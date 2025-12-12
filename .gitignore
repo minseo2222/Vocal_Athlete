@@ -1,0 +1,9 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Data (일지는 개인적인 것이니 깃헙에 올릴지 말지 결정. 백업용으로 올리려면 이 줄 제외)
+# data/*.csv
+
+# Mac OS System file
+.DS_Store
