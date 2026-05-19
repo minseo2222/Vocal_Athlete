@@ -1,6 +1,13 @@
 # A0 — 피치 검출 방식 결정
 
-Status: ready-for-human
+Status: done — 결정: **pYIN V1 + CREPE-tiny V2경로** (ADR-0014)
+
+## Decision
+
+V1 = pYIN 온디바이스(C via FFI, Flutter). CREPE-tiny = 문서화된 V2 업그레이드 경로. 피치 소스 인터페이스 분리(교체 seam). 정직 한계: F0·sustain만, 저신뢰 지표 비표시, 시각 전용. 근거·대안·리스크 = `docs/adr/0014-pitch-detection-pyin-v1.md`.
+
+---
+
 
 ## What to build
 
