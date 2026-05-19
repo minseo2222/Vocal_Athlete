@@ -170,4 +170,58 @@ void main() {
     p.completeLesson(); // capped
     expect(p.streak, 1);
   });
+
+  // --- P6: 복귀 복습 ---
+
+  test('P6.1 gap >= 7 → return review, no advance', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        lastActiveDay: 1, day: 9); // gap = 9 - 1 - 1 = 7
+    final i = p.currentIndex;
+    expect(p.completeLesson(), CompleteOutcome.review);
+    expect(p.currentIndex, i); // review consumes the day, no new unlock
+  });
+
+  test('P6.2 gap 7-14 → owed 1: review then next day advances', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        lastActiveDay: 1, day: 10); // gap = 8
+    final i = p.currentIndex;
+    expect(p.completeLesson(), CompleteOutcome.review);
+    expect(p.currentIndex, i);
+    p.advanceDay();
+    expect(p.completeLesson(), CompleteOutcome.advanced);
+    expect(p.currentIndex, i + 1);
+  });
+
+  test('P6.3 gap > 14 → owed 2: two review days then advance', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        lastActiveDay: 1, day: 22); // gap = 20
+    final i = p.currentIndex;
+    expect(p.completeLesson(), CompleteOutcome.review); // owed 2 → 1 left
+    p.advanceDay();
+    expect(p.completeLesson(), CompleteOutcome.review); // 1 → 0
+    p.advanceDay();
+    expect(p.completeLesson(), CompleteOutcome.advanced);
+    expect(p.currentIndex, i + 1);
+  });
+
+  test('P6.4 gap < 7 → no review trigger', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        lastActiveDay: 1, day: 5); // gap = 3
+    expect(p.completeLesson(), CompleteOutcome.advanced);
+  });
+
+  test('P6.5 streak still +1 on a review day (lenient)', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        lastActiveDay: 1, day: 9);
+    final s = p.streak;
+    p.completeLesson(); // review day
+    expect(p.streak, s + 1);
+  });
+
+  test('P6.6 graduated → no review trigger', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        lastActiveDay: 1, day: 22, graduated: true);
+    // graduated + !didToday path: gap large but excluded → not review
+    expect(p.completeLesson(), isNot(CompleteOutcome.review));
+  });
 }

@@ -56,6 +56,7 @@ class _DebugHomeState extends State<DebugHome> {
               _row('atEnd', '${p.atEnd}'),
               _row('day', '${p.day}'),
               _row('streak', '${p.streak}'),
+              _row('pendingReview', '${p.pendingReview}'),
               _row('didToday', '${p.didToday}'),
               _row('lastOutcome', _last?.name ?? '—'),
               const SizedBox(height: 16),

@@ -7,7 +7,13 @@ library;
 import 'path.dart';
 
 /// P4 — 캡된 완료의 보고. 전진/캡 동작은 불변, *보고*만 분기.
-enum CompleteOutcome { advanced, capped, transitionGraduated, transitionToNext }
+enum CompleteOutcome {
+  advanced,
+  capped,
+  transitionGraduated,
+  transitionToNext,
+  review
+}
 
 /// ADR-0010 보강 문구. UI(U7) 표시용 — 캡 에러가 아닌 *전이 화면*.
 const Map<CompleteOutcome, String> kOutcomeMessage = {
@@ -26,16 +32,20 @@ class Progression {
   bool _graduated; // P4 — 실설정=P7
   int _transitionDay; // P4 — 코스 전이 발생일(실설정=P8/P10)
   int _streak = 0; // P5 — 관대 스트릭(0 리셋·freeze 없음)
+  int _lastActiveDay; // P6 — 마지막 활동일(0=없음), 공백 계산용
+  int _pendingReview = 0; // P6 — 남은 복귀 복습일
 
   bool get didToday => _didToday;
   int get day => _day;
   int get streak => _streak;
+  int get pendingReview => _pendingReview;
 
   Progression._(this._manifest, this._currentIndex,
       {this._didToday = false,
       this._day = 1,
       this._graduated = false,
-      this._transitionDay = 0});
+      this._transitionDay = 0,
+      this._lastActiveDay = 0});
 
   factory Progression.beginner() =>
       Progression._(buildPlaceholderManifest(), 0);
@@ -48,12 +58,14 @@ class Progression {
     int day = 1,
     bool graduated = false,
     int transitionDay = 0,
+    int lastActiveDay = 0,
   }) =>
       Progression._(manifest, currentIndex,
           didToday: didToday,
           day: day,
           graduated: graduated,
-          transitionDay: transitionDay);
+          transitionDay: transitionDay,
+          lastActiveDay: lastActiveDay);
 
   int get currentIndex => _currentIndex;
   int get total => _manifest.length;
@@ -72,8 +84,18 @@ class Progression {
       if (_transitionDay == _day) return CompleteOutcome.transitionToNext;
       return CompleteOutcome.capped;
     }
+    // P6 — 공백 계산 → 복귀 복습 트리거(활동 등록 전)
+    final gap = _lastActiveDay == 0 ? 0 : _day - _lastActiveDay - 1;
+    if (gap >= 7 && _pendingReview == 0 && !_graduated) {
+      _pendingReview = gap <= 14 ? 1 : 2;
+    }
     _didToday = true;
-    _streak++; // P5 — 그날 활동 등록 시 1회(경로 끝이라 전진 안 해도 증가)
+    _streak++; // P5 — 그날 활동 등록 시 1회(복습일 포함)
+    _lastActiveDay = _day;
+    if (_pendingReview > 0) {
+      _pendingReview--; // P6 — 복귀일=복습이 그날 레슨, 신규 해금 ❌
+      return CompleteOutcome.review;
+    }
     if (!atEnd) _currentIndex++;
     return CompleteOutcome.advanced;
   }

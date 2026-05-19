@@ -1,6 +1,6 @@
 # P6 — 복귀 복습
 
-Status: ready-for-agent
+Status: done — _gap·_pendingReview(7–14→1·>14→2), 복귀일=복습 그날 레슨·신규 다음날, 스트릭 유지·졸업 제외, progression.py 직역, TDD 6행동, analyze 클린·테스트 31/31 (2026-05)
 
 ## What to build
 
