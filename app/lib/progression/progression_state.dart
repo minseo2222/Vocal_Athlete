@@ -12,7 +12,8 @@ enum CompleteOutcome {
   capped,
   transitionGraduated,
   transitionToNext,
-  review
+  review,
+  graduated
 }
 
 /// ADR-0010 보강 문구. UI(U7) 표시용 — 캡 에러가 아닌 *전이 화면*.
@@ -22,6 +23,8 @@ const Map<CompleteOutcome, String> kOutcomeMessage = {
   CompleteOutcome.transitionGraduated:
       '🎉 경로 완주! 오늘은 여기까지 — 장르를 고르고 내일부터 다음 코스',
   CompleteOutcome.transitionToNext: '🎉 전이 완료 — 내일 다음 코스 1과부터',
+  CompleteOutcome.review: '↩ 오랜만이에요 — 가볍게 복습부터. 신규는 내일부터.',
+  CompleteOutcome.graduated: '🎉 초급 완주! 잘 해냈어요.',
 };
 
 class Progression {
@@ -39,6 +42,7 @@ class Progression {
   int get day => _day;
   int get streak => _streak;
   int get pendingReview => _pendingReview;
+  bool get graduated => _graduated;
 
   Progression._(this._manifest, this._currentIndex,
       {this._didToday = false,
@@ -96,8 +100,12 @@ class Progression {
       _pendingReview--; // P6 — 복귀일=복습이 그날 레슨, 신규 해금 ❌
       return CompleteOutcome.review;
     }
-    if (!atEnd) _currentIndex++;
-    return CompleteOutcome.advanced;
+    if (!atEnd) {
+      _currentIndex++;
+      return CompleteOutcome.advanced;
+    }
+    _graduated = true; // P7 — 마지막 슬롯 완주 = 졸업(점수 무관, ADR-0004)
+    return CompleteOutcome.graduated;
   }
 
   /// P3 — 날짜 진행 = 캡 해제. P4 — 달력일 증가. 해금(_currentIndex) 불변.

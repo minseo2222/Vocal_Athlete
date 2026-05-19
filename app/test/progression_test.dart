@@ -224,4 +224,48 @@ void main() {
     // graduated + !didToday path: gap large but excluded → not review
     expect(p.completeLesson(), isNot(CompleteOutcome.review));
   });
+
+  // --- P7: 졸업 감지 ---
+
+  test('P7.1 completing the last slot graduates', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        currentIndex: pathLength - 1);
+    expect(p.graduated, isFalse);
+    final i = p.currentIndex;
+    expect(p.completeLesson(), CompleteOutcome.graduated);
+    expect(p.graduated, isTrue);
+    expect(p.currentIndex, i); // no advance past end
+  });
+
+  test('P7.2 mid-path completion does not graduate', () {
+    final p = Progression.beginner();
+    expect(p.completeLesson(), CompleteOutcome.advanced);
+    expect(p.graduated, isFalse);
+  });
+
+  test('P7.3 graduation only on path completion (not before)', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        currentIndex: pathLength - 2);
+    expect(p.completeLesson(), CompleteOutcome.advanced); // → last slot
+    expect(p.graduated, isFalse);
+    p.advanceDay();
+    expect(p.completeLesson(), CompleteOutcome.graduated);
+    expect(p.graduated, isTrue);
+  });
+
+  test('P7.4 post-graduation fresh day is idempotent (no advance)', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        currentIndex: pathLength - 1, graduated: true);
+    final i = p.currentIndex;
+    p.advanceDay();
+    expect(p.completeLesson(), CompleteOutcome.graduated);
+    expect(p.graduated, isTrue);
+    expect(p.currentIndex, i);
+  });
+
+  test('P7.5 graduated + same-day 2nd → transitionGraduated (P4 regress)', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        currentIndex: pathLength - 1, didToday: true, graduated: true);
+    expect(p.completeLesson(), CompleteOutcome.transitionGraduated);
+  });
 }

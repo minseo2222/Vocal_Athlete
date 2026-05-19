@@ -54,6 +54,7 @@ class _DebugHomeState extends State<DebugHome> {
                   '${(s.bodyVoicedRatio * 100).round()}:${(100 - s.bodyVoicedRatio * 100).round()}'),
               _row('variation', s.variationLevel.name),
               _row('atEnd', '${p.atEnd}'),
+              _row('graduated', '${p.graduated}'),
               _row('day', '${p.day}'),
               _row('streak', '${p.streak}'),
               _row('pendingReview', '${p.pendingReview}'),

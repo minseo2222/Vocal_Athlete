@@ -1,6 +1,6 @@
 # P7 — 졸업 감지
 
-Status: ready-for-agent
+Status: done — 마지막 슬롯 완주 → _graduated=true + CompleteOutcome.graduated, 점수 무관·졸업 후 전진 정지·idempotent, P4 회귀 무사, TDD 5행동, analyze 클린·테스트 36/36 (2026-05)
 
 ## What to build
 
