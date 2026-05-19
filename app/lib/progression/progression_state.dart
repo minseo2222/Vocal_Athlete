@@ -9,6 +9,9 @@ import 'path.dart';
 class Progression {
   final List<PathSlot> _manifest;
   int _currentIndex; // 0-based, 현재(오늘) 슬롯
+  bool _didToday = false; // P3 — 1일 1레슨 캡
+
+  bool get didToday => _didToday;
 
   Progression._(this._manifest, this._currentIndex);
 
@@ -30,6 +33,13 @@ class Progression {
   /// *인자 없음* = 수행 품질이 해금을 막지 않음(구조적 강제, ADR-0002/완료기반).
   /// 경로 끝에서는 더 전진하지 않음(졸업 처리는 P7, 별도 슬라이스).
   void completeLesson() {
+    if (_didToday) return; // P3 — 1일 1레슨 캡(같은 날 2번째 no-op)
+    _didToday = true;
     if (!atEnd) _currentIndex++;
+  }
+
+  /// P3 — 날짜 진행 = 캡 해제. 해금(_currentIndex)은 건드리지 않음.
+  void advanceDay() {
+    _didToday = false;
   }
 }

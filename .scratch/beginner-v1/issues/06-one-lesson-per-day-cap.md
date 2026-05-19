@@ -1,6 +1,6 @@
 # P3 — 1일1레슨 캡
 
-Status: ready-for-agent
+Status: done — did_today 캡 + advanceDay 해제(순수, 해금/끝과 직교), TDD 5행동, analyze 클린·테스트 15/15 (2026-05)
 
 ## What to build
 

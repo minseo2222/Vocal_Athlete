@@ -53,12 +53,23 @@ class _DebugHomeState extends State<DebugHome> {
                   '${(s.bodyVoicedRatio * 100).round()}:${(100 - s.bodyVoicedRatio * 100).round()}'),
               _row('variation', s.variationLevel.name),
               _row('atEnd', '${p.atEnd}'),
+              _row('didToday', '${p.didToday}'),
               const SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
                 child: FilledButton(
                   onPressed: () => setState(p.completeLesson),
                   child: const Text('레슨 완료 (해금)'),
+                ),
+              ),
+              const SizedBox(height: 8),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  onPressed: () => setState(p.advanceDay),
+                  style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white70),
+                  child: const Text('다음날 (캡 해제)'),
                 ),
               ),
               const Spacer(),
