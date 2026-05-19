@@ -268,4 +268,39 @@ void main() {
         currentIndex: pathLength - 1, didToday: true, graduated: true);
     expect(p.completeLesson(), CompleteOutcome.transitionGraduated);
   });
+
+  // --- P8: 비구속 장르 선택 ---
+
+  test('P8.1 graduated → chooseGenre records genre', () {
+    final p = Progression.from(buildPlaceholderManifest(), graduated: true);
+    expect(p.genre, isNull);
+    p.chooseGenre(Genre.musical);
+    expect(p.genre, Genre.musical);
+  });
+
+  test('P8.2 chooseGenre ignored before graduation', () {
+    final p = Progression.beginner();
+    expect(p.graduated, isFalse);
+    p.chooseGenre(Genre.musical);
+    expect(p.genre, isNull);
+  });
+
+  test('P8.3 nonbinding — genre can be changed', () {
+    final p = Progression.from(buildPlaceholderManifest(), graduated: true);
+    p.chooseGenre(Genre.musical);
+    p.chooseGenre(Genre.gayo);
+    expect(p.genre, Genre.gayo);
+  });
+
+  test('P8.4 choosing genre does not penalize progression', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        currentIndex: 5, graduated: true);
+    final i = p.currentIndex;
+    final s = p.streak;
+    p.chooseGenre(Genre.classical);
+    p.chooseGenre(Genre.musical);
+    expect(p.currentIndex, i);
+    expect(p.streak, s);
+    expect(p.graduated, isTrue);
+  });
 }

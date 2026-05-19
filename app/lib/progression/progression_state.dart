@@ -6,6 +6,9 @@ library;
 
 import 'path.dart';
 
+/// P8 — 장르 트랙(CONTEXT 글로서리). 졸업 후 비구속 선택.
+enum Genre { musical, classical, gayo }
+
 /// P4 — 캡된 완료의 보고. 전진/캡 동작은 불변, *보고*만 분기.
 enum CompleteOutcome {
   advanced,
@@ -37,8 +40,10 @@ class Progression {
   int _streak = 0; // P5 — 관대 스트릭(0 리셋·freeze 없음)
   int _lastActiveDay; // P6 — 마지막 활동일(0=없음), 공백 계산용
   int _pendingReview = 0; // P6 — 남은 복귀 복습일
+  Genre? _genre; // P8 — 졸업 후 선택(null=미선택), 비구속
 
   bool get didToday => _didToday;
+  Genre? get genre => _genre;
   int get day => _day;
   int get streak => _streak;
   int get pendingReview => _pendingReview;
@@ -106,6 +111,12 @@ class Progression {
     }
     _graduated = true; // P7 — 마지막 슬롯 완주 = 졸업(점수 무관, ADR-0004)
     return CompleteOutcome.graduated;
+  }
+
+  /// P8 — 졸업 후에만 장르 선택. 재호출=교체(비구속), 페널티 없음.
+  void chooseGenre(Genre g) {
+    if (!_graduated) return;
+    _genre = g;
   }
 
   /// P3 — 날짜 진행 = 캡 해제. P4 — 달력일 증가. 해금(_currentIndex) 불변.

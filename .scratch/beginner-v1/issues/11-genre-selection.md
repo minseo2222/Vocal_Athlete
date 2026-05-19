@@ -1,6 +1,6 @@
 # P8 — 비구속 장르 선택
 
-Status: ready-for-agent
+Status: done — Genre enum + chooseGenre(졸업 가드·비구속·교체·무부작용), 라우팅 입력 기록, TDD 4행동, analyze 클린·테스트 40/40 (2026-05)
 
 ## What to build
 

@@ -59,6 +59,7 @@ class _DebugHomeState extends State<DebugHome> {
               _row('streak', '${p.streak}'),
               _row('pendingReview', '${p.pendingReview}'),
               _row('didToday', '${p.didToday}'),
+              _row('genre', p.genre?.name ?? '—'),
               _row('lastOutcome', _last?.name ?? '—'),
               const SizedBox(height: 16),
               SizedBox(
@@ -77,6 +78,22 @@ class _DebugHomeState extends State<DebugHome> {
                   style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.white70),
                   child: const Text('다음날 (캡 해제)'),
+                ),
+              ),
+              const SizedBox(height: 8),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  onPressed: () => setState(() {
+                    const g = Genre.values;
+                    final next = p.genre == null
+                        ? g.first
+                        : g[(p.genre!.index + 1) % g.length];
+                    p.chooseGenre(next); // 졸업 시에만 효과
+                  }),
+                  style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white70),
+                  child: const Text('장르 순환 (졸업 후만)'),
                 ),
               ),
               const Spacer(),
