@@ -1,6 +1,6 @@
 # P4 — 졸업/전이 메시지 (transition_day 패턴)
 
-Status: ready-for-agent
+Status: done — CompleteOutcome(advanced/capped/transitionGraduated/transitionToNext) + transition_day·day, 캡 동작 불변·보고만 분기, ADR-0010 문구 상수, TDD 5행동, analyze 클린·테스트 20/20 (2026-05)
 
 ## What to build
 

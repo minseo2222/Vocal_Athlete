@@ -84,4 +84,41 @@ void main() {
     p.advanceDay();
     expect(p.currentIndex, i);
   });
+
+  // --- P4: 졸업/전이 메시지 ---
+
+  test('P4.1 graduated + no genre + capped → transitionGraduated', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        currentIndex: pathLength - 1,
+        didToday: true,
+        graduated: true);
+    expect(p.completeLesson(), CompleteOutcome.transitionGraduated);
+  });
+
+  test('P4.2 transitionDay == day + capped → transitionToNext', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        didToday: true, day: 5, transitionDay: 5);
+    expect(p.completeLesson(), CompleteOutcome.transitionToNext);
+  });
+
+  test('P4.3 ordinary same-day 2nd (mid-path, no transition) → capped', () {
+    final p = Progression.from(buildPlaceholderManifest(), didToday: true);
+    expect(p.completeLesson(), CompleteOutcome.capped);
+  });
+
+  test('P4.4 first complete of day → advanced (regression)', () {
+    final p = Progression.beginner();
+    expect(p.completeLesson(), CompleteOutcome.advanced);
+    expect(p.currentIndex, 1);
+  });
+
+  test('P4.5 transition not "today" after advanceDay (day increments)', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        day: 5, transitionDay: 5);
+    p.completeLesson(); // day 5: advances (not capped yet)
+    p.advanceDay(); // → day 6
+    p.completeLesson(); // day 6: advances
+    p.completeLesson(); // day 6 2nd: capped, transitionDay(5) != day(6)
+    expect(p.completeLesson(), CompleteOutcome.capped);
+  });
 }

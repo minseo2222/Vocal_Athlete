@@ -27,6 +27,7 @@ class DebugHome extends StatefulWidget {
 
 class _DebugHomeState extends State<DebugHome> {
   final Progression _p = Progression.beginner();
+  CompleteOutcome? _last;
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +54,15 @@ class _DebugHomeState extends State<DebugHome> {
                   '${(s.bodyVoicedRatio * 100).round()}:${(100 - s.bodyVoicedRatio * 100).round()}'),
               _row('variation', s.variationLevel.name),
               _row('atEnd', '${p.atEnd}'),
+              _row('day', '${p.day}'),
               _row('didToday', '${p.didToday}'),
+              _row('lastOutcome', _last?.name ?? '—'),
               const SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
                 child: FilledButton(
-                  onPressed: () => setState(p.completeLesson),
+                  onPressed: () =>
+                      setState(() => _last = p.completeLesson()),
                   child: const Text('레슨 완료 (해금)'),
                 ),
               ),
