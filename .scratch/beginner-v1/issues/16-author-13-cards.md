@@ -1,6 +1,6 @@
 # C1 — 13 IN 카드 콘텐츠 작성
 
-Status: ready-for-human
+Status: done — 13 카드 `docs/curriculum/beginner/cards.md` 작성, 발성안전 인적 검토 사인오프 완료(2026-05)
 
 ## What to build
 
