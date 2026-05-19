@@ -1,6 +1,13 @@
 # F0 — 스마트폰 스택·스캐폴드 결정
 
-Status: ready-for-human
+Status: done — 결정: **Flutter** (ADR-0013)
+
+## Decision
+
+V1 스택 = **Flutter**(조건부: F1에 오디오 지연 스파이크 → 불충족 시 폴백 = 네이티브 1종 우선). 근거·대안·결과는 `docs/adr/0013-mobile-stack-flutter.md`. A0 피치는 Flutter 경로(YIN=C FFI / CREPE=tflite_flutter) 전제.
+
+---
+
 
 ## What to build
 
