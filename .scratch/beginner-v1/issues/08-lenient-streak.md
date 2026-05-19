@@ -1,6 +1,6 @@
 # P5 — 관대 스트릭
 
-Status: ready-for-agent
+Status: done — _streak 활동일 +1(비-캡 분기), advanceDay 불변(0리셋·freeze 없음), 해금/끝과 직교, TDD 5행동, analyze 클린·테스트 25/25 (2026-05)
 
 ## What to build
 

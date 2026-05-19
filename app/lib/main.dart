@@ -55,6 +55,7 @@ class _DebugHomeState extends State<DebugHome> {
               _row('variation', s.variationLevel.name),
               _row('atEnd', '${p.atEnd}'),
               _row('day', '${p.day}'),
+              _row('streak', '${p.streak}'),
               _row('didToday', '${p.didToday}'),
               _row('lastOutcome', _last?.name ?? '—'),
               const SizedBox(height: 16),

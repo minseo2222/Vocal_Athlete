@@ -25,9 +25,11 @@ class Progression {
   int _day; // P4 — 달력일(advanceDay에서 증가)
   bool _graduated; // P4 — 실설정=P7
   int _transitionDay; // P4 — 코스 전이 발생일(실설정=P8/P10)
+  int _streak = 0; // P5 — 관대 스트릭(0 리셋·freeze 없음)
 
   bool get didToday => _didToday;
   int get day => _day;
+  int get streak => _streak;
 
   Progression._(this._manifest, this._currentIndex,
       {this._didToday = false,
@@ -71,6 +73,7 @@ class Progression {
       return CompleteOutcome.capped;
     }
     _didToday = true;
+    _streak++; // P5 — 그날 활동 등록 시 1회(경로 끝이라 전진 안 해도 증가)
     if (!atEnd) _currentIndex++;
     return CompleteOutcome.advanced;
   }

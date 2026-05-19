@@ -121,4 +121,53 @@ void main() {
     p.completeLesson(); // day 6 2nd: capped, transitionDay(5) != day(6)
     expect(p.completeLesson(), CompleteOutcome.capped);
   });
+
+  // --- P5: 관대 스트릭 ---
+
+  test('P5.1 streak 0 → 1 on first completeLesson', () {
+    final p = Progression.beginner();
+    expect(p.streak, 0);
+    p.completeLesson();
+    expect(p.streak, 1);
+  });
+
+  test('P5.2 +1 per active day', () {
+    final p = Progression.beginner();
+    p.completeLesson();
+    p.advanceDay();
+    p.completeLesson();
+    expect(p.streak, 2);
+  });
+
+  test('P5.3 capped same-day 2nd does not increment streak', () {
+    final p = Progression.beginner();
+    p.completeLesson();
+    p.completeLesson(); // capped
+    expect(p.streak, 1);
+  });
+
+  test('P5.4 gap does not reset streak (lenient, no freeze)', () {
+    final p = Progression.beginner();
+    p.completeLesson();
+    p.completeLesson(); // build to streak 1
+    p.advanceDay();
+    p.completeLesson();
+    expect(p.streak, 2);
+    p.advanceDay();
+    p.advanceDay();
+    p.advanceDay(); // 3-day gap, no completion
+    expect(p.streak, 2); // not reset
+    p.completeLesson(); // resume
+    expect(p.streak, 3);
+  });
+
+  test('P5.5 streak increments at path end, capped after stays', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        currentIndex: pathLength - 1);
+    expect(p.atEnd, isTrue);
+    p.completeLesson();
+    expect(p.streak, 1); // trained today even with no advance
+    p.completeLesson(); // capped
+    expect(p.streak, 1);
+  });
 }
