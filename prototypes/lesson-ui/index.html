@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>레슨 화면 — 채택안 D (레퍼런스 목업)</title>
+<!--
+  CHOSEN reference mock — 변주 비교(A/B/C/D)에서 D 채택.
+  D = B의 단계 스테퍼 + C의 cue 중앙·하단 시트. 결정 근거는 NOTES.md.
+  읽기전용·가짜 피치. 실제 앱 코드는 이 구조를 정식으로 다시 작성할 것(프로토 폐기 대상).
+  실행:  python -m http.server -d prototypes/lesson-ui 8000  → http://localhost:8000/
+-->
+<style>
+  :root{ --bg:#0e0f13; --card:#171922; --ink:#eef0f6; --dim:#9aa0b4;
+         --good:#39d98a; --warn:#ffcf5c; --bad:#ff6b6b; --accent:#6c8cff; }
+  *{box-sizing:border-box; margin:0; padding:0; font-family:-apple-system,Segoe UI,Roboto,sans-serif}
+  html,body{height:100%; background:#000; color:var(--ink)}
+  #phone{max-width:420px; height:100dvh; margin:0 auto; background:var(--bg);
+         position:relative; overflow:hidden; display:flex; flex-direction:column}
+  #scr{flex:1; display:flex; flex-direction:column; overflow:hidden}
+  .cue{font-size:15px; color:var(--ink); line-height:1.45}
+  .cue b{color:var(--accent)}
+  .dim{color:var(--dim); font-size:13px}
+  .pill{display:inline-flex; align-items:center; gap:6px; background:#222637;
+        color:var(--dim); font-size:12px; padding:5px 10px; border-radius:999px}
+  .voiced{color:var(--good)}
+  button{font:inherit; border:0; border-radius:14px; padding:15px; width:100%;
+          background:var(--accent); color:#fff; font-weight:700; font-size:16px}
+  button.ghost{background:#222637; color:var(--ink); font-weight:600}
+  .nudge{background:#23202c; border:1px solid #3a3550; color:var(--warn);
+         border-radius:12px; padding:10px 12px; font-size:13px; display:flex;
+         align-items:center; gap:10px}
+  canvas{display:block; width:100%}
+</style>
+</head>
+<body>
+<div id="phone"><div id="scr"></div></div>
+<script>
+const LESSON = { name:"빨대 발성", idx:7, total:48,
+  cue:"빨대를 입술 안에 부드럽게. <b>이로 물지 마세요.</b> 편한 중음으로 5초." };
+
+function pitchCanvas(h){
+  const c=document.createElement('canvas'); const ratio=devicePixelRatio||1;
+  const w=Math.min(420,innerWidth); c.width=w*ratio; c.height=h*ratio;
+  c.style.height=h+'px'; const x=c.getContext('2d'); x.scale(ratio,ratio);
+  let t=0;
+  (function loop(){
+    x.clearRect(0,0,w,h); const mid=h/2;
+    x.strokeStyle='#3a3f55'; x.lineWidth=2;
+    x.beginPath(); x.moveTo(0,mid); x.lineTo(w,mid); x.stroke();
+    x.fillStyle='rgba(57,217,138,.07)'; x.fillRect(0,mid-14,w,28);
+    x.fillStyle='rgba(255,207,92,.05)'; x.fillRect(0,mid-34,w,20); x.fillRect(0,mid+14,w,20);
+    x.beginPath();
+    for(let i=0;i<w;i++){ const dev=Math.sin((i+t)/26)*22+Math.sin((i+t)/7)*6;
+      const y=mid+dev; i?x.lineTo(i,y):x.moveTo(i,y); }
+    const live=Math.sin((w+t)/26)*22;
+    x.strokeStyle=Math.abs(live)<14?'#39d98a':Math.abs(live)<34?'#ffcf5c':'#ff6b6b';
+    x.lineWidth=3; x.stroke(); t+=1.4; requestAnimationFrame(loop);
+  })();
+  return c;
+}
+
+function render(){
+  const s=document.getElementById('scr'); s.innerHTML='';
+  const step=(lbl,st)=>`<div style="flex:1;text-align:center">
+     <div style="height:5px;border-radius:3px;background:${
+        st==='done'?'#39d98a':st==='now'?'#6c8cff':'#3a3f55'}"></div>
+     <div class="dim" style="margin-top:6px;font-size:11px;${
+        st==='now'?'color:var(--ink);font-weight:700':''}">${lbl}</div></div>`;
+  s.innerHTML=`
+   <div style="padding:16px 16px 4px;display:flex;justify-content:space-between">
+     <span class="pill">${LESSON.name} · ${LESSON.idx}/${LESSON.total}</span>
+     <span class="pill voiced">● 유성 마이크로윈</span></div>
+   <div style="display:flex;gap:8px;padding:10px 16px 2px">
+     ${step('진입·워밍업','done')}${step('본운동 7–11분','now')}${step('쿨다운','next')}</div>
+   <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:20px 24px">
+     <div class="cue" style="font-size:21px;line-height:1.5;text-align:center">${LESSON.cue}</div>
+   </div>
+   <div style="background:var(--card);border-radius:22px 22px 0 0;padding:14px 16px 18px;
+               box-shadow:0 -8px 24px rgba(0,0,0,.4)">
+     <div style="width:40px;height:4px;background:#3a3f55;border-radius:2px;margin:2px auto 10px"></div>
+     <div class="dim" style="display:flex;justify-content:space-between;margin-bottom:10px">
+       <span>본운동 · 7–11분</span><span class="pill">쿨다운 건너뛰기</span></div>
+     <div id="pcv"></div>
+     <div class="nudge" style="margin:12px 0">크게 빗나갔어요 — 원하면
+       <button class="ghost" style="width:auto;padding:7px 12px">다시 한 번</button></div>
+     <button>완료</button>
+   </div>`;
+  document.getElementById('pcv').appendChild(pitchCanvas(118));
+}
+addEventListener('resize',render); render();
+</script>
+</body>
+</html>
