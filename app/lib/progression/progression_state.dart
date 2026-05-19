@@ -44,10 +44,12 @@ class Progression {
   int _pendingReview = 0; // P6 — 남은 복귀 복습일
   Genre? _genre; // P8 — 졸업 후 선택(null=미선택), 비구속
   bool _maintenance = false; // P9 — 유지 모드(자유 연습 모드와 별개)
+  final Set<Genre> _released = {}; // P10 — 출시된 장르 중급(V1 기본 빔=스텁)
 
   bool get didToday => _didToday;
   Genre? get genre => _genre;
   bool get maintenance => _maintenance;
+  bool isReleased(Genre g) => _released.contains(g); // P10 — 디버그/검증
   int get day => _day;
   int get streak => _streak;
   int get pendingReview => _pendingReview;
@@ -125,8 +127,30 @@ class Progression {
   void chooseGenre(Genre g) {
     if (!_graduated) return;
     _genre = g;
-    // P9 — V1엔 장르 중급 미출시 → 유지 모드 진입. 출시/자동연결은 P10.
-    _maintenance = true;
+    if (_released.contains(g)) {
+      _enterCourse(); // P10 — 출시됨 → 직접 진입
+    } else {
+      _maintenance = true; // P9 — 미출시 → 유지 모드
+    }
+  }
+
+  /// P10 — (테스트/관리 스텁) 장르 중급 출시 토글.
+  /// 새로 출시됐고 그 장르 대기 중(유지 모드)이면 자동 연결.
+  void toggleRelease(Genre g) {
+    if (!_released.add(g)) {
+      _released.remove(g);
+      return;
+    }
+    if (_maintenance && _genre == g) _enterCourse();
+  }
+
+  /// P10 — 코스 진입 공통(progression.py). V1 스텁: 중급 매니페스트 미구현 →
+  /// _currentIndex 불변(실제 코스 로드는 향후 슬라이스). 메커니즘만.
+  void _enterCourse() {
+    _maintenance = false;
+    _graduated = false;
+    _transitionDay = _day;
+    _pendingReview = 0;
   }
 
   /// P3 — 날짜 진행 = 캡 해제. P4 — 달력일 증가. 해금(_currentIndex) 불변.

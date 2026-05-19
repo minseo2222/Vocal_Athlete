@@ -60,6 +60,8 @@ class _DebugHomeState extends State<DebugHome> {
               _row('didToday', '${p.didToday}'),
               _row('genre', p.genre?.name ?? '—'),
               _row('maintenance', '${p.maintenance}'),
+              _row('released',
+                  Genre.values.where(p.isReleased).map((g) => g.name).join(',')),
               _row('lastOutcome', _last?.name ?? '—'),
               const SizedBox(height: 16),
               SizedBox(
@@ -94,6 +96,17 @@ class _DebugHomeState extends State<DebugHome> {
                   style: OutlinedButton.styleFrom(
                       foregroundColor: Colors.white70),
                   child: const Text('장르 순환 (졸업 후만)'),
+                ),
+              ),
+              const SizedBox(height: 8),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  onPressed: () => setState(
+                      () => p.toggleRelease(p.genre ?? Genre.musical)),
+                  style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white70),
+                  child: const Text('선택 장르 중급 출시 토글'),
                 ),
               ),
               const Spacer(),

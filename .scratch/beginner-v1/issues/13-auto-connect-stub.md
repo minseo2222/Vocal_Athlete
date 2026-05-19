@@ -1,6 +1,6 @@
 # P10 — 출시 시 자동 연결 (V1 stub)
 
-Status: ready-for-agent
+Status: done — _released·toggleRelease(자동연결)·_enterCourse, chooseGenre 출시분기, P4 transitionToNext 배선, V1 스텁(매니페스트 미구현·_currentIndex 불변), TDD 5행동, analyze 클린·테스트 50/50 (2026-05)
 
 ## What to build
 

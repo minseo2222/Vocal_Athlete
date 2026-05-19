@@ -349,4 +349,48 @@ void main() {
         Progression.from(buildPlaceholderManifest(), graduated: true);
     expect(grad.maintenance, isFalse); // graduated but no genre yet
   });
+
+  // --- P10: 출시 자동연결 (V1 stub) ---
+
+  test('P10.2 released genre → chooseGenre enters course directly', () {
+    final p = Progression.from(buildPlaceholderManifest(), graduated: true);
+    p.toggleRelease(Genre.musical);
+    p.chooseGenre(Genre.musical);
+    expect(p.maintenance, isFalse); // 직접 진입(유지 모드 아님)
+    expect(p.graduated, isFalse); // 다음 코스로 이동
+  });
+
+  test('P10.3 auto-connect: release while waiting in maintenance', () {
+    final p = Progression.from(buildPlaceholderManifest(), graduated: true);
+    p.chooseGenre(Genre.musical);
+    expect(p.maintenance, isTrue);
+    p.toggleRelease(Genre.musical); // 출시 → 자동연결
+    expect(p.maintenance, isFalse);
+    expect(p.graduated, isFalse);
+  });
+
+  test('P10.1 not released → maintenance (V1 default, regression-safe)', () {
+    final p = Progression.from(buildPlaceholderManifest(), graduated: true);
+    p.chooseGenre(Genre.musical);
+    expect(p.maintenance, isTrue);
+  });
+
+  test('P10.4 release of other genre / no genre → no auto-connect', () {
+    final p = Progression.from(buildPlaceholderManifest(), graduated: true);
+    p.chooseGenre(Genre.musical);
+    p.toggleRelease(Genre.gayo); // 다른 장르
+    expect(p.maintenance, isTrue); // 자동연결 없음
+    final q = Progression.from(buildPlaceholderManifest(), graduated: true);
+    q.toggleRelease(Genre.musical); // 장르 미선택
+    expect(q.maintenance, isFalse);
+    expect(q.graduated, isTrue); // 전이 없음
+  });
+
+  test('P10.5 after auto-connect, same-day cap → transitionToNext (P4)', () {
+    final p = Progression.from(buildPlaceholderManifest(), graduated: true);
+    p.chooseGenre(Genre.musical);
+    p.completeLesson(); // maintenance lesson (didToday=true)
+    p.toggleRelease(Genre.musical); // auto-connect (graduated=false, txnDay=day)
+    expect(p.completeLesson(), CompleteOutcome.transitionToNext);
+  });
 }
