@@ -303,4 +303,50 @@ void main() {
     expect(p.streak, s);
     expect(p.graduated, isTrue);
   });
+
+  // --- P9: 유지 모드 ---
+
+  test('P9.1 graduated → chooseGenre enters maintenance (V1: no course)', () {
+    final p = Progression.from(buildPlaceholderManifest(), graduated: true);
+    expect(p.maintenance, isFalse);
+    p.chooseGenre(Genre.musical);
+    expect(p.maintenance, isTrue);
+  });
+
+  test('P9.2 maintenance lesson: maintenance outcome, no new unlock', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        currentIndex: 5, graduated: true);
+    p.chooseGenre(Genre.musical);
+    final i = p.currentIndex;
+    expect(p.completeLesson(), CompleteOutcome.maintenance);
+    expect(p.currentIndex, i); // 신규 해금 없음
+  });
+
+  test('P9.3 maintenance lesson still counts streak (lenient P5)', () {
+    final p = Progression.from(buildPlaceholderManifest(), graduated: true);
+    p.chooseGenre(Genre.musical);
+    final s = p.streak;
+    p.completeLesson();
+    expect(p.streak, s + 1);
+  });
+
+  test('P9.4 1/day cap holds in maintenance', () {
+    final p = Progression.from(buildPlaceholderManifest(), graduated: true);
+    p.chooseGenre(Genre.musical);
+    p.completeLesson(); // maintenance lesson today
+    final s = p.streak;
+    final i = p.currentIndex;
+    p.completeLesson(); // same day → capped
+    expect(p.streak, s); // no extra increment
+    expect(p.currentIndex, i);
+  });
+
+  test('P9.5 maintenance only via genre choice after graduation', () {
+    final pre = Progression.beginner();
+    pre.chooseGenre(Genre.musical); // not graduated → ignored
+    expect(pre.maintenance, isFalse);
+    final grad =
+        Progression.from(buildPlaceholderManifest(), graduated: true);
+    expect(grad.maintenance, isFalse); // graduated but no genre yet
+  });
 }

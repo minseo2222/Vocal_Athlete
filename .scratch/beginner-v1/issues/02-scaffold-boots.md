@@ -8,6 +8,7 @@ Status: in-progress — 스캐폴드·스파이크·CI·테스트 완료(green).
 - 오디오 지연 스파이크: `app/lib/main.dart` + `app/lib/spike/pitch_naive.dart`(순수·교체 seam)
 - 권한(Android RECORD_AUDIO / iOS 마이크), CI(`.github/workflows/flutter-ci.yml`), README 실행법
 - **남은 AC**: 기기에서 `flutter run` → avg latency 실측 → 수용/폴백 판정 기록 후 본 이슈 done
+- ⚠ 오디오 플러그인 리스크(2026-05): `record ^5.1.2`가 `record_linux 0.7.2` ↔ `record_platform_interface 1.5.0` 비호환으로 *앱 빌드 실패*(analyze/test는 통과 — Dart VM이라). → 스파이크 화면(`lib/spike/latency_spike.dart`)·`record` 의존 *제거*, 순수 `lib/spike/pitch_naive.dart`는 보존. F1 지연 스파이크/A1은 *검증된 오디오 경로*(다른 플러그인 핀·플랫폼 채널)로 재도입 필요 — **이 크로스플랫폼 깨짐 자체가 ADR-0013(Flutter 조건부)·ADR-0014(피치) 오디오 리스크의 실증 신호**로 기록. 현재 앱 = P1~P8 디버그 허브만(마이크 무관, 빌드 정상).
 
 
 

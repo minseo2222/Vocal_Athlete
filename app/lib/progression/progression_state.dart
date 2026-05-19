@@ -16,7 +16,8 @@ enum CompleteOutcome {
   transitionGraduated,
   transitionToNext,
   review,
-  graduated
+  graduated,
+  maintenance
 }
 
 /// ADR-0010 보강 문구. UI(U7) 표시용 — 캡 에러가 아닌 *전이 화면*.
@@ -28,6 +29,7 @@ const Map<CompleteOutcome, String> kOutcomeMessage = {
   CompleteOutcome.transitionToNext: '🎉 전이 완료 — 내일 다음 코스 1과부터',
   CompleteOutcome.review: '↩ 오랜만이에요 — 가볍게 복습부터. 신규는 내일부터.',
   CompleteOutcome.graduated: '🎉 초급 완주! 잘 해냈어요.',
+  CompleteOutcome.maintenance: '오늘도 가볍게 유지. 새 코스 열리면 이어가요.',
 };
 
 class Progression {
@@ -41,9 +43,11 @@ class Progression {
   int _lastActiveDay; // P6 — 마지막 활동일(0=없음), 공백 계산용
   int _pendingReview = 0; // P6 — 남은 복귀 복습일
   Genre? _genre; // P8 — 졸업 후 선택(null=미선택), 비구속
+  bool _maintenance = false; // P9 — 유지 모드(자유 연습 모드와 별개)
 
   bool get didToday => _didToday;
   Genre? get genre => _genre;
+  bool get maintenance => _maintenance;
   int get day => _day;
   int get streak => _streak;
   int get pendingReview => _pendingReview;
@@ -99,8 +103,12 @@ class Progression {
       _pendingReview = gap <= 14 ? 1 : 2;
     }
     _didToday = true;
-    _streak++; // P5 — 그날 활동 등록 시 1회(복습일 포함)
+    _streak++; // P5 — 그날 활동 등록 시 1회(복습일·유지일 포함)
     _lastActiveDay = _day;
+    if (_maintenance) {
+      // P9 — 유지 모드: 스킬 얇게 반복, 신규 해금 ❌(스트릭·캡은 유지)
+      return CompleteOutcome.maintenance;
+    }
     if (_pendingReview > 0) {
       _pendingReview--; // P6 — 복귀일=복습이 그날 레슨, 신규 해금 ❌
       return CompleteOutcome.review;
@@ -117,6 +125,8 @@ class Progression {
   void chooseGenre(Genre g) {
     if (!_graduated) return;
     _genre = g;
+    // P9 — V1엔 장르 중급 미출시 → 유지 모드 진입. 출시/자동연결은 P10.
+    _maintenance = true;
   }
 
   /// P3 — 날짜 진행 = 캡 해제. P4 — 달력일 증가. 해금(_currentIndex) 불변.

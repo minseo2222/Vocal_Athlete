@@ -5,7 +5,6 @@ library;
 import 'package:flutter/material.dart';
 
 import 'progression/progression_state.dart';
-import 'spike/latency_spike.dart';
 
 void main() => runApp(const DebugApp());
 
@@ -60,6 +59,7 @@ class _DebugHomeState extends State<DebugHome> {
               _row('pendingReview', '${p.pendingReview}'),
               _row('didToday', '${p.didToday}'),
               _row('genre', p.genre?.name ?? '—'),
+              _row('maintenance', '${p.maintenance}'),
               _row('lastOutcome', _last?.name ?? '—'),
               const SizedBox(height: 16),
               SizedBox(
@@ -97,18 +97,6 @@ class _DebugHomeState extends State<DebugHome> {
                 ),
               ),
               const Spacer(),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                        builder: (_) => const LatencySpikeScreen()),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.white70),
-                  child: const Text('F1 지연 스파이크 (마이크 필요 · pending)'),
-                ),
-              ),
             ],
           ),
         ),

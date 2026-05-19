@@ -35,9 +35,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
-  # F1 audio-latency spike: PCM mic stream (ADR-0013 conditional check).
-  record: ^5.1.2
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

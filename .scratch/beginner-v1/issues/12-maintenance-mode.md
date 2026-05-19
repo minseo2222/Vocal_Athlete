@@ -1,6 +1,6 @@
 # P9 — 유지 모드
 
-Status: ready-for-agent
+Status: done — _maintenance(chooseGenre 진입, V1 항상) + completeLesson 단락(신규 해금 ❌·스트릭/캡 유지), 자유 연습과 별개, TDD 5행동, analyze 클린·테스트 45/45 (2026-05)
 
 ## What to build
 
