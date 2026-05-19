@@ -1,6 +1,6 @@
 # P1 — 선형 경로 + 오늘 레슨 셀렉터
 
-Status: ready-for-agent
+Status: done — 순수 path.dart/progression_state.dart + 디버그 허브, analyze 클린·테스트 6/6 (2026-05)
 
 ## What to build
 

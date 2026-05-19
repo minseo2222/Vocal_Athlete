@@ -1,91 +1,31 @@
-/// F1 SPIKE — mic → naive F0 → screen latency probe.
-///
-/// Throwaway. Purpose: measure end-to-end pipeline latency on a real device
-/// to validate ADR-0013's conditional Flutter adoption (fallback = native
-/// single-platform if latency is unacceptable). NOT the real app.
-import 'dart:async';
-import 'dart:typed_data';
+/// 디버그 허브 (현 단계 throwaway). P1 경로 상태 표면 + F1 스파이크 진입.
+/// 실제 앱 UI(채택안 D)는 U1에서 본구현.
+library;
 
 import 'package:flutter/material.dart';
-import 'package:record/record.dart';
 
-import 'spike/pitch_naive.dart';
+import 'progression/progression_state.dart';
+import 'spike/latency_spike.dart';
 
-void main() => runApp(const SpikeApp());
+void main() => runApp(const DebugApp());
 
-class SpikeApp extends StatelessWidget {
-  const SpikeApp({super.key});
+class DebugApp extends StatelessWidget {
+  const DebugApp({super.key});
   @override
   Widget build(BuildContext context) => const MaterialApp(
-        title: 'F1 latency spike',
+        title: 'vocal_athlete (debug)',
         debugShowCheckedModeBanner: false,
-        home: SpikeScreen(),
+        home: DebugHome(),
       );
 }
 
-class SpikeScreen extends StatefulWidget {
-  const SpikeScreen({super.key});
-  @override
-  State<SpikeScreen> createState() => _SpikeScreenState();
-}
-
-class _SpikeScreenState extends State<SpikeScreen> {
-  final _rec = AudioRecorder();
-  StreamSubscription<Uint8List>? _sub;
-  static const _sr = 16000;
-
-  bool _running = false;
-  double? _f0;
-  double _lastMs = 0;
-  double _avgMs = 0;
-  int _frames = 0;
-
-  Future<void> _start() async {
-    if (!await _rec.hasPermission()) return;
-    final stream = await _rec.startStream(
-      const RecordConfig(
-        encoder: AudioEncoder.pcm16bits,
-        sampleRate: _sr,
-        numChannels: 1,
-      ),
-    );
-    setState(() => _running = true);
-    _sub = stream.listen((bytes) {
-      final tCapture = DateTime.now().microsecondsSinceEpoch;
-      final pcm = bytes.buffer.asInt16List();
-      final samples =
-          List<double>.generate(pcm.length, (i) => pcm[i] / 32768.0);
-      final f0 = estimateF0(samples, _sr);
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final ms =
-            (DateTime.now().microsecondsSinceEpoch - tCapture) / 1000.0;
-        _frames++;
-        _avgMs += (ms - _avgMs) / _frames;
-        if (mounted) {
-          setState(() {
-            _f0 = f0;
-            _lastMs = ms;
-          });
-        }
-      });
-    });
-  }
-
-  Future<void> _stop() async {
-    await _sub?.cancel();
-    await _rec.stop();
-    if (mounted) setState(() => _running = false);
-  }
-
-  @override
-  void dispose() {
-    _sub?.cancel();
-    _rec.dispose();
-    super.dispose();
-  }
+class DebugHome extends StatelessWidget {
+  const DebugHome({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final p = Progression.beginner();
+    final s = p.todaysLesson;
     return Scaffold(
       backgroundColor: const Color(0xFF0E0F13),
       body: SafeArea(
@@ -94,22 +34,30 @@ class _SpikeScreenState extends State<SpikeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('F1 지연 스파이크 (throwaway)',
+              const Text('P1 디버그 — 오늘의 레슨 셀렉터',
                   style: TextStyle(color: Colors.white, fontSize: 18)),
               const SizedBox(height: 4),
-              const Text('마이크→F0→화면 지연 측정 · ADR-0013 검증',
+              const Text('placeholder 카드 · 실배선 = C2',
                   style: TextStyle(color: Colors.white38, fontSize: 12)),
-              const Spacer(),
-              _row('F0', _f0 == null ? '—' : '${_f0!.toStringAsFixed(1)} Hz'),
-              _row('last latency', '${_lastMs.toStringAsFixed(1)} ms'),
-              _row('avg latency', '${_avgMs.toStringAsFixed(1)} ms'),
-              _row('frames', '$_frames'),
+              const SizedBox(height: 24),
+              _row('index', '${p.currentIndex} / ${p.total - 1}'),
+              _row('cardId', s.cardId),
+              _row('block', '${s.block}'),
+              _row('body:voiced',
+                  '${(s.bodyVoicedRatio * 100).round()}:${(100 - s.bodyVoicedRatio * 100).round()}'),
+              _row('variation', s.variationLevel.name),
+              _row('atEnd', '${p.atEnd}'),
               const Spacer(),
               SizedBox(
                 width: double.infinity,
-                child: FilledButton(
-                  onPressed: _running ? _stop : _start,
-                  child: Text(_running ? '정지' : '시작 (마이크)'),
+                child: OutlinedButton(
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                        builder: (_) => const LatencySpikeScreen()),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white70),
+                  child: const Text('F1 지연 스파이크 (마이크 필요 · pending)'),
                 ),
               ),
             ],
@@ -127,7 +75,7 @@ class _SpikeScreenState extends State<SpikeScreen> {
             Text(k, style: const TextStyle(color: Colors.white54)),
             Text(v,
                 style:
-                    const TextStyle(color: Colors.white, fontSize: 20)),
+                    const TextStyle(color: Colors.white, fontSize: 18)),
           ],
         ),
       );
