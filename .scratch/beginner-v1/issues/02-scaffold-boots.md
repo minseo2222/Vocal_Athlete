@@ -1,6 +1,15 @@
 # F1 — 스캐폴드 부팅
 
-Status: ready-for-agent
+Status: in-progress — 스캐폴드·스파이크·CI·테스트 완료(green). *실기기 지연 측정*(ADR-0013 조건부 검증)만 남음 — Android Studio/SDK + `flutter doctor` 필요(대화형, 사용자)
+
+## 진행 메모
+
+- `app/` Flutter 프로젝트 생성, `flutter analyze` 클린 + `flutter test` 2/2 통과
+- 오디오 지연 스파이크: `app/lib/main.dart` + `app/lib/spike/pitch_naive.dart`(순수·교체 seam)
+- 권한(Android RECORD_AUDIO / iOS 마이크), CI(`.github/workflows/flutter-ci.yml`), README 실행법
+- **남은 AC**: 기기에서 `flutter run` → avg latency 실측 → 수용/폴백 판정 기록 후 본 이슈 done
+
+
 
 ## What to build
 
