@@ -4,7 +4,7 @@ Status: ready-for-agent
 
 ## What to build
 
-C1의 13카드·5블록 콘텐츠를 P1 경로 모델에 배선해 플레이스홀더 레슨을 실제 콘텐츠로 교체. ~48레슨 경로가 5블록 순서·비중대로 구성되고, "오늘의 레슨"이 실제 카드 데이터를 반환.
+ADR-0015대로 **PathManifest 작성 + `resolve(Card,PathSlot,day)` 리졸버 구현**. C1의 13카드를 manifest 슬롯(블록·bodyVoicedRatio·variationLevel)에 배치해 ~48레슨 경로 구성, "오늘의 레슨" = 리졸버가 도출한 LessonInstance. 플레이스홀더 교체.
 
 ## Acceptance criteria
 
