@@ -19,12 +19,18 @@ class DebugApp extends StatelessWidget {
       );
 }
 
-class DebugHome extends StatelessWidget {
+class DebugHome extends StatefulWidget {
   const DebugHome({super.key});
+  @override
+  State<DebugHome> createState() => _DebugHomeState();
+}
+
+class _DebugHomeState extends State<DebugHome> {
+  final Progression _p = Progression.beginner();
 
   @override
   Widget build(BuildContext context) {
-    final p = Progression.beginner();
+    final p = _p;
     final s = p.todaysLesson;
     return Scaffold(
       backgroundColor: const Color(0xFF0E0F13),
@@ -34,7 +40,7 @@ class DebugHome extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('P1 디버그 — 오늘의 레슨 셀렉터',
+              const Text('P1/P2 디버그 — 오늘 레슨 · 완료 해금',
                   style: TextStyle(color: Colors.white, fontSize: 18)),
               const SizedBox(height: 4),
               const Text('placeholder 카드 · 실배선 = C2',
@@ -47,6 +53,14 @@ class DebugHome extends StatelessWidget {
                   '${(s.bodyVoicedRatio * 100).round()}:${(100 - s.bodyVoicedRatio * 100).round()}'),
               _row('variation', s.variationLevel.name),
               _row('atEnd', '${p.atEnd}'),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton(
+                  onPressed: () => setState(p.completeLesson),
+                  child: const Text('레슨 완료 (해금)'),
+                ),
+              ),
               const Spacer(),
               SizedBox(
                 width: double.infinity,

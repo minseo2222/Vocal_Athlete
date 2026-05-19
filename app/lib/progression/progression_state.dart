@@ -25,4 +25,11 @@ class Progression {
 
   /// "오늘의 레슨" 셀렉터 — 현재 슬롯 반환.
   PathSlot get todaysLesson => _manifest[_currentIndex];
+
+  /// P2 — 레슨 완료 → 완료 기반 해금(포인터 1 전진).
+  /// *인자 없음* = 수행 품질이 해금을 막지 않음(구조적 강제, ADR-0002/완료기반).
+  /// 경로 끝에서는 더 전진하지 않음(졸업 처리는 P7, 별도 슬라이스).
+  void completeLesson() {
+    if (!atEnd) _currentIndex++;
+  }
 }

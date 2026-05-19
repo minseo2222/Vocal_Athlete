@@ -1,6 +1,6 @@
 # P2 — 레슨 완료 액션 → 완료 기반 해금
 
-Status: ready-for-agent
+Status: done — completeLesson() 순수·품질무관·끝 보호 + 디버그 완료 버튼, analyze 클린·테스트 10/10 (2026-05)
 
 ## What to build
 
