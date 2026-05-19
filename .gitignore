@@ -1,2 +1,11 @@
 __pycache__/
 *.pyc
+
+# IDE
+.idea/
+
+# Flutter/Dart build artifacts
+**/.dart_tool/
+**/build/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
