@@ -1,6 +1,6 @@
 # F2 — 앱 실행 경고 화면
 
-Status: ready-for-agent
+Status: done — LaunchWarning 위젯(4신호+18+면책+확인) + _AppShell 상태 게이트(앱 실행당 1회·인메모리), 문진/입력 없음, TDD 4행동(위젯 테스트), analyze 클린·테스트 54/54 (2026-05). 부수: DebugHome SingleChildScrollView로 정리(소형 폰 overflow 방지).
 
 ## What to build
 

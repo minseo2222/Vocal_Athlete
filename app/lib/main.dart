@@ -5,6 +5,7 @@ library;
 import 'package:flutter/material.dart';
 
 import 'progression/progression_state.dart';
+import 'safety/launch_warning.dart';
 
 void main() => runApp(const DebugApp());
 
@@ -14,8 +15,23 @@ class DebugApp extends StatelessWidget {
   Widget build(BuildContext context) => const MaterialApp(
         title: 'vocal_athlete (debug)',
         debugShowCheckedModeBanner: false,
-        home: DebugHome(),
+        home: _AppShell(),
       );
+}
+
+/// F2 — 앱 실행 경고 게이트(인메모리, 앱 실행당 1회).
+class _AppShell extends StatefulWidget {
+  const _AppShell();
+  @override
+  State<_AppShell> createState() => _AppShellState();
+}
+
+class _AppShellState extends State<_AppShell> {
+  bool _ack = false;
+  @override
+  Widget build(BuildContext context) => _ack
+      ? const DebugHome()
+      : LaunchWarning(onConfirm: () => setState(() => _ack = true));
 }
 
 class DebugHome extends StatefulWidget {
@@ -35,7 +51,7 @@ class _DebugHomeState extends State<DebugHome> {
     return Scaffold(
       backgroundColor: const Color(0xFF0E0F13),
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,7 +125,7 @@ class _DebugHomeState extends State<DebugHome> {
                   child: const Text('선택 장르 중급 출시 토글'),
                 ),
               ),
-              const Spacer(),
+              const SizedBox(height: 24),
             ],
           ),
         ),
