@@ -58,4 +58,17 @@ void main() {
     expect(find.byKey(const Key('lesson-sheet')), findsOneWidget);
     expect(find.byKey(const Key('complete-button')), findsOneWidget);
   });
+
+  testWidgets('C2.2 cue area renders resolved card cue (CARD-01)',
+      (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp());
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    // CARD-01 cue 일부
+    expect(find.textContaining('바닥/의자에 편하게'), findsOneWidget);
+    expect(find.textContaining('턱·어깨 힘 빼기'), findsOneWidget);
+    // placeholder 사라짐
+    expect(find.textContaining('운동 cue 자리'), findsNothing);
+  });
 }

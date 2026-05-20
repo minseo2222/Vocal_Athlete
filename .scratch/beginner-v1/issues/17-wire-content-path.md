@@ -1,6 +1,6 @@
 # C2 — 콘텐츠 경로 배선
 
-Status: ready-for-agent
+Status: done — Card 모델(ADR-0015 minimal) + kCardLibrary 13카드(cards.md 직역) + resolveCard, LessonScreen cue 영역이 실제 카드 cue 렌더, TDD 4행동 + 전수 가드, analyze 클린·테스트 62/62 (2026-05). anatomy/feedback/antiPatterns/variableAxes는 소비자 슬라이스에서 추가(YAGNI).
 
 ## What to build
 

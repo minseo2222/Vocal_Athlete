@@ -7,6 +7,7 @@ library;
 import 'package:flutter/material.dart';
 
 import '../progression/progression_state.dart';
+import 'card_library.dart';
 
 class LessonScreen extends StatelessWidget {
   const LessonScreen(
@@ -57,16 +58,16 @@ class LessonScreen extends StatelessWidget {
                 ],
               ),
             ),
-            // cue 중앙(placeholder, U2/C2에서 실제 카드 cue로 교체)
+            // cue 중앙 (C2: 실제 카드 cue로 배선)
             Expanded(
               child: Center(
                 key: const Key('lesson-cue'),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Text(
-                    '운동 cue 자리 (C2/U2 배선 후 실제 cue)',
+                    p == null ? '' : resolveCard(p.todaysLesson).cue.join('\n'),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white, fontSize: 21, height: 1.5),
                   ),
                 ),
