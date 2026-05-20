@@ -4,6 +4,7 @@
 /// progression.py 검증 패턴의 실코드 거처.
 library;
 
+import 'outcome_resolver.dart';
 import 'path.dart';
 
 /// P8 — 장르 트랙(CONTEXT 글로서리). 졸업 후 비구속 선택.
@@ -93,34 +94,50 @@ class Progression {
   /// *인자 없음* = 수행 품질이 해금을 막지 않음(구조적 강제, ADR-0002/완료기반).
   /// 경로 끝에서는 더 전진하지 않음(졸업 처리는 P7, 별도 슬라이스).
   CompleteOutcome completeLesson() {
+    // 캡 경로 — 변이 없음, 분류만.
     if (_didToday) {
-      // P3 캡 동작 불변 — P4는 *보고*만 분기.
-      if (_graduated) return CompleteOutcome.transitionGraduated;
-      if (_transitionDay == _day) return CompleteOutcome.transitionToNext;
-      return CompleteOutcome.capped;
+      return resolveOutcome(
+        didToday: true,
+        graduated: _graduated,
+        transitionDayHit: _transitionDay == _day,
+        maintenance: _maintenance,
+        pendingReview: _pendingReview,
+        atEnd: atEnd,
+      );
     }
     // P6 — 공백 계산 → 복귀 복습 트리거(활동 등록 전)
     final gap = _lastActiveDay == 0 ? 0 : _day - _lastActiveDay - 1;
     if (gap >= 7 && _pendingReview == 0 && !_graduated) {
       _pendingReview = gap <= 14 ? 1 : 2;
     }
+    // 활동 등록(P3·P5·P6 공통 변이)
     _didToday = true;
-    _streak++; // P5 — 그날 활동 등록 시 1회(복습일·유지일 포함)
+    _streak++;
     _lastActiveDay = _day;
-    if (_maintenance) {
-      // P9 — 유지 모드: 스킬 얇게 반복, 신규 해금 ❌(스트릭·캡은 유지)
-      return CompleteOutcome.maintenance;
+    // 활동 outcome 분류
+    final outcome = resolveOutcome(
+      didToday: false,
+      graduated: _graduated,
+      transitionDayHit: _transitionDay == _day,
+      maintenance: _maintenance,
+      pendingReview: _pendingReview,
+      atEnd: atEnd,
+    );
+    // outcome별 후속 변이
+    switch (outcome) {
+      case CompleteOutcome.review:
+        _pendingReview--; // P6 — 복귀일=복습, 신규 해금 ❌
+      case CompleteOutcome.advanced:
+        _currentIndex++;
+      case CompleteOutcome.graduated:
+        _graduated = true; // P7 — 마지막 슬롯 완주(점수 무관, ADR-0004)
+      case CompleteOutcome.maintenance:
+      case CompleteOutcome.capped:
+      case CompleteOutcome.transitionGraduated:
+      case CompleteOutcome.transitionToNext:
+        break;
     }
-    if (_pendingReview > 0) {
-      _pendingReview--; // P6 — 복귀일=복습이 그날 레슨, 신규 해금 ❌
-      return CompleteOutcome.review;
-    }
-    if (!atEnd) {
-      _currentIndex++;
-      return CompleteOutcome.advanced;
-    }
-    _graduated = true; // P7 — 마지막 슬롯 완주 = 졸업(점수 무관, ADR-0004)
-    return CompleteOutcome.graduated;
+    return outcome;
   }
 
   /// P8 — 졸업 후에만 장르 선택. 재호출=교체(비구속), 페널티 없음.
