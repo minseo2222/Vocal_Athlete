@@ -1,7 +1,6 @@
 /// U1 — 레슨 화면 D 셸(채택안 D, 프로토 검증).
 ///
-/// 본 슬라이스(U1) = 셸·완료 배선까지. cue/유성 콘텐츠 = U2(C2 후),
-/// 시각 피치 = U4, 쿨다운 스킵 동작 = U3, "다시?" 넛지 = U5.
+/// U3 — 단계 머신(진입/본운동/쿨다운) 도입. 시각 피치 = U4, "다시?" 넛지 = U5.
 library;
 
 import 'package:flutter/material.dart';
@@ -9,7 +8,10 @@ import 'package:flutter/material.dart';
 import '../progression/progression_state.dart';
 import 'card_library.dart';
 
-class LessonScreen extends StatelessWidget {
+/// U3 — 레슨 단계 머신(진입→본운동→쿨다운).
+enum LessonStep { entry, main, cooldown }
+
+class LessonScreen extends StatefulWidget {
   const LessonScreen(
       {this.progression,
       this.onComplete,
@@ -24,8 +26,23 @@ class LessonScreen extends StatelessWidget {
   final VoidCallback? onAdvanceDay;
 
   @override
+  State<LessonScreen> createState() => _LessonScreenState();
+}
+
+class _LessonScreenState extends State<LessonScreen> {
+  LessonStep _step = LessonStep.entry;
+  // _p가 변이형이라 widget.progression 참조 비교가 무용 — 카드ID 자체를 추적.
+  String? _lastCardId;
+
+  @override
   Widget build(BuildContext context) {
-    final p = progression;
+    final p = widget.progression;
+    final card = p == null ? null : resolveCard(p.todaysLesson);
+    final id = card?.id;
+    if (id != null && _lastCardId != null && id != _lastCardId) {
+      _step = LessonStep.entry;
+    }
+    _lastCardId = id;
     return Scaffold(
       backgroundColor: const Color(0xFF0E0F13),
       body: SafeArea(
@@ -52,10 +69,7 @@ class LessonScreen extends StatelessWidget {
                         _Pill(
                             key: const Key('streak'),
                             text: '🔥 ${p.streak}'),
-                      if (p != null &&
-                          resolveCard(p.todaysLesson)
-                              .voicedMicroWin
-                              .isNotEmpty) ...[
+                      if (card != null && card.voicedMicroWin.isNotEmpty) ...[
                         const SizedBox(width: 6),
                         const _Pill(text: '● 유성'),
                       ],
@@ -84,11 +98,33 @@ class LessonScreen extends StatelessWidget {
                 key: const Key('lesson-cue'),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Text(
-                    p == null ? '' : resolveCard(p.todaysLesson).cue.join('\n'),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        color: Colors.white, fontSize: 21, height: 1.5),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (_step == LessonStep.entry && card != null) ...[
+                        Text(
+                          '워밍업: ${card.anatomyEntry}',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              color: Colors.white70, fontSize: 14),
+                        ),
+                        const SizedBox(height: 12),
+                      ],
+                      if (_step == LessonStep.cooldown && card != null)
+                        Text(
+                          '쿨다운: ${card.anatomyCooldown}',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 21, height: 1.5),
+                        )
+                      else
+                        Text(
+                          card == null ? '' : card.cue.join('\n'),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 21, height: 1.5),
+                        ),
+                    ],
                   ),
                 ),
               ),
@@ -117,16 +153,22 @@ class LessonScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text('본운동 · 7–11분',
+                    children: [
+                      const Text('본운동 · 7–11분',
                           style: TextStyle(color: Colors.white54)),
-                      _Pill(text: '쿨다운 건너뛰기'), // placeholder, 동작 = U3
+                      if (_step == LessonStep.main)
+                        InkWell(
+                          key: const Key('skip-cooldown'),
+                          onTap: widget.onComplete,
+                          borderRadius: BorderRadius.circular(999),
+                          child: const _Pill(text: '쿨다운 건너뛰기'),
+                        ),
                     ],
                   ),
-                  if (p != null) ...[
+                  if (card != null) ...[
                     const SizedBox(height: 8),
                     Text(
-                      '● ${resolveCard(p.todaysLesson).voicedMicroWin.first}',
+                      '● ${card.voicedMicroWin.first}',
                       style: const TextStyle(
                           color: Color(0xFF39D98A), fontSize: 13),
                     ),
@@ -141,21 +183,36 @@ class LessonScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
+                  if (_step != LessonStep.cooldown) ...[
+                    SizedBox(
+                      width: double.infinity,
+                      child: FilledButton(
+                        key: const Key('next-button'),
+                        onPressed: () => setState(() {
+                          _step = _step == LessonStep.entry
+                              ? LessonStep.main
+                              : LessonStep.cooldown;
+                        }),
+                        child: const Text('다음'),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                  ],
                   SizedBox(
                     width: double.infinity,
                     child: FilledButton(
                       key: const Key('complete-button'),
-                      onPressed: onComplete,
+                      onPressed: widget.onComplete,
                       child: const Text('완료'),
                     ),
                   ),
-                  if (onAdvanceDay != null) ...[
+                  if (widget.onAdvanceDay != null) ...[
                     const SizedBox(height: 8),
                     SizedBox(
                       width: double.infinity,
                       child: OutlinedButton(
                         key: const Key('dev-advance-day'),
-                        onPressed: onAdvanceDay,
+                        onPressed: widget.onAdvanceDay,
                         style: OutlinedButton.styleFrom(
                             foregroundColor: Colors.white38),
                         child: const Text('다음날 (dev · 실 캘린더 슬라이스 전 임시)'),

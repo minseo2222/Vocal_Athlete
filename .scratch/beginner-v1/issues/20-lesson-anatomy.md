@@ -1,6 +1,6 @@
 # U3 — 레슨 해부 (진입/본/쿨다운, 쿨다운 스킵)
 
-Status: ready-for-agent
+Status: done
 
 ## What to build
 

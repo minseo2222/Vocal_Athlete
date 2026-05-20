@@ -16,6 +16,9 @@ const Map<String, Card> kCardLibrary = {
       '6점 균형 의식만 — 움직이지 않기.',
     ],
     voicedMicroWin: ['끝에 편한 /m/ 3회(각 2–3초)'],
+    anatomyEntry: '가벼운 신체 스캔',
+    anatomyMain: '6점 정렬 관찰',
+    anatomyCooldown: '느린 호흡 3회',
   ),
   'CARD-02': Card(
     id: 'CARD-02',
@@ -25,6 +28,9 @@ const Map<String, Card> kCardLibrary = {
       '내쉴 때 어깨 ❌.',
     ],
     voicedMicroWin: ['voiced 한숨 /h→a/ 3회(음정 안 정함)'],
+    anatomyEntry: '무음 호흡 관찰',
+    anatomyMain: '늑골-복부 결합 호흡',
+    anatomyCooldown: '느린 날숨 연장',
   ),
   'CARD-03': Card(
     id: 'CARD-03',
@@ -34,6 +40,9 @@ const Map<String, Card> kCardLibrary = {
       'silent ah 후 가벼운 voiced ah.',
     ],
     voicedMicroWin: ['가벼운 /a/ 3회(편한 중음)'],
+    anatomyEntry: '턱·혀 풀기',
+    anatomyMain: 'silent ah → voiced ah',
+    anatomyCooldown: '하품-한숨 1회',
   ),
   'CARD-04': Card(
     id: 'CARD-04',
@@ -43,6 +52,9 @@ const Map<String, Card> kCardLibrary = {
       '크게 ❌, 편하게.',
     ],
     voicedMicroWin: ['/h/-led 부드러운 onset 5회'],
+    anatomyEntry: '무성 호기 3회',
+    anatomyMain: '/h/→/m/ easy onset',
+    anatomyCooldown: '가벼운 /m/ 하행',
   ),
   'CARD-05': Card(
     id: 'CARD-05',
@@ -52,6 +64,9 @@ const Map<String, Card> kCardLibrary = {
       '(블록4) 균형/과기식/과압착 중 어디로 보이는지 표시.',
     ],
     voicedMicroWin: ['편한 음 2–3초 발성 후 시각 곡선 확인 3회'],
+    anatomyEntry: '짧은 발성',
+    anatomyMain: '발성→시각 곡선 대조',
+    anatomyCooldown: '가벼운 허밍',
   ),
   'CARD-06': Card(
     id: 'CARD-06',
@@ -62,6 +77,9 @@ const Map<String, Card> kCardLibrary = {
       '어지러우면 즉시 멈추세요.',
     ],
     voicedMicroWin: ['빨대 /u/ sustain 5초 × 3'],
+    anatomyEntry: '무음 빨대 호기 1회',
+    anatomyMain: '빨대 /u/ sustain 반복',
+    anatomyCooldown: '빨대 빼고 /u/ 1회',
   ),
   'CARD-07': Card(
     id: 'CARD-07',
@@ -71,6 +89,9 @@ const Map<String, Card> kCardLibrary = {
       '편한 음으로 5초.',
     ],
     voicedMicroWin: ['립 트릴 sustain 5초 × 3, 가벼운 글라이드 1회'],
+    anatomyEntry: '무성 입술 트릴',
+    anatomyMain: '유성 트릴 sustain·글라이드',
+    anatomyCooldown: '가벼운 허밍',
   ),
   'CARD-08': Card(
     id: 'CARD-08',
@@ -80,6 +101,9 @@ const Map<String, Card> kCardLibrary = {
       '/ŋ/로 바꿔 같은 느낌.',
     ],
     voicedMicroWin: ['/m/ 5초 × 2, /ŋ/ 5초 × 2'],
+    anatomyEntry: '가벼운 /m/',
+    anatomyMain: '/m/·/ŋ/ sustain·작은 글라이드',
+    anatomyCooldown: '하행 허밍',
   ),
   'CARD-09': Card(
     id: 'CARD-09',
@@ -89,6 +113,9 @@ const Map<String, Card> kCardLibrary = {
       '약한 강도로 5초.',
     ],
     voicedMicroWin: ['물 버블 발성 5초 × 3'],
+    anatomyEntry: '무음 버블 1회',
+    anatomyMain: '유성 물 버블 반복',
+    anatomyCooldown: '빨대 빼고 /u/ 1회',
   ),
   'CARD-10': Card(
     id: 'CARD-10',
@@ -98,6 +125,9 @@ const Map<String, Card> kCardLibrary = {
       '짜내지 말기.',
     ],
     voicedMicroWin: ['편한 음 sustain 5초 × 4'],
+    anatomyEntry: '가벼운 onset',
+    anatomyMain: '균형 지점 탐색 sustain',
+    anatomyCooldown: '가벼운 허밍',
   ),
   'CARD-11': Card(
     id: 'CARD-11',
@@ -108,6 +138,9 @@ const Map<String, Card> kCardLibrary = {
       '5회 반복.',
     ],
     voicedMicroWin: ['자기 녹음 모방 발성 5회'],
+    anatomyEntry: '편한 음 1회',
+    anatomyMain: '녹음→재생→재모방→시각 비교 5회',
+    anatomyCooldown: '가벼운 /m/',
   ),
   'CARD-12': Card(
     id: 'CARD-12',
@@ -117,6 +150,9 @@ const Map<String, Card> kCardLibrary = {
       '빗나가도 계속 — 다음에 가까이.',
     ],
     voicedMicroWin: ['목표음 매칭 발성 5회(각 3–5초)'],
+    anatomyEntry: '가벼운 글라이드',
+    anatomyMain: '피아노롤 목표선 매칭',
+    anatomyCooldown: '하행 글라이드 1회',
   ),
   'CARD-13': Card(
     id: 'CARD-13',
@@ -127,6 +163,9 @@ const Map<String, Card> kCardLibrary = {
       '/a/로 저→고→저 한 호흡.',
     ],
     voicedMicroWin: ['지속 모음 3종 + 글라이드 녹음(전체가 유성)'],
+    anatomyEntry: '환경 확인',
+    anatomyMain: '고정 과제 녹음',
+    anatomyCooldown: '가벼운 허밍',
   ),
 };
 

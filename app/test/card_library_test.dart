@@ -28,6 +28,16 @@ void main() {
     }
   });
 
+  test('U3.6 all cards have non-empty anatomy{entry,main,cooldown}', () {
+    for (final entry in kCardLibrary.entries) {
+      final c = entry.value;
+      expect(c.anatomyEntry, isNotEmpty, reason: '${entry.key} anatomyEntry empty');
+      expect(c.anatomyMain, isNotEmpty, reason: '${entry.key} anatomyMain empty');
+      expect(c.anatomyCooldown, isNotEmpty,
+          reason: '${entry.key} anatomyCooldown empty');
+    }
+  });
+
   test('U2.3 no card cue contains rationale/motivation tokens (ADR-0002)',
       () {
     // 무납득 구조 강제 — cue는 지시문만, "왜"/정당화 어휘 미포함.

@@ -105,4 +105,73 @@ void main() {
     expect(find.descendant(of: streak, matching: find.text('🔥 1')),
         findsOneWidget);
   });
+
+  testWidgets('U3.1 initial step is entry — shows 워밍업 + 다음 button',
+      (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp());
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('워밍업:'), findsOneWidget);
+    expect(find.byKey(const Key('next-button')), findsOneWidget);
+  });
+
+  testWidgets('U3.5 main 쿨다운 스킵 chip 탭 → 즉시 다음 카드(CARD-02, entry)',
+      (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp());
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('next-button'))); // entry→main
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('skip-cooldown')));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('CARD-02'), findsOneWidget);
+    expect(find.byKey(const Key('next-button')), findsOneWidget); // entry 리셋
+  });
+
+  testWidgets('U3.4 cooldown 완료 → 다음 카드(CARD-02) + step=entry 리셋',
+      (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp());
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('next-button'))); // entry→main
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('next-button'))); // main→cooldown
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('complete-button')));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('CARD-02'), findsOneWidget);
+    // step=entry로 리셋되어 next 버튼 다시 보임, 쿨다운 텍스트 없음
+    expect(find.byKey(const Key('next-button')), findsOneWidget);
+    expect(find.textContaining('쿨다운:'), findsNothing);
+  });
+
+  testWidgets('U3.3 tap 다음 at main → step=cooldown (쿨다운 텍스트 + 다음 버튼 사라짐)',
+      (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp());
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('next-button'))); // entry → main
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('next-button'))); // main → cooldown
+    await tester.pumpAndSettle();
+    expect(find.textContaining('쿨다운:'), findsOneWidget);
+    expect(find.byKey(const Key('next-button')), findsNothing);
+    expect(find.byKey(const Key('complete-button')), findsOneWidget);
+  });
+
+  testWidgets('U3.2 tap 다음 at entry → step=main (워밍업 사라지고 cue 유지)',
+      (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp());
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('next-button')));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('워밍업:'), findsNothing);
+    expect(find.textContaining('바닥/의자에 편하게'), findsOneWidget);
+  });
 }
