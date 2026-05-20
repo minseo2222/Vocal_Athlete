@@ -13,10 +13,15 @@ class LessonScreen extends StatelessWidget {
   const LessonScreen(
       {this.progression,
       this.onComplete,
+      this.onAdvanceDay,
       super.key = const Key('lesson-screen')});
 
   final Progression? progression;
   final VoidCallback? onComplete;
+
+  /// dev 어포던스 — 실 캘린더 바인딩 슬라이스 전까지 다음날로 진행할 수단.
+  /// null이면 버튼 미표시. 정식 출시 전 제거.
+  final VoidCallback? onAdvanceDay;
 
   @override
   Widget build(BuildContext context) {
@@ -144,6 +149,19 @@ class LessonScreen extends StatelessWidget {
                       child: const Text('완료'),
                     ),
                   ),
+                  if (onAdvanceDay != null) ...[
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        key: const Key('dev-advance-day'),
+                        onPressed: onAdvanceDay,
+                        style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.white38),
+                        child: const Text('다음날 (dev · 실 캘린더 슬라이스 전 임시)'),
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),

@@ -34,6 +34,7 @@ class _AppShellState extends State<_AppShell> {
       ? LessonScreen(
           progression: _p,
           onComplete: () => setState(_p.completeLesson),
+          onAdvanceDay: () => setState(_p.advanceDay), // dev 임시(ADR-0016)
         )
       : LaunchWarning(onConfirm: () => setState(() => _ack = true));
 }
