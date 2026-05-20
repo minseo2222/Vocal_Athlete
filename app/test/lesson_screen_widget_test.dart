@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vocal_athlete/main.dart';
 import 'package:vocal_athlete/lesson/lesson_screen.dart';
+import 'package:vocal_athlete/progression/path.dart';
+import 'package:vocal_athlete/progression/progression_state.dart';
 
 void _phoneViewport(WidgetTester tester) {
   tester.view.physicalSize = const Size(1260, 2700);
@@ -114,6 +116,59 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.textContaining('워밍업:'), findsOneWidget);
     expect(find.byKey(const Key('next-button')), findsOneWidget);
+  });
+
+  testWidgets('M3 last slot complete → graduated SnackBar', (tester) async {
+    _phoneViewport(tester);
+    const slot = PathSlot(
+      index: 0,
+      cardId: 'CARD-01',
+      block: 1,
+      bodyVoicedRatio: 0.70,
+      variationLevel: VariationLevel.blocked,
+    );
+    final p = Progression.from([slot]);
+    await tester.pumpWidget(DebugApp(initialProgression: p));
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('next-button')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('skip-cooldown')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('outcome-snack')), findsOneWidget);
+    expect(find.textContaining('초급 완주'), findsOneWidget);
+  });
+
+  testWidgets('M2 first complete (advanced) → no SnackBar', (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp());
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('next-button')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('skip-cooldown')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('outcome-snack')), findsNothing);
+  });
+
+  testWidgets('M1 second complete same day → capped SnackBar shown',
+      (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp());
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    // 1차 완료: entry→main→skip-chip → onComplete (advanced)
+    await tester.tap(find.byKey(const Key('next-button')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('skip-cooldown')));
+    await tester.pumpAndSettle();
+    // 2차 완료(같은 날): CARD-02 entry → main → skip-chip → capped
+    await tester.tap(find.byKey(const Key('next-button')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('skip-cooldown')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('outcome-snack')), findsOneWidget);
+    expect(find.textContaining('오늘 레슨은 끝났어요'), findsOneWidget);
   });
 
   testWidgets('C3.5 main step shows today-variation; entry/cooldown hide it',
