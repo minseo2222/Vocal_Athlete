@@ -1,6 +1,6 @@
 # U1 — 레슨 화면 D 셸 + 완료 배선
 
-Status: ready-for-agent
+Status: done — LessonScreen D 셸(헤더·3단 스테퍼·cue·하단 시트·완료) + _AppShell이 Progression 보유·완료 배선 → P2 전진, 디버그 허브 제거(역할 종료), TDD 4행동, analyze 클린·테스트 58/58 (2026-05). cue/유성/피치/쿨다운chip/넛지=후속 슬라이스.
 
 ## What to build
 
