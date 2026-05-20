@@ -6,8 +6,7 @@ library;
 import 'package:flutter/material.dart';
 
 import '../progression/progression_state.dart';
-import 'card_library.dart';
-import 'variation.dart';
+import 'lesson_instance.dart';
 
 /// U3 — 레슨 단계 머신(진입→본운동→쿨다운).
 enum LessonStep { entry, main, cooldown }
@@ -38,7 +37,9 @@ class _LessonScreenState extends State<LessonScreen> {
   @override
   Widget build(BuildContext context) {
     final p = widget.progression;
-    final card = p == null ? null : resolveCard(p.todaysLesson);
+    final instance =
+        p == null ? null : resolveLessonInstance(p.todaysLesson, p.day);
+    final card = instance?.card;
     final id = card?.id;
     if (id != null && _lastCardId != null && id != _lastCardId) {
       _step = LessonStep.entry;
@@ -70,7 +71,7 @@ class _LessonScreenState extends State<LessonScreen> {
                         _Pill(
                             key: const Key('streak'),
                             text: '🔥 ${p.streak}'),
-                      if (card != null && card.voicedMicroWin.isNotEmpty) ...[
+                      if (instance != null && instance.hasVoicedMicroWin) ...[
                         const SizedBox(width: 6),
                         const _Pill(text: '● 유성'),
                       ],
@@ -174,22 +175,18 @@ class _LessonScreenState extends State<LessonScreen> {
                           color: Color(0xFF39D98A), fontSize: 13),
                     ),
                   ],
-                  if (_step == LessonStep.main && p != null && card != null)
-                    Builder(builder: (_) {
-                      final v = selectVariation(card, p.todaysLesson, p.day);
-                      if (v.isEmpty) return const SizedBox.shrink();
-                      final joined =
-                          v.entries.map((e) => '${e.key}=${e.value}').join(' · ');
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 6),
-                        child: Text(
-                          '오늘: $joined',
-                          key: const Key('today-variation'),
-                          style: const TextStyle(
-                              color: Colors.white54, fontSize: 12),
-                        ),
-                      );
-                    }),
+                  if (_step == LessonStep.main &&
+                      instance != null &&
+                      instance.variation.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 6),
+                      child: Text(
+                        '오늘: ${instance.variationLabel}',
+                        key: const Key('today-variation'),
+                        style: const TextStyle(
+                            color: Colors.white54, fontSize: 12),
+                      ),
+                    ),
                   const SizedBox(height: 12),
                   // 시각 피치 영역 자리(실제 곡선 = U4)
                   Container(
