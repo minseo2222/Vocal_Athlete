@@ -1,6 +1,6 @@
 # U2 — 유성 마이크로윈 + 운동 지시 cue 렌더
 
-Status: ready-for-agent
+Status: done — 헤더 ● 유성 pill 데이터 조건부(card.voicedMicroWin.isNotEmpty), 시트에 voicedMicroWin 본문 노출, 무납득 데이터 가드(cue에 정당화 토큰 미포함), TDD 2행동+리팩터+가드, analyze 클린·테스트 64/64 (2026-05).
 
 ## What to build
 

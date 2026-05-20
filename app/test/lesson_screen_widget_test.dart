@@ -71,4 +71,14 @@ void main() {
     // placeholder 사라짐
     expect(find.textContaining('운동 cue 자리'), findsNothing);
   });
+
+  testWidgets('U2.2 sheet shows voicedMicroWin body (CARD-01)',
+      (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp());
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    // CARD-01 voicedMicroWin: "끝에 편한 /m/ 3회(각 2–3초)"
+    expect(find.textContaining('/m/ 3회'), findsOneWidget);
+  });
 }

@@ -27,5 +27,19 @@ void main() {
       expect(resolveCard(slot).id, slot.cardId);
     }
   });
+
+  test('U2.3 no card cue contains rationale/motivation tokens (ADR-0002)',
+      () {
+    // 무납득 구조 강제 — cue는 지시문만, "왜"/정당화 어휘 미포함.
+    const banned = ['왜', '이유', '때문', '위해서', '효과'];
+    for (final entry in kCardLibrary.entries) {
+      for (final line in entry.value.cue) {
+        for (final token in banned) {
+          expect(line.contains(token), isFalse,
+              reason: '${entry.key} cue line "$line" contains "$token"');
+        }
+      }
+    }
+  });
 }
 

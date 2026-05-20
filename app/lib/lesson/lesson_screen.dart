@@ -40,7 +40,10 @@ class LessonScreen extends StatelessWidget {
                     style:
                         const TextStyle(color: Colors.white, fontSize: 14),
                   ),
-                  const _Pill(text: '● 유성'), // placeholder, 실제 = U2
+                  // U2 — 데이터 조건부 표지: 카드에 voicedMicroWin 있을 때만(무성 0)
+                  if (p != null &&
+                      resolveCard(p.todaysLesson).voicedMicroWin.isNotEmpty)
+                    const _Pill(text: '● 유성'),
                 ],
               ),
             ),
@@ -103,6 +106,14 @@ class LessonScreen extends StatelessWidget {
                       _Pill(text: '쿨다운 건너뛰기'), // placeholder, 동작 = U3
                     ],
                   ),
+                  if (p != null) ...[
+                    const SizedBox(height: 8),
+                    Text(
+                      '● ${resolveCard(p.todaysLesson).voicedMicroWin.first}',
+                      style: const TextStyle(
+                          color: Color(0xFF39D98A), fontSize: 13),
+                    ),
+                  ],
                   const SizedBox(height: 12),
                   // 시각 피치 영역 자리(실제 곡선 = U4)
                   Container(
