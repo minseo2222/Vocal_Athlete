@@ -19,6 +19,9 @@ const Map<String, Card> kCardLibrary = {
     anatomyEntry: '가벼운 신체 스캔',
     anatomyMain: '6점 정렬 관찰',
     anatomyCooldown: '느린 호흡 3회',
+    variableAxes: {
+      'sessionPos': ['워밍업', '본'],
+    },
   ),
   'CARD-02': Card(
     id: 'CARD-02',
@@ -31,6 +34,9 @@ const Map<String, Card> kCardLibrary = {
     anatomyEntry: '무음 호흡 관찰',
     anatomyMain: '늑골-복부 결합 호흡',
     anatomyCooldown: '느린 날숨 연장',
+    variableAxes: {
+      'sessionPos': ['워밍업', '본'],
+    },
   ),
   'CARD-03': Card(
     id: 'CARD-03',
@@ -43,6 +49,9 @@ const Map<String, Card> kCardLibrary = {
     anatomyEntry: '턱·혀 풀기',
     anatomyMain: 'silent ah → voiced ah',
     anatomyCooldown: '하품-한숨 1회',
+    variableAxes: {
+      'sessionPos': ['워밍업', '본'],
+    },
   ),
   'CARD-04': Card(
     id: 'CARD-04',
@@ -55,6 +64,10 @@ const Map<String, Card> kCardLibrary = {
     anatomyEntry: '무성 호기 3회',
     anatomyMain: '/h/→/m/ easy onset',
     anatomyCooldown: '가벼운 /m/ 하행',
+    variableAxes: {
+      'range': ['편한 중음', '약간 낮게'],
+      'sessionPos': ['워밍업', '본'],
+    },
   ),
   'CARD-05': Card(
     id: 'CARD-05',
@@ -67,6 +80,10 @@ const Map<String, Card> kCardLibrary = {
     anatomyEntry: '짧은 발성',
     anatomyMain: '발성→시각 곡선 대조',
     anatomyCooldown: '가벼운 허밍',
+    variableAxes: {
+      'range': ['중음', '약간 높/낮'],
+      'vowel': ['a', 'i', 'u'],
+    },
   ),
   'CARD-06': Card(
     id: 'CARD-06',
@@ -80,6 +97,10 @@ const Map<String, Card> kCardLibrary = {
     anatomyEntry: '무음 빨대 호기 1회',
     anatomyMain: '빨대 /u/ sustain 반복',
     anatomyCooldown: '빨대 빼고 /u/ 1회',
+    variableAxes: {
+      'range': ['중음', '±2도'],
+      'vowel': ['u', 'a'],
+    },
   ),
   'CARD-07': Card(
     id: 'CARD-07',
@@ -92,6 +113,10 @@ const Map<String, Card> kCardLibrary = {
     anatomyEntry: '무성 입술 트릴',
     anatomyMain: '유성 트릴 sustain·글라이드',
     anatomyCooldown: '가벼운 허밍',
+    variableAxes: {
+      'range': ['중음', '±2도'],
+      'glide': ['sustain', '작은 5도 글라이드'],
+    },
   ),
   'CARD-08': Card(
     id: 'CARD-08',
@@ -104,6 +129,11 @@ const Map<String, Card> kCardLibrary = {
     anatomyEntry: '가벼운 /m/',
     anatomyMain: '/m/·/ŋ/ sustain·작은 글라이드',
     anatomyCooldown: '하행 허밍',
+    variableAxes: {
+      'range': ['중음', '±3도'],
+      'vowel': ['m', 'ŋ'],
+      'glide': ['sustain', '글라이드'],
+    },
   ),
   'CARD-09': Card(
     id: 'CARD-09',
@@ -116,6 +146,10 @@ const Map<String, Card> kCardLibrary = {
     anatomyEntry: '무음 버블 1회',
     anatomyMain: '유성 물 버블 반복',
     anatomyCooldown: '빨대 빼고 /u/ 1회',
+    variableAxes: {
+      'range': ['중음'],
+      'glide': ['sustain'],
+    },
   ),
   'CARD-10': Card(
     id: 'CARD-10',
@@ -128,6 +162,10 @@ const Map<String, Card> kCardLibrary = {
     anatomyEntry: '가벼운 onset',
     anatomyMain: '균형 지점 탐색 sustain',
     anatomyCooldown: '가벼운 허밍',
+    variableAxes: {
+      'range': ['중음', '±3도'],
+      'vowel': ['a', 'i', 'u'],
+    },
   ),
   'CARD-11': Card(
     id: 'CARD-11',
@@ -141,6 +179,10 @@ const Map<String, Card> kCardLibrary = {
     anatomyEntry: '편한 음 1회',
     anatomyMain: '녹음→재생→재모방→시각 비교 5회',
     anatomyCooldown: '가벼운 /m/',
+    variableAxes: {
+      'range': ['중음', '±3도'],
+      'vowel': ['a', 'u'],
+    },
   ),
   'CARD-12': Card(
     id: 'CARD-12',
@@ -153,6 +195,11 @@ const Map<String, Card> kCardLibrary = {
     anatomyEntry: '가벼운 글라이드',
     anatomyMain: '피아노롤 목표선 매칭',
     anatomyCooldown: '하행 글라이드 1회',
+    variableAxes: {
+      'range': ['중음', '±3도', '약간 확장'],
+      'vowel': ['a', 'i', 'u'],
+      'glide': ['고정음', '작은 글라이드'],
+    },
   ),
   'CARD-13': Card(
     id: 'CARD-13',

@@ -1,6 +1,6 @@
 # C3 — 변주 엔진
 
-Status: ready-for-agent
+Status: done
 
 ## What to build
 

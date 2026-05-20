@@ -28,6 +28,21 @@ void main() {
     }
   });
 
+  test('C3.6 variableAxes values contain no rationale tokens (ADR-0002)', () {
+    const banned = ['왜', '이유', '때문', '위해서', '효과'];
+    for (final entry in kCardLibrary.entries) {
+      for (final axis in entry.value.variableAxes.entries) {
+        for (final v in axis.value) {
+          for (final token in banned) {
+            expect(v.contains(token), isFalse,
+                reason:
+                    '${entry.key} axis ${axis.key} value "$v" contains "$token"');
+          }
+        }
+      }
+    }
+  });
+
   test('U3.6 all cards have non-empty anatomy{entry,main,cooldown}', () {
     for (final entry in kCardLibrary.entries) {
       final c = entry.value;

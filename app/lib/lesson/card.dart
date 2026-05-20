@@ -12,6 +12,7 @@ class Card {
     this.anatomyEntry = '',
     this.anatomyMain = '',
     this.anatomyCooldown = '',
+    this.variableAxes = const {},
   });
 
   final String id;
@@ -21,4 +22,6 @@ class Card {
   final String anatomyEntry;
   final String anatomyMain;
   final String anatomyCooldown;
+  // C3 — 변주축(ADR-0015 variableAxes). 키=축, 값=후보 리스트. 비면 변주 없음.
+  final Map<String, List<String>> variableAxes;
 }

@@ -116,6 +116,25 @@ void main() {
     expect(find.byKey(const Key('next-button')), findsOneWidget);
   });
 
+  testWidgets('C3.5 main step shows today-variation; entry/cooldown hide it',
+      (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp());
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    // entry: 미표시
+    expect(find.byKey(const Key('today-variation')), findsNothing);
+    await tester.tap(find.byKey(const Key('next-button'))); // → main
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('today-variation')), findsOneWidget);
+    // CARD-01 sessionPos:[워밍업,본] / blocked → 워밍업
+    final t = tester.widget<Text>(find.byKey(const Key('today-variation')));
+    expect(t.data, contains('워밍업'));
+    await tester.tap(find.byKey(const Key('next-button'))); // → cooldown
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('today-variation')), findsNothing);
+  });
+
   testWidgets('U3.5 main 쿨다운 스킵 chip 탭 → 즉시 다음 카드(CARD-02, entry)',
       (tester) async {
     _phoneViewport(tester);

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../progression/progression_state.dart';
 import 'card_library.dart';
+import 'variation.dart';
 
 /// U3 — 레슨 단계 머신(진입→본운동→쿨다운).
 enum LessonStep { entry, main, cooldown }
@@ -173,6 +174,22 @@ class _LessonScreenState extends State<LessonScreen> {
                           color: Color(0xFF39D98A), fontSize: 13),
                     ),
                   ],
+                  if (_step == LessonStep.main && p != null && card != null)
+                    Builder(builder: (_) {
+                      final v = selectVariation(card, p.todaysLesson, p.day);
+                      if (v.isEmpty) return const SizedBox.shrink();
+                      final joined =
+                          v.entries.map((e) => '${e.key}=${e.value}').join(' · ');
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 6),
+                        child: Text(
+                          '오늘: $joined',
+                          key: const Key('today-variation'),
+                          style: const TextStyle(
+                              color: Colors.white54, fontSize: 12),
+                        ),
+                      );
+                    }),
                   const SizedBox(height: 12),
                   // 시각 피치 영역 자리(실제 곡선 = U4)
                   Container(
