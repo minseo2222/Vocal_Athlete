@@ -1,6 +1,6 @@
 # U6 — 스트릭·진척 노출
 
-Status: ready-for-agent
+Status: done — 헤더에 🔥 streak pill(Key('streak'))·P5와 동기화(완료 시 갱신), idx/total은 U1에 이미 존재, 가혹 연출·정당화 텍스트 없음, TDD 2행동, analyze 클린·테스트 66/66 (2026-05).
 
 ## What to build
 

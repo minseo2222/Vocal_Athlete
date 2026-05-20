@@ -40,10 +40,22 @@ class LessonScreen extends StatelessWidget {
                     style:
                         const TextStyle(color: Colors.white, fontSize: 14),
                   ),
-                  // U2 — 데이터 조건부 표지: 카드에 voicedMicroWin 있을 때만(무성 0)
-                  if (p != null &&
-                      resolveCard(p.todaysLesson).voicedMicroWin.isNotEmpty)
-                    const _Pill(text: '● 유성'),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (p != null)
+                        _Pill(
+                            key: const Key('streak'),
+                            text: '🔥 ${p.streak}'),
+                      if (p != null &&
+                          resolveCard(p.todaysLesson)
+                              .voicedMicroWin
+                              .isNotEmpty) ...[
+                        const SizedBox(width: 6),
+                        const _Pill(text: '● 유성'),
+                      ],
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -179,7 +191,7 @@ class _Step extends StatelessWidget {
 }
 
 class _Pill extends StatelessWidget {
-  const _Pill({required this.text});
+  const _Pill({required this.text, super.key});
   final String text;
   @override
   Widget build(BuildContext context) => Container(

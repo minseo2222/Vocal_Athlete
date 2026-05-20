@@ -81,4 +81,28 @@ void main() {
     // CARD-01 voicedMicroWin: "끝에 편한 /m/ 3회(각 2–3초)"
     expect(find.textContaining('/m/ 3회'), findsOneWidget);
   });
+
+  testWidgets('U6.1 header shows streak (starts at 0)', (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp());
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    final streak = find.byKey(const Key('streak'));
+    expect(streak, findsOneWidget);
+    expect(find.descendant(of: streak, matching: find.text('🔥 0')),
+        findsOneWidget);
+  });
+
+  testWidgets('U6.2 streak updates 0→1 after complete (P5 sync)',
+      (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp());
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('complete-button')));
+    await tester.pumpAndSettle();
+    final streak = find.byKey(const Key('streak'));
+    expect(find.descendant(of: streak, matching: find.text('🔥 1')),
+        findsOneWidget);
+  });
 }
