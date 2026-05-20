@@ -10,6 +10,12 @@ class _UnvoicedOnlySource implements PitchSource {
   @override
   Stream<PitchReading> get readings =>
       Stream<PitchReading>.value(const PitchReading(f0Hz: null, timestampSec: 0));
+  @override
+  Future<bool> start() async => true;
+  @override
+  Future<void> stop() async {}
+  @override
+  void dispose() {}
 }
 
 void main() {

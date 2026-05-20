@@ -9,6 +9,24 @@ import 'package:vocal_athlete/lesson/pitch/pitch_source.dart';
 import 'package:vocal_athlete/progression/path.dart';
 import 'package:vocal_athlete/progression/progression_state.dart';
 
+class _SpyPitchSource implements PitchSource {
+  int startCalls = 0;
+  int stopCalls = 0;
+  int disposeCalls = 0;
+  bool grant = true;
+  @override
+  Stream<PitchReading> get readings => const Stream<PitchReading>.empty();
+  @override
+  Future<bool> start() async {
+    startCalls++;
+    return grant;
+  }
+  @override
+  Future<void> stop() async => stopCalls++;
+  @override
+  void dispose() => disposeCalls++;
+}
+
 void _phoneViewport(WidgetTester tester) {
   tester.view.physicalSize = const Size(1260, 2700);
   tester.view.devicePixelRatio = 3.0;
@@ -117,6 +135,45 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.textContaining('워밍업:'), findsOneWidget);
     expect(find.byKey(const Key('next-button')), findsOneWidget);
+  });
+
+  testWidgets('L4 _AppShell teardown → source.stop() + dispose() called',
+      (tester) async {
+    final spy = _SpyPitchSource();
+    await tester.pumpWidget(DebugApp(pitchSource: spy));
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    expect(spy.stopCalls, 0);
+    expect(spy.disposeCalls, 0);
+    // 앱 트리에서 제거 = State.dispose
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pumpAndSettle();
+    expect(spy.stopCalls, 1);
+    expect(spy.disposeCalls, 1);
+  });
+
+  testWidgets('L3 start() denied → LessonScreen gets null pitchSource',
+      (tester) async {
+    _phoneViewport(tester);
+    final spy = _SpyPitchSource()..grant = false;
+    await tester.pumpWidget(DebugApp(pitchSource: spy));
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('next-button'))); // → main
+    await tester.pumpAndSettle();
+    // pitch-target은 항상 렌더(null source일 때도) — current는 source가 null이라 미렌더
+    expect(find.byKey(const Key('pitch-target')), findsOneWidget);
+    expect(find.byKey(const Key('pitch-current')), findsNothing);
+  });
+
+  testWidgets('L2 _AppShell calls pitchSource.start() once after ack',
+      (tester) async {
+    final spy = _SpyPitchSource();
+    await tester.pumpWidget(DebugApp(pitchSource: spy));
+    expect(spy.startCalls, 0); // ack 전 미호출
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    expect(spy.startCalls, 1);
   });
 
   testWidgets('P6 pitch-display gated on main step (entry/cooldown hidden)',

@@ -16,6 +16,15 @@ void main() {
     }
   });
 
+  test('L1 PitchSource lifecycle — start/stop/dispose on stub', () async {
+    final s = StubPitchSource();
+    expect(await s.start(), isTrue); // stub: 항상 grant
+    final r = await s.readings.first;
+    expect(r.f0Hz, isNotNull);
+    await s.stop();
+    s.dispose();
+  });
+
   test('P1 StubPitchSource emits at least one non-null reading', () async {
     final s = StubPitchSource();
     final first = await s.readings.first;

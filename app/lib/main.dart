@@ -39,7 +39,17 @@ class _AppShell extends StatefulWidget {
 
 class _AppShellState extends State<_AppShell> {
   bool _ack = false;
+  bool _pitchReady = false;
   late final Progression _p = widget.initial ?? Progression.beginner();
+
+  Future<void> _onAck() async {
+    setState(() => _ack = true);
+    final src = widget.pitchSource;
+    if (src == null) return;
+    final ok = await src.start();
+    if (!mounted) return;
+    setState(() => _pitchReady = ok);
+  }
 
   void _onComplete() {
     final outcome = _p.completeLesson();
@@ -57,16 +67,28 @@ class _AppShellState extends State<_AppShell> {
   void _onPickGenre(Genre g) => setState(() => _p.chooseGenre(g));
 
   @override
+  void dispose() {
+    final src = widget.pitchSource;
+    if (src != null) {
+      // unawaited — dispose는 sync. stop은 fire-and-forget.
+      // ignore: discarded_futures
+      src.stop();
+      src.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (!_ack) {
-      return LaunchWarning(onConfirm: () => setState(() => _ack = true));
+      return LaunchWarning(onConfirm: _onAck);
     }
     if (_p.graduated && _p.genre == null) {
       return GraduationScreen(onPick: _onPickGenre);
     }
     return LessonScreen(
       progression: _p,
-      pitchSource: widget.pitchSource,
+      pitchSource: _pitchReady ? widget.pitchSource : null,
       onComplete: _onComplete,
       onAdvanceDay: () => setState(_p.advanceDay), // dev 임시(ADR-0016)
     );
