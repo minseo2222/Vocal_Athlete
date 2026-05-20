@@ -141,6 +141,47 @@ void main() {
     expect(find.byKey(const Key('pitch-display')), findsNothing);
   });
 
+  testWidgets('G3 pick unreleased genre → LessonScreen with maintenance-badge',
+      (tester) async {
+    _phoneViewport(tester);
+    const slot = PathSlot(
+      index: 0,
+      cardId: 'CARD-01',
+      block: 1,
+      bodyVoicedRatio: 0.70,
+      variationLevel: VariationLevel.blocked,
+    );
+    final p = Progression.from([slot], graduated: true);
+    await tester.pumpWidget(DebugApp(initialProgression: p));
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('genre-musical')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('lesson-screen')), findsOneWidget);
+    expect(find.byKey(const Key('maintenance-badge')), findsOneWidget);
+  });
+
+  testWidgets('G4 pick released genre → LessonScreen, no maintenance-badge',
+      (tester) async {
+    _phoneViewport(tester);
+    const slot = PathSlot(
+      index: 0,
+      cardId: 'CARD-01',
+      block: 1,
+      bodyVoicedRatio: 0.70,
+      variationLevel: VariationLevel.blocked,
+    );
+    final p = Progression.from([slot], graduated: true);
+    p.toggleRelease(Genre.musical); // P10: 출시 토글
+    await tester.pumpWidget(DebugApp(initialProgression: p));
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('genre-musical')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('lesson-screen')), findsOneWidget);
+    expect(find.byKey(const Key('maintenance-badge')), findsNothing);
+  });
+
   testWidgets('M3 last slot complete → graduated SnackBar', (tester) async {
     _phoneViewport(tester);
     const slot = PathSlot(
@@ -159,7 +200,12 @@ void main() {
     await tester.tap(find.byKey(const Key('skip-cooldown')));
     await tester.pumpAndSettle();
     expect(find.byKey(const Key('outcome-snack')), findsOneWidget);
-    expect(find.textContaining('초급 완주'), findsOneWidget);
+    expect(
+      find.descendant(
+          of: find.byKey(const Key('outcome-snack')),
+          matching: find.textContaining('초급 완주')),
+      findsOneWidget,
+    );
   });
 
   testWidgets('M2 first complete (advanced) → no SnackBar', (tester) async {

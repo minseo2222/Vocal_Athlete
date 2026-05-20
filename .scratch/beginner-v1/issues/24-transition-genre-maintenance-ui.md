@@ -1,6 +1,6 @@
 # U7 — 졸업/전이/장르/유지 모드 UI
 
-Status: ready-for-agent
+Status: done (장르 변경 진입점은 backlog로 분리)
 
 ## What to build
 

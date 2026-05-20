@@ -68,18 +68,23 @@ class _LessonScreenState extends State<LessonScreen> {
                     style:
                         const TextStyle(color: Colors.white, fontSize: 14),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (p != null)
-                        _Pill(
-                            key: const Key('streak'),
-                            text: '🔥 ${p.streak}'),
-                      if (instance != null && instance.hasVoicedMicroWin) ...[
-                        const SizedBox(width: 6),
-                        const _Pill(text: '● 유성'),
+                  Flexible(
+                    child: Wrap(
+                      alignment: WrapAlignment.end,
+                      spacing: 6,
+                      runSpacing: 4,
+                      children: [
+                        if (p != null)
+                          _Pill(
+                              key: const Key('streak'),
+                              text: '🔥 ${p.streak}'),
+                        if (p != null && p.maintenance)
+                          const _Pill(
+                              key: Key('maintenance-badge'), text: '유지 모드'),
+                        if (instance != null && instance.hasVoicedMicroWin)
+                          const _Pill(text: '● 유성'),
                       ],
-                    ],
+                    ),
                   ),
                 ],
               ),

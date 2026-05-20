@@ -3,6 +3,7 @@ library;
 
 import 'package:flutter/material.dart';
 
+import 'lesson/graduation_screen.dart';
 import 'lesson/lesson_screen.dart';
 import 'lesson/pitch/pitch_source.dart';
 import 'progression/progression_state.dart';
@@ -53,13 +54,21 @@ class _AppShellState extends State<_AppShell> {
     );
   }
 
+  void _onPickGenre(Genre g) => setState(() => _p.chooseGenre(g));
+
   @override
-  Widget build(BuildContext context) => _ack
-      ? LessonScreen(
-          progression: _p,
-          pitchSource: widget.pitchSource,
-          onComplete: _onComplete,
-          onAdvanceDay: () => setState(_p.advanceDay), // dev 임시(ADR-0016)
-        )
-      : LaunchWarning(onConfirm: () => setState(() => _ack = true));
+  Widget build(BuildContext context) {
+    if (!_ack) {
+      return LaunchWarning(onConfirm: () => setState(() => _ack = true));
+    }
+    if (_p.graduated && _p.genre == null) {
+      return GraduationScreen(onPick: _onPickGenre);
+    }
+    return LessonScreen(
+      progression: _p,
+      pitchSource: widget.pitchSource,
+      onComplete: _onComplete,
+      onAdvanceDay: () => setState(_p.advanceDay), // dev 임시(ADR-0016)
+    );
+  }
 }
