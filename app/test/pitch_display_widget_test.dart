@@ -13,6 +13,51 @@ class _UnvoicedOnlySource implements PitchSource {
 }
 
 void main() {
+  testWidgets('N5 dismiss → nudge disappears and stays gone for instance',
+      (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: PitchDisplay(
+            targetHz: 220,
+            source: StubPitchSource(
+              targetHz: 440,
+              interval: const Duration(milliseconds: 5),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump(const Duration(milliseconds: 60));
+    expect(find.byKey(const Key('retry-nudge')), findsOneWidget);
+    await tester.tap(find.byKey(const Key('nudge-dismiss')));
+    await tester.pump();
+    expect(find.byKey(const Key('retry-nudge')), findsNothing);
+    // 추가 reading 흘러도 재노출 ❌
+    await tester.pump(const Duration(milliseconds: 60));
+    expect(find.byKey(const Key('retry-nudge')), findsNothing);
+  });
+
+  testWidgets('N4 sustained severe deviation → retry-nudge appears',
+      (tester) async {
+    // PitchDisplay target=220, stub target=440 → 모든 reading +1200 cents.
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: PitchDisplay(
+            targetHz: 220,
+            source: StubPitchSource(
+              targetHz: 440,
+              interval: const Duration(milliseconds: 5),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump(const Duration(milliseconds: 60)); // ~10 readings
+    expect(find.byKey(const Key('retry-nudge')), findsOneWidget);
+  });
+
   testWidgets('P5 unvoiced reading (f0Hz=null) → no current dot painted',
       (tester) async {
     await tester.pumpWidget(

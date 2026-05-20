@@ -1,6 +1,6 @@
 # U5 — 선택형 "다시?" 넛지
 
-Status: ready-for-agent
+Status: done
 
 ## What to build
 
