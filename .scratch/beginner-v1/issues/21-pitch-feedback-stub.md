@@ -1,6 +1,6 @@
 # U4 — 시각 피치 피드백 (피치 stub)
 
-Status: ready-for-agent
+Status: done
 
 ## What to build
 

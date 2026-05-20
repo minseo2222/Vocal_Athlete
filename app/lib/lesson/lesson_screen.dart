@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 
 import '../progression/progression_state.dart';
 import 'lesson_instance.dart';
+import 'pitch/pitch_display.dart';
+import 'pitch/pitch_source.dart';
 
 /// U3 — 레슨 단계 머신(진입→본운동→쿨다운).
 enum LessonStep { entry, main, cooldown }
@@ -16,10 +18,12 @@ class LessonScreen extends StatefulWidget {
       {this.progression,
       this.onComplete,
       this.onAdvanceDay,
+      this.pitchSource,
       super.key = const Key('lesson-screen')});
 
   final Progression? progression;
   final VoidCallback? onComplete;
+  final PitchSource? pitchSource;
 
   /// dev 어포던스 — 실 캘린더 바인딩 슬라이스 전까지 다음날로 진행할 수단.
   /// null이면 버튼 미표시. 정식 출시 전 제거.
@@ -188,14 +192,11 @@ class _LessonScreenState extends State<LessonScreen> {
                       ),
                     ),
                   const SizedBox(height: 12),
-                  // 시각 피치 영역 자리(실제 곡선 = U4)
-                  Container(
-                    height: 110,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF0E0F13),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
+                  // U4 — main 단계에서만 시각 피치 stub 표시.
+                  if (_step == LessonStep.main)
+                    PitchDisplay(source: widget.pitchSource)
+                  else
+                    const SizedBox(height: 110),
                   const SizedBox(height: 12),
                   if (_step != LessonStep.cooldown) ...[
                     SizedBox(

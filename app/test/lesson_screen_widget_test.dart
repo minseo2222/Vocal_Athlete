@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vocal_athlete/main.dart';
 import 'package:vocal_athlete/lesson/lesson_screen.dart';
+import 'package:vocal_athlete/lesson/pitch/pitch_source.dart';
 import 'package:vocal_athlete/progression/path.dart';
 import 'package:vocal_athlete/progression/progression_state.dart';
 
@@ -116,6 +117,28 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.textContaining('워밍업:'), findsOneWidget);
     expect(find.byKey(const Key('next-button')), findsOneWidget);
+  });
+
+  testWidgets('P6 pitch-display gated on main step (entry/cooldown hidden)',
+      (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(DebugApp(
+      pitchSource: StubPitchSource(
+        interval: const Duration(milliseconds: 10),
+      ),
+    ));
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    // entry: hidden
+    expect(find.byKey(const Key('pitch-display')), findsNothing);
+    await tester.tap(find.byKey(const Key('next-button')));
+    await tester.pump(const Duration(milliseconds: 30));
+    // main: visible
+    expect(find.byKey(const Key('pitch-display')), findsOneWidget);
+    await tester.tap(find.byKey(const Key('next-button')));
+    await tester.pump(const Duration(milliseconds: 30));
+    // cooldown: hidden again
+    expect(find.byKey(const Key('pitch-display')), findsNothing);
   });
 
   testWidgets('M3 last slot complete → graduated SnackBar', (tester) async {

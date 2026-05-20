@@ -4,29 +4,34 @@ library;
 import 'package:flutter/material.dart';
 
 import 'lesson/lesson_screen.dart';
+import 'lesson/pitch/pitch_source.dart';
 import 'progression/progression_state.dart';
 import 'safety/launch_warning.dart';
 
-void main() => runApp(const DebugApp());
+void main() => runApp(DebugApp(pitchSource: StubPitchSource()));
 
 class DebugApp extends StatelessWidget {
-  const DebugApp({super.key, this.initialProgression});
+  const DebugApp({super.key, this.initialProgression, this.pitchSource});
 
   /// 테스트 seam — 주입 시 사용, 없으면 기본 `Progression.beginner()`.
   final Progression? initialProgression;
+
+  /// U4 — pitch source. 기본 null(테스트). 프로덕션 main()이 StubPitchSource 주입.
+  final PitchSource? pitchSource;
 
   @override
   Widget build(BuildContext context) => MaterialApp(
         title: 'vocal_athlete',
         debugShowCheckedModeBanner: false,
-        home: _AppShell(initial: initialProgression),
+        home: _AppShell(initial: initialProgression, pitchSource: pitchSource),
       );
 }
 
 /// F2 — 앱 실행 경고 게이트(인메모리, 앱 실행당 1회).
 class _AppShell extends StatefulWidget {
-  const _AppShell({this.initial});
+  const _AppShell({this.initial, this.pitchSource});
   final Progression? initial;
+  final PitchSource? pitchSource;
   @override
   State<_AppShell> createState() => _AppShellState();
 }
@@ -52,6 +57,7 @@ class _AppShellState extends State<_AppShell> {
   Widget build(BuildContext context) => _ack
       ? LessonScreen(
           progression: _p,
+          pitchSource: widget.pitchSource,
           onComplete: _onComplete,
           onAdvanceDay: () => setState(_p.advanceDay), // dev 임시(ADR-0016)
         )
