@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'lesson/graduation_screen.dart';
 import 'lesson/home_screen.dart';
 import 'lesson/lesson_screen.dart';
+import 'lesson/settings_screen.dart';
 import 'lesson/pitch/pitch_source.dart';
 import 'progression/progression_state.dart';
 import 'progression/progression_store.dart';
@@ -80,6 +81,7 @@ class _AppShell extends StatefulWidget {
 class _AppShellState extends State<_AppShell> {
   bool _ack = false;
   late bool _started = widget.startInLesson; // 홈 "오늘 시작" 탭 시 레슨 진입
+  bool _showSettings = false;
   bool _pitchReady = false;
   Progression? _p; // store load 전엔 null(로딩 표시)
 
@@ -161,10 +163,17 @@ class _AppShellState extends State<_AppShell> {
     if (p.graduated && p.genre == null) {
       return GraduationScreen(onPick: _onPickGenre);
     }
+    if (_showSettings) {
+      return SettingsScreen(
+        micGranted: _pitchReady,
+        onBack: () => setState(() => _showSettings = false),
+      );
+    }
     if (!_started) {
       return HomeScreen(
         progression: p,
         onStart: () => setState(() => _started = true),
+        onSettings: () => setState(() => _showSettings = true),
       );
     }
     return LessonScreen(

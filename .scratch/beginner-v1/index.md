@@ -37,3 +37,4 @@ HITL = 사람 결정/검토 필요. 그 외 AFK.
 | 27 | 홈 화면(경고→홈→레슨) ✅ MVP | AFK | 18 |
 | 28 | Progression 영속화(shared_preferences) ✅ MVP | AFK | — |
 | 29 | 실 캘린더 바인딩(dev 다음날 제거) ✅ MVP | AFK | 28 |
+| 30 | 설정 화면 ✅ MVP | AFK | 27 |
