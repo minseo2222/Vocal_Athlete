@@ -4,7 +4,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vocal_athlete/main.dart';
-import 'package:vocal_athlete/lesson/lesson_screen.dart';
+import 'package:vocal_athlete/lesson/home_screen.dart';
 
 void _phoneViewport(WidgetTester tester) {
   tester.view.physicalSize = const Size(1260, 2700); // 420 x 900 logical @ DPR 3
@@ -33,7 +33,7 @@ void main() {
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     expect(find.widgetWithText(FilledButton, '확인'), findsNothing);
-    expect(find.byType(LessonScreen), findsOneWidget);
+    expect(find.byType(HomeScreen), findsOneWidget);
   });
 
   testWidgets('F2.3 no medical/onboarding inputs on warning screen',
@@ -55,6 +55,6 @@ void main() {
     // 추가 펌프 — 같은 run 내 상태 유지, 경고 재등장 없음
     await tester.pump(const Duration(seconds: 1));
     expect(find.widgetWithText(FilledButton, '확인'), findsNothing);
-    expect(find.byType(LessonScreen), findsOneWidget);
+    expect(find.byType(HomeScreen), findsOneWidget);
   });
 }

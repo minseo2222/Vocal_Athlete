@@ -38,7 +38,7 @@ void main() {
   testWidgets('U1.1 launch → confirm → LessonScreen shown',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     expect(find.byType(LessonScreen), findsOneWidget);
@@ -48,7 +48,7 @@ void main() {
   testWidgets('U1.2 header shows current slot cardId + idx/total',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     expect(find.textContaining('CARD-01'), findsOneWidget); // P1 manifest slot 0
@@ -58,7 +58,7 @@ void main() {
   testWidgets('U1.3 tap 완료 → header advances to next slot',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     expect(find.textContaining('CARD-01'), findsOneWidget);
@@ -71,7 +71,7 @@ void main() {
   testWidgets('U1.4 D structural elements present (stepper, cue, sheet)',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     expect(find.byKey(const Key('lesson-stepper')), findsOneWidget);
@@ -83,7 +83,7 @@ void main() {
   testWidgets('C2.2 cue area renders resolved card cue (CARD-01)',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     // CARD-01 cue 일부
@@ -96,7 +96,7 @@ void main() {
   testWidgets('U2.2 sheet shows voicedMicroWin body (CARD-01)',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     // CARD-01 voicedMicroWin: "끝에 편한 /m/ 3회(각 2–3초)"
@@ -105,7 +105,7 @@ void main() {
 
   testWidgets('U6.1 header shows streak (starts at 0)', (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     final streak = find.byKey(const Key('streak'));
@@ -117,7 +117,7 @@ void main() {
   testWidgets('U6.2 streak updates 0→1 after complete (P5 sync)',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('complete-button')));
@@ -130,7 +130,7 @@ void main() {
   testWidgets('U3.1 initial step is entry — shows 워밍업 + 다음 button',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     expect(find.textContaining('워밍업:'), findsOneWidget);
@@ -140,7 +140,7 @@ void main() {
   testWidgets('L4 _AppShell teardown → source.stop() + dispose() called',
       (tester) async {
     final spy = _SpyPitchSource();
-    await tester.pumpWidget(DebugApp(pitchSource: spy));
+    await tester.pumpWidget(DebugApp(pitchSource: spy, startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     expect(spy.stopCalls, 0);
@@ -156,7 +156,7 @@ void main() {
       (tester) async {
     _phoneViewport(tester);
     final spy = _SpyPitchSource()..grant = false;
-    await tester.pumpWidget(DebugApp(pitchSource: spy));
+    await tester.pumpWidget(DebugApp(pitchSource: spy, startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('next-button'))); // → main
@@ -169,7 +169,7 @@ void main() {
   testWidgets('L2 _AppShell calls pitchSource.start() once after ack',
       (tester) async {
     final spy = _SpyPitchSource();
-    await tester.pumpWidget(DebugApp(pitchSource: spy));
+    await tester.pumpWidget(DebugApp(pitchSource: spy, startInLesson: true));
     expect(spy.startCalls, 0); // ack 전 미호출
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
@@ -180,6 +180,7 @@ void main() {
       (tester) async {
     _phoneViewport(tester);
     await tester.pumpWidget(DebugApp(
+      startInLesson: true,
       pitchSource: StubPitchSource(
         interval: const Duration(milliseconds: 10),
       ),
@@ -209,7 +210,7 @@ void main() {
       variationLevel: VariationLevel.blocked,
     );
     final p = Progression.from([slot], graduated: true);
-    await tester.pumpWidget(DebugApp(initialProgression: p));
+    await tester.pumpWidget(DebugApp(initialProgression: p, startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('genre-musical')));
@@ -230,7 +231,7 @@ void main() {
     );
     final p = Progression.from([slot], graduated: true);
     p.toggleRelease(Genre.musical); // P10: 출시 토글
-    await tester.pumpWidget(DebugApp(initialProgression: p));
+    await tester.pumpWidget(DebugApp(initialProgression: p, startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('genre-musical')));
@@ -249,7 +250,7 @@ void main() {
       variationLevel: VariationLevel.blocked,
     );
     final p = Progression.from([slot]);
-    await tester.pumpWidget(DebugApp(initialProgression: p));
+    await tester.pumpWidget(DebugApp(initialProgression: p, startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('next-button')));
@@ -267,7 +268,7 @@ void main() {
 
   testWidgets('M2 first complete (advanced) → no SnackBar', (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('next-button')));
@@ -280,7 +281,7 @@ void main() {
   testWidgets('M1 second complete same day → capped SnackBar shown',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     // 1차 완료: entry→main→skip-chip → onComplete (advanced)
@@ -300,7 +301,7 @@ void main() {
   testWidgets('C3.5 main step shows today-variation; entry/cooldown hide it',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     // entry: 미표시
@@ -319,7 +320,7 @@ void main() {
   testWidgets('U3.5 main 쿨다운 스킵 chip 탭 → 즉시 다음 카드(CARD-02, entry)',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('next-button'))); // entry→main
@@ -333,7 +334,7 @@ void main() {
   testWidgets('U3.4 cooldown 완료 → 다음 카드(CARD-02) + step=entry 리셋',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('next-button'))); // entry→main
@@ -351,7 +352,7 @@ void main() {
   testWidgets('U3.3 tap 다음 at main → step=cooldown (쿨다운 텍스트 + 다음 버튼 사라짐)',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('next-button'))); // entry → main
@@ -366,7 +367,7 @@ void main() {
   testWidgets('U3.2 tap 다음 at entry → step=main (워밍업 사라지고 cue 유지)',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('next-button')));
