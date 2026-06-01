@@ -20,6 +20,7 @@ class DebugApp extends StatelessWidget {
     this.initialProgression,
     this.pitchSource,
     this.store,
+    this.todayEpochDay,
     this.startInLesson = false,
   });
 
@@ -33,6 +34,9 @@ class DebugApp extends StatelessWidget {
   /// null이면 인메모리(기존 테스트 동작 유지).
   final ProgressionStore? store;
 
+  /// Task 3 — 오늘 날짜(epoch day) 주입 seam. null이면 DateTime.now()로 계산.
+  final int? todayEpochDay;
+
   /// 테스트 seam — true면 홈을 건너뛰고 곧장 레슨(레슨 동작 테스트용).
   final bool startInLesson;
 
@@ -44,8 +48,16 @@ class DebugApp extends StatelessWidget {
             initial: initialProgression,
             pitchSource: pitchSource,
             store: store,
+            todayEpochDay: todayEpochDay,
             startInLesson: startInLesson),
       );
+}
+
+/// 로컬 자정 기준 epoch day(1970-01-01부터의 일수).
+int currentEpochDay() {
+  final n = DateTime.now();
+  return DateTime(n.year, n.month, n.day).millisecondsSinceEpoch ~/
+      Duration.millisecondsPerDay;
 }
 
 /// F2 — 앱 실행 경고 게이트(인메모리, 앱 실행당 1회).
@@ -54,10 +66,12 @@ class _AppShell extends StatefulWidget {
       {this.initial,
       this.pitchSource,
       this.store,
+      this.todayEpochDay,
       this.startInLesson = false});
   final Progression? initial;
   final PitchSource? pitchSource;
   final ProgressionStore? store;
+  final int? todayEpochDay;
   final bool startInLesson;
   @override
   State<_AppShell> createState() => _AppShellState();
@@ -79,9 +93,11 @@ class _AppShellState extends State<_AppShell> {
     final store = widget.store;
     final loaded = store == null ? null : await store.load();
     if (!mounted) return;
-    setState(() {
-      _p = loaded ?? widget.initial ?? Progression.beginner();
-    });
+    final p = loaded ?? widget.initial ?? Progression.beginner();
+    // Task 3 — 실 날짜 동기화: 흐른 날만큼 캡 해제·gap 반영.
+    p.syncToToday(widget.todayEpochDay ?? currentEpochDay());
+    setState(() => _p = p);
+    _persist();
   }
 
   /// 변이 후 영속화(store 있을 때만). fire-and-forget.
@@ -132,11 +148,6 @@ class _AppShellState extends State<_AppShell> {
     super.dispose();
   }
 
-  void _onAdvanceDay() {
-    setState(_p!.advanceDay);
-    _persist();
-  }
-
   @override
   Widget build(BuildContext context) {
     final p = _p;
@@ -160,7 +171,6 @@ class _AppShellState extends State<_AppShell> {
       progression: p,
       pitchSource: _pitchReady ? widget.pitchSource : null,
       onComplete: _onComplete,
-      onAdvanceDay: _onAdvanceDay, // dev 임시(ADR-0016)
     );
   }
 }

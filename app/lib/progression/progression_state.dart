@@ -46,6 +46,23 @@ class Progression {
   Genre? _genre; // P8 — 졸업 후 선택(null=미선택), 비구속
   bool _maintenance; // P9 — 유지 모드(자유 연습 모드와 별개)
   final Set<Genre> _released; // P10 — 출시된 장르 중급(V1 기본 빔=스텁)
+  int _lastCalendarDay; // Task3 — 마지막 동기화한 실 날짜(epoch day, 0=미설정)
+
+  /// Task 3 — 실 캘린더 동기화. todayEpochDay = 1970-01-01부터의 일수.
+  /// 날짜가 흐른 만큼 advanceDay()를 호출해 캡 해제·gap을 기존 로직으로 처리.
+  /// 같은 날 재실행은 no-op. 첫 호출은 기준만 잡음.
+  void syncToToday(int todayEpochDay) {
+    if (_lastCalendarDay == 0) {
+      _lastCalendarDay = todayEpochDay;
+      return;
+    }
+    if (todayEpochDay <= _lastCalendarDay) return;
+    final elapsed = todayEpochDay - _lastCalendarDay;
+    for (var i = 0; i < elapsed; i++) {
+      advanceDay();
+    }
+    _lastCalendarDay = todayEpochDay;
+  }
 
   static Genre? _genreByName(String? n) {
     if (n == null) return null;
@@ -74,6 +91,7 @@ class Progression {
       this._pendingReview = 0,
       this._genre,
       this._maintenance = false,
+      this._lastCalendarDay = 0,
       Set<Genre> released = const {}})
       : _released = {...released};
 
@@ -93,6 +111,7 @@ class Progression {
         'genre': _genre?.name,
         'maintenance': _maintenance,
         'released': _released.map((g) => g.name).toList(),
+        'lastCalendarDay': _lastCalendarDay,
       };
 
   factory Progression.fromJson(Map<String, dynamic> j) => Progression._(
@@ -107,6 +126,7 @@ class Progression {
         pendingReview: j['pendingReview'] as int,
         genre: _genreByName(j['genre'] as String?),
         maintenance: j['maintenance'] as bool,
+        lastCalendarDay: (j['lastCalendarDay'] as int?) ?? 0,
         released: ((j['released'] as List).cast<String>())
             .map(_genreByName)
             .whereType<Genre>()
