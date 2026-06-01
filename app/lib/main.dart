@@ -8,15 +8,18 @@ import 'lesson/home_screen.dart';
 import 'lesson/lesson_screen.dart';
 import 'lesson/pitch/pitch_source.dart';
 import 'progression/progression_state.dart';
+import 'progression/progression_store.dart';
 import 'safety/launch_warning.dart';
 
-void main() => runApp(DebugApp(pitchSource: StubPitchSource()));
+void main() => runApp(
+    DebugApp(pitchSource: StubPitchSource(), store: ProgressionStore()));
 
 class DebugApp extends StatelessWidget {
   const DebugApp({
     super.key,
     this.initialProgression,
     this.pitchSource,
+    this.store,
     this.startInLesson = false,
   });
 
@@ -25,6 +28,10 @@ class DebugApp extends StatelessWidget {
 
   /// U4 — pitch source. 기본 null(테스트). 프로덕션 main()이 StubPitchSource 주입.
   final PitchSource? pitchSource;
+
+  /// Task 2 — 영속화 store. 주입 시 시작 때 load·변이 때 save.
+  /// null이면 인메모리(기존 테스트 동작 유지).
+  final ProgressionStore? store;
 
   /// 테스트 seam — true면 홈을 건너뛰고 곧장 레슨(레슨 동작 테스트용).
   final bool startInLesson;
@@ -36,15 +43,21 @@ class DebugApp extends StatelessWidget {
         home: _AppShell(
             initial: initialProgression,
             pitchSource: pitchSource,
+            store: store,
             startInLesson: startInLesson),
       );
 }
 
 /// F2 — 앱 실행 경고 게이트(인메모리, 앱 실행당 1회).
 class _AppShell extends StatefulWidget {
-  const _AppShell({this.initial, this.pitchSource, this.startInLesson = false});
+  const _AppShell(
+      {this.initial,
+      this.pitchSource,
+      this.store,
+      this.startInLesson = false});
   final Progression? initial;
   final PitchSource? pitchSource;
+  final ProgressionStore? store;
   final bool startInLesson;
   @override
   State<_AppShell> createState() => _AppShellState();
@@ -54,7 +67,30 @@ class _AppShellState extends State<_AppShell> {
   bool _ack = false;
   late bool _started = widget.startInLesson; // 홈 "오늘 시작" 탭 시 레슨 진입
   bool _pitchReady = false;
-  late final Progression _p = widget.initial ?? Progression.beginner();
+  Progression? _p; // store load 전엔 null(로딩 표시)
+
+  @override
+  void initState() {
+    super.initState();
+    _initProgression();
+  }
+
+  Future<void> _initProgression() async {
+    final store = widget.store;
+    final loaded = store == null ? null : await store.load();
+    if (!mounted) return;
+    setState(() {
+      _p = loaded ?? widget.initial ?? Progression.beginner();
+    });
+  }
+
+  /// 변이 후 영속화(store 있을 때만). fire-and-forget.
+  void _persist() {
+    final p = _p;
+    if (widget.store == null || p == null) return;
+    // ignore: discarded_futures
+    widget.store!.save(p);
+  }
 
   Future<void> _onAck() async {
     setState(() => _ack = true);
@@ -66,8 +102,9 @@ class _AppShellState extends State<_AppShell> {
   }
 
   void _onComplete() {
-    final outcome = _p.completeLesson();
+    final outcome = _p!.completeLesson();
     setState(() {});
+    _persist();
     final msg = kOutcomeMessage[outcome] ?? '';
     if (msg.isEmpty) return;
     ScaffoldMessenger.of(context).showSnackBar(
@@ -78,7 +115,10 @@ class _AppShellState extends State<_AppShell> {
     );
   }
 
-  void _onPickGenre(Genre g) => setState(() => _p.chooseGenre(g));
+  void _onPickGenre(Genre g) {
+    setState(() => _p!.chooseGenre(g));
+    _persist();
+  }
 
   @override
   void dispose() {
@@ -92,25 +132,35 @@ class _AppShellState extends State<_AppShell> {
     super.dispose();
   }
 
+  void _onAdvanceDay() {
+    setState(_p!.advanceDay);
+    _persist();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final p = _p;
+    if (p == null) {
+      // store load 대기 — 짧은 빈 화면.
+      return const Scaffold(backgroundColor: Color(0xFF0E0F13));
+    }
     if (!_ack) {
       return LaunchWarning(onConfirm: _onAck);
     }
-    if (_p.graduated && _p.genre == null) {
+    if (p.graduated && p.genre == null) {
       return GraduationScreen(onPick: _onPickGenre);
     }
     if (!_started) {
       return HomeScreen(
-        progression: _p,
+        progression: p,
         onStart: () => setState(() => _started = true),
       );
     }
     return LessonScreen(
-      progression: _p,
+      progression: p,
       pitchSource: _pitchReady ? widget.pitchSource : null,
       onComplete: _onComplete,
-      onAdvanceDay: () => setState(_p.advanceDay), // dev 임시(ADR-0016)
+      onAdvanceDay: _onAdvanceDay, // dev 임시(ADR-0016)
     );
   }
 }

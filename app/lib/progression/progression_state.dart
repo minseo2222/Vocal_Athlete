@@ -40,12 +40,20 @@ class Progression {
   int _day; // P4 — 달력일(advanceDay에서 증가)
   bool _graduated; // P4 — 실설정=P7
   int _transitionDay; // P4 — 코스 전이 발생일(실설정=P8/P10)
-  int _streak = 0; // P5 — 관대 스트릭(0 리셋·freeze 없음)
+  int _streak; // P5 — 관대 스트릭(0 리셋·freeze 없음)
   int _lastActiveDay; // P6 — 마지막 활동일(0=없음), 공백 계산용
-  int _pendingReview = 0; // P6 — 남은 복귀 복습일
+  int _pendingReview; // P6 — 남은 복귀 복습일
   Genre? _genre; // P8 — 졸업 후 선택(null=미선택), 비구속
-  bool _maintenance = false; // P9 — 유지 모드(자유 연습 모드와 별개)
-  final Set<Genre> _released = {}; // P10 — 출시된 장르 중급(V1 기본 빔=스텁)
+  bool _maintenance; // P9 — 유지 모드(자유 연습 모드와 별개)
+  final Set<Genre> _released; // P10 — 출시된 장르 중급(V1 기본 빔=스텁)
+
+  static Genre? _genreByName(String? n) {
+    if (n == null) return null;
+    for (final g in Genre.values) {
+      if (g.name == n) return g;
+    }
+    return null;
+  }
 
   bool get didToday => _didToday;
   Genre? get genre => _genre;
@@ -61,10 +69,49 @@ class Progression {
       this._day = 1,
       this._graduated = false,
       this._transitionDay = 0,
-      this._lastActiveDay = 0});
+      this._lastActiveDay = 0,
+      this._streak = 0,
+      this._pendingReview = 0,
+      this._genre,
+      this._maintenance = false,
+      Set<Genre> released = const {}})
+      : _released = {...released};
 
   factory Progression.beginner() =>
       Progression._(buildPlaceholderManifest(), 0);
+
+  /// Task 2 — 영속화 직렬화. manifest는 고정 경로라 저장 안 함(복원 시 재생성).
+  Map<String, dynamic> toJson() => {
+        'currentIndex': _currentIndex,
+        'didToday': _didToday,
+        'day': _day,
+        'graduated': _graduated,
+        'transitionDay': _transitionDay,
+        'lastActiveDay': _lastActiveDay,
+        'streak': _streak,
+        'pendingReview': _pendingReview,
+        'genre': _genre?.name,
+        'maintenance': _maintenance,
+        'released': _released.map((g) => g.name).toList(),
+      };
+
+  factory Progression.fromJson(Map<String, dynamic> j) => Progression._(
+        buildPlaceholderManifest(),
+        j['currentIndex'] as int,
+        didToday: j['didToday'] as bool,
+        day: j['day'] as int,
+        graduated: j['graduated'] as bool,
+        transitionDay: j['transitionDay'] as int,
+        lastActiveDay: j['lastActiveDay'] as int,
+        streak: j['streak'] as int,
+        pendingReview: j['pendingReview'] as int,
+        genre: _genreByName(j['genre'] as String?),
+        maintenance: j['maintenance'] as bool,
+        released: ((j['released'] as List).cast<String>())
+            .map(_genreByName)
+            .whereType<Genre>()
+            .toSet(),
+      );
 
   /// 테스트용: 임의 매니페스트/위치/상태.
   factory Progression.from(

@@ -35,3 +35,4 @@ HITL = 사람 결정/검토 필요. 그 외 AFK.
 | 25 | A1 실제 F0 검출 → U4 교체 | AFK | 14, 21 |
 | 26 | C3 변주 엔진 ✅ | AFK | 17 |
 | 27 | 홈 화면(경고→홈→레슨) ✅ MVP | AFK | 18 |
+| 28 | Progression 영속화(shared_preferences) ✅ MVP | AFK | — |
