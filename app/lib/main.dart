@@ -8,12 +8,13 @@ import 'lesson/home_screen.dart';
 import 'lesson/lesson_screen.dart';
 import 'lesson/settings_screen.dart';
 import 'lesson/pitch/pitch_source.dart';
+import 'lesson/pitch/recording_pitch_source.dart';
 import 'progression/progression_state.dart';
 import 'progression/progression_store.dart';
 import 'safety/launch_warning.dart';
 
-void main() => runApp(
-    DebugApp(pitchSource: StubPitchSource(), store: ProgressionStore()));
+void main() => runApp(DebugApp(
+    pitchSource: RecordingPitchSource(), store: ProgressionStore()));
 
 class DebugApp extends StatelessWidget {
   const DebugApp({
