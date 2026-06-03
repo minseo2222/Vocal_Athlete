@@ -49,4 +49,27 @@ void main() {
     expect(find.text('토대'), findsOneWidget);
     expect(find.text('졸업'), findsOneWidget);
   });
+
+  testWidgets('H4 completing today returns home with 오늘 완료 state',
+      (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp());
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('start-today')));
+    await tester.pumpAndSettle();
+    // 본운동에서 쿨다운 스킵으로 오늘 레슨 완료
+    await tester.tap(find.byKey(const Key('next-button')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('skip-cooldown')));
+    await tester.pumpAndSettle();
+    // 홈 복귀 + 완료 상태
+    expect(find.byKey(const Key('home-screen')), findsOneWidget);
+    expect(find.byType(LessonScreen), findsNothing);
+    expect(find.byKey(const Key('today-done')), findsOneWidget);
+    // 시작 버튼은 비활성(다시 못 들어감 = 1일1레슨 캡 구조화)
+    final start = tester.widget<FilledButton>(
+        find.byKey(const Key('start-today')));
+    expect(start.onPressed, isNull);
+  });
 }

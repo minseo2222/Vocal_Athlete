@@ -80,14 +80,22 @@ class HomeScreen extends StatelessWidget {
               // 5블록 진행도
               _ProgressBlocks(progression: p),
               const Spacer(),
+              if (p.didToday)
+                const Padding(
+                  key: Key('today-done'),
+                  padding: EdgeInsets.only(bottom: 12),
+                  child: Text('오늘 완료 — 내일 또',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Color(0xFF39D98A), fontSize: 14)),
+                ),
               SizedBox(
                 width: double.infinity,
                 height: 56,
                 child: FilledButton(
                   key: const Key('start-today'),
-                  onPressed: onStart,
-                  child: const Text('오늘 시작',
-                      style: TextStyle(
+                  onPressed: p.didToday ? null : onStart,
+                  child: Text(p.didToday ? '오늘 완료' : '오늘 시작',
+                      style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.w700)),
                 ),
               ),

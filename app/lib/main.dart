@@ -122,8 +122,8 @@ class _AppShellState extends State<_AppShell> {
 
   void _onComplete() {
     final outcome = _p!.completeLesson();
-    setState(() {});
     _persist();
+    setState(() => _started = false); // 오늘 레슨 끝 → 홈(또는 졸업 화면) 복귀
     final msg = kOutcomeMessage[outcome] ?? '';
     if (msg.isEmpty) return;
     ScaffoldMessenger.of(context).showSnackBar(

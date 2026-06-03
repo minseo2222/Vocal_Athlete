@@ -55,7 +55,7 @@ void main() {
     expect(find.textContaining('1/48'), findsOneWidget);
   });
 
-  testWidgets('U1.3 tap 완료 → header advances to next slot',
+  testWidgets('U1.3 tap 완료 → returns home (오늘 완료, 캡 구조화)',
       (tester) async {
     _phoneViewport(tester);
     await tester.pumpWidget(const DebugApp(startInLesson: true));
@@ -64,8 +64,9 @@ void main() {
     expect(find.textContaining('CARD-01'), findsOneWidget);
     await tester.tap(find.byKey(const Key('complete-button')));
     await tester.pumpAndSettle();
-    expect(find.textContaining('CARD-02'), findsOneWidget); // P1 slot 1
-    expect(find.textContaining('2/48'), findsOneWidget);
+    // 완료 → 홈 복귀 + 오늘 완료(슬롯 전진은 progression 내부, 별도 검증)
+    expect(find.byKey(const Key('home-screen')), findsOneWidget);
+    expect(find.byKey(const Key('today-done')), findsOneWidget);
   });
 
   testWidgets('U1.4 D structural elements present (stepper, cue, sheet)',
@@ -114,7 +115,7 @@ void main() {
         findsOneWidget);
   });
 
-  testWidgets('U6.2 streak updates 0→1 after complete (P5 sync)',
+  testWidgets('U6.2 streak updates 0→1 after complete (홈에 반영)',
       (tester) async {
     _phoneViewport(tester);
     await tester.pumpWidget(const DebugApp(startInLesson: true));
@@ -122,9 +123,10 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('complete-button')));
     await tester.pumpAndSettle();
-    final streak = find.byKey(const Key('streak'));
-    expect(find.descendant(of: streak, matching: find.text('🔥 1')),
-        findsOneWidget);
+    // 완료 → 홈 복귀, 홈 스트릭이 1
+    final streak =
+        tester.widget<Text>(find.byKey(const Key('home-streak')));
+    expect(streak.data, contains('1'));
   });
 
   testWidgets('U3.1 initial step is entry — shows 워밍업 + 다음 button',
@@ -278,25 +280,9 @@ void main() {
     expect(find.byKey(const Key('outcome-snack')), findsNothing);
   });
 
-  testWidgets('M1 second complete same day → capped SnackBar shown',
-      (tester) async {
-    _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp(startInLesson: true));
-    await tester.tap(find.widgetWithText(FilledButton, '확인'));
-    await tester.pumpAndSettle();
-    // 1차 완료: entry→main→skip-chip → onComplete (advanced)
-    await tester.tap(find.byKey(const Key('next-button')));
-    await tester.pumpAndSettle();
-    await tester.tap(find.byKey(const Key('skip-cooldown')));
-    await tester.pumpAndSettle();
-    // 2차 완료(같은 날): CARD-02 entry → main → skip-chip → capped
-    await tester.tap(find.byKey(const Key('next-button')));
-    await tester.pumpAndSettle();
-    await tester.tap(find.byKey(const Key('skip-cooldown')));
-    await tester.pumpAndSettle();
-    expect(find.byKey(const Key('outcome-snack')), findsOneWidget);
-    expect(find.textContaining('오늘 레슨은 끝났어요'), findsOneWidget);
-  });
+  // M1(같은 날 2차 완료 → capped SnackBar) 삭제:
+  // 완료 시 홈 복귀 + 시작 비활성으로 1일1레슨 캡이 UI에서 구조화됨(H4).
+  // capped outcome 분류는 R3(outcome_resolver) + progression_test가 커버.
 
   testWidgets('C3.5 main step shows today-variation; entry/cooldown hide it',
       (tester) async {
@@ -317,7 +303,7 @@ void main() {
     expect(find.byKey(const Key('today-variation')), findsNothing);
   });
 
-  testWidgets('U3.5 main 쿨다운 스킵 chip 탭 → 즉시 다음 카드(CARD-02, entry)',
+  testWidgets('U3.5 main 쿨다운 스킵 chip 탭 → 오늘 완료, 홈 복귀',
       (tester) async {
     _phoneViewport(tester);
     await tester.pumpWidget(const DebugApp(startInLesson: true));
@@ -327,11 +313,11 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('skip-cooldown')));
     await tester.pumpAndSettle();
-    expect(find.textContaining('CARD-02'), findsOneWidget);
-    expect(find.byKey(const Key('next-button')), findsOneWidget); // entry 리셋
+    expect(find.byKey(const Key('home-screen')), findsOneWidget);
+    expect(find.byKey(const Key('today-done')), findsOneWidget);
   });
 
-  testWidgets('U3.4 cooldown 완료 → 다음 카드(CARD-02) + step=entry 리셋',
+  testWidgets('U3.4 cooldown 완료 → 오늘 완료, 홈 복귀',
       (tester) async {
     _phoneViewport(tester);
     await tester.pumpWidget(const DebugApp(startInLesson: true));
@@ -343,10 +329,8 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('complete-button')));
     await tester.pumpAndSettle();
-    expect(find.textContaining('CARD-02'), findsOneWidget);
-    // step=entry로 리셋되어 next 버튼 다시 보임, 쿨다운 텍스트 없음
-    expect(find.byKey(const Key('next-button')), findsOneWidget);
-    expect(find.textContaining('쿨다운:'), findsNothing);
+    expect(find.byKey(const Key('home-screen')), findsOneWidget);
+    expect(find.byKey(const Key('today-done')), findsOneWidget);
   });
 
   testWidgets('U3.3 tap 다음 at main → step=cooldown (쿨다운 텍스트 + 다음 버튼 사라짐)',
