@@ -26,12 +26,35 @@ class LaunchWarning extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
+              // 마이크가 위에서 내려오는 진입 애니메이션(장식 — 추가 탭/게이트 아님).
+              Center(
+                child: TweenAnimationBuilder<double>(
+                  tween: Tween(begin: -80, end: 0),
+                  duration: const Duration(milliseconds: 700),
+                  curve: Curves.easeOutCubic,
+                  builder: (context, dy, child) =>
+                      Transform.translate(offset: Offset(0, dy), child: child),
+                  child: const Icon(Icons.mic_none,
+                      key: Key('launch-mic'), color: Colors.white, size: 64),
+                ),
+              ),
+              const SizedBox(height: 12),
+              const Center(
+                child: Text('Vocal Athlete',
+                    key: Key('launch-logo'),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.5)),
+              ),
+              const SizedBox(height: 28),
               const Text('시작 전 안내',
                   style: TextStyle(color: Colors.white, fontSize: 20)),
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
               const Text(
                 kWarningSentence,
                 style: TextStyle(

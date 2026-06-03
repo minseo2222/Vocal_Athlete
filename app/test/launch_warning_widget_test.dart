@@ -46,6 +46,18 @@ void main() {
     expect(find.byType(Radio), findsNothing);
   });
 
+  testWidgets('LW1 warning shows descending mic + logo, confirm intact',
+      (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp());
+    await tester.pump(); // 애니메이션 첫 프레임
+    expect(find.byKey(const Key('launch-mic')), findsOneWidget);
+    expect(find.byKey(const Key('launch-logo')), findsOneWidget);
+    // 안전 문구·확인 버튼 그대로(ADR-0001)
+    expect(find.textContaining('통증'), findsOneWidget);
+    expect(find.widgetWithText(FilledButton, '확인'), findsOneWidget);
+  });
+
   testWidgets('F2.4 after confirm, warning does not reappear in same run',
       (tester) async {
     _phoneViewport(tester);
