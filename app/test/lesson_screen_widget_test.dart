@@ -154,6 +154,18 @@ void main() {
     expect(spy.disposeCalls, 1);
   });
 
+  testWidgets('PD1 mic denied → main step shows mic-off notice',
+      (tester) async {
+    _phoneViewport(tester);
+    final spy = _SpyPitchSource()..grant = false;
+    await tester.pumpWidget(DebugApp(pitchSource: spy, startInLesson: true));
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('next-button'))); // → main
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('mic-off-notice')), findsOneWidget);
+  });
+
   testWidgets('L3 start() denied → LessonScreen gets null pitchSource',
       (tester) async {
     _phoneViewport(tester);

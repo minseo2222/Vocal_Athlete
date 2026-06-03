@@ -192,10 +192,16 @@ class _LessonScreenState extends State<LessonScreen> {
                       ),
                     ),
                   const SizedBox(height: 12),
-                  // U4 — main 단계에서만 시각 피치 stub 표시.
-                  if (_step == LessonStep.main)
-                    PitchDisplay(source: widget.pitchSource)
-                  else
+                  // U4 — main 단계에서만 시각 피치 표시. 마이크 없으면 안내 한 줄.
+                  if (_step == LessonStep.main) ...[
+                    if (widget.pitchSource == null)
+                      const Text(
+                        '마이크 꺼짐 — 피치 표시 안 됨',
+                        key: Key('mic-off-notice'),
+                        style: TextStyle(color: Colors.white38, fontSize: 12),
+                      ),
+                    PitchDisplay(source: widget.pitchSource),
+                  ] else
                     const SizedBox(height: 110),
                   const SizedBox(height: 12),
                   if (_step != LessonStep.cooldown) ...[
