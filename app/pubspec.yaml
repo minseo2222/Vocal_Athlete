@@ -39,7 +39,7 @@ dependencies:
   shared_preferences: ^2.3.0
 
   # 실 마이크 PCM 스트림(A1 — frames 어댑터).
-  record: ^5.1.0
+  record: ^6.2.1
 
 dev_dependencies:
   flutter_test:
