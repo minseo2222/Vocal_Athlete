@@ -9,11 +9,15 @@ class SettingsScreen extends StatefulWidget {
     required this.onBack,
     this.micGranted = false,
     this.version = '0.1.0',
+    this.onChangeGenre,
   });
 
   final VoidCallback onBack;
   final bool micGranted;
   final String version;
+
+  /// 졸업/유지 모드에서만 비-null — 장르 변경 진입점.
+  final VoidCallback? onChangeGenre;
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -45,6 +49,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
             value: _notify,
             onChanged: (v) => setState(() => _notify = v),
           ),
+          if (widget.onChangeGenre != null)
+            ListTile(
+              key: const Key('settings-change-genre'),
+              title: const Text('장르 변경',
+                  style: TextStyle(color: Colors.white)),
+              trailing: const Icon(Icons.chevron_right, color: Colors.white38),
+              onTap: widget.onChangeGenre,
+            ),
           ListTile(
             title: const Text('마이크 권한',
                 style: TextStyle(color: Colors.white)),

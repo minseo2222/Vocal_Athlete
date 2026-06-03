@@ -83,6 +83,7 @@ class _AppShellState extends State<_AppShell> {
   bool _ack = false;
   late bool _started = widget.startInLesson; // 홈 "오늘 시작" 탭 시 레슨 진입
   bool _showSettings = false;
+  bool _showGenrePicker = false; // 설정에서 장르 변경 재진입
   bool _pitchReady = false;
   Progression? _p; // store load 전엔 null(로딩 표시)
 
@@ -135,7 +136,10 @@ class _AppShellState extends State<_AppShell> {
   }
 
   void _onPickGenre(Genre g) {
-    setState(() => _p!.chooseGenre(g));
+    setState(() {
+      _p!.chooseGenre(g);
+      _showGenrePicker = false;
+    });
     _persist();
   }
 
@@ -161,13 +165,21 @@ class _AppShellState extends State<_AppShell> {
     if (!_ack) {
       return LaunchWarning(onConfirm: _onAck);
     }
-    if (p.graduated && p.genre == null) {
+    // 졸업 직후(미선택) 또는 설정에서 장르 변경 재진입.
+    if ((p.graduated && p.genre == null) || _showGenrePicker) {
       return GraduationScreen(onPick: _onPickGenre);
     }
     if (_showSettings) {
       return SettingsScreen(
         micGranted: _pitchReady,
         onBack: () => setState(() => _showSettings = false),
+        // 졸업/유지 모드(장르 선택됨)에서만 변경 진입점 노출.
+        onChangeGenre: p.genre != null
+            ? () => setState(() {
+                  _showSettings = false;
+                  _showGenrePicker = true;
+                })
+            : null,
       );
     }
     if (!_started) {
