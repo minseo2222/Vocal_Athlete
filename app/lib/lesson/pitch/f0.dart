@@ -1,25 +1,24 @@
-/// F1 SPIKE — naive autocorrelation F0 (throwaway accuracy, real pYIN = A1).
+/// F0(기본 주파수) 검출 — 자기상관 기반(ADR-0014 pYIN 자리 V1).
 ///
-/// Pure, no I/O — seeds the swappable pitch-source seam (ADR-0014/0015 U4).
-/// The spike measures *pipeline latency*, not pitch accuracy, so a crude
-/// autocorrelation estimator is sufficient here.
+/// 순수, no I/O. PitchSource 구현체(MicPitchSource)가 프레임마다 호출.
+/// 비차단 피드백(ADR-0002)이라 완벽 정확도가 V1 게이트 아님 — 정직하게
+/// 명확한 주기가 없으면 null(무음/무성).
 library;
 
-/// Estimate fundamental frequency (Hz) from a mono PCM frame.
-/// Returns null if no clear period (silence / unvoiced).
+/// 모노 PCM 프레임에서 F0(Hz) 추정. 명확한 주기 없으면 null.
 double? estimateF0(List<double> samples, int sampleRate,
     {double minHz = 70, double maxHz = 1000}) {
   final n = samples.length;
   if (n < 64) return null;
 
-  // DC removal.
+  // DC 제거.
   double mean = 0;
   for (final s in samples) {
     mean += s;
   }
   mean /= n;
 
-  // Energy gate (skip silence).
+  // 에너지 게이트(무음 skip).
   double energy = 0;
   for (final s in samples) {
     final v = s - mean;

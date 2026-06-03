@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vocal_athlete/spike/pitch_naive.dart';
+import 'package:vocal_athlete/lesson/pitch/f0.dart';
 
 void main() {
   test('estimateF0 recovers a synthetic sine within 5%', () {

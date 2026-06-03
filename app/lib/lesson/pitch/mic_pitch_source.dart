@@ -6,7 +6,7 @@
 /// 골전도 착각 차단: 출력은 시각용 F0뿐(ADR-0014 honest, 저신뢰=null).
 library;
 
-import '../../spike/pitch_naive.dart';
+import 'f0.dart';
 import 'pitch_source.dart';
 
 class MicPitchSource implements PitchSource {
