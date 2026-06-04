@@ -34,7 +34,7 @@ const Map<CompleteOutcome, String> kOutcomeMessage = {
 };
 
 class Progression {
-  final List<PathSlot> _manifest;
+  List<PathSlot> _manifest; // I3 — 분기 진입 시 코스 manifest로 교체(swappable)
   int _currentIndex; // 0-based, 현재(오늘) 슬롯
   bool _didToday; // P3 — 1일 1레슨 캡
   int _day; // P4 — 달력일(advanceDay에서 증가)
@@ -212,7 +212,7 @@ class Progression {
     if (!_graduated) return;
     _genre = g;
     if (_released.contains(g)) {
-      _enterCourse(); // P10 — 출시됨 → 직접 진입
+      _enterCourse(g); // P10 — 출시됨 → 코스 진입(코어+분기 로드)
     } else {
       _maintenance = true; // P9 — 미출시 → 유지 모드
     }
@@ -225,12 +225,21 @@ class Progression {
       _released.remove(g);
       return;
     }
-    if (_maintenance && _genre == g) _enterCourse();
+    if (_maintenance && _genre == g) _enterCourse(g);
   }
 
-  /// P10 — 코스 진입 공통(progression.py). V1 스텁: 중급 매니페스트 미구현 →
-  /// _currentIndex 불변(실제 코스 로드는 향후 슬라이스). 메커니즘만.
-  void _enterCourse() {
+  /// I3 — 장르 → 코스 manifest(코어 블록1·2 + 분기 블록3·4) 매핑.
+  static List<PathSlot> _courseManifest(Genre g) => switch (g) {
+        Genre.musical => buildMusicalManifest(),
+        Genre.classical => buildClassicalManifest(),
+        Genre.gayo => buildGayoManifest(),
+      };
+
+  /// I3 — 코스 진입: 선택 장르의 코어→분기 manifest 로드 + 새 코스 시작.
+  /// 완료 기반 진행·1일1레슨 캡은 그대로(새 manifest 위에서 동일 규칙).
+  void _enterCourse(Genre g) {
+    _manifest = _courseManifest(g);
+    _currentIndex = 0; // 새 코스 1과부터
     _maintenance = false;
     _graduated = false;
     _transitionDay = _day;

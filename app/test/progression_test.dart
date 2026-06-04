@@ -393,4 +393,40 @@ void main() {
     p.toggleRelease(Genre.musical); // auto-connect (graduated=false, txnDay=day)
     expect(p.completeLesson(), CompleteOutcome.transitionToNext);
   });
+
+  // --- I3: 졸업→분기 코스 manifest 로드 ---
+
+  test('I3.1 released musical → course manifest loaded (total 74, index 0)',
+      () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        currentIndex: 5, graduated: true);
+    expect(p.total, 48); // 초급
+    p.toggleRelease(Genre.musical);
+    p.chooseGenre(Genre.musical);
+    expect(p.total, 74); // 뮤지컬 코스(코어32+분기42)
+    expect(p.currentIndex, 0); // 새 코스 1과
+    expect(p.maintenance, isFalse);
+    expect(p.todaysLesson.cardId, startsWith('IC-')); // 코어부터
+  });
+
+  test('I3.2 each genre loads its course length', () {
+    for (final (g, len) in [
+      (Genre.musical, 74),
+      (Genre.classical, 68),
+      (Genre.gayo, 64),
+    ]) {
+      final p = Progression.from(buildPlaceholderManifest(), graduated: true);
+      p.toggleRelease(g);
+      p.chooseGenre(g);
+      expect(p.total, len, reason: '$g course length');
+    }
+  });
+
+  test('I3.3 course progression: complete advances within loaded course', () {
+    final p = Progression.from(buildPlaceholderManifest(), graduated: true);
+    p.toggleRelease(Genre.gayo);
+    p.chooseGenre(Genre.gayo);
+    expect(p.completeLesson(), CompleteOutcome.advanced);
+    expect(p.currentIndex, 1);
+  });
 }
