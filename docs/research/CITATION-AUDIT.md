@@ -76,6 +76,29 @@
 
 ---
 
+## V5 단위 claim 적대적 재검증 (claim ↔ 정정된 근거 정합)
+
+방법: 각 단위 핵심 claim을 V1~V4 검증·정정된 인용에 대조해 *과주장*(근거 초과) 색출.
+무납득(ADR-0002)상 학습자 대상 효능 주장 0 — 과주장 위험은 *내부 SOURCES의 근거 등급*에 한정.
+
+| 단위 | 핵심 claim | 근거 상태 | 과주장? |
+|---|---|---|---|
+| 초급 | SOVT 부하↓·효율↑ | TITZE2006SOVT(정전)+ANDRADE2024(RCT)+Adriaansen2025(RCT) | **아님**. RCT 뒷받침 |
+| 초급 | 자기청취 시각전용(마이크 한계) | ⚠️ MANFREDI→Grillo2016 오귀속·프레이밍 의심 | **근거 교체 필요**. 단 시각전용 자체는 골전도·저신뢰지표로 유지(설계 불변). V2서 정정 |
+| 초급 | 3분류 | KIM2025(VERIFIED, OCEBM 5 개념) | 아님(교육 프레임·비차단으로 한정됨) |
+| 코어 | VFE 지구력 | STEMPLE_VFE(VERIFIED, n=35 무작위) | 아님 |
+| 코어 | 트웽=AES 협착 | Jelinger2024(VERIFIED MRI) | 아님(저자만 정정) |
+| 코어 | 패사지오 인지 | ROUBEAU2009(VERIFIED M0–M3) | 아님(인지 수준 한정) |
+| 뮤지컬 | belt 음향·진입 | MCGLASHAN2017(VERIFIED, OCEBM 4) | 아님. `[탐색적]`·진입한정·HITL로 *이미* 보수 |
+| 뮤지컬 | 믹스 단일정의 금지 | VALA2021(PARTIAL) | **역과주장 방지 양호** — "흉성50+두성50 검증 안 됨"을 *명시 부정* |
+| 성악 | cover·aggiustamento·ring | MILLER1996·CHAN_DO2021·SUNDBERG1987(VERIFIED) | 아님 |
+| 가요 | K-pop 명명=SOVT 동일운동 | KCONTENT(산업)+TITZE SOVT | 아님(기능적 추론 `[K-pop 산업관행]` 명시) |
+| 전역 | Alexander Technique RCT 근거 | ⚠️ DAVIES2020 SUSPECT(실제 SAGE 평가연구) | **과주장**. "단일브랜드 RCT 희귀사례" 하향 → 평가연구. V1 정정 |
+
+**V5 결론**: 과주장 2건(DAVIES2020 RCT·MANFREDI 마이크한계)은 V1·V2서 이미 정정·하향. 그 외 단위 claim은 정정된 근거 내. 무납득 설계가 학습자 대상 효능 과장을 구조적으로 차단(claim이 "지시"지 "효과 주장"이 아님). 신규 등급 하향 없음.
+
+---
+
 ## §B 방법론 RCT/임상 (Wave 2) — V1
 
 | 키 | 등급 | 근거 |
