@@ -200,7 +200,7 @@ OCEBM: 1b. 적용: part 3, part 16 (변성기 갭).
 Davies, J. (2020). "Alexander Technique classes improve vocal training: a randomised study with university students," *J Voice*.
 *가창자 대상 알렉산더 테크닉 RCT — 단일 브랜드 방법론 중 RCT 보유한 희귀 사례.*
 ⚠️정정(CITATION-AUDIT V1·SUSPECT): "J Voice RCT 'AT classes improve vocal training'" *해당 제목·저널 논문 미발견*. 실제 Davies 2020 = SAGE(Int J Music Educ 추정) "AT classes for tertiary music students: student/teacher evaluations of pre/post recordings"(n=12 평가연구)로 보임. **OCEBM 1b(RCT) 주장 과장 의심 → 평가연구로 하향**. "단일브랜드 RCT 앵커" 약화 — part 16/MX Evidence Ladder 재검토 필요.
-OCEBM: 1b. 적용: part 2, part 5, part 12, part MX.
+OCEBM: ~~1b~~ → **평가연구(R4 하향, RCT 아님)**. 적용: part 2, part 5, part 12, part MX(전부 R4 정정 반영). 1저자 Janet Davies(Jennifer 오기).
 
 ---
 

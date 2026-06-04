@@ -33,7 +33,7 @@
 | *What Every Singer Needs to Know About the Body* (2nd ed.) | Malde, Allen, Zeller (2017) [CITE: MALDE2017] | **Body Mapping 가창자용 표준 교재** (Andover Educators). 해부 다이어그램 + 가창 적용의 모범. | ✓ **신규** ★★★ |
 | *Anatomy of the Voice* | T. Dimon (2018) [CITE: DIMON2018] | Alexander 라인 + 후두·호흡 해부. 자세-가창 운동학적 연결. | ✓ **신규** ★★★ |
 | *How to Learn the Alexander Technique* | Conable (1995) | Body Mapping 1차 자료. | (선택, 추가 검토) |
-| Alexander Technique × Singing RCT | Davies (2020 / *J Voice*) [CITE: DAVIES2020] | 가창자 RCT. 단일 브랜드 RCT 보유. | ✓ |
+| Alexander Technique × Singing (⚠️평가연구, RCT 아님 — R4) | Janet Davies (2020 / *SAGE*, J Voice 아님) [CITE: DAVIES2020→평가연구] | ⚠️정정: 가창자 *RCT 아님*(학생/교사 pre·post 평가, n≈12). "단일 브랜드 RCT 보유" 철회 | ✓(평가연구) |
 | *Freeing the Natural Voice* | Linklater (2006 rev.) | 배우 발성, 가창 적용. | ✓ |
 | *The Use and Training of the Human Voice* | Lessac (1967) | 촉각 중심 음성, libral tone. | ✓ |
 | Fitzmaurice Voicework® | Fitzmaurice (1936–2024) [CITE: FITZMAURICE] | Destructuring + Restructuring. | ✓ |
@@ -147,7 +147,7 @@
 
 | 본 앱 영역 | 1차 참조 | 보강 |
 |---|---|---|
-| Phase A 호흡·자세 | Hixon 2008 + Chapman 2017 + **Malde et al. 2017 Body Mapping** | Davies 2020 RCT |
+| Phase A 호흡·자세 | Hixon 2008 + Chapman 2017 + **Malde et al. 2017 Body Mapping** | ⚠️Davies 2020 *평가연구*(RCT 아님, R4) |
 | Phase A 자세 정렬 | Body Mapping (Conable·Malde) + Alexander | **Dimon 2018** |
 | Phase B SOVT | Titze 2006 + Vocology 2012 + Andrade 2014/2024 | Stemple VFE |
 | Phase B 균형 발성 | Verdolini LMRVT + 김형미 2025 | Galindo 2023 |

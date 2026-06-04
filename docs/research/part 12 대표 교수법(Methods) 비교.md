@@ -99,7 +99,7 @@ NYU Steinhardt MT/CCM 트랙의 핵심 교수법. **Bel Canto의 vowel modificat
 
 | 방법론 | Evidence Status | 핵심 근거 / 한계 |
 |---|---|---|
-| **Alexander Technique** | RCT (가창 한정) | Davies 2020 / *J Voice* — 대학 가창 학생 무작위 시험. 단일 브랜드 방법론 중 *가창자 대상* RCT 보유의 희귀 사례. [CITE: DAVIES2020] |
+| **Alexander Technique** | ⚠️**평가연구(R4 정정, RCT 아님)** | Davies 2020은 *J Voice RCT가 아니라 SAGE 평가연구*(tertiary music students, 학생/교사 pre·post 평가, n≈12)로 확인 — "가창자 RCT 희귀 사례" 철회. [CITE: DAVIES2020→평가연구, KEYMAP] |
 | **CVT (Complete Vocal Technique)** | Feasibility (등록 임상) `[탐색적 근거]` | CVT4MTD (NCT05365126) UK HRA 등록 임상; McGlashan et al. 2023 프로토콜 / 2025 feasibility 첫 결과(11/11 완료, MPT 변동 없음, 다차원 측정 호전). Phase III RCT는 미실시. [CITE: MCGLASHAN2023PROTO] [CITE: MCGLASHAN2025] [CITE: CVT4MTD] |
 | **Estill Voice Training (EVT)** | Non-randomized + clinical bridge `[탐색적 근거]` `[Phase III RCT 부재]` | Berardi 2022 비무작위 n=82 (대면 ≈ 텔레); Ouattara 2017 CCM pre/post 탐색; Steinhauer & Klimek 2024 RTSS 임상 분류 매핑(EVT *비임상* 비판에 대한 응답). [CITE: BERARDI2022] [CITE: OUATTARA2017] [CITE: STEINHAUER2024] |
 | **Speech Level Singing (SLS)** | Critical literature only `[Phase III RCT 부재]` | McClellan 2011 (멤피스대 박사논문, n=7 정성 비교); Wicks 2019 *J Singing* (NATS 발간 역사·비판, "cords zip up" 등 비과학적 명제 식별). 학술 효능 검증 부재. [CITE: MCCLELLAN2011] [CITE: WICKS2019] |

@@ -250,14 +250,15 @@ Donald Miller (Groningen, 2008) — VoceVista [CITE: DMILLER2008]
 | **Husler & Rodd-Marling** | — `[Phase III RCT 부재]` | ★ | ★★ | ★★★ | "성대 현가계" 비유 임상 검증 제한 |
 | **Vocal Power Method** | — `[Phase III RCT 부재]` | ★ | ★★ | ★★ | 학술 검증 거의 없음 |
 | **Linklater / Lessac / Fitzmaurice** | — `[Phase III RCT 부재]` | ★ | ★★★ (배우 학교) | ★★★ | 배우 발성 정전; 가창 응용은 추론 |
-| **Alexander Technique** | ★★★ Davies 2020 *J Voice* — 가창 학생 대상 RCT (브랜드 방법론 중 가창자 RCT 보유의 희귀 사례) | ★★ | ★★★ | ★★★ | 만성 통증 RCT(BMJ 2008) 외에 가창자 RCT 직접 보유로 등급 상향 [CITE: DAVIES2020] |
+| **Alexander Technique** | ⚠️**★★로 하향(R4 정정)** — Davies 2020은 *J Voice RCT 아님*, 실제 SAGE 평가연구(n≈12 학생/교사 pre·post 평가) | ★★ | ★★★ | ★★★ | ⚠️정정: "가창자 RCT 보유"는 과장 — Davies 2020=평가연구. 만성통증 RCT(BMJ 2008)는 발성 직접 아님 → ★★★ 상향 근거 철회, **★★ 유지**. 키 DAVIES2020 KEYMAP 참조 |
 
 본 ladder는 §4와 함께 본 base 자료의 핵심 비교축이다. "X 학파가 옳다"는 진술 대신 "X 학파의 Y 주장은 Z 등급 근거"로 표기하는 것이 본 자료의 원칙이다.
 
 **태그 사용 규칙 (2026 갱신):**
 - `[탐색적 근거]` — feasibility / 비무작위 / 단일 사례 시리즈 / 파일럿(n<30) 수준. 효능 부정의 표시가 아니라 *Phase II 이전 단계*의 표시.
 - `[Phase III RCT 부재]` — 브랜드 방법론으로서의 Phase III 무작위 대조 시험이 2026-05 기준 부재함을 의미. 이는 *해당 방법론이 차용하는 기법*(SOVT, formant tuning, vocal dose 등)의 RCT 근거와 분리해 읽어야 한다 — 본 보고서는 *기법군의 근거*와 *브랜드의 근거*를 별도로 평가한다 (자세한 매트릭스는 Part 12 §"방법론별 Evidence Status" 참조).
-- 본 등급 상향 사유: Alexander Technique은 Davies 2020 *J Voice*(가창 학생 RCT)로 ★★ → ★★★ 상향. CVT는 CVT4MTD 등록 임상 + McGlashan 2025 feasibility 첫 결과로 ★ → ★★ 상향. EVT는 Berardi 2022 + Steinhauer 2024 RTSS 매핑으로 ★ → ★★ 상향.
+- 본 등급 상향 사유: ⚠️**Alexander Technique ★★★ 상향 철회(R4)** — Davies 2020은 *J Voice RCT가 아니라 SAGE 평가연구*로 확인됨 → ★★ 유지. CVT는 CVT4MTD 등록 임상 + McGlashan 2025 feasibility 첫 결과로 ★ → ★★ 상향. EVT는 Berardi 2022 + Steinhauer 2024 RTSS 매핑으로 ★ → ★★ 상향.
+  (메소드 효능 RCT 갭은 R4로 *재개방* — 단일 브랜드 가창자 RCT는 현재 *확인된 것 없음*.)
 
 ---
 

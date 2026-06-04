@@ -88,7 +88,7 @@
 
 - **Kim Steinhauer & Mary McDonald Klimek** (미국 / Estill Voice International) — Estill 정전 *The Estill Voice Model: Theory & Translation* (2017) 공저자에 더해, 2024 *Am J Speech Lang Pathol* 논문에서 **EVT figure를 RTSS(Rehabilitation Treatment Specification System) 임상 분류에 매핑**해 EVT의 *비임상* 비판에 응답. EVT가 임상 voice therapy 영역으로 진입하는 변곡점. [CITE: STEINHAUER2017] [CITE: STEINHAUER2024]
 
-- **Jennifer Davies** (영국·호주) — *J Voice* 2020 발표 RCT 책임자. 대학 가창 학생 대상 **Alexander Technique 무작위 시험**으로 보컬 훈련 호전 보고. 단일 브랜드 방법론 중 *가창자 대상* RCT를 보유한 매우 드문 사례 — Alexander가 part MX Evidence Ladder에서 ★★★급으로 상향되는 직접 근거. [CITE: DAVIES2020]
+- **Janet Davies** (⚠️R4 정정: "Jennifer"는 오기) — 2020 발표. ⚠️**RCT 아님(R4)**: *J Voice 무작위 시험*이 아니라 **SAGE 평가연구**(대학 가창 학생 대상 Alexander Technique 수업의 학생/교사 pre·post 평가, n≈12)로 확인. "가창자 RCT 희귀 사례 → ★★★ 상향" 근거 **철회**(part MX ★★ 유지). [CITE: DAVIES2020→평가연구, KEYMAP]
 
 ## 인물 비교표
 

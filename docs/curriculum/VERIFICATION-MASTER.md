@@ -37,6 +37,7 @@
 ## 5. 잔존 미해결 (등급)
 
 - **S**: K-pop 트레이니 손상 코호트 부재 / Phase III 방법비교 RCT 부재 → 가요·belt 증거강도 낮음 단서 유지. (제품 범위 밖: 트랜스·변성기)
+- **S(R4 재개방)**: 메소드 효능 *가창자 RCT* 부재 — Davies 2020이 RCT가 아니라 SAGE 평가연구로 확인되어 "단일 브랜드 가창자 RCT 확보" 철회. part16 메소드효능 갭 🟡→🔴. Alexander part MX ★★★→★★ 하향. (커리큘럼 카드엔 belt 외 Alexander 직접 의존 없어 안전 무관.)
 - **A**: 한국어 가창 formant DB 부재 / 다언어 딕션 / 장르 세분화.
 - **인프라 A**: CITATIONS 영어권 single-author-year 키의 *저자명 신뢰 불가* — 후속 사용 전 1저자 재확인 권장(본 감사가 8건 정정, 미개별검증 다수 PARTIAL).
 
