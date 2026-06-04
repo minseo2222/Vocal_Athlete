@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:vocal_athlete/lesson/card.dart';
 import 'package:vocal_athlete/lesson/card_library.dart';
 import 'package:vocal_athlete/progression/path.dart';
 
@@ -64,6 +65,35 @@ void main() {
               reason: '${entry.key} cue line "$line" contains "$token"');
         }
       }
+    }
+  });
+
+  test('I1.1 all intermediate cards present (IC/IM/CL/GY)', () {
+    final ids = <String>[
+      for (var i = 1; i <= 12; i++) 'IC-${i.toString().padLeft(2, '0')}',
+      for (var i = 1; i <= 12; i++) 'IM-${i.toString().padLeft(2, '0')}',
+      for (var i = 1; i <= 9; i++) 'CL-${i.toString().padLeft(2, '0')}',
+      for (var i = 1; i <= 9; i++) 'GY-${i.toString().padLeft(2, '0')}',
+    ];
+    for (final id in ids) {
+      final c = kCardLibrary[id];
+      expect(c, isNotNull, reason: '$id missing in library');
+      expect(c!.cue, isNotEmpty, reason: '$id empty cue');
+      expect(c.voicedMicroWin, isNotEmpty, reason: '$id empty voicedMicroWin');
+    }
+  });
+
+  test('I1.2 HITL-SIGNOFF safety cards flagged pending; others none', () {
+    const pending = {
+      'IM-02', 'IM-03', 'IM-05', 'IM-12',
+      'CL-01', 'CL-08',
+      'GY-04', 'GY-05', 'GY-06', 'GY-09',
+    };
+    for (final entry in kCardLibrary.entries) {
+      final expected =
+          pending.contains(entry.key) ? SafetyReview.pending : SafetyReview.none;
+      expect(entry.value.safetyReview, expected,
+          reason: '${entry.key} safetyReview mismatch');
     }
   });
 }
