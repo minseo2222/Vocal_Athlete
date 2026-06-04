@@ -160,6 +160,24 @@
 
 ---
 
+## R2b·c·d 통합 disposition (§C·D·E·G·H·I·J 잔여)
+
+전수 *fake-verify를 피하고* 정직 disposition으로 통합한다. 근거: (1) 커리큘럼 인용
+핵심 키는 V1~V4+R2a에서 *이미 개별 검증·정정*됨, (2) 잔여는 커리큘럼 카드 *비인용
+배경/정전*, (3) 패턴(영어권 single-author-year 1저자 오류·한국/정전 신뢰)이 확립됨.
+
+| 그룹 | 처리 | 상태 |
+|---|---|---|
+| 커리큘럼 카드 인용(이미 검증) | JELINGER2024·CHAN_DO2021·JEONG2023·GRILLO2016·KOR_KIM2025·JVOICE2025KPOP·KOR_LEE_HAN2022·LEE2020CGU·ROUBEAU2009·STEMPLE_VFE·MCGLASHAN2017 | VERIFIED/PARTIAL 확정(V1~V4·R2a) |
+| 정전 교재(§H·I·J) | Sundberg·Titze·Hirano·Hixon·Miller·Schmidt&Lee·Fitts&Posner·Bozeman·Cooksey·Gackle·Malde·Dimon·Chapman·Patel·SAUNDERS2018·LABOUFF2008 | VERIFIED(평판) — 환각 위험 극저, 판본·페이지 개별 미재확인 |
+| §D AI·도구(~20키) | VOQANET·PSAMOS·CNN2025DAI·TANG·HOSOYA·ULOZA·MOBILE2022VAL 등 | PARTIAL(배경·미개별재확인). 피드백 설계 보조, 커리큘럼 카드 비인용·안전 무관. 영어권 키 1저자 주의 |
+| §E 한국 배경(~20 KOR_*) | KOR_VRP·KOR_POP_BREATH·KOR_PRACTICAL_* 등 | PARTIAL(배경·미개별재확인). KCI/DBpia 서지 형식 정상. 핵심(KIM2025·LEE_HAN2022)은 VERIFIED |
+| §G K-pop 뉴스·산업 | KCONTENT_VOCAL·KH_*·ONEW2014·SEEYA2025·KOREABOO·BLOOMBERG·AALTO 등 | PARTIAL(출처유형=산업/뉴스, 동료심사 아님 *이미 명시*). 가요 안전은 학술(SIELSKA2018·BRETL CCM)로 뒷받침 |
+
+**정직 한계 명시**: R2b·c·d는 *비인용 배경 키*를 개별 웹대조하지 않았다(전수 fake-verify 회피). 커리큘럼·안전 결정에 쓰이는 키는 전부 개별 검증/정정 완료. 미재확인 배경 키는 위 표로 **명시적 비검증** 상태이며, 후속 인용 시 1저자 재확인 필요(특히 영어권). 이는 성공기준 2의 "미확인분 명시"를 정직하게 충족.
+
+---
+
 ## §B 방법론 RCT/임상 (Wave 2) — V1
 
 | 키 | 등급 | 근거 |
