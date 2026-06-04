@@ -429,4 +429,38 @@ void main() {
     expect(p.completeLesson(), CompleteOutcome.advanced);
     expect(p.currentIndex, 1);
   });
+
+  // --- I4: 분기 완주 → 고급 미생성 → 유지 모드 ---
+
+  test('I4.1 finishing genre course → graduated + maintenance (advanced 미생성)',
+      () {
+    final p = Progression.from(buildPlaceholderManifest(), graduated: true);
+    p.toggleRelease(Genre.gayo);
+    p.chooseGenre(Genre.gayo); // 가요 코스 로드(64), index 0
+    // 마지막 슬롯까지 진행: 매일 1레슨(advanceDay로 캡 해제)
+    while (!p.atEnd) {
+      p.completeLesson();
+      p.advanceDay();
+    }
+    expect(p.completeLesson(), CompleteOutcome.graduated); // 마지막 슬롯 완주
+    expect(p.graduated, isTrue);
+    expect(p.maintenance, isTrue); // 고급 미생성 → 유지 모드
+    expect(p.genre, Genre.gayo); // 장르 유지
+  });
+
+  test('I4.2 beginner graduation (genre 미선택) → NOT maintenance (picker로)',
+      () {
+    const slot = PathSlot(
+      index: 0,
+      cardId: 'CARD-01',
+      block: 1,
+      bodyVoicedRatio: 0.70,
+      variationLevel: VariationLevel.blocked,
+    );
+    final p = Progression.from([slot]); // 1슬롯 초급
+    expect(p.completeLesson(), CompleteOutcome.graduated);
+    expect(p.graduated, isTrue);
+    expect(p.maintenance, isFalse); // genre 미선택 → 유지 모드 아님(picker)
+    expect(p.genre, isNull);
+  });
 }

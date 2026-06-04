@@ -29,7 +29,7 @@ const Map<CompleteOutcome, String> kOutcomeMessage = {
       '🎉 경로 완주! 오늘은 여기까지 — 장르를 고르고 내일부터 다음 코스',
   CompleteOutcome.transitionToNext: '🎉 전이 완료 — 내일 다음 코스 1과부터',
   CompleteOutcome.review: '↩ 오랜만이에요 — 가볍게 복습부터. 신규는 내일부터.',
-  CompleteOutcome.graduated: '🎉 초급 완주! 잘 해냈어요.',
+  CompleteOutcome.graduated: '🎉 완주! 잘 해냈어요.',
   CompleteOutcome.maintenance: '오늘도 가볍게 유지. 새 코스 열리면 이어가요.',
 };
 
@@ -198,6 +198,9 @@ class Progression {
         _currentIndex++;
       case CompleteOutcome.graduated:
         _graduated = true; // P7 — 마지막 슬롯 완주(점수 무관, ADR-0004)
+        // I4 — 분기(장르 코스) 완주: 고급 미생성 → 유지 모드(ADR-0010).
+        // 초급 완주(genre 미선택)는 picker로(유지 모드 아님).
+        if (_genre != null) _maintenance = true;
       case CompleteOutcome.maintenance:
       case CompleteOutcome.capped:
       case CompleteOutcome.transitionGraduated:

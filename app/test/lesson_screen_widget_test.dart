@@ -275,7 +275,7 @@ void main() {
     expect(
       find.descendant(
           of: find.byKey(const Key('outcome-snack')),
-          matching: find.textContaining('초급 완주')),
+          matching: find.textContaining('완주')),
       findsOneWidget,
     );
   });
