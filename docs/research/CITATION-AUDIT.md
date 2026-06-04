@@ -26,6 +26,26 @@
 
 ---
 
+## §C 공명·믹스·트웽 + §D 자기모니터링·AI·도구 — V2
+
+| 키 | 등급 | 근거 |
+|---|---|---|
+| **GIBIAT2024** | **REFUTED(저자 오기) ⚠️정정** | 논문 실재(J Voice 2024, pubmed 38964963, URL 일치, 트웽 MRI 협착 18.8–52.4%)하나 **1저자 = Jelinger, J**(Gibiat 아님). 키→JELINGER2024. 트웽=구강·AES 협착 *내용 확정* → IC-10·IM-02·GY-04 트웽 cue 근거 유지(저자만 정정) |
+| **CHAN_DO2021** | **VERIFIED** | Chan, M.P.Y. & Do, Y. (2021), Music & Science, DOI 10.1177/20592043211055168. 소프라노 모음조정 실증. 저자·저널·내용 일치. CL-02·IC-07 근거 견고 |
+| LEHOUX2024·SAUNDERS2018 | PARTIAL(미개별검증) | 서지 형식 정상 |
+| **NAIR2023PNAS** | **REFUTED(저자 오기) ⚠️정정** | 논문 실재(PNAS 2023, DOI 10.1073/pnas.2219394120, pubmed 36802437, 스킨 웨어러블 음성피로)하나 **1저자 = Jeong, H**(Nair 아님; ADS 키 …J). 키→JEONG2023. 내용 확정 |
+| **MANFREDI2017** | **REFUTED(오귀속+프레이밍 의심) ⚠️정정** | 실제 **Grillo, E.U. et al. (2016)**, *Int J Telerehabilitation* 8(2):9-14, PMC5536725 — "Manfredi 2017" 아님. **게다가 원문 결론은 "스마트폰이 within-subject 음성 추적에 적절"** → CITATIONS "마이크 정확도 *한계*" 프레이밍과 상충. ADR-0014 시각전용 근거로 쓰였으나 이 인용은 틀렸고 방향 의심 |
+| MOBILE2022VAL·VOX4HEALTH2018·ULOZA2023·HOSOYA2023·SMARTREV2021·CNN2025DAI·TANG2025·PSAMOS2024·VOQANET2025·SIPSURVEY2025·SVSREVIEW2025·GENMM2025·JANG_TASLP2022·SGRUEL2025·LEE2020TASLP·HU2022PITCH·NOISE2024·ROSEN2022DOSI·CHOIPARK2024·LEE2022IOS | PARTIAL(미개별검증) | AI/도구 키 다수 — arXiv·저널 서지 형식 정상. ADR-0014 피드백 설계 보조. 안전 비관여 → 개별 웹대조 보류(정직 표기). 단 MANFREDI 정정으로 ADR-0014 "마이크 한계" 근거는 *재확보 필요*(V5/V8) |
+
+### ⚠️ 영향 전파 (§C·D)
+- **ADR-0014 근거**: "컨슈머 마이크 정확도 한계(MANFREDI2017)" 인용이 오귀속+프레이밍 의심.
+  단 ADR-0014(시각전용)는 *골전도 착각 차단·저신뢰 지표 비표시*라는 보수적 설계라
+  마이크-한계 단일 근거에 의존하지 않음 → 설계 유지, 근거 인용은 교체 필요(별도).
+- **초급 SOURCES**(C5/C12 "MANFREDI2017 마이크 한계"): Grillo2016으로 정정 + 프레이밍 주의 표기.
+- 트웽(GIBIAT→Jelinger) 저자 정정은 IC-10·IM-02·GY-04에 전파(내용 불변).
+
+---
+
 ## §B 방법론 RCT/임상 (Wave 2) — V1
 
 | 키 | 등급 | 근거 |

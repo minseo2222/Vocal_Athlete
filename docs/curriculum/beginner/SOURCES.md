@@ -12,7 +12,7 @@
 | C2 흉곽-복부 호흡 | 늑골·복부 *결합* 호흡("복식 vs 흉식" 이분법 폐기) | HIXON2008 | 5(정전 교과서). part 14 *복식호흡* 카드 |
 | C3 턱·혀·목 이완 | silent→voiced ah, 후두외근 긴장 완화 | DIMON2018(whispered ah), part HP §해부 | 5 |
 | C4 가벼운 첫 소리 | /h/·/m/ easy onset, balanced onset | part 3 P3-01~05(온셋 유형) | 온셋 DB. *균형 onset이 유일 정답 아님*(스타일 의도) |
-| C5 자기청취(골/공기 전도) | 시각 곡선 전용(골전도 착각 차단) | NAIR2023PNAS, MANFREDI2017, part 7 | 컨슈머 마이크 정확도 한계 → 시각 전용·저신뢰 비표시(ADR-0014) |
+| C5 자기청취(골/공기 전도) | 시각 곡선 전용(골전도 착각 차단) | JEONG2023(전 NAIR), part 7 | ⚠️V2정정: MANFREDI2017→Grillo2016 오귀속·프레이밍 의심으로 *근거에서 제외*. 시각전용 근거는 골전도 착각·저신뢰지표 비표시(ADR-0014)로 유지 |
 | C6 빨대 발성 | SOVT 역압·발성역치압↓·충돌력↓ | TITZE2006SOVT, TITZE2000, ANDRADE2024 | 1b(RCT, SOVT 비교). 빨대 지름=VERIFICATION P1 |
 | C7 립 트릴 | SOVT 반폐쇄(립 트릴=lip bubble/buzz) | TITZE2006SOVT, part 3 | SOVT 하위군 |
 | C8 허밍/NG-hum | /m/·/ŋ/ 비강 SOVT | TITZE2006SOVT, part 3 | SOVT 하위군 |

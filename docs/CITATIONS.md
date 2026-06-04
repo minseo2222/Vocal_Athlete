@@ -202,6 +202,7 @@ OCEBM: 1b. 적용: part 2, part 5, part 12, part MX.
 ### [CITE: GIBIAT2024]
 Gibiat, V. et al. (2024). "Oropharyngeal and Aryepiglottic Narrowing for Twang: An MRI Study," *J Voice*. https://www.jvoice.org/article/S0892-1997(24)00192-9/abstract
 *트웽의 인두·후두덮개 협착 MRI 영상 증거.*
+⚠️정정(CITATION-AUDIT V2): **1저자 = Jelinger, J**(Gibiat 아님). 키→JELINGER2024. 논문·내용(구강·AES 협착 18.8–52.4%) 실재·확정.
 OCEBM: 4 (영상 사례). 적용: part 4, part 5, part 14.
 
 ### [CITE: CHAN_DO2021]
@@ -226,6 +227,7 @@ OCEBM: 5 (교재). 적용: part 5, part 12, part 13.
 ### [CITE: NAIR2023PNAS]
 Nair, R. et al. (2023). "Closed-loop network of skin-interfaced wireless devices for quantifying vocal fatigue and providing user feedback," *PNAS* 120(11). https://www.pnas.org/doi/10.1073/pnas.2219394120
 *Northwestern 웨어러블 음성 도시미터, closed-loop 피드백. PNAS 등재.*
+⚠️정정(CITATION-AUDIT V2): **1저자 = Jeong, H**(Nair 아님). 키→JEONG2023. 논문·내용 실재.
 OCEBM: 5 (장치 검증). 적용: part 7, part 8, part 11, part QI.
 
 ### [CITE: ROSEN2022DOSI]
@@ -306,6 +308,7 @@ OCEBM: 4. 적용: part 7, part 11. 태그: `[탐색적 근거]`.
 ### [CITE: MANFREDI2017]
 Manfredi, C. et al. (2017). "Influence of Smartphones and Software on Acoustic Voice Measures," *PMC*. https://pmc.ncbi.nlm.nih.gov/articles/PMC5536725/
 *마이크 정확도 한계 — 컨슈머 앱 정확도 검증.*
+⚠️정정(CITATION-AUDIT V2): 실제 **Grillo, E.U. et al. (2016)**, *Int J Telerehabilitation* 8(2):9-14, PMC5536725 — "Manfredi 2017" 아님(저자·연도·저널 오기). **원문 결론은 "스마트폰이 within-subject 음성 추적에 적절"** → "마이크 정확도 한계" 프레이밍과 상충. ADR-0014 시각전용 근거로는 부적합 → 근거 교체 필요(시각전용은 골전도·저신뢰지표 근거로 유지).
 OCEBM: 4. 적용: part 7, part 11.
 
 ### [CITE: MOBILE2022VAL]
