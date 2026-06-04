@@ -97,6 +97,15 @@
 - variableAxes: { vowel:["m","a","i"], range:["중음"] }
 - 중단 cue: ["통증 → 중단"]
 
+### IC-12 · 표준샘플 SOP (자기평가, 주기 카드)  (kind: assessment · 블록 경계)
+- cue: ["조용한 곳에서 같은 조건으로.", "/a/ /i/ /u/ 각 5초 + 표준 문장 1줄 + 저→고→저 글라이드.", "녹음 후 *시각 곡선*을 직전 회차와 나란히 비교(듣고 판단 ❌)."]
+- voicedMicroWin: ["고정 과제 녹음 1세트(전체 유성)"]
+- antiPatterns: ["매번 다른 과제로 비교 무력화 ❌", "청각으로만 자가판정 ❌"]
+- anatomy: { entry:"환경·자세 확인", main:"고정 과제 녹음→직전 회차 시각 A/B", cooldown:"가벼운 허밍" } · cooldownSkippable: true
+- feedback: { kind: visual }  # 졸업/전이 판정 연속(초급 졸업 4스킬 ③ 계승), 비차단
+- variableAxes: { }   # 고정 과제 — 변주 없음(비교 가능성이 핵심, CARD-13과 동형)
+- 중단 cue: ["통증 → 중단"]
+
 ### IC-11 · 패사지오 인지 (P5-03/06)  (kind: concept · 블록2)
 - cue: ["저음→고음 사이렌으로 천천히.", "소리 질감이 바뀌는 *구간*을 관찰(없애려 하지 않기).", "(믹스·belt·cover 처리는 분기에서)."]
 - voicedMicroWin: ["사이렌 글라이드 3회"]
