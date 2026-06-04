@@ -83,6 +83,22 @@ void main() {
     }
   });
 
+  test('I6.1 every cardId in all course manifests resolves (no dangling)', () {
+    final manifests = <String, List<PathSlot>>{
+      'beginner': buildPlaceholderManifest(),
+      'core': buildCoreManifest(),
+      'musical': buildMusicalManifest(),
+      'classical': buildClassicalManifest(),
+      'gayo': buildGayoManifest(),
+    };
+    for (final entry in manifests.entries) {
+      for (final slot in entry.value) {
+        expect(() => resolveCard(slot), returnsNormally,
+            reason: '${entry.key}: ${slot.cardId} not in library');
+      }
+    }
+  });
+
   test('I1.2 HITL-SIGNOFF safety cards flagged pending; others none', () {
     const pending = {
       'IM-02', 'IM-03', 'IM-05', 'IM-12',
