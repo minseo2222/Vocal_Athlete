@@ -49,6 +49,20 @@
 4. **k-keok**: 영구 제외 유지(고급/HITL 한정).
 5. **ADR-0014 근거 교체**: MANFREDI→다른 마이크 한계 출처(또는 골전도·저신뢰지표 근거로 재서술). 시각전용 설계 자체는 불변.
 
+## 6b. Remediation 완료 (R1~R7, 2026-06)
+
+| 단계 | 결과 |
+|---|---|
+| R1 | 정정 8건 완결 + `docs/CITATION-KEYMAP.md`(권위 정정표) 신설. CITATIONS 헤더 포인터 |
+| R2a~d | PARTIAL 전수 재확인 — VALA(이니셜 B→M)·SELAMTZIS2019(UNVERIFIABLE) 추가 색출. 배경 키는 *정직 비검증* 표기(fake-verify 회피), 후속 인용 시 1저자 재확인 필요 |
+| R3 | ADR-0014 근거 교체 — MANFREDI(→Grillo, 폐기) → MOBILEVOICE2022·SMARTPHONE_AVQI_META2025(F0 robust·jitter/shimmer/HNR device bias). 시각전용 설계 불변 |
+| R4 | DAVIES2020 RCT→평가연구 하향 전수 전파(part12·13·16·MX·HX·CITATIONS). Alexander ★★★→★★. 메소드효능 RCT 갭 재개방 |
+| R5 | 약근거 보강 — 등급 상향 0(belt 효능 RCT 미발견 정직 유지), 출처 날조 0. belt 특성화 corroboration 보강 |
+| R6 | `docs/curriculum/HITL-SIGNOFF.md` — 안전 카드 전문가 검토 패킷, 자가 승인 0 |
+| R7 | 본 종합 갱신 |
+
+**정정 총계**: 메타데이터 오류 8(R1) + 2(R2a: VALA·SELAMTZIS) = **10건 색출·정정**. 환각(미존재 논문) 0건. 안전 claim REFUTED 0건(V6).
+
 ## 7. 검증 한계 (정직)
 
 - 학술 *본문* 다수 유료 → claim 정밀 수치는 PARTIAL 잔존(예 belt "성문하압 2–3배" 배수).
