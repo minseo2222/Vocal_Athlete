@@ -1,0 +1,40 @@
+{
+  "schema": "vocal-athlete/verification-status@1",
+  "updated": "2026-06-04",
+  "note": "인간 게이트 항목의 검증 상태 단일 소스(머신리더블). W5 하네스(flutter test)가 이 파일과 라이브 코드 상수의 정합을 강제한다. 임의로 status/목록을 올려도 코드가 뒷받침 못 하면 테스트 실패.",
+  "statusEnum": ["VERIFIED", "UNVERIFIED", "BLOCKED", "OUT_OF_SCOPE"],
+  "items": {
+    "safetySignoff": {
+      "decision": "human:HITL",
+      "source": "app/lib/safety/safety_signoff.dart (kSafetySignoff)",
+      "signedOffCardIds": [],
+      "stillGatedCardIds": [
+        "IM-02", "IM-03", "IM-05", "IM-12",
+        "CL-01", "CL-08",
+        "GY-04", "GY-05", "GY-06", "GY-09"
+      ],
+      "status": "UNVERIFIED",
+      "note": "빈 사인오프 레코드 = 전 안전 카드(belt/트웽/cover/messa/런) 잠금. 발성 전문가 사인오프 전까지 UNVERIFIED. AI 자가 승인 ❌."
+    },
+    "rollout": {
+      "decision": "human:rollout",
+      "source": "app/lib/progression/progression_state.dart (kReleasedGenres)",
+      "releasedGenres": [],
+      "allGenres": ["musical", "classical", "gayo"],
+      "status": "UNVERIFIED",
+      "note": "빈 config = 전 장르 유지 모드(미출시). 출시는 롤아웃·안전 결정이라 사람만. AI 자가 롤아웃 ❌."
+    },
+    "deviceMic": {
+      "decision": "human:device",
+      "source": "docs/verification/device-results.md",
+      "status": "UNVERIFIED",
+      "note": "기기 육안 검증(소리→피치 곡선) 미수행. RecordingPitchSource는 코드·analyze만 검증됨(device-bound glue)."
+    },
+    "advancedTrack": {
+      "decision": "human:design+HITL",
+      "source": "docs/curriculum/CURRICULUM-REVIEW.md (G4·G5)",
+      "status": "OUT_OF_SCOPE",
+      "note": "고급 트랙(G4)·periodization/디로드(G5)는 의도적 범위 밖. 신규 고위험 = 별도 안전 설계 + HITL 필요."
+    }
+  }
+}
