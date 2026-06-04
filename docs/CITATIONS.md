@@ -14,6 +14,7 @@
 ### [CITE: BRETL2023]
 Bretl, M., Boyer, J., Lerner, M., Smith, B., Lobo, R., Zhang, Y., et al. (2023). "Vocal Fold Pathologies Among Undergraduate Singing Students In Three Different Genres," *The Laryngoscope* 133(7). https://onlinelibrary.wiley.com/doi/10.1002/lary.30533
 *3년 종단: 클래식 1년차 0% → 3년차 22%, 뮤지컬 39%, CCM 27%. 클래식이 안전하다는 통념 정정.*
+⚠️정정(CITATION-AUDIT V1): "뮤지컬 39%" 출처 미확인 — 원 출처는 *1년차 유병률* MT 32–40%·CCM 17–18%·클래식 0%, *발생률(incidence)* MT 67%·클래식 22%·CCM 27%(22·27은 발생률값으로 일치). 안전 방향(MT 최고) 유지·강화.
 OCEBM: 2b (코호트). 적용: part 8, part 9, part 16.
 
 ### [CITE: CHILDS2023]
@@ -29,6 +30,7 @@ OCEBM: 1a (메타분석). 적용: part 8, part 9.
 ### [CITE: SIELSKA2024]
 Sielska-Badurek, E. M. et al. (2024). "Population characteristics and self-assessment of speaking and singing voice in Polish CCM singers — exploratory cross-sectional study," *Frontiers in Public Health*. https://pmc.ncbi.nlm.nih.gov/articles/PMC11133608/
 *폴란드 CCM 학생의 22%가 훈련 시작 시점 결절 보유.*
+⚠️정정(CITATION-AUDIT V1): "22% 결절" finding은 *Sielska-Badurek 2018, J Voice*(n=45 중 10명=22% 결절, S0892199717302564) 소관 — 본 2024 Frontiers 논문(인구특성·자가평가)에 오귀속. 키 SIELSKA2024와 별개로 SIELSKA2018(J Voice)로 재귀속해야 22% 사용 가능. 22% 수치 자체는 실재.
 OCEBM: 3b. 적용: part 8, part 9, part 9-KR.
 
 ### [CITE: BEHLAU2021]
@@ -39,6 +41,7 @@ OCEBM: 3b. 적용: part 8, part 16.
 ### [CITE: LECHIEN2021]
 Lechien, J. R. et al. (2021). "Laryngeal Pathologies Associated with the Genre of Singing and Professional Singing Status in a Treatment-Seeking Population," *J Voice*. https://pubmed.ncbi.nlm.nih.gov/33270237/
 *치료 추구 코호트: 팝 63.2%, 풀타임 60.8%, 파트타임 62.2%, 아마추어 45.1%.*
+⚠️정정(CITATION-AUDIT V1): **1저자 = Rotsides, J**(Lechien 아님), **저널 = The Laryngoscope**(lary.29303, "J Voice" 아님). 키→ROTSIDES2021 권장. 논문 실재(pubmed 33270237), 수치는 유료 본문 미확인(PARTIAL).
 OCEBM: 3b. 적용: part 9, part 16.
 
 ### [CITE: PAWELCZYK2022]
@@ -183,11 +186,13 @@ OCEBM: 1b. 적용: part 3.
 ### [CITE: CHEN2024]
 Chen, T. et al. (2024). "Short-Term Effects of Semi-Occluded Vocal Tract Therapy on the Phonation of Children With Vocal Fold Nodules: An RCT," *JSLHR*. https://pubs.asha.org/doi/10.1044/2024_JSLHR-24-00243
 *아동 결절 SOVT 단기 효과 RCT.*
+⚠️정정(CITATION-AUDIT V1): **1저자 = Adriaansen, A**(Ghent), "Chen" 아님. epub 2025-01(2024년분). 키→ADRIAANSEN2025 권장. 논문·설계(RCT) 실재(DOI 10.1044/2024_JSLHR-24-00243).
 OCEBM: 1b. 적용: part 3, part 16 (변성기 갭).
 
 ### [CITE: DAVIES2020]
 Davies, J. (2020). "Alexander Technique classes improve vocal training: a randomised study with university students," *J Voice*.
 *가창자 대상 알렉산더 테크닉 RCT — 단일 브랜드 방법론 중 RCT 보유한 희귀 사례.*
+⚠️정정(CITATION-AUDIT V1·SUSPECT): "J Voice RCT 'AT classes improve vocal training'" *해당 제목·저널 논문 미발견*. 실제 Davies 2020 = SAGE(Int J Music Educ 추정) "AT classes for tertiary music students: student/teacher evaluations of pre/post recordings"(n=12 평가연구)로 보임. **OCEBM 1b(RCT) 주장 과장 의심 → 평가연구로 하향**. "단일브랜드 RCT 앵커" 약화 — part 16/MX Evidence Ladder 재검토 필요.
 OCEBM: 1b. 적용: part 2, part 5, part 12, part MX.
 
 ---
