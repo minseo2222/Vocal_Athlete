@@ -1,5 +1,10 @@
 # CITATIONS.md — 신규 인용 키 마스터 인덱스
 
+> ⚠️ **정정 권위표 = `docs/CITATION-KEYMAP.md`**. 메타데이터 오류 8건(저자·연도·
+> 저널·수치)이 CITATION-AUDIT으로 색출됨 — 해당 키는 본문에 ⚠️정정 인라인 보유,
+> 정정 메타데이터는 KEYMAP을 단일 기준으로 사용. 미개별검증 PARTIAL 키의 1저자는
+> R2 전수 재확인 진행. 영어권 single-author-year 키의 1저자명은 재확인 전 신뢰 주의.
+>
 > `docs/research/RESEARCH_COMPILATION.md` 와 `RESEARCH_COMPILATION_2.md` 에서 docs 본문에 통합될 핵심 출처의 표준 인용 키 정의. 각 항목 형식:
 >
 > **[CITE: KEY]** — 저자 (연도). "제목," *저널/출판사*. URL.
