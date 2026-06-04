@@ -11,6 +11,17 @@ import 'path.dart';
 /// P8 — 장르 트랙(CONTEXT 글로서리). 졸업 후 비구속 선택.
 enum Genre { musical, classical, gayo }
 
+/// W2 — 장르 코스 롤아웃 설정 (세션-독립 단일 소스).
+///
+/// 여기 든 장르만 졸업→픽 시 실제 중급 코스로 연결된다(staged rollout, ADR-0010 P10).
+/// 비어 있으면(기본) 모든 장르가 유지 모드 = 미출시. 앱 진입 경로(beginner/fromJson)는
+/// *이 config를 권위로* 읽으므로, 저장된 stale release 상태가 config를 덮어쓰지 못한다
+/// — 즉 출시 진실은 대화·세션·영속화가 아니라 체크인된 이 상수다.
+///
+/// ⚠️ AI 자가 롤아웃 금지: AI는 이 집합을 채우지 않는다. 빈 채로 둔다.
+///    출시는 롤아웃·안전 사인오프 결정이라 사람만 한다.
+const Set<Genre> kReleasedGenres = {};
+
 /// P4 — 캡된 완료의 보고. 전진/캡 동작은 불변, *보고*만 분기.
 enum CompleteOutcome {
   advanced,
@@ -101,7 +112,8 @@ class Progression {
       : _released = {...released};
 
   factory Progression.beginner() =>
-      Progression._(buildPlaceholderManifest(), 0);
+      Progression._(buildPlaceholderManifest(), 0,
+          released: kReleasedGenres);
 
   /// Task 2 — 영속화 직렬화. manifest는 고정 경로라 저장 안 함(복원 시 재생성).
   Map<String, dynamic> toJson() => {
@@ -132,10 +144,9 @@ class Progression {
         genre: _genreByName(j['genre'] as String?),
         maintenance: j['maintenance'] as bool,
         lastCalendarDay: (j['lastCalendarDay'] as int?) ?? 0,
-        released: ((j['released'] as List).cast<String>())
-            .map(_genreByName)
-            .whereType<Genre>()
-            .toSet(),
+        // W2 — 출시 상태는 체크인 config가 권위. 저장된 'released'는 무시
+        // (롤아웃은 전역 결정이라 per-user 영속값이 config를 덮지 못함).
+        released: kReleasedGenres,
       );
 
   /// 테스트용: 임의 매니페스트/위치/상태.
