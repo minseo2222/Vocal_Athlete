@@ -27,7 +27,7 @@
 - **5블록 blocked→variable**(ADR-0006): SCHMIDT_LEE2019(blocked vs random), FITTS_POSNER1967(인지→연합→자동 3단계). *내부 설계 전용, 학습자 비노출*.
 - **SOVT를 워밍업 겸용**: part 8(워밍업·부하관리), TITZE_VERDOLINI2012(부하 저감).
 - **무성 레슨 0 / 유성 마이크로윈**: part 3(발성 개시 조기 도입), 균형 onset 라인.
-- **시각 전용 피드백·저신뢰 비표시**(ADR-0014): MANFREDI2017(스마트폰 음향 한계), NAIR2023PNAS(웨어러블 dose), part 7/11.
+- **시각 전용 피드백·저신뢰 비표시**(ADR-0014): ⚠️R3 근거 교체 — MANFREDI2017(→Grillo2016 오귀속·프레이밍 상충) *폐기*. 정정 근거 = MOBILEVOICE2022(모바일 F0 robust·jitter/shimmer/HNR device bias)·SMARTPHONE_AVQI_META2025 → F0(시각 곡선)는 표시·저신뢰 perturbation 비표시와 정합. + 골전도 착각 차단. JEONG2023(전 NAIR, 웨어러블 dose), part 7/11.
 - **졸업 = 완료 기반(시험 없음)**(ADR-0004): 운동학습 자동화 단계는 *시간 의존*(FITTS_POSNER1967) → 초급은 입문 토대까지.
 
 ## 안전 관련 출처 (상세 판정 = VERIFICATION.md)

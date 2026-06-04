@@ -312,6 +312,16 @@ Uloza, V. et al. (2023). "An iOS-based VoiceScreen application: feasibility for 
 *임상급 스마트폰 앱 검증 파일럿.*
 OCEBM: 4. 적용: part 7, part 11. 태그: `[탐색적 근거]`.
 
+### [CITE: MOBILEVOICE2022]
+(1저자 확인 권장) (2022). "Comparison of Acoustic Voice Features Derived From Mobile Devices and Studio Microphone Recordings," *Journal of Voice*. https://www.sciencedirect.com/science/article/pii/S0892199722003125
+*모바일 기기는 F0·jitter는 스튜디오 마이크와 양호 일치, **HNR·shimmer·그 변종은 device bias·유의차** — F0 외 측정은 device·조건 robustness 제한.*
+OCEBM: 3b. 적용: ADR-0014(R3 신규 근거), part 7·11. (R3 교체분 — MANFREDI/GRILLO 대체)
+
+### [CITE: SMARTPHONE_AVQI_META2025]
+(1저자 확인 권장) (2025). "The Accuracy of Smartphone Recordings for Clinical Voice Diagnostics in Acoustic Voice Quality Assessments: A Systematic Review and Meta-Analysis," *J Voice*(추정). https://pubmed.ncbi.nlm.nih.gov/41037430/
+*스마트폰 임상 음성 진단 정확도 체계적 리뷰·메타분석.*
+OCEBM: 1a(메타). 적용: ADR-0014(R3 신규 근거), part 7. *연도·저널 1저자 확인 권장*.
+
 ### [CITE: MANFREDI2017]
 Manfredi, C. et al. (2017). "Influence of Smartphones and Software on Acoustic Voice Measures," *PMC*. https://pmc.ncbi.nlm.nih.gov/articles/PMC5536725/
 *마이크 정확도 한계 — 컨슈머 앱 정확도 검증.*

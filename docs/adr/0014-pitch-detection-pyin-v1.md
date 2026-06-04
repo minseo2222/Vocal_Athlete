@@ -4,6 +4,16 @@
 
 정직 한계(AI-ANALYSIS.md): F0·sustain만 표시, jitter/shimmer/HNR/AVQI 등 저신뢰 지표 비표시, 시각 전용(청각 자가판정 ❌).
 
+> ⚠️ 근거 교체(CITATION-AUDIT R3, 2026-06): 종전 "컨슈머 마이크 정확도 한계" 근거였던
+> MANFREDI2017은 오귀속(실제 Grillo 2016)에 프레이밍도 상충 → *폐기*. 정정된 실제 근거:
+> 모바일 기기는 **F0는 robust하나 jitter·shimmer·HNR은 device bias·variability 큼**
+> (J Voice 2022 "Comparison of Acoustic Voice Features Derived From Mobile Devices vs Studio
+> Microphone Recordings" S0892199722003125; JSLHR 2024 10.1044/2024_JSLHR-23-00759;
+> 스마트폰 임상 음성 정확도 체계적 리뷰·메타 pubmed 41037430. *1저자는 인용 전 확인 권장*).
+> → 본 ADR의 "F0(시각 곡선)는 표시 / 저신뢰 perturbation·quality 지표 비표시"가 *이 증거와
+> 정합*(F0=robust라 보여줌, jitter/shimmer/HNR=device bias라 숨김). 추가 근거: 골전도 자가청취
+> 착각 차단(시각 전용). 시각전용 결론·설계 불변.
+
 ## Considered Options
 
 - **(채택) pYIN V1 + CREPE V2 경로** — 저지연·무모델·결정적·유지 최소. 비차단 피드백(ADR-0002)이라 완벽 F0가 V1 게이트 아님
