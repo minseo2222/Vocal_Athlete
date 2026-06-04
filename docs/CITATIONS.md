@@ -463,6 +463,7 @@ OCEBM: 4. 적용: part 8, part 9-KR.
 ### [CITE: LEE2017CGU]
 Lee, C. N. (2017). "Adapting the IPA Systems of Korean Diction to Classical Vocal Method," CGU 박사논문. https://scholarship.claremont.edu/cgu_etd/689/
 *한국어 IPA × 클래식 성악 직접 다룬 박사논문 — 기존 docs 명시 갭 보완.*
+⚠️정정(CITATION-AUDIT V3): 저자 Clara N. Lee·CGU ETD 689 실재하나 **연도 2020**(2017 오기). 키→LEE2020CGU 권장. 내용 일치.
 OCEBM: 4. 적용: part 6-KR, part 9-KR.
 
 ### [CITE: LABOUFF2008]

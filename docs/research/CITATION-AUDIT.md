@@ -46,6 +46,22 @@
 
 ---
 
+## §E 한국 1차 + §F 딕션 + §G K-pop — V3 (진행 중)
+
+| 키 | 등급 | 근거 |
+|---|---|---|
+| **KOR_KIM2025** | **VERIFIED** | 김형미 (2025), 한국산학기술학회논문지 26(10):756-763, KCI(ART003258894). 성대접지 3분류(이상/저접지/과접지)·SOVTE 일치. IC-01·C10 근거 견고 |
+| **LEE2017CGU** | **PARTIAL ⚠️정정(연도)** | Clara N. Lee, "Adapting the IPA Systems of Korean Diction to Classical Vocal Method," CGU ETD 689 — 실재. 단 **연도 2020**(2017 아님). 저자·기관·주제 일치. IM-09·GY-07·CL 딕션 근거 |
+| **JVOICE2025KPOP** | **VERIFIED** | J Voice 2025, S0892199725004874. K-pop 젠더 중립 청지각, 청자 프로필별. IM-02·GY-04 근거 견고 |
+| **KOR_LEE_HAN2022** | **VERIFIED** | 이송희·한경훈, 예술교육연구 2022 20(4), KCI ART002917940. n=10, EVT 트웽이 파사지오 개선에 유의미. IM-03 근거 견고 |
+| §E 한국 학술 잔여(KOR_* ~22키) | PARTIAL(미개별검증) | KCI/DBpia/RISS 한국어·다수 유료. 안전 비관여분은 PARTIAL 표기 |
+| §G K-pop 산업·뉴스(KCONTENT_VOCAL·KH_*·ONEW2014·SEEYA2025·KOREABOO 등) | PARTIAL(출처유형=산업/뉴스) | `[K-pop 산업관행]` 태그 — 동료심사 아님이 *이미 명시*. 손상 사례(ONEW/Seeya)는 뉴스 신뢰도 한계 표기, 가요 안전은 학술(SIELSKA2018 등)로 뒷받침 |
+
+### V3 종합 (§E·F·G)
+**대조 패턴 — 한국 학술 1차가 영어권보다 신뢰성 높음**: KOR_KIM2025·JVOICE2025KPOP·KOR_LEE_HAN2022 = VERIFIED(서지·내용 정확), LEE2017CGU = 연도만 오기(2020). §A~D에서 만연한 *영어권 저자 오기*(Rotsides/Adriaansen/Jelinger/Jeong/Grillo)가 한국 출처엔 없음 — 영어 인용이 AI 생성 시 저자명 환각이 집중된 것으로 추정. §E 잔여 ~22키·§G 뉴스는 PARTIAL(미개별/출처유형). 안전(가요) 외삽 근거는 학술로 뒷받침되어 영향 없음.
+
+---
+
 ## §B 방법론 RCT/임상 (Wave 2) — V1
 
 | 키 | 등급 | 근거 |
