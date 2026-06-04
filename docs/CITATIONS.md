@@ -176,11 +176,13 @@ OCEBM: 5. 적용: part 12.
 ### [CITE: VALA2021]
 Vala, B. (2021). "Mixed Voice for the Bel Canto and Musical Theatre Singer," UNT 박사논문. https://digital.library.unt.edu/ark:/67531/metadc1833442/m2/1/high_res_d/VALA-DISSERTATION-2021.pdf
 *벨칸토 vs MT mix 비교 박사논문.*
+⚠️정정(R2a): 1저자 **Matthew Vala**(B.→M.). 제목 "Training the Hybrid Singer: Mixed Voice…". UNT DMA 2021 실재.
 OCEBM: 4. 적용: part 5, part 12.
 
 ### [CITE: SELAMTZIS2019]
 Selamtzis, A. (2019). "Acoustic and EGG analyses of CVT vocal modes," KTH 박사논문. https://www.diva-portal.org/smash/get/diva2:1366879/FULLTEXT01.pdf
 *KTH 박사논문, CVT EGG/음향 모드 실증 평가.*
+⚠️정정(R2a·UNVERIFIABLE): 2019 KTH 학위논문(diva2:1366879) 미확인. 확인되는 건 *Selamtzis & Ternström ~2014 "Acoustical characteristics of vocal modes in singing"* — 연도·유형 의심. 사용 전 재확인 필요(믹스/CVT 보조, 안전 무관).
 OCEBM: 4. 적용: part 5, part 13, part MX.
 
 ### [CITE: ANDRADE2024]

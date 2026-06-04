@@ -146,6 +146,20 @@
 
 ---
 
+## R2a 재확인 §A·B 잔여 (remediation)
+
+| 키 | 등급 | 근거 |
+|---|---|---|
+| **VALA2021** | **PARTIAL ⚠️정정(이니셜)** | 실재(UNT DMA 2021, metadc1833442). 단 1저자 **Matthew Vala**(B.→M.). 제목 "Training the Hybrid Singer: Mixed Voice…". 믹스 근거(IM-01/GY-02) — 커리큘럼은 믹스=합의없음 처리라 영향 미미 |
+| **SELAMTZIS2019** | **UNVERIFIABLE ⚠️** | 2019 KTH 학위논문(diva2:1366879) 미확인. 확인되는 Selamtzis CVT-모드 연구는 *Selamtzis & Ternström ~2014 "Acoustical characteristics of vocal modes in singing"*. 연도·유형 의심 → 믹스/CVT 보조 근거, 안전 무관. 사용 전 재확인 필요 |
+| §A 배경 역학(NAYAK2025·SCHWARZ2025·OHLSSON2016·BEHLAU2021·DEVADAS2021A/B·PARK_BEHLAU2018·DIETRICH2022·SALTURK2017·GUNJAWATE2024·PAWELCZYK2022·TOLES2025·GALINDO2023) | PARTIAL(배경·미개별재확인) | **커리큘럼 카드 비인용**(part 8/9 배경). 안전 *방향*은 V6서 확정(BRETL/PESTANA/belt). 영어권 single-author-year라 1저자 주의(KEYMAP 패턴). 개별 웹대조 미실시 — *정직 표기*(fake verify 금지) |
+| §B 방법 보조(MCGLASHAN2025·CVT4MTD·OUATTARA2017·BERARDI2022·STEINHAUER2024·PERCEIVE2025·MCCLELLAN2011·WICKS2019·BARTLETT2020·NAISMITH2022) | PARTIAL(보조·미개별재확인) | belt 핵심 앵커(MCGLASHAN2017)는 V1 VERIFIED. 나머지는 방법론 비교·비판(저위험)·part12/13. 개별 재확인 미실시 — 1저자 주의 |
+
+### R2a 정직 한계 표기
+§A·B 잔여 ~25키 중 **커리큘럼 인용·근거 핵심(VALA·SELAMTZIS)만 개별 재확인**. 순수 배경 역학·방법 비교 키는 *커리큘럼 카드에 비인용*이라 PARTIAL(미개별재확인)로 **명시적 비검증** 표기 — 안전·핵심 결정은 이미 VERIFIED 앵커(BRETL·PESTANA·MCGLASHAN2017·STEMPLE·ROUBEAU)로 뒷받침되어 영향 없음. (전수 fake-verify 대신 정직 비검증.)
+
+---
+
 ## §B 방법론 RCT/임상 (Wave 2) — V1
 
 | 키 | 등급 | 근거 |
