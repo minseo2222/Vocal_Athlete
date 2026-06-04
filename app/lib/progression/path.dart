@@ -48,11 +48,45 @@ class _Block {
 
 const int pathLength = 48;
 
-/// 결정적 플레이스홀더 PathManifest 생성(실제 배선·내용은 C2/C1).
-List<PathSlot> buildPlaceholderManifest() {
+// ===== 중급 코어 + 장르 분기 (I2) — D1 레슨 수 매핑 반영 =====
+// 코어(블록1·2) + 분기(블록3·4). 변주: 코어 light→variable, 분기 variable(ADR-0006).
+// 표준샘플 SOP(IC-12)는 각 블록 카드열 말미에 두어 주기적으로 등장(D2).
+
+const _coreBlocks = <_Block>[
+  _Block(1, 16, ['IC-01', 'IC-02', 'IC-03', 'IC-04', 'IC-05', 'IC-12'],
+      0.20, VariationLevel.lightVariable),
+  _Block(2, 32, ['IC-06', 'IC-07', 'IC-08', 'IC-09', 'IC-10', 'IC-11', 'IC-12'],
+      0.15, VariationLevel.variable),
+];
+
+const _musicalBlocks = <_Block>[
+  _Block(3, 48, ['IM-01', 'IM-02', 'IM-03', 'IM-04', 'IM-05', 'IC-12'],
+      0.10, VariationLevel.variable),
+  _Block(4, 74,
+      ['IM-06', 'IM-07', 'IM-08', 'IM-09', 'IM-10', 'IM-11', 'IM-12', 'IC-12'],
+      0.10, VariationLevel.variable),
+];
+
+const _classicalBlocks = <_Block>[
+  _Block(3, 47, ['CL-01', 'CL-02', 'CL-03', 'CL-04', 'IC-12'],
+      0.10, VariationLevel.variable),
+  _Block(4, 68, ['CL-05', 'CL-06', 'CL-07', 'CL-08', 'CL-09', 'IC-12'],
+      0.10, VariationLevel.variable),
+];
+
+const _gayoBlocks = <_Block>[
+  _Block(3, 51,
+      ['GY-01', 'GY-02', 'GY-03', 'GY-04', 'GY-05', 'GY-06', 'IC-12'],
+      0.10, VariationLevel.variable),
+  _Block(4, 64, ['GY-07', 'GY-08', 'GY-09', 'IC-12'],
+      0.10, VariationLevel.variable),
+];
+
+/// 블록열 → PathSlot 리스트(결정적 modulo 확장).
+List<PathSlot> _expand(List<_Block> blocks) {
   final slots = <PathSlot>[];
   var prevEnd = 0;
-  for (final b in _blocks) {
+  for (final b in blocks) {
     for (var lesson = prevEnd + 1; lesson <= b.endSlot; lesson++) {
       final within = lesson - prevEnd - 1;
       slots.add(PathSlot(
@@ -67,3 +101,14 @@ List<PathSlot> buildPlaceholderManifest() {
   }
   return slots;
 }
+
+/// 결정적 플레이스홀더 PathManifest 생성(초급 5블록).
+List<PathSlot> buildPlaceholderManifest() => _expand(_blocks);
+
+/// 중급 코어 manifest(블록1·2, genre-neutral). 분기 진입 전 공유.
+List<PathSlot> buildCoreManifest() => _expand(_coreBlocks);
+
+/// 장르 코스 = 코어(블록1·2) + 분기(블록3·4). I3의 genre→빌더 매핑이 사용.
+List<PathSlot> buildMusicalManifest() => _expand([..._coreBlocks, ..._musicalBlocks]);
+List<PathSlot> buildClassicalManifest() => _expand([..._coreBlocks, ..._classicalBlocks]);
+List<PathSlot> buildGayoManifest() => _expand([..._coreBlocks, ..._gayoBlocks]);
