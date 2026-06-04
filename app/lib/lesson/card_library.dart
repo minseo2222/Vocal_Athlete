@@ -712,6 +712,13 @@ const Map<String, Card> kCardLibrary = {
   ),
 };
 
+/// I5 — 안전 게이트 대상(safetyReview:pending) 카드 ID 집합.
+/// 미사인오프(safetyApproved=false) 시 코스 manifest에서 제외(belt/cover 등 비활성).
+Set<String> safetyGatedCardIds() => {
+      for (final e in kCardLibrary.entries)
+        if (e.value.safetyReview == SafetyReview.pending) e.key,
+    };
+
 /// PathSlot → Card 해석. V1 = 라이브러리 lookup.
 /// 카드 미등록 시 ArgumentError(전수 가드 테스트 C2.3가 강제).
 Card resolveCard(PathSlot slot) {

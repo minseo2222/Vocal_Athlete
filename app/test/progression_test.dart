@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:vocal_athlete/lesson/card_library.dart';
 import 'package:vocal_athlete/progression/path.dart';
 import 'package:vocal_athlete/progression/progression_state.dart';
 
@@ -399,11 +400,11 @@ void main() {
   test('I3.1 released musical → course manifest loaded (total 74, index 0)',
       () {
     final p = Progression.from(buildPlaceholderManifest(),
-        currentIndex: 5, graduated: true);
+        currentIndex: 5, graduated: true, safetyApproved: true);
     expect(p.total, 48); // 초급
     p.toggleRelease(Genre.musical);
     p.chooseGenre(Genre.musical);
-    expect(p.total, 74); // 뮤지컬 코스(코어32+분기42)
+    expect(p.total, 74); // 뮤지컬 코스(코어32+분기42), 사인오프 시 전체
     expect(p.currentIndex, 0); // 새 코스 1과
     expect(p.maintenance, isFalse);
     expect(p.todaysLesson.cardId, startsWith('IC-')); // 코어부터
@@ -415,7 +416,8 @@ void main() {
       (Genre.classical, 68),
       (Genre.gayo, 64),
     ]) {
-      final p = Progression.from(buildPlaceholderManifest(), graduated: true);
+      final p = Progression.from(buildPlaceholderManifest(),
+          graduated: true, safetyApproved: true);
       p.toggleRelease(g);
       p.chooseGenre(g);
       expect(p.total, len, reason: '$g course length');
@@ -446,6 +448,47 @@ void main() {
     expect(p.graduated, isTrue);
     expect(p.maintenance, isTrue); // 고급 미생성 → 유지 모드
     expect(p.genre, Genre.gayo); // 장르 유지
+  });
+
+  test('I5.1 safetyApproved=false → gated cards excluded from course', () {
+    final locked = Progression.from(buildPlaceholderManifest(),
+        graduated: true); // safetyApproved 기본 false
+    locked.toggleRelease(Genre.gayo);
+    locked.chooseGenre(Genre.gayo);
+    final approved = Progression.from(buildPlaceholderManifest(),
+        graduated: true, safetyApproved: true);
+    approved.toggleRelease(Genre.gayo);
+    approved.chooseGenre(Genre.gayo);
+    // 가요 분기 GY-04/05/06/09 게이트 → 잠금 코스가 더 짧음
+    expect(approved.total, 64); // 사인오프 시 전체
+    expect(locked.total, lessThan(approved.total));
+    // 잠금 코스를 순회해도 게이트 카드(pending)는 등장하지 않음
+    final gated = safetyGatedCardIds();
+    final seen = <String>{};
+    while (true) {
+      seen.add(locked.todaysLesson.cardId);
+      if (locked.atEnd) break;
+      locked.completeLesson();
+      locked.advanceDay();
+    }
+    expect(seen.intersection(gated), isEmpty,
+        reason: '잠금 코스에 게이트 카드 등장: ${seen.intersection(gated)}');
+  });
+
+  test('I5.2 safetyApproved=true → gated cards present in course', () {
+    final p = Progression.from(buildPlaceholderManifest(),
+        graduated: true, safetyApproved: true);
+    p.toggleRelease(Genre.gayo);
+    p.chooseGenre(Genre.gayo);
+    final gated = safetyGatedCardIds();
+    final seen = <String>{};
+    while (true) {
+      seen.add(p.todaysLesson.cardId);
+      if (p.atEnd) break;
+      p.completeLesson();
+      p.advanceDay();
+    }
+    expect(seen.intersection(gated), isNotEmpty); // belt/트웽/런 등장
   });
 
   test('I4.2 beginner graduation (genre 미선택) → NOT maintenance (picker로)',

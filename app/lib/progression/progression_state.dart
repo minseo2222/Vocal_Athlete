@@ -4,6 +4,7 @@
 /// progression.py 검증 패턴의 실코드 거처.
 library;
 
+import '../lesson/card_library.dart' show safetyGatedCardIds;
 import 'outcome_resolver.dart';
 import 'path.dart';
 
@@ -47,6 +48,9 @@ class Progression {
   bool _maintenance; // P9 — 유지 모드(자유 연습 모드와 별개)
   final Set<Genre> _released; // P10 — 출시된 장르 중급(V1 기본 빔=스텁)
   int _lastCalendarDay; // Task3 — 마지막 동기화한 실 날짜(epoch day, 0=미설정)
+  /// I5 — 안전 사인오프 여부. false(기본)면 pending 카드를 코스에서 제외(게이트).
+  /// HITL-SIGNOFF 완료 시에만 true(자가 승인 ❌). 출시 빌드 기본=false.
+  final bool safetyApproved;
 
   /// Task 3 — 실 캘린더 동기화. todayEpochDay = 1970-01-01부터의 일수.
   /// 날짜가 흐른 만큼 advanceDay()를 호출해 캡 해제·gap을 기존 로직으로 처리.
@@ -92,6 +96,7 @@ class Progression {
       this._genre,
       this._maintenance = false,
       this._lastCalendarDay = 0,
+      this.safetyApproved = false,
       Set<Genre> released = const {}})
       : _released = {...released};
 
@@ -142,13 +147,15 @@ class Progression {
     bool graduated = false,
     int transitionDay = 0,
     int lastActiveDay = 0,
+    bool safetyApproved = false,
   }) =>
       Progression._(manifest, currentIndex,
           didToday: didToday,
           day: day,
           graduated: graduated,
           transitionDay: transitionDay,
-          lastActiveDay: lastActiveDay);
+          lastActiveDay: lastActiveDay,
+          safetyApproved: safetyApproved);
 
   int get currentIndex => _currentIndex;
   int get total => _manifest.length;
@@ -240,8 +247,24 @@ class Progression {
 
   /// I3 — 코스 진입: 선택 장르의 코어→분기 manifest 로드 + 새 코스 시작.
   /// 완료 기반 진행·1일1레슨 캡은 그대로(새 manifest 위에서 동일 규칙).
+  /// I5 — safetyApproved=false면 안전 게이트(pending) 카드 슬롯 제외 후 재인덱싱.
   void _enterCourse(Genre g) {
-    _manifest = _courseManifest(g);
+    var course = _courseManifest(g);
+    if (!safetyApproved) {
+      final gated = safetyGatedCardIds();
+      final kept = course.where((s) => !gated.contains(s.cardId)).toList();
+      course = [
+        for (var i = 0; i < kept.length; i++)
+          PathSlot(
+            index: i,
+            cardId: kept[i].cardId,
+            block: kept[i].block,
+            bodyVoicedRatio: kept[i].bodyVoicedRatio,
+            variationLevel: kept[i].variationLevel,
+          ),
+      ];
+    }
+    _manifest = course;
     _currentIndex = 0; // 새 코스 1과부터
     _maintenance = false;
     _graduated = false;
