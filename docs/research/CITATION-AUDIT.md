@@ -178,6 +178,19 @@
 
 ---
 
+## R5 약근거 보강 (날조 금지)
+
+| claim | 보강 시도 결과 | 등급 처리 |
+|---|---|---|
+| belt 음향·생리 | 새 *효능 RCT* 없음. 단 *특성화*는 MCGLASHAN2017(EGG/strobo) + Bourne/Sundberg(belt vs neutral 호흡·음향, 고 성문하압) + voice efficiency FEM/EGG(LEHOUX2024, belting=고효율) 다중 corroboration | **`[탐색적]` 유지**(효능 RCT 부재). 특성화 견고함만 보강 명시 |
+| 트웽 = AES 협착 | Jelinger2024 MRI(VERIFIED, V2) | 이미 견고(4, 영상). 보강 불요 |
+| 믹스 | *진짜 미해결*(과학 합의 없음) — VALA PARTIAL·SELAMTZIS UNVERIFIABLE | **합의없음 유지**(날조 ❌). 커리큘럼이 이미 다중라벨로 처리 |
+| VFE·SOVT | STEMPLE(VERIFIED RCT)·ANDRADE(VERIFIED RCT)·Adriaansen2025(RCT) | 이미 최강. 보강 불요 |
+
+**R5 결론**: 등급 상향 0(belt 효능 RCT 미발견 → `[탐색적]` 정직 유지). belt 생리 특성화는 다중 출처로 corroboration 보강. 믹스는 미해결로 두고 *출처 날조 0*. VFE/SOVT는 이미 RCT. → 날조 없이 정직 보강·등급 유지.
+
+---
+
 ## §B 방법론 RCT/임상 (Wave 2) — V1
 
 | 키 | 등급 | 근거 |
