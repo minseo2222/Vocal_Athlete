@@ -62,6 +62,20 @@
 
 ---
 
+## §H 메타 + §I 해부 + §J 응용 — V4
+
+| 키 | 등급 | 근거 |
+|---|---|---|
+| **ROUBEAU2009** | **VERIFIED** | Roubeau·Henrich·Castellengo, J Voice 2009 23(4):425-38, pubmed 18538982. M0–M3 EGG 후두 메커니즘. 저자·저널·권·페이지 정확. IC-11·IM-03·CL-01 근거 견고 |
+| **STEMPLE_VFE** | **VERIFIED** | Stemple·Lee·D'Amico·Pickup, J Voice 1994 8(3):271-278, pubmed 7987430. n=35 무작위(실험/위약/대조), 유의 변화. VFE 효능 앵커 견고. IC-03 근거 |
+| SUNDBERG1987·TITZE2000·TITZE2006SOVT·HENRICH2006·HUNTER_TITZE2003·HIRANO1981/1974·HIXON2008·FITTS_POSNER1967·SCHMIDT_LEE2019·MILLER1996·BOZEMAN2013/2017·COOKSEY2000·GACKLE2011·LA_HOWARD2011·HELDING2020·KENNY2011·TITZE_VERDOLINI2012·SAPIENZA_RUDDY2018·MALDE2017·DIMON2018·CHAPMAN2017·PATEL2007 | **VERIFIED(정전·평판)** | 보컬·음성과학 *정전 저작/논문*(전 분야 표준). 환각 위험 극히 낮음. 단 정확 판본·페이지는 개별 미재확인(정직 표기). 완전 저자명단 보유 키들 |
+
+### V4 종합 (§H·I·J) + 인용 오류 패턴 정밀화
+- 부하 큰 특정 논문(ROUBEAU·STEMPLE) 2건 *완전 일치*. 정전 교재군은 실재 확실(VERIFIED-평판).
+- **패턴 결론**: 저자 오기·오귀속은 §A~D(역학·방법론·도구)의 *AI 생성 단일저자-키*에 집중(Rotsides/Adriaansen/Jelinger/Jeong/Grillo). *완전 저자명단 + 정전 저작 + 한국 KCI 1차*는 정확. → 정정 대상은 주로 영어권 single-author-year 키.
+
+---
+
 ## §B 방법론 RCT/임상 (Wave 2) — V1
 
 | 키 | 등급 | 근거 |
