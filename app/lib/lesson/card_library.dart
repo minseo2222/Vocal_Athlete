@@ -6,6 +6,7 @@ library;
 
 import 'card.dart';
 import '../progression/path.dart';
+import '../safety/safety_signoff.dart';
 
 const Map<String, Card> kCardLibrary = {
   'CARD-01': Card(
@@ -714,9 +715,17 @@ const Map<String, Card> kCardLibrary = {
 
 /// I5 — 안전 게이트 대상(safetyReview:pending) 카드 ID 집합.
 /// 미사인오프(safetyApproved=false) 시 코스 manifest에서 제외(belt/cover 등 비활성).
-Set<String> safetyGatedCardIds() => {
+/// W1 — pending 카드 중 *유효 사인오프가 없는* 것의 id 집합(=여전히 잠긴 카드).
+/// signoff 인자 생략 시 체크인된 [kSafetySignoff](기본 빈)을 사용 → 빈 레코드면
+/// 모든 pending 카드 잠금(하위 호환). 사람이 레코드에 항목을 추가하면 그 카드만 해제.
+Set<String> safetyGatedCardIds([
+  Map<String, SafetySignoff> signoff = kSafetySignoff,
+]) =>
+    {
       for (final e in kCardLibrary.entries)
-        if (e.value.safetyReview == SafetyReview.pending) e.key,
+        if (e.value.safetyReview == SafetyReview.pending &&
+            !(signoff[e.key]?.isValid ?? false))
+          e.key,
     };
 
 /// PathSlot → Card 해석. V1 = 라이브러리 lookup.
