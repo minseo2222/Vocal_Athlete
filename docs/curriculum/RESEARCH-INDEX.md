@@ -82,7 +82,9 @@
 - **임상·치료 전용 프로토콜**(LSVT 등 의학감독 필요): 교육용 차용 드릴만 허용, 치료 프로토콜 자체는 제외(ADR-0001 의료도구 아님).
 - **무대공포 모듈·학술 정당화 온보딩·강사/임상 동반 트랙**: ADR-0001/0002로 제거됨 — 되살리지 않음.
 
-## 4. 작업 순서 (의존)
-A(본 문서) → B 초급 → C 중급코어 → D 중급뮤지컬 → (E 성악 / F 가요, 신규=범위 확인).
+## 4. 작업 순서 (의존) — 진행 현황
+A ✅ → B 초급 ✅ → C 중급코어 ✅ → D 중급뮤지컬 ✅(belt HITL) → E 성악 ✅(cover/messa HITL) → F 가요 ✅(belt/트웽/런 HITL, k-keok 제외).
+산출물: 각 단위 `docs/curriculum/<unit>/{CURRICULUM, cards, SOURCES, VERIFICATION}`
+(성악·가요는 CONTEXT 포함 신규). 모든 안전 S등급 항목은 VERIFICATION에 `HITL 사인오프 필요` 플래그.
 각 단위 = 수집→웹보강→교차검증(적대적)→정합→집필(CURRICULUM/cards/SOURCES/VERIFICATION)→자기비평→확정.
 안전 플래그 항목은 VERIFICATION.md에 `HITL 사인오프 필요`로 표시하고 자가 확정하지 않는다.
