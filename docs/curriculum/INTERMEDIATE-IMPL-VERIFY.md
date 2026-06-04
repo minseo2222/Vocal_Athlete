@@ -24,6 +24,10 @@ rollout). 즉 현재 앱에서 졸업→장르픽 = 유지 모드(코스 미연�
 > 이 두 스위치 분리는 *재설계가 아니라 기존 ADR-0010 P10 + I5 안전 게이트*. 앱 전역
 > 기본 release/approve 결정은 롤아웃·안전 사인오프 사안이라 본 구현 범위 밖(자가 결정 ❌).
 
+> **세션-독립 검증(W1~W5)**: 두 스위치의 진실은 이제 체크인 상수(`kReleasedGenres`·
+> `kSafetySignoff`)에 박혀 있고, `docs/verification/`의 단일 소스·하네스가 정합을
+> 강제한다. 신규 세션 재확인: `docs/verification/NEW-SESSION-REVERIFY.md`.
+
 ## 수동 검증 (개발 빌드, 코스 연결 시)
 release 플래그를 켠 개발 빌드 기준:
 1. 경고 → 확인 → 홈 → 오늘 시작 → 초급 레슨 진행.
