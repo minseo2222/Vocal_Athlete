@@ -1,6 +1,6 @@
 {
   "schema": "vocal-athlete/verification-status@1",
-  "updated": "2026-06-04",
+  "updated": "2026-06-05",
   "note": "인간 게이트 항목의 검증 상태 단일 소스(머신리더블). W5 하네스(flutter test)가 이 파일과 라이브 코드 상수의 정합을 강제한다. 임의로 status/목록을 올려도 코드가 뒷받침 못 하면 테스트 실패.",
   "statusEnum": ["VERIFIED", "UNVERIFIED", "BLOCKED", "OUT_OF_SCOPE"],
   "items": {
@@ -14,7 +14,9 @@
         "GY-04", "GY-05", "GY-06", "GY-09"
       ],
       "status": "UNVERIFIED",
-      "note": "빈 사인오프 레코드 = 전 안전 카드(belt/트웽/cover/messa/런) 잠금. 발성 전문가 사인오프 전까지 UNVERIFIED. AI 자가 승인 ❌."
+      "note": "빈 사인오프 레코드 = 전 안전 카드(belt/트웽/cover/messa/런) 잠금. 발성 전문가 사인오프 전까지 UNVERIFIED. AI 자가 승인 ❌.",
+      "evidenceInput": "docs/verification/SAFETY-EVIDENCE-DOSSIER.md (독립 리서치 2종 교차검증, 2026-06)",
+      "prerequisite": "전문가 ✅ + 강제 캡 구현(docs/verification/backlog-safety-enforcement.md, 이슈 #1) — 둘 다 충족 후에만 사인오프 기입"
     },
     "rollout": {
       "decision": "human:rollout",
