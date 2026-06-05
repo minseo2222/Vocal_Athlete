@@ -16,6 +16,10 @@
 
 기본은 전부 잠금/미검증 = **안전 기본값**. AI는 어느 것도 자가 결정하지 않는다.
 
+> **안전 사인오프 입력 패킷:** [SAFETY-EVIDENCE-DOSSIER.md](SAFETY-EVIDENCE-DOSSIER.md)
+> (독립 리서치 2종 교차검증, 2026-06). 사인오프 = 전문가 ✅ **+** 강제 캡 구현
+> ([backlog-safety-enforcement.md](backlog-safety-enforcement.md), 이슈 #1) 둘 다 충족 후.
+
 ## 세션-독립성이 보장되는 방식
 
 1. **진실의 위치 = git에 박힌 산출물**: 사인오프=`kSafetySignoff`, 롤아웃=`kReleasedGenres`,
