@@ -848,3 +848,23 @@ OCEBM: 5 (페다고지 정전). 적용: part 12, part 13, part 14 *Appoggio·Pas
 - [ ] 본 문서의 모든 KEY가 적어도 하나의 docs 파일에 등장하는가? (역방향 grep)
 - [ ] OCEBM 등급 표기가 일관된가?
 - [ ] 한국어 출처가 한글로 표기되었는가?
+
+---
+
+## L. 교차검증 도시에 신규 키 (2026-06, 독립 리서치 2종)
+
+> 출처: [SAFETY-EVIDENCE-DOSSIER.md](verification/SAFETY-EVIDENCE-DOSSIER.md) §6.
+> 아래 3건은 본 작업에서 **웹으로 핵심 주장을 독립 재확인(✅)** 함. 나머지 도시에 출처는
+> 리서치 제공(미재확인, ○)이며 도시에 §6 표에 귀속만 — 본 인덱스엔 미등재(재확인 후 승격).
+
+### [CITE: BOURNE2012] ✅재확인(웹 2026-06)
+Bourne, T., & Garnier, M. (2012). "Physiological and acoustic characteristics of the female music theater voice," *JASA* 131(2):1586–1594. https://doi.org/10.1121/1.3675010
+belt는 R1을 2f0에 **C5까지** 동조(legit보다 고SPL) / OCEBM 4·GRADE 낮음 / 적용: belt 음역 상한(IM-05·GY-05), 도시에.
+
+### [CITE: ZUIM2023] ✅재확인(웹 2026-06)
+Zuim, A. F., Stewart, C. F., & Titze, I. R. (2023). "Vocal Demands of Musical Theatre Rehearsals: A Dosimetry Study," *Journal of Voice*. PMID 37951817. https://doi.org/10.1016/j.jvoice.2023.09.020
+**"안전 baseline vocal dose 미확립"**(가수) — 모든 dose 임계는 보수적 추정 / OCEBM 4 / 적용: 주간 캡 권고, 도시에.
+
+### [CITE: ANDRADE2000] ✅재확인(웹 2026-06)
+Andrade, D. F., et al. (2000). "The frequency of hard glottal attacks in patients with muscle tension dysphonia, unilateral benign masses and bilateral benign masses," *Journal of Voice*. https://doi.org/10.1016/S0892-1997(00)80032-6
+HGA 빈도 MTD·양성병변군 > 건강대조군(147명) → k-keok 영구 제외 지지 / OCEBM 4 / 적용: 가요 k-keok 제외, 도시에.

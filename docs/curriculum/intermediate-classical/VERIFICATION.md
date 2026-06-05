@@ -1,6 +1,11 @@
 # 중급 성악 분기 — 검증 로그 (VERIFICATION)
 
 > 6단계 루프 산출물. `[HITL]` 안전 항목(고음·지속) 포함 — 해당 카드 자가 확정 안 함.
+>
+> **교차검증(독립 리서치 2종, 2026-06 — [도시에](../../verification/SAFETY-EVIDENCE-DOSSIER.md)):**
+> cover 진입(CL-01)·messa 기초(CL-08) = 조건부 가능(둘 다 *성악 트랙을 가장 출시 가능*으로
+> 평가) / full cover·고음 풀 messa = 미출시 유지. 사인오프 선결조건 = 전문가 ✅ + 강제 캡·
+> swelling check·다중 stop 구현. messa는 중음·저강도 한정 시 untrained도 비교적 안전(○Kirsch 2025).
 
 ## 1. 교차검증 (claim별 반박 시도)
 
