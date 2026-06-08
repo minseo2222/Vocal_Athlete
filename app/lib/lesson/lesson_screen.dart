@@ -153,7 +153,7 @@ class _LessonScreenState extends State<LessonScreen> {
               key: const Key('lesson-sheet'),
               decoration: const BoxDecoration(
                 color: AppColors.surface,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(AppRadii.sheet)),
               ),
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
               child: Column(
@@ -179,7 +179,7 @@ class _LessonScreenState extends State<LessonScreen> {
                         InkWell(
                           key: const Key('skip-cooldown'),
                           onTap: widget.onComplete,
-                          borderRadius: BorderRadius.circular(999),
+                          borderRadius: BorderRadius.circular(AppRadii.pill),
                           child: const _Pill(text: '쿨다운 건너뛰기'),
                         ),
                     ],
@@ -304,7 +304,7 @@ class _Pill extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
           color: AppColors.surfaceAlt,
-          borderRadius: BorderRadius.circular(999),
+          borderRadius: BorderRadius.circular(AppRadii.pill),
         ),
         child: Text(text,
             style: const TextStyle(color: Colors.white54, fontSize: 12)),

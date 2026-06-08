@@ -15,9 +15,13 @@ class AppColors {
   static const textHi = Colors.white;        // 강조 텍스트
   static const textMid = Colors.white60;     // 보조 텍스트
   static const textLow = Colors.white38;     // 흐림 텍스트
+  static const doneSurface = Color(0xFF1D3A2C); // 완료 노드 채움(진한 초록)
+  static const warn = Color(0xFFFFD166);        // 경고/넛지 노랑
 }
 
 class AppRadii {
   const AppRadii._();
   static const card = 12.0;
+  static const sheet = 22.0;
+  static const pill = 999.0;
 }

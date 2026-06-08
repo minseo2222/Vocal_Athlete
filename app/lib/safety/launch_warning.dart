@@ -5,6 +5,8 @@ library;
 
 import 'package:flutter/material.dart';
 
+import '../theme/app_theme.dart';
+
 /// 캐노니컬 문구(CONTEXT.md `앱 실행 경고` · ADR-0001).
 const List<String> kHardStopSigns = ['통증', '어지럼', '호흡곤란', '각혈'];
 const String kAgeLine = '만 18세 이상·변성기 종료 대상';
@@ -21,7 +23,7 @@ class LaunchWarning extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0E0F13),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),

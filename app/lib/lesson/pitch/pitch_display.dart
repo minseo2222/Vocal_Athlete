@@ -122,7 +122,7 @@ class _PitchDisplayState extends State<PitchDisplay> {
                       _kNudgeCue[cls.direction] ?? '',
                       key: const Key('retry-nudge'),
                       style: const TextStyle(
-                          color: Color(0xFFFFD166), fontSize: 12),
+                          color: AppColors.warn, fontSize: 12),
                     ),
                     const SizedBox(width: 6),
                     InkWell(

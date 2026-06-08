@@ -12,6 +12,7 @@ import 'lesson/pitch/recording_pitch_source.dart';
 import 'progression/progression_state.dart';
 import 'progression/progression_store.dart';
 import 'safety/launch_warning.dart';
+import 'theme/app_theme.dart';
 
 void main() => runApp(DebugApp(
     pitchSource: RecordingPitchSource(), store: ProgressionStore()));
@@ -160,7 +161,7 @@ class _AppShellState extends State<_AppShell> {
     final p = _p;
     if (p == null) {
       // store load 대기 — 짧은 빈 화면.
-      return const Scaffold(backgroundColor: Color(0xFF0E0F13));
+      return const Scaffold(backgroundColor: AppColors.bg);
     }
     if (!_ack) {
       return LaunchWarning(onConfirm: _onAck);

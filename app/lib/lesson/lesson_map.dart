@@ -97,7 +97,7 @@ class _Node extends StatelessWidget {
     final ({Color bg, Color border, String glyph, Color glyphColor, Key key})
         v = switch (state) {
       _NodeState.done => (
-          bg: const Color(0xFF1D3A2C),
+          bg: AppColors.doneSurface,
           border: AppColors.done,
           glyph: '✓',
           glyphColor: AppColors.done,
