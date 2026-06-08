@@ -22,4 +22,19 @@ void main() {
     expect(find.byKey(const Key('node-done')), findsNWidgets(3));
     expect(find.byKey(const Key('node-today')), findsOneWidget);
   });
+
+  testWidgets('LM2b currentIndex 0 → 완료 0, 오늘 1', (tester) async {
+    final p = Progression.from(buildPlaceholderManifest(), currentIndex: 0);
+    await tester.pumpWidget(host(p));
+    expect(find.byKey(const Key('node-done')), findsNothing);
+    expect(find.byKey(const Key('node-today')), findsOneWidget);
+  });
+
+  testWidgets('LM2c 마지막 슬롯 → 미래 0', (tester) async {
+    final total = Progression.beginner().total;
+    final p = Progression.from(buildPlaceholderManifest(), currentIndex: total - 1);
+    await tester.pumpWidget(host(p));
+    expect(find.byKey(const Key('node-future')), findsNothing);
+    expect(find.byKey(const Key('node-today')), findsOneWidget);
+  });
 }
