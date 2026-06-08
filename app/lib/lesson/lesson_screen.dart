@@ -6,6 +6,7 @@ library;
 import 'package:flutter/material.dart';
 
 import '../progression/progression_state.dart';
+import '../theme/app_theme.dart';
 import 'lesson_instance.dart';
 import 'pitch/pitch_display.dart';
 import 'pitch/pitch_source.dart';
@@ -33,6 +34,12 @@ class _LessonScreenState extends State<LessonScreen> {
   // _p가 변이형이라 widget.progression 참조 비교가 무용 — 카드ID 자체를 추적.
   String? _lastCardId;
 
+  _StepState _stepStateFor(LessonStep s) {
+    if (s.index < _step.index) return _StepState.done;
+    if (s.index == _step.index) return _StepState.now;
+    return _StepState.next;
+  }
+
   @override
   Widget build(BuildContext context) {
     final p = widget.progression;
@@ -45,7 +52,7 @@ class _LessonScreenState extends State<LessonScreen> {
     }
     _lastCardId = id;
     return Scaffold(
-      backgroundColor: const Color(0xFF0E0F13),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -84,17 +91,17 @@ class _LessonScreenState extends State<LessonScreen> {
                 ],
               ),
             ),
-            // 3단 스테퍼(진입·본운동·쿨다운)
+            // 3단 스테퍼(진입·본운동·쿨다운) — 현재 단계 강조
             Padding(
               key: const Key('lesson-stepper'),
               padding: const EdgeInsets.fromLTRB(16, 10, 16, 2),
               child: Row(
-                children: const [
-                  _Step(label: '진입·워밍업', state: _StepState.done),
-                  SizedBox(width: 8),
-                  _Step(label: '본운동 7–11분', state: _StepState.now),
-                  SizedBox(width: 8),
-                  _Step(label: '쿨다운', state: _StepState.next),
+                children: [
+                  _Step(label: '진입·워밍업', state: _stepStateFor(LessonStep.entry)),
+                  const SizedBox(width: 8),
+                  _Step(label: '본운동 7–11분', state: _stepStateFor(LessonStep.main)),
+                  const SizedBox(width: 8),
+                  _Step(label: '쿨다운', state: _stepStateFor(LessonStep.cooldown)),
                 ],
               ),
             ),
@@ -102,35 +109,41 @@ class _LessonScreenState extends State<LessonScreen> {
             Expanded(
               child: Center(
                 key: const Key('lesson-cue'),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (_step == LessonStep.entry && card != null) ...[
-                        Text(
-                          '워밍업: ${card.anatomyEntry}',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              color: Colors.white70, fontSize: 14),
-                        ),
-                        const SizedBox(height: 12),
-                      ],
-                      if (_step == LessonStep.cooldown && card != null)
-                        Text(
-                          '쿨다운: ${card.anatomyCooldown}',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 21, height: 1.5),
-                        )
-                      else
-                        Text(
-                          card == null ? '' : card.cue.join('\n'),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 21, height: 1.5),
-                        ),
-                    ],
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 200),
+                  child: KeyedSubtree(
+                    key: ValueKey(_step),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (_step == LessonStep.entry && card != null) ...[
+                            Text(
+                              '워밍업: ${card.anatomyEntry}',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  color: Colors.white70, fontSize: 14),
+                            ),
+                            const SizedBox(height: 12),
+                          ],
+                          if (_step == LessonStep.cooldown && card != null)
+                            Text(
+                              '쿨다운: ${card.anatomyCooldown}',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 21, height: 1.5),
+                            )
+                          else
+                            Text(
+                              card == null ? '' : card.cue.join('\n'),
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 21, height: 1.5),
+                            ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -139,7 +152,7 @@ class _LessonScreenState extends State<LessonScreen> {
             Container(
               key: const Key('lesson-sheet'),
               decoration: const BoxDecoration(
-                color: Color(0xFF171922),
+                color: AppColors.surface,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
               ),
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
@@ -151,7 +164,7 @@ class _LessonScreenState extends State<LessonScreen> {
                       width: 40,
                       height: 4,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF3A3F55),
+                        color: AppColors.locked,
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -176,7 +189,7 @@ class _LessonScreenState extends State<LessonScreen> {
                     Text(
                       '● ${card.voicedMicroWin.first}',
                       style: const TextStyle(
-                          color: Color(0xFF39D98A), fontSize: 13),
+                          color: AppColors.done, fontSize: 13),
                     ),
                   ],
                   if (_step == LessonStep.main &&
@@ -195,12 +208,22 @@ class _LessonScreenState extends State<LessonScreen> {
                   // U4 — main 단계에서만 시각 피치 표시. 마이크 없으면 안내 한 줄.
                   if (_step == LessonStep.main) ...[
                     if (widget.pitchSource == null)
-                      const Text(
-                        '마이크 꺼짐 — 피치 표시 안 됨',
-                        key: Key('mic-off-notice'),
-                        style: TextStyle(color: Colors.white38, fontSize: 12),
-                      ),
-                    PitchDisplay(source: widget.pitchSource),
+                      Container(
+                        height: 110,
+                        decoration: BoxDecoration(
+                          color: AppColors.surface,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          '🎤\n마이크 꺼짐 — 피치 표시 안 됨',
+                          key: Key('mic-off-notice'),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white38, fontSize: 12),
+                        ),
+                      )
+                    else
+                      PitchDisplay(source: widget.pitchSource),
                   ] else
                     const SizedBox(height: 110),
                   const SizedBox(height: 12),
@@ -246,9 +269,9 @@ class _Step extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = switch (state) {
-      _StepState.done => const Color(0xFF39D98A),
-      _StepState.now => const Color(0xFF6C8CFF),
-      _StepState.next => const Color(0xFF3A3F55),
+      _StepState.done => AppColors.done,
+      _StepState.now => AppColors.now,
+      _StepState.next => AppColors.locked,
     };
     return Expanded(
       child: Column(
@@ -280,7 +303,7 @@ class _Pill extends StatelessWidget {
   Widget build(BuildContext context) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
-          color: const Color(0xFF222637),
+          color: AppColors.surfaceAlt,
           borderRadius: BorderRadius.circular(999),
         ),
         child: Text(text,

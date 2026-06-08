@@ -175,8 +175,9 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('next-button'))); // → main
     await tester.pumpAndSettle();
-    // pitch-target은 항상 렌더(null source일 때도) — current는 source가 null이라 미렌더
-    expect(find.byKey(const Key('pitch-target')), findsOneWidget);
+    // UI3: pitchSource == null → 마이크 자리표시 컨테이너(PitchDisplay 미렌더)
+    expect(find.byKey(const Key('mic-off-notice')), findsOneWidget);
+    expect(find.byKey(const Key('pitch-display')), findsNothing);
     expect(find.byKey(const Key('pitch-current')), findsNothing);
   });
 
@@ -370,5 +371,13 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.textContaining('워밍업:'), findsNothing);
     expect(find.textContaining('바닥/의자에 편하게'), findsOneWidget);
+  });
+
+  testWidgets('LP1 진입 단계에서 진입 스테퍼가 now 상태(볼드)', (tester) async {
+    await tester.pumpWidget(MaterialApp(
+        home: LessonScreen(progression: Progression.beginner())));
+    await tester.pumpAndSettle();
+    final entry = tester.widget<Text>(find.text('진입·워밍업'));
+    expect(entry.style?.fontWeight, FontWeight.w700);
   });
 }
