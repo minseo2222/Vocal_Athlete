@@ -7,6 +7,7 @@ library;
 import 'package:flutter/material.dart';
 
 import '../progression/progression_state.dart';
+import '../theme/app_theme.dart';
 import 'lesson_instance.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -27,7 +28,7 @@ class HomeScreen extends StatelessWidget {
     final instance = resolveLessonInstance(p.todaysLesson, p.day);
     final card = instance.card;
     return Scaffold(
-      backgroundColor: const Color(0xFF0E0F13),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
@@ -46,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                   IconButton(
                     key: const Key('home-settings'),
                     onPressed: onSettings,
-                    icon: const Icon(Icons.settings, color: Colors.white38),
+                    icon: const Icon(Icons.settings, color: AppColors.textLow),
                   ),
                 ],
               ),
@@ -54,7 +55,7 @@ class HomeScreen extends StatelessWidget {
               // 오늘 레슨 프리뷰 카드
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF171922),
+                  color: AppColors.surface,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 padding: const EdgeInsets.all(20),
@@ -63,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     const Text('오늘의 레슨',
                         style: TextStyle(
-                            color: Colors.white60, fontSize: 13)),
+                            color: AppColors.textMid, fontSize: 13)),
                     const SizedBox(height: 6),
                     Text(card.anatomyMain,
                         style: const TextStyle(
@@ -72,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(card.cue.isNotEmpty ? card.cue.first : '',
                         style: const TextStyle(
-                            color: Colors.white60, fontSize: 14)),
+                            color: AppColors.textMid, fontSize: 14)),
                   ],
                 ),
               ),
@@ -86,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 12),
                   child: Text('오늘 완료 — 내일 또',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Color(0xFF39D98A), fontSize: 14)),
+                      style: TextStyle(color: AppColors.done, fontSize: 14)),
                 ),
               SizedBox(
                 width: double.infinity,
@@ -130,10 +131,10 @@ class _ProgressBlocks extends StatelessWidget {
                   height: 6,
                   decoration: BoxDecoration(
                     color: b < current
-                        ? const Color(0xFF39D98A)
+                        ? AppColors.done
                         : b == current
-                            ? const Color(0xFF6C8CFF)
-                            : const Color(0xFF3A3F55),
+                            ? AppColors.now
+                            : AppColors.locked,
                     borderRadius: BorderRadius.circular(3),
                   ),
                 ),
