@@ -90,6 +90,8 @@ class _Node extends StatelessWidget {
   const _Node({required this.state});
   final _NodeState state;
 
+  static const double _kTodayScaleIn = 0.85;
+
   @override
   Widget build(BuildContext context) {
     final ({Color bg, Color border, String glyph, Color glyphColor, Key key})
@@ -138,7 +140,7 @@ class _Node extends StatelessWidget {
     );
     if (state != _NodeState.today) return node;
     return TweenAnimationBuilder<double>(
-      tween: Tween(begin: 0.85, end: 1.0),
+      tween: Tween(begin: _kTodayScaleIn, end: 1.0),
       duration: const Duration(milliseconds: 400),
       curve: Curves.easeOutBack,
       builder: (_, scale, child) => Transform.scale(scale: scale, child: child),
