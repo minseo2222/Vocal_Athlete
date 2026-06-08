@@ -96,6 +96,8 @@ class HomeScreen extends StatelessWidget {
                 child: FilledButton(
                   key: const Key('start-today'),
                   onPressed: p.didToday ? null : onStart,
+                  style: FilledButton.styleFrom(
+                      animationDuration: const Duration(milliseconds: 120)),
                   child: Text(p.didToday ? '오늘 완료' : '오늘 시작',
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.w700)),

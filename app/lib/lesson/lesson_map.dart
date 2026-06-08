@@ -116,7 +116,7 @@ class _Node extends StatelessWidget {
           key: const Key('node-future'),
         ),
     };
-    return Container(
+    final node = Container(
       key: v.key,
       width: 46,
       height: 46,
@@ -135,6 +135,14 @@ class _Node extends StatelessWidget {
       ),
       alignment: Alignment.center,
       child: Text(v.glyph, style: TextStyle(color: v.glyphColor, fontSize: 18)),
+    );
+    if (state != _NodeState.today) return node;
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.85, end: 1.0),
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeOutBack,
+      builder: (_, scale, child) => Transform.scale(scale: scale, child: child),
+      child: node,
     );
   }
 }

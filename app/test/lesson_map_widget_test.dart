@@ -37,4 +37,12 @@ void main() {
     expect(find.byKey(const Key('node-future')), findsNothing);
     expect(find.byKey(const Key('node-today')), findsOneWidget);
   });
+
+  testWidgets('LM3 오늘 노드 등장 애니가 정착 후에도 존재(pumpAndSettle 안전)',
+      (tester) async {
+    final p = Progression.from(buildPlaceholderManifest(), currentIndex: 2);
+    await tester.pumpWidget(host(p));
+    await tester.pumpAndSettle(); // 무한 반복이면 여기서 타임아웃
+    expect(find.byKey(const Key('node-today')), findsOneWidget);
+  });
 }
