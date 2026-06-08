@@ -9,3 +9,5 @@ __pycache__/
 **/build/
 **/.flutter-plugins
 **/.flutter-plugins-dependencies
+.superpowers/
+uiux-preview.html
