@@ -170,6 +170,10 @@ class Progression {
 
   int get currentIndex => _currentIndex;
   int get total => _manifest.length;
+
+  /// UI — 여정 맵용 읽기 전용 슬롯 뷰(블록·인덱스 표시).
+  List<PathSlot> get slots => List.unmodifiable(_manifest);
+
   bool get atEnd => _currentIndex >= _manifest.length - 1;
 
   /// "오늘의 레슨" 셀렉터 — 현재 슬롯 반환.

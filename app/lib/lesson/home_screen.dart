@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import '../progression/progression_state.dart';
 import '../theme/app_theme.dart';
 import 'lesson_instance.dart';
+import 'lesson_map.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -78,9 +79,9 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              // 5블록 진행도
-              _ProgressBlocks(progression: p),
-              const Spacer(),
+              // 여정 맵
+              Expanded(child: LessonMap(progression: p)),
+              const SizedBox(height: 12),
               if (p.didToday)
                 const Padding(
                   key: Key('today-done'),
@@ -104,49 +105,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-/// 5블록 누적 막대. 현재 블록 미만 = 완료(green), 현재 = 진행(blue),
-/// 이후 = 잠금(outline). 블록 번호는 PathSlot.block(1..5).
-class _ProgressBlocks extends StatelessWidget {
-  const _ProgressBlocks({required this.progression});
-  final Progression progression;
-
-  static const _labels = ['토대', 'SOVT', '발성', '감각', '졸업'];
-
-  @override
-  Widget build(BuildContext context) {
-    final current = progression.todaysLesson.block; // 1..5
-    return Row(
-      key: const Key('progress-blocks'),
-      children: [
-        for (var b = 1; b <= 5; b++) ...[
-          if (b > 1) const SizedBox(width: 8),
-          Expanded(
-            child: Column(
-              children: [
-                Container(
-                  height: 6,
-                  decoration: BoxDecoration(
-                    color: b < current
-                        ? AppColors.done
-                        : b == current
-                            ? AppColors.now
-                            : AppColors.locked,
-                    borderRadius: BorderRadius.circular(3),
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(_labels[b - 1],
-                    style: const TextStyle(
-                        color: Colors.white54, fontSize: 10)),
-              ],
-            ),
-          ),
-        ],
-      ],
     );
   }
 }

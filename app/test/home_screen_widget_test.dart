@@ -38,14 +38,14 @@ void main() {
     expect(find.byKey(const Key('home-screen')), findsNothing);
   });
 
-  testWidgets('H3 home shows streak + 5 progress blocks', (tester) async {
+  testWidgets('H3 home shows streak + lesson map with section labels',
+      (tester) async {
     _phoneViewport(tester);
     await tester.pumpWidget(const DebugApp());
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     expect(find.byKey(const Key('home-streak')), findsOneWidget);
-    expect(find.byKey(const Key('progress-blocks')), findsOneWidget);
-    // 5블록 라벨
+    expect(find.byKey(const Key('lesson-map')), findsOneWidget);
     expect(find.text('토대'), findsOneWidget);
     expect(find.text('졸업'), findsOneWidget);
   });
