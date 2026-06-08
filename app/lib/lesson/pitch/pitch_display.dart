@@ -9,6 +9,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 
+import '../../theme/app_theme.dart';
 import 'deviation.dart';
 import 'pitch_source.dart';
 
@@ -81,7 +82,7 @@ class _PitchDisplayState extends State<PitchDisplay> {
       key: const Key('pitch-display'),
       height: 110,
       decoration: BoxDecoration(
-        color: const Color(0xFF0E0F13),
+        color: AppColors.bg,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Stack(
@@ -93,7 +94,7 @@ class _PitchDisplayState extends State<PitchDisplay> {
               key: Key('pitch-target'),
               height: 2,
               width: double.infinity,
-              child: ColoredBox(color: Color(0xFF6C8CFF)),
+              child: ColoredBox(color: AppColors.now),
             ),
           ),
           if (reading?.f0Hz != null)
@@ -104,7 +105,7 @@ class _PitchDisplayState extends State<PitchDisplay> {
                 width: 14,
                 height: 14,
                 decoration: const BoxDecoration(
-                  color: Color(0xFF39D98A),
+                  color: AppColors.done,
                   shape: BoxShape.circle,
                 ),
               ),

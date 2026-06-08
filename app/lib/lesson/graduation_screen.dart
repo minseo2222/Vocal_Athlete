@@ -6,6 +6,7 @@ library;
 import 'package:flutter/material.dart';
 
 import '../progression/progression_state.dart';
+import '../theme/app_theme.dart';
 
 class GraduationScreen extends StatelessWidget {
   const GraduationScreen({super.key = const Key('graduation-screen'),
@@ -15,7 +16,7 @@ class GraduationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: const Color(0xFF0E0F13),
+        backgroundColor: AppColors.bg,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(24, 32, 24, 24),
@@ -35,16 +36,19 @@ class GraduationScreen extends StatelessWidget {
                 const SizedBox(height: 28),
                 _GenreButton(
                     keyName: const Key('genre-musical'),
+                    emoji: '🎭',
                     label: '뮤지컬',
                     onTap: () => onPick(Genre.musical)),
                 const SizedBox(height: 10),
                 _GenreButton(
                     keyName: const Key('genre-classical'),
+                    emoji: '🎼',
                     label: '성악',
                     onTap: () => onPick(Genre.classical)),
                 const SizedBox(height: 10),
                 _GenreButton(
                     keyName: const Key('genre-gayo'),
+                    emoji: '🎤',
                     label: '가요',
                     onTap: () => onPick(Genre.gayo)),
               ],
@@ -55,8 +59,9 @@ class GraduationScreen extends StatelessWidget {
 }
 
 class _GenreButton extends StatelessWidget {
-  const _GenreButton({required this.keyName, required this.label, required this.onTap});
+  const _GenreButton({required this.keyName, required this.emoji, required this.label, required this.onTap});
   final Key keyName;
+  final String emoji;
   final String label;
   final VoidCallback onTap;
   @override
@@ -65,7 +70,13 @@ class _GenreButton extends StatelessWidget {
         child: FilledButton(
           key: keyName,
           onPressed: onTap,
-          child: Text(label),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('$emoji '),
+              Text(label),
+            ],
+          ),
         ),
       );
 }

@@ -3,6 +3,8 @@ library;
 
 import 'package:flutter/material.dart';
 
+import '../theme/app_theme.dart';
+
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({
     super.key = const Key('settings-screen'),
@@ -29,9 +31,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0E0F13),
+      backgroundColor: AppColors.bg,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF0E0F13),
+        backgroundColor: AppColors.bg,
         foregroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
@@ -54,20 +56,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
               key: const Key('settings-change-genre'),
               title: const Text('장르 변경',
                   style: TextStyle(color: Colors.white)),
-              trailing: const Icon(Icons.chevron_right, color: Colors.white38),
+              trailing: const Icon(Icons.chevron_right, color: AppColors.textLow),
               onTap: widget.onChangeGenre,
             ),
           ListTile(
             title: const Text('마이크 권한',
                 style: TextStyle(color: Colors.white)),
             trailing: Text(widget.micGranted ? '허용됨' : '미허용',
-                style: const TextStyle(color: Colors.white60)),
+                style: const TextStyle(color: AppColors.textMid)),
           ),
           ListTile(
             title: const Text('버전',
                 style: TextStyle(color: Colors.white)),
             trailing: Text(widget.version,
-                style: const TextStyle(color: Colors.white38)),
+                style: const TextStyle(color: AppColors.textLow)),
           ),
         ],
       ),
