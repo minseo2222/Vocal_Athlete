@@ -211,7 +211,7 @@ class _LessonScreenState extends State<LessonScreen> {
                       Container(
                         height: 110,
                         decoration: BoxDecoration(
-                          color: AppColors.surface,
+                          color: AppColors.lockedSurface,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         alignment: Alignment.center,

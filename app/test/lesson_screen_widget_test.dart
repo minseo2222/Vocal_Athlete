@@ -374,6 +374,7 @@ void main() {
   });
 
   testWidgets('LP1 진입 단계에서 진입 스테퍼가 now 상태(볼드)', (tester) async {
+    _phoneViewport(tester);
     await tester.pumpWidget(MaterialApp(
         home: LessonScreen(progression: Progression.beginner())));
     await tester.pumpAndSettle();
