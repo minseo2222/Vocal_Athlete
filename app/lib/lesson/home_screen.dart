@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                   Text('🔥 ${p.streak}일',
                       key: const Key('home-streak'),
                       style: const TextStyle(
-                          color: Colors.white, fontSize: 16,
+                          color: AppColors.textHi, fontSize: 16,
                           fontWeight: FontWeight.w700)),
                   IconButton(
                     key: const Key('home-settings'),
@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(AppRadii.card),
                 ),
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -68,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(height: 6),
                     Text(card.anatomyMain,
                         style: const TextStyle(
-                            color: Colors.white, fontSize: 22,
+                            color: AppColors.textHi, fontSize: 22,
                             fontWeight: FontWeight.w700)),
                     const SizedBox(height: 6),
                     Text(card.cue.isNotEmpty ? card.cue.first : '',
