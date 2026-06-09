@@ -61,12 +61,11 @@ void main() {
     }
     // ignore: avoid_print
     print('[CHAR1 깨끗한 사인]\n${rows.join("\n")}\n  최대 |오차| ≈ ${maxAbs.toStringAsFixed(0)}c');
-    // 현 거동 단언: 모두 검출(null 아님) + 오차는 존재하나 ±100c 이내.
+    // 개선 강제(I2): 모두 검출 + 포물선 보간 후 전 음역 |오차| < 10c.
     for (final f in fs) {
       expect(estimateF0(_sine(f), _sr), isNotNull, reason: '$f sine null');
     }
-    expect(maxAbs, greaterThan(0), reason: '양자화 오차가 0일 수 없음(보간 없음)');
-    expect(maxAbs, lessThan(100), reason: '깨끗한 사인은 반음 이내여야');
+    expect(maxAbs, lessThan(10), reason: '보간 후 고음도 10c 이내여야');
   });
 
   test('CHAR2 배음많은/잃은기음/SOVT — 옥타브·검출 거동', () {

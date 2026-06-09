@@ -74,5 +74,16 @@ double? estimateF0(List<double> samples, int sampleRate,
     }
     if (chosen < 0) chosen = 0;
   }
-  return sampleRate / (minLag + chosen);
+
+  // 포물선 보간: 선택 peak 주변 3점으로 sub-lag 정밀도(정수 lag 양자화 보정).
+  var refinedLag = (minLag + chosen).toDouble();
+  if (chosen > 0 && chosen < lags - 1) {
+    final a = nsdf[chosen - 1], b = nsdf[chosen], c = nsdf[chosen + 1];
+    final denom = a - 2 * b + c;
+    if (denom != 0) {
+      final delta = (0.5 * (a - c) / denom).clamp(-1.0, 1.0);
+      refinedLag += delta;
+    }
+  }
+  return sampleRate / refinedLag;
 }
