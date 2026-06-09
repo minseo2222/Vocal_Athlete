@@ -11,3 +11,8 @@ __pycache__/
 **/.flutter-plugins-dependencies
 .superpowers/
 uiux-preview.html
+uiux-mockups.html
+uiux-mockups/
+uiux-mockups-2.html
+uiux-mockups-3.html
+uiux-mockups-r4.html
