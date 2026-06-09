@@ -92,17 +92,15 @@ void main() {
     expect(estimateF0(_harmonics(220), _sr), isNotNull);
   });
 
-  test('CHAR3 잡음·무음 — 신뢰 게이트 부재 확인', () {
+  test('CHAR3 잡음·무음 — 신뢰 게이트(잡음 spurious 제거)', () {
     final noiseResults = [for (var s = 1; s <= 5; s++) estimateF0(_noise(s), _sr)];
     final nonNull = noiseResults.where((e) => e != null).length;
     // ignore: avoid_print
     print('[CHAR3 잡음/무음]\n  백색잡음 5프레임 → 검출(null아님) $nonNull/5: '
         '${noiseResults.map((e) => e?.toStringAsFixed(0) ?? "null").join(", ")}\n'
         '  무음 → ${estimateF0(List.filled(_n, 0), _sr) ?? "null"}');
-    // 현 거동: 에너지게이트만 있고 신뢰 임계 없음 → 잡음은 spurious f0 반환(대부분 non-null).
-    expect(nonNull, greaterThan(0),
-        reason: '신뢰 게이트가 없어 잡음에도 spurious f0가 나옴(약점 문서화)');
-    // 무음은 에너지게이트로 null(정상).
-    expect(estimateF0(List.filled(_n, 0), _sr), isNull);
+    // 개선 강제(I1): NSDF clarity 신뢰 게이트 → 백색잡음은 전부 null(틀린 점 ❌).
+    expect(nonNull, 0, reason: '신뢰 게이트로 잡음 spurious f0 제거');
+    expect(estimateF0(List.filled(_n, 0), _sr), isNull); // 무음 null 유지.
   });
 }

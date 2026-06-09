@@ -18,4 +18,11 @@ void main() {
     final est = estimateF0(List<double>.filled(2048, 0), 16000);
     expect(est, isNull);
   });
+
+  test('estimateF0 returns null on white noise (신뢰 게이트)', () {
+    final r = Random(7);
+    final noise = List<double>.generate(2048, (_) => r.nextDouble() * 2 - 1);
+    expect(estimateF0(noise, 16000), isNull,
+        reason: '명확한 주기 없는 잡음은 저신뢰 → null(틀린 점 ❌)');
+  });
 }
