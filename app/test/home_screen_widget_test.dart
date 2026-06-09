@@ -38,7 +38,7 @@ void main() {
     expect(find.byKey(const Key('home-screen')), findsNothing);
   });
 
-  testWidgets('H3 home shows streak + lesson map with section labels',
+  testWidgets('H3 home shows streak + journey preview with block chips',
       (tester) async {
     _phoneViewport(tester);
     await tester.pumpWidget(const DebugApp());
