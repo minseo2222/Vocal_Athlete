@@ -30,7 +30,7 @@ C:/src/flutter/bin/flutter.bat test test/verification_harness_test.dart
 
 ```
 cd "C:\Users\user\Desktop\pro v new\app"
-C:/src/flutter/bin/flutter.bat test     # 159개 green = 게이트/라우팅/정합 전부 일치
+C:/src/flutter/bin/flutter.bat test     # 전 테스트 green = 게이트/라우팅/정합 전부 일치
 C:/src/flutter/bin/flutter.bat analyze  # No issues found!
 ```
 

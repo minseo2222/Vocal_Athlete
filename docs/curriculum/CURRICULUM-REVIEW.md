@@ -30,7 +30,7 @@
 - **G2 표준샘플 SOP ✅ 해소**: IC-12 표준샘플 자기평가 카드 + 블록 경계 삽입(D2).
 - **G3 커리큘럼↔앱 구현 ✅ 해소**: 중급 ~50카드 card_library 이식(I1) + 코스 manifest
   빌더(I2) + 졸업→분기 진입 실 로드(I3) + 분기 완주→유지(I4) + 안전 게이트(I5) +
-  정합 가드(I6). 141 tests green. *롤아웃 스위치*(release·safetyApproved)는
+  정합 가드(I6). 168 tests green(2026-06 기준). *롤아웃 스위치*(release·safetyApproved)는
   `INTERMEDIATE-IMPL-VERIFY.md` 참조(기존 ADR-0010 P10 + 안전 게이트).
 - **G4 고급 트랙 ⬜ 범위 밖(의도적)**: 풀 벨트 등 신규 고위험 = 안전 설계 + HITL 필요.
 - **G5 periodization/디로드 ⬜ 범위 밖**: 코어 갭 후보로 잔존.

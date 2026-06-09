@@ -30,7 +30,7 @@ class DebugApp extends StatelessWidget {
   /// 테스트 seam — 주입 시 사용, 없으면 기본 `Progression.beginner()`.
   final Progression? initialProgression;
 
-  /// U4 — pitch source. 기본 null(테스트). 프로덕션 main()이 StubPitchSource 주입.
+  /// U4 — pitch source. 기본 null(테스트). 프로덕션 main()이 RecordingPitchSource 주입.
   final PitchSource? pitchSource;
 
   /// Task 2 — 영속화 store. 주입 시 시작 때 load·변이 때 save.

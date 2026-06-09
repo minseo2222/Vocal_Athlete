@@ -10,7 +10,8 @@ class SettingsScreen extends StatefulWidget {
     super.key = const Key('settings-screen'),
     required this.onBack,
     this.micGranted = false,
-    this.version = '0.1.0',
+    this.version = '1.0.0', // pubspec version과 일치(1.0.0+1)
+
     this.onChangeGenre,
   });
 

@@ -17,7 +17,11 @@ class ProgressionStore {
     final prefs = await SharedPreferences.getInstance();
     final s = prefs.getString(_key);
     if (s == null) return null;
-    return Progression.fromJson(jsonDecode(s) as Map<String, dynamic>);
+    try {
+      return Progression.fromJson(jsonDecode(s) as Map<String, dynamic>);
+    } catch (_) {
+      return null; // 손상된 저장본 → 신규로 안전 폴백(예외 전파 ❌)
+    }
   }
 
   Future<void> save(Progression p) async {

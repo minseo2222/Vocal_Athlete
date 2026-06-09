@@ -24,4 +24,10 @@ void main() {
     expect(loaded.streak, p.streak);
     expect(loaded.day, p.day);
   });
+
+  test('S2b 손상된 저장본 → load는 null(예외 전파 ❌)', () async {
+    SharedPreferences.setMockInitialValues({'progression_v1': '{깨진 json'});
+    final store = ProgressionStore();
+    expect(await store.load(), isNull); // 신규로 안전 폴백
+  });
 }
