@@ -69,7 +69,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: PitchDisplay(source: _UnvoicedOnlySource()),
+          body: PitchDisplay(targetHz: 220, source: _UnvoicedOnlySource()),
         ),
       ),
     );
@@ -82,7 +82,7 @@ void main() {
       (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
-        home: Scaffold(body: PitchDisplay(source: null)),
+        home: Scaffold(body: PitchDisplay(targetHz: 220, source: null)),
       ),
     );
     await tester.pump(const Duration(milliseconds: 30));
@@ -96,6 +96,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: PitchDisplay(
+            targetHz: 220,
             source: StubPitchSource(
               interval: const Duration(milliseconds: 10),
             ),
@@ -106,6 +107,25 @@ void main() {
     // Allow the periodic stream to emit at least one reading.
     await tester.pump(const Duration(milliseconds: 30));
     expect(find.byKey(const Key('pitch-target')), findsOneWidget);
+    expect(find.byKey(const Key('pitch-current')), findsOneWidget);
+  });
+
+  testWidgets('P7 targetHz null → 타깃선 미표시, 점은 절대피치로 표시',
+      (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: PitchDisplay(
+            targetHz: null, // 카드 목표음 없음
+            source: StubPitchSource(
+              interval: const Duration(milliseconds: 10),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump(const Duration(milliseconds: 30));
+    expect(find.byKey(const Key('pitch-target')), findsNothing);
     expect(find.byKey(const Key('pitch-current')), findsOneWidget);
   });
 }

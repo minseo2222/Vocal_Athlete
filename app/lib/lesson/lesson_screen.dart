@@ -214,7 +214,8 @@ class _LessonScreenState extends State<LessonScreen> {
                         ),
                       )
                     else
-                      PitchDisplay(source: widget.pitchSource),
+                      PitchDisplay(
+                          source: widget.pitchSource, targetHz: card?.targetHz),
                   ] else
                     const SizedBox(height: 110),
                   const SizedBox(height: 12),

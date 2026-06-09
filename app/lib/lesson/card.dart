@@ -18,6 +18,7 @@ class Card {
     this.anatomyCooldown = '',
     this.variableAxes = const {},
     this.safetyReview = SafetyReview.none,
+    this.targetHz,
   });
 
   final String id;
@@ -31,4 +32,6 @@ class Card {
   final Map<String, List<String>> variableAxes;
   // I1 — 안전 게이트(자가 승인 ❌). pending이면 사인오프 전 잠금(I5).
   final SafetyReview safetyReview;
+  // 피치 — 카드별 목표음(Hz). null이면 목표 없음(타깃선·넛지 미표시, 점은 절대피치).
+  final double? targetHz;
 }
