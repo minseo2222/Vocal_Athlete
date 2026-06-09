@@ -113,36 +113,27 @@ class _LessonScreenState extends State<LessonScreen> {
                   duration: const Duration(milliseconds: 200),
                   child: KeyedSubtree(
                     key: ValueKey(_step),
+                    // 단계별 단일 콘텐츠 — 진입=워밍업만, 본=본 cue, 쿨다운=쿨다운(중첩 없음).
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (_step == LessonStep.entry && card != null) ...[
-                            Text(
-                              '워밍업: ${card.anatomyEntry}',
+                      child: card == null
+                          ? const SizedBox.shrink()
+                          : Text(
+                              switch (_step) {
+                                LessonStep.entry => '워밍업: ${card.anatomyEntry}',
+                                LessonStep.main => card.cue.join('\n'),
+                                LessonStep.cooldown =>
+                                  '쿨다운: ${card.anatomyCooldown}',
+                              },
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  color: Colors.white70, fontSize: 14),
+                              style: TextStyle(
+                                color: _step == LessonStep.entry
+                                    ? Colors.white70
+                                    : Colors.white,
+                                fontSize: _step == LessonStep.entry ? 18 : 21,
+                                height: 1.5,
+                              ),
                             ),
-                            const SizedBox(height: 12),
-                          ],
-                          if (_step == LessonStep.cooldown && card != null)
-                            Text(
-                              '쿨다운: ${card.anatomyCooldown}',
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 21, height: 1.5),
-                            )
-                          else
-                            Text(
-                              card == null ? '' : card.cue.join('\n'),
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 21, height: 1.5),
-                            ),
-                        ],
-                      ),
                     ),
                   ),
                 ),

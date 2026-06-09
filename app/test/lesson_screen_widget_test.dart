@@ -87,6 +87,9 @@ void main() {
     await tester.pumpWidget(const DebugApp(startInLesson: true));
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
+    // 본운동 단계에서 본 cue 렌더(진입은 워밍업만 — 단계 분리)
+    await tester.tap(find.byKey(const Key('next-button')));
+    await tester.pumpAndSettle();
     // CARD-01 cue 일부
     expect(find.textContaining('바닥/의자에 편하게'), findsOneWidget);
     expect(find.textContaining('턱·어깨 힘 빼기'), findsOneWidget);
@@ -370,6 +373,20 @@ void main() {
     await tester.tap(find.byKey(const Key('next-button')));
     await tester.pumpAndSettle();
     expect(find.textContaining('워밍업:'), findsNothing);
+    expect(find.textContaining('바닥/의자에 편하게'), findsOneWidget);
+  });
+
+  testWidgets('A1 진입엔 본 cue 미표시·본운동엔 표시 (단계 분리)', (tester) async {
+    _phoneViewport(tester);
+    await tester.pumpWidget(const DebugApp(startInLesson: true));
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    // 진입: 워밍업만 — 본 cue(CARD-01) 미표시
+    expect(find.textContaining('워밍업:'), findsOneWidget);
+    expect(find.textContaining('바닥/의자에 편하게'), findsNothing);
+    // 본운동으로 이동 → 본 cue 표시
+    await tester.tap(find.byKey(const Key('next-button')));
+    await tester.pumpAndSettle();
     expect(find.textContaining('바닥/의자에 편하게'), findsOneWidget);
   });
 
