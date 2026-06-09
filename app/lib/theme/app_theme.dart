@@ -22,7 +22,6 @@ class AppColors {
 
 class AppRadii {
   const AppRadii._();
-  static const card = 12.0;
   static const sheet = 22.0;
   static const pill = 999.0;
 }
