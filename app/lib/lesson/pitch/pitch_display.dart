@@ -14,7 +14,7 @@ import '../../theme/app_theme.dart';
 import 'deviation.dart';
 import 'pitch_source.dart';
 
-const _kBufferLen = 8;
+const _kBufferLen = 24; // 스크롤 곡선용 trail(넛지는 windowN=5라 영향 없음)
 const _kNudgeCue = <DeviationDirection, String>{
   DeviationDirection.sharp: '⤵ 좀 더 낮게 — 다시?',
   DeviationDirection.flat: '⤴ 좀 더 높게 — 다시?',
@@ -92,6 +92,17 @@ class _PitchDisplayState extends State<PitchDisplay> {
       ),
       child: Stack(
         children: [
+          // 스크롤 곡선 — 최근 voiced 피치 trail(무성 구간 끊김). 점은 우측 끝(최신).
+          if (_recent.where((r) => r.f0Hz != null).length >= 2)
+            Positioned.fill(
+              child: CustomPaint(
+                key: const Key('pitch-curve'),
+                painter: _CurvePainter([
+                  for (final r in _recent)
+                    r.f0Hz == null ? null : _yOffset(r.f0Hz!)
+                ]),
+              ),
+            ),
           // Target line — 목표음이 있을 때만(없으면 220 같은 가짜 기준선 ❌).
           if (target != null)
             const Align(
@@ -105,7 +116,7 @@ class _PitchDisplayState extends State<PitchDisplay> {
             ),
           if (reading?.f0Hz != null)
             Align(
-              alignment: Alignment(0, _yOffset(reading!.f0Hz!)),
+              alignment: Alignment(1, _yOffset(reading!.f0Hz!)), // 최신=우측 끝
               child: Container(
                 key: const Key('pitch-current'),
                 width: 14,
@@ -159,4 +170,31 @@ class _PitchDisplayState extends State<PitchDisplay> {
     final frac = (math.log(hz / lo) / math.log(hi / lo)).clamp(0.0, 1.0);
     return (1 - 2 * frac);
   }
+}
+
+/// 최근 피치 trail 폴리라인. ys: -1(상)..+1(하), null=무성(구간 끊김).
+class _CurvePainter extends CustomPainter {
+  _CurvePainter(this.ys);
+  final List<double?> ys;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final n = ys.length;
+    if (n < 2) return;
+    final paint = Paint()
+      ..color = AppColors.done.withValues(alpha: 0.7)
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
+    double x(int i) => size.width * i / (n - 1);
+    double y(double v) => (v + 1) / 2 * size.height;
+    for (var i = 1; i < n; i++) {
+      final a = ys[i - 1], b = ys[i];
+      if (a == null || b == null) continue; // 무성 구간 끊김
+      canvas.drawLine(Offset(x(i - 1), y(a)), Offset(x(i), y(b)), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(_CurvePainter old) => true;
 }

@@ -76,6 +76,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 30));
     expect(find.byKey(const Key('pitch-target')), findsOneWidget);
     expect(find.byKey(const Key('pitch-current')), findsNothing);
+    expect(find.byKey(const Key('pitch-curve')), findsNothing); // 무성-only → 곡선 없음
   });
 
   testWidgets('P4 PitchDisplay with null source → target only, no current',
@@ -126,6 +127,25 @@ void main() {
     );
     await tester.pump(const Duration(milliseconds: 30));
     expect(find.byKey(const Key('pitch-target')), findsNothing);
+    expect(find.byKey(const Key('pitch-current')), findsOneWidget);
+  });
+
+  testWidgets('PC1 voiced readings 누적 → pitch-curve + pitch-current 표시',
+      (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: PitchDisplay(
+            targetHz: 220,
+            source: StubPitchSource(
+              interval: const Duration(milliseconds: 5),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pump(const Duration(milliseconds: 60)); // ≥2 voiced readings
+    expect(find.byKey(const Key('pitch-curve')), findsOneWidget);
     expect(find.byKey(const Key('pitch-current')), findsOneWidget);
   });
 }
