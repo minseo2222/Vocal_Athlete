@@ -79,12 +79,13 @@ class TodayHero extends StatelessWidget {
           ),
           if (!done) ...[
             const SizedBox(height: 16),
-            Row(
+            Wrap(
+              spacing: 8,
+              runSpacing: 6,
               children: [
                 if (instance.hasVoicedMicroWin)
                   _chip('● ${card.voicedMicroWin.first}', AppColors.done,
                       AppColors.doneSurface),
-                if (instance.hasVoicedMicroWin) const SizedBox(width: 8),
                 _chip('7–11분', AppColors.textMid, AppColors.surfaceAlt),
               ],
             ),
