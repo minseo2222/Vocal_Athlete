@@ -7,7 +7,9 @@ library;
 import 'package:flutter/material.dart';
 
 import '../progression/progression_state.dart';
+import '../theme/app_theme.dart';
 import 'lesson_instance.dart';
+import 'lesson_map.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -27,7 +29,7 @@ class HomeScreen extends StatelessWidget {
     final instance = resolveLessonInstance(p.todaysLesson, p.day);
     final card = instance.card;
     return Scaffold(
-      backgroundColor: const Color(0xFF0E0F13),
+      backgroundColor: AppColors.bg,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
@@ -41,12 +43,12 @@ class HomeScreen extends StatelessWidget {
                   Text('🔥 ${p.streak}일',
                       key: const Key('home-streak'),
                       style: const TextStyle(
-                          color: Colors.white, fontSize: 16,
+                          color: AppColors.textHi, fontSize: 16,
                           fontWeight: FontWeight.w700)),
                   IconButton(
                     key: const Key('home-settings'),
                     onPressed: onSettings,
-                    icon: const Icon(Icons.settings, color: Colors.white38),
+                    icon: const Icon(Icons.settings, color: AppColors.textLow),
                   ),
                 ],
               ),
@@ -54,8 +56,8 @@ class HomeScreen extends StatelessWidget {
               // 오늘 레슨 프리뷰 카드
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF171922),
-                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.surface,
+                  borderRadius: BorderRadius.circular(AppRadii.card),
                 ),
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -63,30 +65,30 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     const Text('오늘의 레슨',
                         style: TextStyle(
-                            color: Colors.white60, fontSize: 13)),
+                            color: AppColors.textMid, fontSize: 13)),
                     const SizedBox(height: 6),
                     Text(card.anatomyMain,
                         style: const TextStyle(
-                            color: Colors.white, fontSize: 22,
+                            color: AppColors.textHi, fontSize: 22,
                             fontWeight: FontWeight.w700)),
                     const SizedBox(height: 6),
                     Text(card.cue.isNotEmpty ? card.cue.first : '',
                         style: const TextStyle(
-                            color: Colors.white60, fontSize: 14)),
+                            color: AppColors.textMid, fontSize: 14)),
                   ],
                 ),
               ),
               const SizedBox(height: 24),
-              // 5블록 진행도
-              _ProgressBlocks(progression: p),
-              const Spacer(),
+              // 여정 맵
+              Expanded(child: LessonMap(progression: p)),
+              const SizedBox(height: 12),
               if (p.didToday)
                 const Padding(
                   key: Key('today-done'),
                   padding: EdgeInsets.only(bottom: 12),
                   child: Text('오늘 완료 — 내일 또',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Color(0xFF39D98A), fontSize: 14)),
+                      style: TextStyle(color: AppColors.done, fontSize: 14)),
                 ),
               SizedBox(
                 width: double.infinity,
@@ -94,6 +96,8 @@ class HomeScreen extends StatelessWidget {
                 child: FilledButton(
                   key: const Key('start-today'),
                   onPressed: p.didToday ? null : onStart,
+                  style: FilledButton.styleFrom(
+                      animationDuration: const Duration(milliseconds: 120)),
                   child: Text(p.didToday ? '오늘 완료' : '오늘 시작',
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.w700)),
@@ -103,49 +107,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-/// 5블록 누적 막대. 현재 블록 미만 = 완료(green), 현재 = 진행(blue),
-/// 이후 = 잠금(outline). 블록 번호는 PathSlot.block(1..5).
-class _ProgressBlocks extends StatelessWidget {
-  const _ProgressBlocks({required this.progression});
-  final Progression progression;
-
-  static const _labels = ['토대', 'SOVT', '발성', '감각', '졸업'];
-
-  @override
-  Widget build(BuildContext context) {
-    final current = progression.todaysLesson.block; // 1..5
-    return Row(
-      key: const Key('progress-blocks'),
-      children: [
-        for (var b = 1; b <= 5; b++) ...[
-          if (b > 1) const SizedBox(width: 8),
-          Expanded(
-            child: Column(
-              children: [
-                Container(
-                  height: 6,
-                  decoration: BoxDecoration(
-                    color: b < current
-                        ? const Color(0xFF39D98A)
-                        : b == current
-                            ? const Color(0xFF6C8CFF)
-                            : const Color(0xFF3A3F55),
-                    borderRadius: BorderRadius.circular(3),
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(_labels[b - 1],
-                    style: const TextStyle(
-                        color: Colors.white54, fontSize: 10)),
-              ],
-            ),
-          ),
-        ],
-      ],
     );
   }
 }

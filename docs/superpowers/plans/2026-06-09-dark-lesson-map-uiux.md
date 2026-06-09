@@ -150,7 +150,7 @@ void main() {
 Run: `C:/src/flutter/bin/flutter.bat test test/lesson_map_widget_test.dart`
 Expected: FAIL — `lesson_map.dart` / `LessonMap` 미존재(컴파일 에러).
 
-- [ ] **Step 4: LessonMap 구현**
+- [ ] **Step 4: LessonMap 구현** (먼저 `app_theme.dart`의 `AppColors`에 `static const lockedSurface = Color(0xFF2C3142);` 추가 — 미래 노드가 사용)
 
 ```dart
 // app/lib/lesson/lesson_map.dart
@@ -418,7 +418,7 @@ cue `Center`(`Key('lesson-cue')`)의 자식을 `AnimatedSwitcher`로 감싸 페�
 - [ ] **Step 5: 토큰 치환(나머지 색 리터럴)**
 
 `lesson_screen.dart`의 `Color(0xFF0E0F13)`→`AppColors.bg`, `Color(0xFF171922)`→`AppColors.surface`,
-`Color(0xFF39D98A)`→`AppColors.done`, `Color(0xFF222637)`→`AppColors.surfaceAlt`,
+`Color(0xFF39D98A)`→`AppColors.done`, `Color(0xFF222637)`→`AppColors.surfaceAlt`(이 토큰을 `AppColors`에 먼저 추가: `static const surfaceAlt = Color(0xFF222637);`),
 `Color(0xFF3A3F55)`→`AppColors.locked`. 마이크 꺼짐 자리표시: `mic-off-notice` 텍스트 보존,
 그 영역 배경을 `AppColors.surface`로 채워 덜 휑하게(레이아웃·키 불변).
 
