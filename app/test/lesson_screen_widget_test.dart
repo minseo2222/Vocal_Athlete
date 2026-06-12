@@ -217,6 +217,31 @@ void main() {
     expect(find.byKey(const Key('pitch-display')), findsNothing);
   });
 
+  testWidgets('P8 target-bearing card passes targetHz to PitchDisplay',
+      (tester) async {
+    _phoneViewport(tester);
+    const slot = PathSlot(
+      index: 0,
+      cardId: 'CARD-12',
+      block: 5,
+      bodyVoicedRatio: 0.20,
+      variationLevel: VariationLevel.variable,
+    );
+    final p = Progression.from([slot]);
+    await tester.pumpWidget(MaterialApp(
+      home: LessonScreen(
+        progression: p,
+        pitchSource: StubPitchSource(
+          interval: const Duration(milliseconds: 10),
+        ),
+      ),
+    ));
+    await tester.tap(find.byKey(const Key('next-button')));
+    await tester.pump(const Duration(milliseconds: 30));
+    expect(find.byKey(const Key('pitch-display')), findsOneWidget);
+    expect(find.byKey(const Key('pitch-target')), findsOneWidget);
+  });
+
   testWidgets('G3 pick unreleased genre → LessonScreen with maintenance-badge',
       (tester) async {
     _phoneViewport(tester);

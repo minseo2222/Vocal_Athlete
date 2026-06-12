@@ -201,6 +201,8 @@ const Map<String, Card> kCardLibrary = {
       'vowel': ['a', 'i', 'u'],
       'glide': ['고정음', '작은 글라이드'],
     },
+    // Conservative G3-ish guide tone for beginner visual matching.
+    targetHz: 196.0,
   ),
   'CARD-13': Card(
     id: 'CARD-13',

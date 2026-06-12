@@ -112,5 +112,24 @@ void main() {
           reason: '${entry.key} safetyReview mismatch');
     }
   });
-}
 
+  test('P8 cards promising a target line provide targetHz', () {
+    const targetLineTokens = ['목표선', 'target line'];
+    for (final entry in kCardLibrary.entries) {
+      final c = entry.value;
+      final text = [
+        ...c.cue,
+        ...c.voicedMicroWin,
+        c.anatomyEntry,
+        c.anatomyMain,
+        c.anatomyCooldown,
+        for (final values in c.variableAxes.values) ...values,
+      ].join('\n').toLowerCase();
+      final promisesTargetLine = targetLineTokens.any(text.contains);
+      if (promisesTargetLine) {
+        expect(c.targetHz, isNotNull,
+            reason: '${entry.key} mentions a target line but has no targetHz');
+      }
+    }
+  });
+}
