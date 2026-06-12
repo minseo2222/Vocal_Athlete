@@ -16,7 +16,7 @@
 | Flutter | `C:/src/flutter/bin/flutter.bat --version` (3.44+) |
 | 기기 | Android 에뮬레이터(`emulator-5554`) 또는 실 기기 USB 디버깅 |
 | 기기 목록 | `C:/src/flutter/bin/flutter.bat devices` 에 대상이 보일 것 |
-| 작업 폴더 | `C:\Users\user\Desktop\pro v new\app` |
+| 작업 폴더 | repository `app/` directory |
 | 마이크 | 에뮬레이터: 확장 컨트롤(…) → Microphone → "Virtual microphone uses host audio input" ON. 실 기기: 권한 허용. |
 
 > ⚠️ 에뮬레이터 가상 마이크가 호스트 입력을 쓰도록 켜져 있어야 곡선이 움직인다.
@@ -27,11 +27,11 @@
 ## 1. 빌드 & 실행
 
 ```
-cd "C:\Users\user\Desktop\pro v new\app"
-C:/src/flutter/bin/flutter.bat run -d emulator-5554
+cd app
+flutter run -d emulator-5554
 ```
 
-- 빌드 해시 기록용: `git rev-parse --short HEAD` 를 실행 직전에 찍어 둔다.
+- 빌드 해시 기록용: repository root에서 `git rev-parse --short HEAD` 를 실행 직전에 찍어 둔다.
 - `flutter run` 콘솔에 "Syncing files to device…" 후 앱 화면이 떠야 한다.
 
 ---

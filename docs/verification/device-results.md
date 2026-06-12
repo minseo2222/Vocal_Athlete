@@ -5,8 +5,10 @@
 
 ## 현재 상태: UNVERIFIED (미수행)
 
-아직 기기 육안 검증을 수행한 사람 기록이 없다. `RecordingPitchSource`는 코드·analyze
-검증만 완료(단위 테스트 대상 아님). 실 기기에서 소리→곡선 반응은 *미확인*이다.
+아직 기기 육안 검증을 수행한 사람 기록이 없다. `RecordingPitchSource`의 lifecycle과
+PCM→F0 변환은 자동 테스트로 검증하지만, 실 기기에서 권한 허용 후 소리→곡선 반응은
+여전히 *미확인*이다. 실제 PASS는 `DEVICE-MIC-VERIFICATION.md` 절차를 수행한 사람
+기록이 append된 뒤에만 가능하다.
 
 ---
 

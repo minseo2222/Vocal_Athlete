@@ -1,25 +1,83 @@
-# vocal_athlete — Flutter 앱 (V1)
+# vocal_athlete Flutter app
 
-설계: 리포 루트 `CONTEXT-MAP.md` · `docs/adr/` · `docs/curriculum/beginner/` · 슬라이스 `.scratch/beginner-v1/`.
-스택 = Flutter (ADR-0013, 조건부: F1 오디오 지연 스파이크). 피치 = pYIN V1 (ADR-0014).
+This directory is the Flutter project root. The repository root contains planning,
+ADR, safety, and verification documents.
 
-## 실행 / 검증 (1-커맨드)
+## Common Commands
 
+Run from `app/`:
+
+```sh
+flutter pub get
+flutter analyze
+flutter test
+flutter run
 ```
-flutter pub get          # 의존성
-flutter analyze          # lint
-flutter test             # 단위테스트(pitch_naive 등)
-flutter run              # 기기/에뮬에서 실행
+
+Useful targeted checks:
+
+```sh
+flutter test test/platform_config_test.dart
+flutter test test/pitch_display_widget_test.dart test/recording_pitch_source_test.dart
+flutter build apk --debug
 ```
 
-> Flutter SDK는 `C:\src\flutter`(PATH 등록됨). 새 터미널에서 `flutter` 바로 사용.
-> 에뮬/기기 빌드는 `flutter doctor` 통과 + Android Studio/SDK + `flutter doctor --android-licenses` 필요.
+Do not commit generated outputs or local environment files such as `build/`,
+`.dart_tool/`, `.gradle/`, `android/local.properties`, APK/AAB files, Dart
+kernel files, keystores, or signing property files.
 
-## 현재 상태: F1 — 오디오 지연 스파이크 (throwaway)
+## App Scope
 
-`lib/main.dart` + `lib/spike/pitch_naive.dart` = **던져버릴 스파이크**. 목적: 마이크→F0→화면
-end-to-end 지연을 실기기에서 측정해 ADR-0013 조건부 채택을 검증(불충족 시 폴백 = 네이티브 1종).
+The app currently implements the beginner lesson flow, progression persistence,
+genre selection gates, visual pitch display, and microphone-backed pitch capture
+through `RecordingPitchSource`.
 
-측정 방법: 기기에서 `flutter run` → "시작(마이크)" → 발성 → `avg latency` 관찰.
-판정 후 결과를 `.scratch/beginner-v1/issues/02-scaffold-boots.md`에 기록하고 스파이크 폐기,
-검증된 구조로 P1/U1 본구현 진입. `pitch_naive`는 A1에서 실제 pYIN으로 교체(U4 seam).
+Pitch detection is an in-app Dart autocorrelation implementation. The display is
+visual guidance only: voiced readings may render a curve/current dot, cards with
+`targetHz` may render a target line and retry nudge, and low-confidence/unvoiced
+input is shown honestly by omitting the dot.
+
+Real-device microphone behavior is still human-verification gated. See
+`../docs/verification/DEVICE-MIC-VERIFICATION.md` and
+`../docs/verification/device-results.md`.
+
+## Safety And Rollout
+
+Safety signoff and genre rollout are human-controlled gates:
+
+- Do not populate `kSafetySignoff` without human review evidence.
+- Do not populate `kReleasedGenres` without a rollout/safety decision.
+- Do not mark pending, UNVERIFIED, or signoff state as approved without evidence.
+
+Related checks are covered by `flutter test`, including verification harness and
+release config tests.
+
+## Android Release Signing
+
+Debug builds use the normal debug key. Release builds must not use debug signing.
+
+For a local release build:
+
+1. Create a keystore outside source control.
+2. Copy `android/key.properties.example` to `android/key.properties`.
+3. Fill in local values for `storeFile`, `storePassword`, `keyAlias`, and
+   `keyPassword`.
+4. Run `flutter build apk --release` or `flutter build appbundle --release`.
+
+`android/key.properties`, `*.jks`, and `*.keystore` are ignored and must not be
+committed. If release signing is missing, the Gradle release task fails with a
+message pointing to `key.properties.example`.
+
+The current Android application ID is `com.vocalathlete.vocal_athlete`. Before a
+public store release, product ownership should confirm this ID in the release
+checklist rather than changing it casually.
+
+## CI
+
+GitHub Actions runs from `app/` and pins Flutter `3.44.0`:
+
+```sh
+flutter pub get
+flutter analyze
+flutter test
+```

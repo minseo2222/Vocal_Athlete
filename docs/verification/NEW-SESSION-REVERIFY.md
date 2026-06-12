@@ -6,8 +6,8 @@
 ## 30초 요약
 
 ```
-cd "C:\Users\user\Desktop\pro v new\app"
-C:/src/flutter/bin/flutter.bat test test/verification_harness_test.dart
+cd app
+flutter test test/verification_harness_test.dart
 ```
 
 - **PASS** = 단일 소스([`verification-status.json`](verification-status.json))가 라이브
@@ -29,9 +29,9 @@ C:/src/flutter/bin/flutter.bat test test/verification_harness_test.dart
 ## 전체 재검증(권장)
 
 ```
-cd "C:\Users\user\Desktop\pro v new\app"
-C:/src/flutter/bin/flutter.bat test     # 전 테스트 green = 게이트/라우팅/정합 전부 일치
-C:/src/flutter/bin/flutter.bat analyze  # No issues found!
+cd app
+flutter test     # 전 테스트 green = 게이트/라우팅/정합 전부 일치
+flutter analyze  # No issues found!
 ```
 
 해당 테스트가 강제하는 불변식:
