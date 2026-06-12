@@ -72,4 +72,32 @@ void main() {
     await tester.pumpAndSettle();
     expect(p.genre, Genre.gayo);
   });
+
+  testWidgets('GC2 genre course in progress hides genre change entry',
+      (tester) async {
+    _phoneViewport(tester);
+    const slot = PathSlot(
+      index: 0,
+      cardId: 'CARD-01',
+      block: 1,
+      bodyVoicedRatio: 0.70,
+      variationLevel: VariationLevel.blocked,
+    );
+    final p = Progression.from([slot], graduated: true);
+    p.toggleRelease(Genre.musical);
+    p.chooseGenre(Genre.musical);
+    expect(p.genre, Genre.musical);
+    expect(p.graduated, isFalse);
+    expect(p.maintenance, isFalse);
+
+    await tester.pumpWidget(DebugApp(initialProgression: p));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('home-settings')));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('settings-screen')), findsOneWidget);
+    expect(find.byKey(const Key('settings-change-genre')), findsNothing);
+  });
 }

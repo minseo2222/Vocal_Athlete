@@ -54,6 +54,13 @@ void main() {
     }
   });
 
+  test('U2.4 production cards have at least one voicedMicroWin', () {
+    for (final entry in kCardLibrary.entries) {
+      expect(entry.value.voicedMicroWin, isNotEmpty,
+          reason: '${entry.key} empty voicedMicroWin');
+    }
+  });
+
   test('U2.3 no card cue contains rationale/motivation tokens (ADR-0002)',
       () {
     // 무납득 구조 강제 — cue는 지시문만, "왜"/정당화 어휘 미포함.

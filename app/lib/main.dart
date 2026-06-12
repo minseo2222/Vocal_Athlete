@@ -183,8 +183,9 @@ class _AppShellState extends State<_AppShell> {
       return SettingsScreen(
         micGranted: _pitchReady,
         onBack: () => setState(() => _showSettings = false),
-        // 졸업/유지 모드(장르 선택됨)에서만 변경 진입점 노출.
-        onChangeGenre: p.genre != null
+        // 졸업/유지 모드에서만 변경 진입점 노출. 장르 코스 진행 중에는
+        // chooseGenre()가 무시되므로 버튼도 숨긴다.
+        onChangeGenre: p.genre != null && (p.graduated || p.maintenance)
             ? () => setState(() {
                   _showSettings = false;
                   _showGenrePicker = true;

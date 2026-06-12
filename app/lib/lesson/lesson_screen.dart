@@ -19,11 +19,14 @@ class LessonScreen extends StatefulWidget {
       {this.progression,
       this.onComplete,
       this.pitchSource,
+      this.lessonInstanceOverride,
       super.key = const Key('lesson-screen')});
 
   final Progression? progression;
   final VoidCallback? onComplete;
   final PitchSource? pitchSource;
+  @visibleForTesting
+  final LessonInstance? lessonInstanceOverride;
 
   @override
   State<LessonScreen> createState() => _LessonScreenState();
@@ -43,8 +46,8 @@ class _LessonScreenState extends State<LessonScreen> {
   @override
   Widget build(BuildContext context) {
     final p = widget.progression;
-    final instance =
-        p == null ? null : resolveLessonInstance(p.todaysLesson, p.day);
+    final instance = widget.lessonInstanceOverride ??
+        (p == null ? null : resolveLessonInstance(p.todaysLesson, p.day));
     final card = instance?.card;
     final id = card?.id;
     if (id != null && _lastCardId != null && id != _lastCardId) {
@@ -175,7 +178,7 @@ class _LessonScreenState extends State<LessonScreen> {
                         ),
                     ],
                   ),
-                  if (card != null) ...[
+                  if (card != null && card.voicedMicroWin.isNotEmpty) ...[
                     const SizedBox(height: 8),
                     Text(
                       '● ${card.voicedMicroWin.first}',

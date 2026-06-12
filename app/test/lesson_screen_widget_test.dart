@@ -4,6 +4,8 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vocal_athlete/main.dart';
+import 'package:vocal_athlete/lesson/card.dart' as lesson;
+import 'package:vocal_athlete/lesson/lesson_instance.dart';
 import 'package:vocal_athlete/lesson/lesson_screen.dart';
 import 'package:vocal_athlete/lesson/pitch/pitch_source.dart';
 import 'package:vocal_athlete/progression/path.dart';
@@ -108,6 +110,40 @@ void main() {
     await tester.pumpAndSettle();
     // CARD-01 voicedMicroWin: "끝에 편한 /m/ 3회(각 2–3초)"
     expect(find.textContaining('/m/ 3회'), findsOneWidget);
+  });
+
+  testWidgets('U2.4 empty voicedMicroWin card does not crash LessonScreen',
+      (tester) async {
+    _phoneViewport(tester);
+    const slot = PathSlot(
+      index: 0,
+      cardId: 'TEST-EMPTY',
+      block: 1,
+      bodyVoicedRatio: 0.70,
+      variationLevel: VariationLevel.blocked,
+    );
+    final instance = buildLessonInstance(
+      const lesson.Card(
+        id: 'TEST-EMPTY',
+        cue: ['편하게 시작.'],
+        voicedMicroWin: [],
+        anatomyEntry: '가벼운 준비',
+        anatomyMain: '빈 micro-win 방어',
+        anatomyCooldown: '가벼운 마무리',
+      ),
+      slot,
+      1,
+    );
+
+    await tester.pumpWidget(MaterialApp(
+      home: LessonScreen(lessonInstanceOverride: instance),
+    ));
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
+    expect(find.byKey(const Key('lesson-screen')), findsOneWidget);
+    expect(find.textContaining('가벼운 준비'), findsOneWidget);
+    expect(find.textContaining('● '), findsNothing);
   });
 
   testWidgets('U6.1 header shows streak (starts at 0)', (tester) async {
