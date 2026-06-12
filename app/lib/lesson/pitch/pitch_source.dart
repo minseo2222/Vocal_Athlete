@@ -24,7 +24,7 @@ abstract class PitchSource {
   Future<void> stop();
 
   /// 리소스 해제. 이후 호출 금지.
-  void dispose();
+  Future<void> dispose();
 }
 
 /// Synthetic source: deterministic wobble around `targetHz`. For UI iteration
@@ -50,7 +50,7 @@ class StubPitchSource implements PitchSource {
   Future<void> stop() async {}
 
   @override
-  void dispose() {}
+  Future<void> dispose() async {}
 
   PitchReading _generate(int i) => PitchReading(
         f0Hz: targetHz + ((i % 10) - 5) * 5.0,

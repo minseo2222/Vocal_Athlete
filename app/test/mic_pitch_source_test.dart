@@ -48,6 +48,6 @@ void main() {
     );
     expect(await src.start(), isTrue);
     await src.stop();
-    src.dispose();
+    await src.dispose();
   });
 }

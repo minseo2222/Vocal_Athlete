@@ -36,6 +36,7 @@ class _PitchDisplayState extends State<PitchDisplay> {
   final Queue<PitchReading> _recent = ListQueue<PitchReading>(_kBufferLen);
   PitchReading? _latest;
   bool _dismissed = false;
+  int _subscriptionEpoch = 0;
 
   @override
   void initState() {
@@ -47,7 +48,12 @@ class _PitchDisplayState extends State<PitchDisplay> {
   void didUpdateWidget(covariant PitchDisplay old) {
     super.didUpdateWidget(old);
     if (old.source != widget.source) {
-      _sub?.cancel();
+      _subscriptionEpoch++;
+      final oldSub = _sub;
+      _sub = null;
+      if (oldSub != null) {
+        _cancelSubscription(oldSub);
+      }
       _latest = null;
       _recent.clear();
       _dismissed = false;
@@ -58,8 +64,9 @@ class _PitchDisplayState extends State<PitchDisplay> {
   void _subscribe() {
     final src = widget.source;
     if (src == null) return;
+    final epoch = _subscriptionEpoch;
     _sub = src.readings.listen((r) {
-      if (!mounted) return;
+      if (!mounted || epoch != _subscriptionEpoch) return;
       setState(() {
         _latest = r;
         if (_recent.length >= _kBufferLen) _recent.removeFirst();
@@ -68,9 +75,27 @@ class _PitchDisplayState extends State<PitchDisplay> {
     });
   }
 
+  void _cancelSubscription(StreamSubscription<PitchReading> sub) {
+    unawaited(
+      sub.cancel().catchError((Object error, StackTrace stack) {
+        FlutterError.reportError(FlutterErrorDetails(
+          exception: error,
+          stack: stack,
+          library: 'vocal_athlete',
+          context: ErrorDescription('cancelling PitchDisplay subscription'),
+        ));
+      }),
+    );
+  }
+
   @override
   void dispose() {
-    _sub?.cancel();
+    _subscriptionEpoch++;
+    final sub = _sub;
+    _sub = null;
+    if (sub != null) {
+      _cancelSubscription(sub);
+    }
     super.dispose();
   }
 

@@ -1,6 +1,8 @@
 /// 앱 엔트리 — 실행 경고 게이트 → 레슨 화면(D, 채택안).
 library;
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'lesson/graduation_screen.dart';
@@ -148,10 +150,17 @@ class _AppShellState extends State<_AppShell> {
   void dispose() {
     final src = widget.pitchSource;
     if (src != null) {
-      // unawaited — dispose는 sync. stop은 fire-and-forget.
-      // ignore: discarded_futures
-      src.stop();
-      src.dispose();
+      // State.dispose is sync; surface async cleanup failures to Flutter.
+      unawaited(
+        src.dispose().catchError((Object error, StackTrace stack) {
+          FlutterError.reportError(FlutterErrorDetails(
+            exception: error,
+            stack: stack,
+            library: 'vocal_athlete',
+            context: ErrorDescription('disposing PitchSource'),
+          ));
+        }),
+      );
     }
     super.dispose();
   }

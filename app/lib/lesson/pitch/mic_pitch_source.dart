@@ -37,5 +37,5 @@ class MicPitchSource implements PitchSource {
   Future<void> stop() async {}
 
   @override
-  void dispose() {}
+  Future<void> dispose() async {}
 }

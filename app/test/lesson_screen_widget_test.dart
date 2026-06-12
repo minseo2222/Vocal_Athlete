@@ -24,7 +24,10 @@ class _SpyPitchSource implements PitchSource {
   @override
   Future<void> stop() async => stopCalls++;
   @override
-  void dispose() => disposeCalls++;
+  Future<void> dispose() async {
+    disposeCalls++;
+    await stop();
+  }
 }
 
 void _phoneViewport(WidgetTester tester) {
