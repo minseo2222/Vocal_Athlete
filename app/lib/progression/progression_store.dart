@@ -10,7 +10,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'progression_state.dart';
 
 class ProgressionStore {
+  ProgressionStore({this._releasedGenres = kReleasedGenres});
+
   static const _key = 'progression_v1';
+  final Set<Genre> _releasedGenres;
 
   /// 저장된 진행 상태 복원. 없으면 null.
   Future<Progression?> load() async {
@@ -18,7 +21,10 @@ class ProgressionStore {
     final s = prefs.getString(_key);
     if (s == null) return null;
     try {
-      return Progression.fromJson(jsonDecode(s) as Map<String, dynamic>);
+      return Progression.fromJson(
+        jsonDecode(s) as Map<String, dynamic>,
+        releasedGenres: _releasedGenres,
+      );
     } catch (_) {
       return null; // 손상된 저장본 → 신규로 안전 폴백(예외 전파 ❌)
     }

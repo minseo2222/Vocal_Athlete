@@ -30,4 +30,32 @@ void main() {
     final store = ProgressionStore();
     expect(await store.load(), isNull); // 신규로 안전 폴백
   });
+
+  test(
+    'S2c store restores released genre course manifest after restart',
+    () async {
+      SharedPreferences.setMockInitialValues({});
+      final store = ProgressionStore(releasedGenres: {Genre.musical});
+
+      final p = Progression.fromJson(
+        Progression.beginner().toJson()
+          ..['graduated'] = true
+          ..['currentIndex'] = 47,
+        releasedGenres: {Genre.musical},
+      );
+      p.chooseGenre(Genre.musical);
+      p.completeLesson();
+      p.advanceDay();
+      await store.save(p);
+
+      final loaded = await store.load();
+      expect(loaded, isNotNull);
+      expect(loaded!.genre, Genre.musical);
+      expect(loaded.maintenance, isFalse);
+      expect(loaded.graduated, isFalse);
+      expect(loaded.currentIndex, p.currentIndex);
+      expect(loaded.total, p.total);
+      expect(loaded.todaysLesson.cardId, p.todaysLesson.cardId);
+    },
+  );
 }

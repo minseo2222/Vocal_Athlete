@@ -22,6 +22,8 @@ enum Genre { musical, classical, gayo }
 ///    출시는 롤아웃·안전 사인오프 결정이라 사람만 한다.
 const Set<Genre> kReleasedGenres = {};
 
+const String _beginnerCourseId = 'beginner';
+
 /// P4 — 캡된 완료의 보고. 전진/캡 동작은 불변, *보고*만 분기.
 enum CompleteOutcome {
   advanced,
@@ -30,7 +32,7 @@ enum CompleteOutcome {
   transitionToNext,
   review,
   graduated,
-  maintenance
+  maintenance,
 }
 
 /// ADR-0010 보강 문구. UI(U7) 표시용 — 캡 에러가 아닌 *전이 화면*.
@@ -47,6 +49,7 @@ const Map<CompleteOutcome, String> kOutcomeMessage = {
 
 class Progression {
   List<PathSlot> _manifest; // I3 — 분기 진입 시 코스 manifest로 교체(swappable)
+  String _courseId; // 영속화용 active manifest key: beginner|musical|classical|gayo
   int _currentIndex; // 0-based, 현재(오늘) 슬롯
   bool _didToday; // P3 — 1일 1레슨 캡
   int _day; // P4 — 달력일(advanceDay에서 증가)
@@ -96,58 +99,87 @@ class Progression {
   int get pendingReview => _pendingReview;
   bool get graduated => _graduated;
 
-  Progression._(this._manifest, this._currentIndex,
-      {this._didToday = false,
-      this._day = 1,
-      this._graduated = false,
-      this._transitionDay = 0,
-      this._lastActiveDay = 0,
-      this._streak = 0,
-      this._pendingReview = 0,
-      this._genre,
-      this._maintenance = false,
-      this._lastCalendarDay = 0,
-      this.safetyApproved = false,
-      Set<Genre> released = const {}})
-      : _released = {...released};
+  Progression._(
+    this._manifest,
+    this._currentIndex, {
+    this._didToday = false,
+    this._courseId = _beginnerCourseId,
+    this._day = 1,
+    this._graduated = false,
+    this._transitionDay = 0,
+    this._lastActiveDay = 0,
+    this._streak = 0,
+    this._pendingReview = 0,
+    this._genre,
+    this._maintenance = false,
+    this._lastCalendarDay = 0,
+    this.safetyApproved = false,
+    Set<Genre> released = const {},
+  }) : _released = {...released};
 
   factory Progression.beginner() =>
-      Progression._(buildPlaceholderManifest(), 0,
-          released: kReleasedGenres);
+      Progression._(buildPlaceholderManifest(), 0, released: kReleasedGenres);
 
-  /// Task 2 — 영속화 직렬화. manifest는 고정 경로라 저장 안 함(복원 시 재생성).
+  /// Task 2 — 영속화 직렬화.
+  ///
+  /// v2 adds [courseId], a stable key used to rebuild the active manifest on
+  /// restore. The manifest itself remains derived data and is never stored.
   Map<String, dynamic> toJson() => {
-        'currentIndex': _currentIndex,
-        'didToday': _didToday,
-        'day': _day,
-        'graduated': _graduated,
-        'transitionDay': _transitionDay,
-        'lastActiveDay': _lastActiveDay,
-        'streak': _streak,
-        'pendingReview': _pendingReview,
-        'genre': _genre?.name,
-        'maintenance': _maintenance,
-        'released': _released.map((g) => g.name).toList(),
-        'lastCalendarDay': _lastCalendarDay,
-      };
+    'schemaVersion': 2,
+    'courseId': _courseId,
+    'currentIndex': _currentIndex,
+    'didToday': _didToday,
+    'day': _day,
+    'graduated': _graduated,
+    'transitionDay': _transitionDay,
+    'lastActiveDay': _lastActiveDay,
+    'streak': _streak,
+    'pendingReview': _pendingReview,
+    'genre': _genre?.name,
+    'maintenance': _maintenance,
+    'released': _released.map((g) => g.name).toList(),
+    'lastCalendarDay': _lastCalendarDay,
+  };
 
-  factory Progression.fromJson(Map<String, dynamic> j) => Progression._(
-        buildPlaceholderManifest(),
-        j['currentIndex'] as int,
-        didToday: j['didToday'] as bool,
-        day: j['day'] as int,
-        graduated: j['graduated'] as bool,
-        transitionDay: j['transitionDay'] as int,
-        lastActiveDay: j['lastActiveDay'] as int,
-        streak: j['streak'] as int,
-        pendingReview: j['pendingReview'] as int,
-        genre: _genreByName(j['genre'] as String?),
-        maintenance: j['maintenance'] as bool,
-        lastCalendarDay: (j['lastCalendarDay'] as int?) ?? 0,
-        // W2 — 출시 상태는 체크인 config가 권위. 저장된 'released'는 무시
-        // (롤아웃은 전역 결정이라 per-user 영속값이 config를 덮지 못함).
-        released: kReleasedGenres,
-      );
+  factory Progression.fromJson(
+    Map<String, dynamic> j, {
+    Set<Genre> releasedGenres = kReleasedGenres,
+    bool safetyApproved = false,
+  }) {
+    var genre = _genreByName(j['genre'] as String?);
+    final requestedCourseId =
+        (j['courseId'] as String?) ?? _legacyCourseId(j, genre, releasedGenres);
+    final requestedGenre = _genreByName(requestedCourseId);
+    if (genre == null && requestedGenre != null) genre = requestedGenre;
+
+    final restored = _restoreManifest(
+      requestedCourseId,
+      genre,
+      releasedGenres,
+      safetyApproved,
+    );
+    final rawIndex = j['currentIndex'] as int;
+
+    return Progression._(
+      restored.manifest,
+      restored.indexOverride ?? _clampIndex(rawIndex, restored.manifest.length),
+      courseId: restored.courseId,
+      didToday: j['didToday'] as bool,
+      day: j['day'] as int,
+      graduated: restored.graduatedOverride ?? j['graduated'] as bool,
+      transitionDay: j['transitionDay'] as int,
+      lastActiveDay: j['lastActiveDay'] as int,
+      streak: j['streak'] as int,
+      pendingReview: j['pendingReview'] as int,
+      genre: genre,
+      maintenance: restored.maintenanceOverride ?? j['maintenance'] as bool,
+      lastCalendarDay: (j['lastCalendarDay'] as int?) ?? 0,
+      safetyApproved: safetyApproved,
+      // W2 — 출시 상태는 현재 앱 config가 권위. 저장된 'released'는 무시
+      // (롤아웃은 전역 결정이라 per-user 영속값이 config를 덮지 못함).
+      released: releasedGenres,
+    );
+  }
 
   /// 테스트용: 임의 매니페스트/위치/상태.
   factory Progression.from(
@@ -159,14 +191,16 @@ class Progression {
     int transitionDay = 0,
     int lastActiveDay = 0,
     bool safetyApproved = false,
-  }) =>
-      Progression._(manifest, currentIndex,
-          didToday: didToday,
-          day: day,
-          graduated: graduated,
-          transitionDay: transitionDay,
-          lastActiveDay: lastActiveDay,
-          safetyApproved: safetyApproved);
+  }) => Progression._(
+    manifest,
+    currentIndex,
+    didToday: didToday,
+    day: day,
+    graduated: graduated,
+    transitionDay: transitionDay,
+    lastActiveDay: lastActiveDay,
+    safetyApproved: safetyApproved,
+  );
 
   int get currentIndex => _currentIndex;
   int get total => _manifest.length;
@@ -255,31 +289,92 @@ class Progression {
 
   /// I3 — 장르 → 코스 manifest(코어 블록1·2 + 분기 블록3·4) 매핑.
   static List<PathSlot> _courseManifest(Genre g) => switch (g) {
-        Genre.musical => buildMusicalManifest(),
-        Genre.classical => buildClassicalManifest(),
-        Genre.gayo => buildGayoManifest(),
-      };
+    Genre.musical => buildMusicalManifest(),
+    Genre.classical => buildClassicalManifest(),
+    Genre.gayo => buildGayoManifest(),
+  };
+
+  static String _courseIdForGenre(Genre g) => g.name;
+
+  static String _legacyCourseId(
+    Map<String, dynamic> j,
+    Genre? genre,
+    Set<Genre> releasedGenres,
+  ) {
+    final graduated = j['graduated'] as bool;
+    final maintenance = j['maintenance'] as bool;
+    if (genre != null &&
+        !graduated &&
+        !maintenance &&
+        releasedGenres.contains(genre)) {
+      return _courseIdForGenre(genre);
+    }
+    return _beginnerCourseId;
+  }
+
+  static _RestoreManifest _restoreManifest(
+    String requestedCourseId,
+    Genre? genre,
+    Set<Genre> releasedGenres,
+    bool safetyApproved,
+  ) {
+    final courseGenre = _genreByName(requestedCourseId);
+    if (courseGenre == null) {
+      return _RestoreManifest(_beginnerCourseId, buildPlaceholderManifest());
+    }
+
+    if (!releasedGenres.contains(courseGenre)) {
+      // If a saved genre course is no longer released in the current app
+      // config, the persisted course index cannot be trusted against any
+      // available manifest. Fall back to the completed beginner path and wait
+      // in maintenance for the selected genre instead of crashing or exposing
+      // gated content.
+      final beginner = buildPlaceholderManifest();
+      return _RestoreManifest(
+        _beginnerCourseId,
+        beginner,
+        indexOverride: beginner.length - 1,
+        graduatedOverride: true,
+        maintenanceOverride: genre != null,
+      );
+    }
+
+    return _RestoreManifest(
+      _courseIdForGenre(courseGenre),
+      _applySafetyGate(_courseManifest(courseGenre), safetyApproved),
+    );
+  }
+
+  static List<PathSlot> _applySafetyGate(
+    List<PathSlot> manifest,
+    bool safetyApproved,
+  ) {
+    if (safetyApproved) return manifest;
+    final gated = safetyGatedCardIds();
+    final kept = manifest.where((s) => !gated.contains(s.cardId)).toList();
+    return [
+      for (var i = 0; i < kept.length; i++)
+        PathSlot(
+          index: i,
+          cardId: kept[i].cardId,
+          block: kept[i].block,
+          bodyVoicedRatio: kept[i].bodyVoicedRatio,
+          variationLevel: kept[i].variationLevel,
+        ),
+    ];
+  }
+
+  static int _clampIndex(int index, int manifestLength) {
+    if (manifestLength <= 0) return 0;
+    return index.clamp(0, manifestLength - 1);
+  }
 
   /// I3 — 코스 진입: 선택 장르의 코어→분기 manifest 로드 + 새 코스 시작.
   /// 완료 기반 진행·1일1레슨 캡은 그대로(새 manifest 위에서 동일 규칙).
   /// I5 — safetyApproved=false면 안전 게이트(pending) 카드 슬롯 제외 후 재인덱싱.
   void _enterCourse(Genre g) {
-    var course = _courseManifest(g);
-    if (!safetyApproved) {
-      final gated = safetyGatedCardIds();
-      final kept = course.where((s) => !gated.contains(s.cardId)).toList();
-      course = [
-        for (var i = 0; i < kept.length; i++)
-          PathSlot(
-            index: i,
-            cardId: kept[i].cardId,
-            block: kept[i].block,
-            bodyVoicedRatio: kept[i].bodyVoicedRatio,
-            variationLevel: kept[i].variationLevel,
-          ),
-      ];
-    }
-    _manifest = course;
+    _manifest = _applySafetyGate(_courseManifest(g), safetyApproved);
+    _courseId = _courseIdForGenre(g);
     _currentIndex = 0; // 새 코스 1과부터
     _maintenance = false;
     _graduated = false;
@@ -292,4 +387,20 @@ class Progression {
     _didToday = false;
     _day++;
   }
+}
+
+class _RestoreManifest {
+  const _RestoreManifest(
+    this.courseId,
+    this.manifest, {
+    this.indexOverride,
+    this.graduatedOverride,
+    this.maintenanceOverride,
+  });
+
+  final String courseId;
+  final List<PathSlot> manifest;
+  final int? indexOverride;
+  final bool? graduatedOverride;
+  final bool? maintenanceOverride;
 }
