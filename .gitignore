@@ -7,8 +7,22 @@ __pycache__/
 # Flutter/Dart build artifacts
 **/.dart_tool/
 **/build/
+**/.gradle/
 **/.flutter-plugins
 **/.flutter-plugins-dependencies
+
+# Local Flutter/Android environment and signing files
+app/android/local.properties
+app/android/key.properties
+*.jks
+*.keystore
+
+# Mobile build outputs and Dart kernel artifacts
+*.apk
+*.aab
+*.dill
+kernel_blob.bin
+
 .superpowers/
 uiux-preview.html
 uiux-mockups.html
@@ -16,3 +30,4 @@ uiux-mockups/
 uiux-mockups-2.html
 uiux-mockups-3.html
 uiux-mockups-r4.html
+REVIEW-BUNDLE.md

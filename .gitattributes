@@ -1,0 +1,17 @@
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.pdf binary
+*.apk binary
+*.aab binary
+*.jks binary
+*.keystore binary
+*.so binary
+*.jar binary
+*.otf binary
+*.ttf binary
+*.ico binary
