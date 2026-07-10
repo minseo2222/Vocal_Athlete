@@ -1,0 +1,7 @@
+BLOCKED: flutter is not installed or not on PATH. Expected Flutter 3.44.x stable.
+
+exit_code=127
+checked_at=2026-06-21
+expected_flutter=3.44.2 stable
+container_flutter_path=not_found
+container_dart_path=not_found

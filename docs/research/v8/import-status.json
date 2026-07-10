@@ -1,0 +1,149 @@
+{
+  "01-beginner-foundation.md": {
+    "original": "1. Beginner Foundation #Ucd08#Uae09 #Uae30#Ucd08 #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_RECOVERY_REQUIRED",
+    "turn_refs": 28,
+    "link_defs": 0,
+    "bytes": 26620
+  },
+  "10-vocal-load-operating-model.md": {
+    "original": "10. Vocal Load - Recovery #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 26,
+    "bytes": 60300
+  },
+  "11-advanced-gayo-kpop-lab.md": {
+    "original": "11. Advanced Gayo - K-pop Lab #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 30,
+    "bytes": 65186
+  },
+  "12-advanced-musical-theatre-lab.md": {
+    "original": "12. Advanced Musical Theatre Lab #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 21,
+    "bytes": 68737
+  },
+  "13-advanced-classical-lab.md": {
+    "original": "13. Advanced Classical Lab #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 29,
+    "bytes": 63792
+  },
+  "14-advanced-rnb-soul-lab.md": {
+    "original": "14. Advanced R&B - Soul Lab #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 22,
+    "bytes": 59281
+  },
+  "15-advanced-rock-band-lab.md": {
+    "original": "15. Advanced Rock - Band Vocal Lab #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 37,
+    "bytes": 78559
+  },
+  "16-advanced-ccm-worship-lab.md": {
+    "original": "16. Advanced CCM - Worship Lab #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 40,
+    "bytes": 80065
+  },
+  "17-portfolio-performance-mode.md": {
+    "original": "17. Portfolio - Performance Mode #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 31,
+    "bytes": 75763
+  },
+  "18-vocal-load-safety-recovery.md": {
+    "original": "18. Vocal Load - Safety - Recovery #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 29,
+    "bytes": 57302
+  },
+  "19-app-learning-methodology.md": {
+    "original": "19. #Uc571 #Uae30#Ubc18 #Ud559#Uc2b5 #Ubc29#Ubc95#Ub860 - #Ud53c#Ub4dc#Ubc31 #Uc124#Uacc4 #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 42,
+    "bytes": 71771
+  },
+  "02-universal-vocal-core.md": {
+    "original": "2. Universal Vocal Core #Uc804#Uccb4 #Uc124#Uacc4 #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_RECOVERY_REQUIRED",
+    "turn_refs": 52,
+    "link_defs": 0,
+    "bytes": 34187
+  },
+  "20-repertoire-asset-authoring.md": {
+    "original": "20. #Ub808#Ud37c#Ud1a0#Ub9ac - #Ud6c8#Ub828 #Uc790#Uc0b0 #Uc81c#Uc791 #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 35,
+    "bytes": 106761
+  },
+  "03-breath-support.md": {
+    "original": "3. Breath & Support #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_RECOVERY_REQUIRED",
+    "turn_refs": 35,
+    "link_defs": 0,
+    "bytes": 38552
+  },
+  "04-phonation-onset.md": {
+    "original": "4. Phonation & Onset #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_RECOVERY_REQUIRED",
+    "turn_refs": 37,
+    "link_defs": 0,
+    "bytes": 40182
+  },
+  "05-pitch-ear.md": {
+    "original": "5. Pitch & Ear #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_RECOVERY_REQUIRED",
+    "turn_refs": 43,
+    "link_defs": 0,
+    "bytes": 32026
+  },
+  "06-registration-range.md": {
+    "original": "6. Registration & Range #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 31,
+    "bytes": 71789
+  },
+  "07-korean-diction.md": {
+    "original": "7. Diction - Korean Lyric Clarity #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 28,
+    "bytes": 55687
+  },
+  "08-repertoire-application.md": {
+    "original": "8. Repertoire Application #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 25,
+    "bytes": 65323
+  },
+  "09-advanced-gayo-background.md": {
+    "original": "9. Advanced Gayo - K-Pop #Ub9ac#Uc11c#Uce58.md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 26,
+    "bytes": 61389
+  },
+  "21-timbre-resonance-integrated-research.md": {
+    "original": "붙여넣은 마크다운(1).md",
+    "status": "SOURCE_LINKED_UNVERIFIED_IN_BULK",
+    "turn_refs": 0,
+    "link_defs": 0,
+    "bytes": 74486
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "vocal-athlete/curriculum-content-manifest@1",
+  "version": "v13",
+  "generatedAt": "2026-06-20",
+  "algorithm": "sha256",
+  "files": {
+    "assets/curriculum/universal_core_cycle_01.json": {
+      "sha256": "b00bafa4a97554c1fcfac988ce83c2e1c6f9addb95dd9d2fad29524ede6cb29a",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1
+    },
+    "assets/curriculum/repertoire_project_01.json": {
+      "sha256": "d527d8a1c3d35a96c1e71021cdf26a3c37b6424c3620ad9c3f70c10c560d8d32",
+      "bundleVersion": "v10",
+      "track": "repertoireApplication",
+      "cycle": 1
+    },
+    "assets/training/universal_core_cycle_01/rights.json": {
+      "sha256": "6bf6ab86feb2b9f92cae6d78d52d30030754dd60dcdb1c0bca7eb89c16f4bda5",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1
+    },
+    "assets/repertoire/neutral_001/rights.json": {
+      "sha256": "495d37ffbba514cfa202c332272680b7193aee84a37b54d96ee454306c73440f",
+      "bundleVersion": "v10",
+      "track": "repertoireApplication",
+      "cycle": 1
+    }
+  }
+}

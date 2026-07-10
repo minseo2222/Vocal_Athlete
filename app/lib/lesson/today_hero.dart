@@ -19,100 +19,93 @@ class TodayHero extends StatelessWidget {
     final instance = resolveLessonInstance(p.todaysLesson, p.day);
     final card = instance.card;
     final done = p.didToday;
+    final progress = p.total > 0 ? (p.currentIndex + (done ? 1 : 0)) / p.total : 0.0;
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: done
-              ? const [Color(0xFF13251C), Color(0xFF101A15)]
-              : const [Color(0xFF1B2030), AppColors.surface],
-        ),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-            color: done ? AppColors.doneSurface : const Color(0xFF262B3B)),
-      ),
-      padding: const EdgeInsets.all(20),
+      decoration: Sun.card(focal: !done),
+      padding: const EdgeInsets.fromLTRB(22, 18, 22, 22),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            done ? '오늘 완료' : '오늘의 레슨',
-            key: done ? const Key('today-done') : null,
-            style: TextStyle(
-                color: done ? AppColors.done : AppColors.textLow,
-                fontSize: 11,
-                letterSpacing: 2),
-          ),
-          const SizedBox(height: 9),
+          // 시그니처 — 진행 링(여정 진행도) + 제목
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (done) ...[
-                Container(
-                  width: 34, height: 34,
-                  decoration: BoxDecoration(
-                    color: AppColors.doneSurface,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: AppColors.done, width: 2),
-                  ),
-                  alignment: Alignment.center,
-                  child: const Text('✓',
-                      style: TextStyle(color: AppColors.done, fontSize: 17)),
-                ),
-                const SizedBox(width: 10),
-              ],
               Expanded(
-                child: Text(card.anatomyMain,
-                    style: const TextStyle(
-                        color: AppColors.textHi,
-                        fontSize: 26,
-                        fontWeight: FontWeight.w800)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      done ? '오늘 완료' : '오늘의 레슨',
+                      key: done ? const Key('today-done') : null,
+                      style: TextStyle(
+                          color: done ? Sun.mint : Sun.inkMid,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 2.5),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(card.anatomyMain,
+                        style: const TextStyle(
+                            color: Sun.ink,
+                            fontSize: 24,
+                            height: 1.18,
+                            letterSpacing: -0.4,
+                            fontWeight: FontWeight.w800)),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 14),
+              ProgressRing(
+                progress: progress.toDouble(),
+                size: 76,
+                stroke: 7,
+                label: '${p.currentIndex + 1}',
+                sub: '/ ${p.total}',
+                color: done ? Sun.mint : Sun.coral,
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           Text(
             done
                 ? '오늘 레슨 끝 — 내일 또.'
                 : (card.cue.isNotEmpty ? card.cue.first : ''),
-            style: const TextStyle(color: AppColors.textMid, fontSize: 13),
+            style: const TextStyle(color: Sun.inkMid, fontSize: 14, height: 1.4),
           ),
           if (!done) ...[
-            const SizedBox(height: 16),
+            const SizedBox(height: 18),
             Wrap(
               spacing: 8,
               runSpacing: 6,
               children: [
                 if (instance.hasVoicedMicroWin)
-                  _chip('● ${card.voicedMicroWin.first}', AppColors.done,
-                      AppColors.doneSurface),
-                _chip('7–11분', AppColors.textMid, AppColors.surfaceAlt),
+                  _chip(card.voicedMicroWin.first),
+                _chip('7–11분'),
               ],
             ),
           ],
-          const SizedBox(height: 18),
-          SizedBox(
-            height: 52,
-            child: FilledButton(
-              key: const Key('start-today'),
-              onPressed: done ? null : onStart,
-              style: FilledButton.styleFrom(
-                  animationDuration: const Duration(milliseconds: 120)),
-              child: Text(done ? '오늘 완료' : '오늘 시작 →',
-                  style:
-                      const TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
-            ),
+          const SizedBox(height: 22),
+          SunsetCta(
+            buttonKey: const Key('start-today'),
+            label: done ? '오늘 완료' : '오늘 시작',
+            onPressed: done ? null : onStart,
+            disabled: done,
+            height: 54,
           ),
         ],
       ),
     );
   }
 
-  Widget _chip(String text, Color fg, Color bg) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),
-        decoration:
-            BoxDecoration(color: bg, borderRadius: BorderRadius.circular(999)),
+  Widget _chip(String text) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+        decoration: BoxDecoration(
+          color: Sun.surfaceSoft,
+          borderRadius: BorderRadius.circular(999),
+          border: Border.all(color: Sun.hairline),
+        ),
         child: Text(text,
-            style: TextStyle(color: fg, fontSize: 11, fontWeight: FontWeight.w600)),
+            style: const TextStyle(
+                color: Sun.inkMid, fontSize: 11.5, fontWeight: FontWeight.w600)),
       );
 }

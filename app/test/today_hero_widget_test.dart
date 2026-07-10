@@ -9,7 +9,7 @@ void main() {
 
   testWidgets('TH1 오늘 — 제목(anatomyMain)·시작 버튼 활성', (tester) async {
     await tester.pumpWidget(host(Progression.beginner()));
-    expect(find.textContaining('6점 정렬 관찰'), findsOneWidget); // CARD-01 anatomyMain
+    expect(find.textContaining('고정 과제 녹음'), findsOneWidget); // R2 Day 1 CARD-13 anatomyMain
     final btn = tester.widget<FilledButton>(find.byKey(const Key('start-today')));
     expect(btn.onPressed, isNotNull);
   });

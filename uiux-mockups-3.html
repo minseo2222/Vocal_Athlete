@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vocal Athlete — 레퍼런스 기반 UI 시안</title>
+<style>
+  :root{ --done:#39D98A; --now:#6C8CFF; --bg:#0E0F13; --surf:#171922; --lock:#2C3142; }
+  *{box-sizing:border-box; -webkit-font-smoothing:antialiased;}
+  body{ margin:0; padding:32px 28px 70px; background:#06070b; color:#e8eaf0;
+        font-family:-apple-system,'Segoe UI',Roboto,sans-serif; }
+  h1{ font-size:22px; margin:0 0 4px; }
+  .lede{ color:#8a8f9c; font-size:13px; max-width:880px; line-height:1.65; }
+  .grid{ display:flex; flex-wrap:wrap; gap:38px; margin-top:28px; align-items:flex-start; }
+  .concept{ width:320px; }
+  .ref{ display:inline-block; font-size:10px; letter-spacing:.4px; color:#0E0F13; font-weight:800;
+        background:var(--now); padding:3px 9px; border-radius:999px; }
+  .ctitle{ font-size:16px; font-weight:700; margin:11px 0 3px; }
+  .cdesc{ font-size:12.5px; color:#9aa1b2; line-height:1.6; }
+  .borrow{ font-size:11.5px; color:#7f8aa6; margin-top:7px; line-height:1.55; }
+  .borrow b{ color:#aab2c8; }
+  /* device */
+  .phone{ width:320px; height:660px; border-radius:42px; border:11px solid #1b1d25;
+          overflow:hidden; position:relative; background:var(--bg);
+          box-shadow:0 22px 50px rgba(0,0,0,.55); display:flex; flex-direction:column; }
+  .status{ height:30px; display:flex; align-items:center; justify-content:space-between;
+           padding:0 22px; font-size:12px; font-weight:700; color:#fff; flex:none; }
+  .status .r{ letter-spacing:1px; }
+  .navbar{ height:58px; flex:none; display:flex; align-items:center; justify-content:space-around;
+           border-top:1px solid #1d2030; background:#0c0d12; }
+  .tab{ display:flex; flex-direction:column; align-items:center; gap:2px; font-size:9.5px; color:#4a4f63; }
+  .tab.on{ color:var(--now); }
+  .tab .ic{ font-size:17px; }
+  .scroll{ flex:1; overflow:hidden; position:relative; }
+  .node{ border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; }
+  .lily{ box-shadow:0 5px 0 rgba(0,0,0,.45); } /* duo 3D */
+  .seclabel{ font-size:10px; letter-spacing:1.5px; text-transform:uppercase; }
+  .start-bubble{ position:absolute; background:#fff; color:#1b6; font-weight:800; font-size:11px;
+                 padding:5px 12px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,.3); }
+  .start-bubble:after{ content:''; position:absolute; left:50%; bottom:-6px; transform:translateX(-50%);
+                 border:6px solid transparent; border-top-color:#fff; border-bottom:0; }
+</style></head><body>
+
+<h1>Vocal Athlete — 레퍼런스 기반 풀-디테일 시안</h1>
+<p class="lede">"대충"이 아니라 <b>실제로 성공한 앱의 검증된 패턴</b>을 근거로, 상태바·상단 스탯바·하단 탭까지 갖춘 풀 화면 4종. 각 시안에 <b>어떤 앱의 어떤 패턴을 차용</b>했는지 명시. 응원/설명 카피는 ADR-0002에 맞춰 제거하고 <i>레이아웃·컴포넌트 구조</i>만 차용했어. 실 데이터(🔥3일·블록 토대/SOVT/발성/감각/졸업·오늘 "빨대 발성"·3/48).</p>
+
+<div class="grid">
+
+<!-- R1 DUOLINGO PATH -->
+<div class="concept">
+  <div class="phone">
+    <div class="status"><span>9:41</span><span class="r">●●● ▰▰</span></div>
+    <!-- top stat bar -->
+    <div style="flex:none;display:flex;align-items:center;justify-content:space-between;padding:8px 18px 12px;">
+      <div style="width:34px;height:34px;border-radius:50%;background:#241b33;display:flex;align-items:center;justify-content:center;font-size:17px;border:1px solid #3a2f53;">🎭</div>
+      <div style="display:flex;gap:16px;font-size:14px;font-weight:800;">
+        <span style="color:#ff9f43;">🔥 3</span>
+        <span style="color:var(--done);">◆ 47</span>
+        <span style="color:#9aa1b2;">◷ 0/1</span>
+      </div>
+    </div>
+    <div class="scroll">
+      <!-- unit header banner (Duolingo) -->
+      <div style="margin:6px 16px 0;background:linear-gradient(180deg,#3a57c4,#2f49a8);border-radius:14px;padding:12px 16px;display:flex;align-items:center;box-shadow:0 4px 0 #233a86;">
+        <div><div style="font-size:10px;color:#c5d2ff;letter-spacing:1px;">블록 2 · 9과 중 3</div>
+          <div style="font-size:15px;font-weight:800;color:#fff;">SOVT · 반폐쇄 발성</div></div>
+        <div style="margin-left:auto;font-size:18px;opacity:.9;">📘</div>
+      </div>
+      <!-- winding path -->
+      <div style="position:relative;height:380px;margin-top:6px;">
+        <div class="start-bubble" style="left:96px;top:6px;">오늘</div>
+        <div class="node lily" style="position:absolute;left:108px;top:34px;width:62px;height:62px;background:var(--now);color:#fff;font-size:22px;box-shadow:0 6px 0 #3a55c9,0 0 0 6px rgba(108,140,255,.25);">▶</div>
+        <div class="node lily" style="position:absolute;left:188px;top:118px;width:56px;height:56px;background:var(--surf);color:#3a3f55;font-size:19px;box-shadow:0 5px 0 #0a0b0f;">🔒</div>
+        <div class="node lily" style="position:absolute;left:96px;top:196px;width:56px;height:56px;background:var(--surf);color:#3a3f55;font-size:19px;box-shadow:0 5px 0 #0a0b0f;">🔒</div>
+        <!-- done below -->
+        <div class="node lily" style="position:absolute;left:40px;top:284px;width:56px;height:56px;background:#1d3a2c;border:2px solid var(--done);color:var(--done);font-size:20px;box-shadow:0 5px 0 #0c1f17;">✓</div>
+        <div class="node lily" style="position:absolute;left:150px;top:316px;width:56px;height:56px;background:#1d3a2c;border:2px solid var(--done);color:var(--done);font-size:20px;box-shadow:0 5px 0 #0c1f17;">✓</div>
+        <!-- mascot/genre illustration beside path -->
+        <div style="position:absolute;right:20px;top:212px;font-size:40px;opacity:.85;">🎭</div>
+      </div>
+    </div>
+    <div class="navbar">
+      <div class="tab on"><span class="ic">🏠</span>홈</div>
+      <div class="tab"><span class="ic">🎙</span>연습</div>
+      <div class="tab"><span class="ic">📊</span>통계</div>
+      <div class="tab"><span class="ic">👤</span>프로필</div>
+    </div>
+  </div>
+  <div style="margin-top:14px;"><span class="ref">REF · Duolingo</span></div>
+  <div class="ctitle">가이드 경로 (학습 맵의 정석)</div>
+  <div class="cdesc">검증된 "한 단계씩 따라가는 길". 유닛 헤더 배너 + 3D 입체 노드 + 현재 노드의 펄스 링과 "오늘" 말풍선 + 상단 스탯바 + 하단 4탭.</div>
+  <div class="borrow"><b>차용:</b> 유닛 헤더(블록 진척)·lily-pad 노드 3D 그림자·현재 노드 START 버블·상단 streak/진행 스탯바·하단 탭바. <b>제거:</b> 하트(생명)·응원 멘트 → 1일1레슨·무납득에 맞게 ◷ 오늘 0/1 링으로 대체.</div>
+</div>
+
+<!-- R2 HEADSPACE CALM -->
+<div class="concept">
+  <div class="phone" style="background:linear-gradient(180deg,#1a1d3a 0%,#14152a 40%,#0e0f1a 100%);">
+    <div class="status"><span>9:41</span><span class="r">●●● ▰▰</span></div>
+    <div class="scroll" style="padding:6px 18px 0;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;">
+        <div style="font-size:13px;color:#aab2d8;">6월 9일 화요일</div>
+        <div style="font-size:13px;font-weight:800;color:#ffb070;">🔥 3일</div>
+      </div>
+      <!-- hero today card -->
+      <div style="margin-top:14px;border-radius:24px;padding:22px;background:radial-gradient(120% 100% at 20% 0%,#3a3f7a 0%,#2a2c5a 55%,#222348 100%);box-shadow:0 14px 30px rgba(20,20,60,.5);">
+        <div style="font-size:11px;letter-spacing:1.5px;color:#b9c0ee;">오늘 · 블록 2 SOVT</div>
+        <div style="font-size:28px;font-weight:800;color:#fff;margin-top:10px;line-height:1.2;">빨대 발성</div>
+        <div style="font-size:13px;color:#c6ccf0;margin-top:8px;">물컵에 빨대 — 가는 거품 일정하게.</div>
+        <div style="display:flex;gap:8px;margin-top:16px;">
+          <span style="font-size:11px;color:#0e0f1a;background:#a9f0cf;padding:5px 11px;border-radius:999px;font-weight:700;">● 유성 5초×5</span>
+          <span style="font-size:11px;color:#c6ccf0;background:#ffffff1a;padding:5px 11px;border-radius:999px;">7–11분</span>
+        </div>
+        <div style="margin-top:18px;background:#fff;color:#2a2c5a;text-align:center;padding:13px;border-radius:14px;font-weight:800;font-size:15px;">오늘 시작</div>
+      </div>
+      <!-- this week dots -->
+      <div style="margin-top:22px;display:flex;justify-content:space-between;">
+        <div style="font-size:11px;color:#8a90b8;letter-spacing:1px;">이번 주</div>
+        <div style="font-size:11px;color:#8a90b8;">여정 3 / 48</div>
+      </div>
+      <div style="margin-top:10px;display:flex;justify-content:space-between;">
+        <div style="text-align:center;font-size:10px;color:#6b7196;">일<br><span style="display:inline-block;margin-top:5px;width:22px;height:22px;border-radius:50%;background:#2a2c4a;"></span></div>
+        <div style="text-align:center;font-size:10px;color:#6b7196;">월<br><span style="display:inline-block;margin-top:5px;width:22px;height:22px;border-radius:50%;background:var(--done);"></span></div>
+        <div style="text-align:center;font-size:10px;color:#6b7196;">화<br><span style="display:inline-block;margin-top:5px;width:22px;height:22px;border-radius:50%;background:var(--done);"></span></div>
+        <div style="text-align:center;font-size:10px;color:#6b7196;">수<br><span style="display:inline-block;margin-top:5px;width:22px;height:22px;border-radius:50%;background:var(--done);"></span></div>
+        <div style="text-align:center;font-size:10px;color:#aab2d8;">목<br><span style="display:inline-block;margin-top:5px;width:22px;height:22px;border-radius:50%;border:2px solid var(--now);"></span></div>
+        <div style="text-align:center;font-size:10px;color:#6b7196;">금<br><span style="display:inline-block;margin-top:5px;width:22px;height:22px;border-radius:50%;background:#2a2c4a;"></span></div>
+        <div style="text-align:center;font-size:10px;color:#6b7196;">토<br><span style="display:inline-block;margin-top:5px;width:22px;height:22px;border-radius:50%;background:#2a2c4a;"></span></div>
+      </div>
+    </div>
+    <div class="navbar" style="background:#0c0d18;">
+      <div class="tab on"><span class="ic">◎</span>오늘</div>
+      <div class="tab"><span class="ic">🗺</span>여정</div>
+      <div class="tab"><span class="ic">📊</span>통계</div>
+      <div class="tab"><span class="ic">⚙</span>설정</div>
+    </div>
+  </div>
+  <div style="margin-top:14px;"><span class="ref">REF · Headspace/Calm</span></div>
+  <div class="ctitle">캄(Calm) 데일리 홈</div>
+  <div class="cdesc">단일 "오늘의 세션"을 전면 히어로로. 탐색 부담 0 — 매일 한 가지에 집중. 부드러운 그라데이션·여백·주간 점.</div>
+  <div class="borrow"><b>차용:</b> 단일 추천 세션 히어로 카드(제목·시간·시작)·하단 스트릭·이번 주 점·4탭. <b>적합성:</b> 1일1레슨 모델과 거의 1:1(고를 게 없음). 차분·프리미엄.</div>
+</div>
+
+<!-- R3 YOUSICIAN PRACTICE -->
+<div class="concept">
+  <div class="phone" style="background:#0c0f14;">
+    <div class="status"><span>9:41</span><span class="r">●●● ▰▰</span></div>
+    <div class="scroll" style="padding:8px 16px 0;">
+      <div style="font-size:11px;letter-spacing:1.5px;color:#5f93c0;">이어서 연습</div>
+      <!-- continue card with waveform -->
+      <div style="margin-top:8px;border-radius:18px;background:linear-gradient(135deg,#15324a,#122233);border:1px solid #1d4060;padding:16px;">
+        <div style="display:flex;align-items:flex-end;gap:3px;height:36px;margin-bottom:12px;opacity:.9;">
+          <!-- waveform -->
+          <i style="flex:1;height:40%;background:#2bb6e6;border-radius:2px;"></i><i style="flex:1;height:70%;background:#2bb6e6;border-radius:2px;"></i><i style="flex:1;height:100%;background:#2bb6e6;border-radius:2px;"></i><i style="flex:1;height:55%;background:#2bb6e6;border-radius:2px;"></i><i style="flex:1;height:80%;background:#2bb6e6;border-radius:2px;"></i><i style="flex:1;height:35%;background:#2bb6e6;border-radius:2px;"></i><i style="flex:1;height:60%;background:#2bb6e6;border-radius:2px;"></i><i style="flex:1;height:90%;background:#2bb6e6;border-radius:2px;"></i><i style="flex:1;height:45%;background:#2bb6e6;border-radius:2px;"></i><i style="flex:1;height:75%;background:#2bb6e6;border-radius:2px;"></i>
+        </div>
+        <div style="font-size:21px;font-weight:800;color:#fff;">빨대 발성</div>
+        <div style="font-size:12px;color:#8fb4cf;margin-top:3px;">블록 2 SOVT · 3/9</div>
+        <div style="margin-top:14px;display:flex;align-items:center;gap:12px;">
+          <div style="width:46px;height:46px;border-radius:50%;background:#2bb6e6;color:#06121b;display:flex;align-items:center;justify-content:center;font-size:20px;">▶</div>
+          <div style="flex:1;height:6px;background:#15324a;border-radius:3px;overflow:hidden;"><div style="width:33%;height:100%;background:#2bb6e6;"></div></div>
+        </div>
+      </div>
+      <!-- stat tiles -->
+      <div style="display:flex;gap:10px;margin-top:14px;">
+        <div style="flex:1;background:#13161d;border:1px solid #20242f;border-radius:12px;padding:12px;text-align:center;">
+          <div style="font-size:19px;font-weight:800;color:#fff;">42<span style="font-size:11px;color:#8a8f9c;">분</span></div>
+          <div style="font-size:10px;color:#8a8f9c;margin-top:2px;">이번 주</div></div>
+        <div style="flex:1;background:#13161d;border:1px solid #20242f;border-radius:12px;padding:12px;text-align:center;">
+          <div style="font-size:19px;font-weight:800;color:#ff9f43;">3<span style="font-size:11px;color:#8a8f9c;">일</span></div>
+          <div style="font-size:10px;color:#8a8f9c;margin-top:2px;">스트릭</div></div>
+        <div style="flex:1;background:#13161d;border:1px solid #20242f;border-radius:12px;padding:12px;text-align:center;">
+          <div style="font-size:19px;font-weight:800;color:#566179;">—</div>
+          <div style="font-size:10px;color:#8a8f9c;margin-top:2px;">정확도·마이크</div></div>
+      </div>
+      <!-- block lesson rail -->
+      <div style="font-size:11px;color:#8a8f9c;letter-spacing:1px;margin:18px 0 8px;">블록 2 · SOVT</div>
+      <div style="display:flex;gap:10px;">
+        <div style="width:84px;flex:none;background:#101820;border:1px solid #1d3a2c;border-radius:12px;padding:10px;text-align:center;"><div style="font-size:20px;color:var(--done);">✓</div><div style="font-size:10px;color:#7fae95;margin-top:4px;">립버블</div></div>
+        <div style="width:84px;flex:none;background:#11203a;border:2px solid var(--now);border-radius:12px;padding:10px;text-align:center;"><div style="font-size:20px;color:var(--now);">▶</div><div style="font-size:10px;color:#aeb9ff;margin-top:4px;">빨대 발성</div></div>
+        <div style="width:84px;flex:none;background:#13161d;border:1px solid #20242f;border-radius:12px;padding:10px;text-align:center;"><div style="font-size:20px;color:#3a3f55;">🔒</div><div style="font-size:10px;color:#566179;margin-top:4px;">허밍</div></div>
+      </div>
+    </div>
+    <div class="navbar">
+      <div class="tab on"><span class="ic">🏠</span>홈</div>
+      <div class="tab"><span class="ic">▦</span>레슨</div>
+      <div class="tab"><span class="ic">📊</span>통계</div>
+      <div class="tab"><span class="ic">👤</span>프로필</div>
+    </div>
+  </div>
+  <div style="margin-top:14px;"><span class="ref">REF · Yousician</span></div>
+  <div class="ctitle">연습 중심 홈 (음악 학습)</div>
+  <div class="cdesc">"이어서 연습" 카드 + 파형 + 연습 통계 타일 + 블록 레슨 가로 레일. 음악/연습 앱의 정체성·데이터 동기부여.</div>
+  <div class="borrow"><b>차용:</b> 이어서-연습 카드·파형 비주얼·통계 타일(분/스트릭/정확도)·가로 레슨 레일·4탭. <b>적합성:</b> "발성=소리" 주제 부합. 정확도는 마이크 검증 후 활성(현재 '—').</div>
+</div>
+
+<!-- R4 SYNTHESIS (RECOMMENDED) -->
+<div class="concept">
+  <div class="phone">
+    <div class="status"><span>9:41</span><span class="r">●●● ▰▰</span></div>
+    <div style="flex:none;display:flex;align-items:center;justify-content:space-between;padding:8px 18px 10px;">
+      <div style="font-size:13px;color:#8a8f9c;">6월 9일 · <span style="color:#fff;">블록 2 SOVT</span></div>
+      <div style="font-size:14px;font-weight:800;color:#ff9f43;">🔥 3</div>
+    </div>
+    <div class="scroll" style="padding:0 16px;">
+      <!-- today hero (Headspace) -->
+      <div style="border-radius:20px;padding:18px;background:linear-gradient(150deg,#1e2336,#16192a);border:1px solid #29314e;box-shadow:0 10px 26px rgba(20,30,70,.4);">
+        <div style="font-size:10px;letter-spacing:1.5px;color:#8fa0d8;">오늘의 레슨</div>
+        <div style="font-size:25px;font-weight:800;color:#fff;margin-top:8px;">빨대 발성</div>
+        <div style="font-size:12.5px;color:#9aa1b2;margin-top:6px;">물컵에 빨대 — 가는 거품 일정하게.</div>
+        <div style="margin-top:16px;background:var(--now);color:#fff;text-align:center;padding:13px;border-radius:13px;font-weight:800;">오늘 시작 →</div>
+      </div>
+      <!-- mini path (Duolingo nodes, compact) -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:20px 4px 8px;">
+        <div style="font-size:11px;color:#8a8f9c;letter-spacing:1px;">여정</div>
+        <div style="font-size:11px;color:#8a8f9c;">3 / 48 · 졸업까지 45</div>
+      </div>
+      <div style="position:relative;height:150px;background:#101117;border:1px solid #1c2030;border-radius:16px;overflow:hidden;">
+        <svg width="100%" height="100%" viewBox="0 0 290 150" preserveAspectRatio="none" style="position:absolute;inset:0;"><path d="M30 110 C 80 110 90 50 140 50 S 210 110 260 70" fill="none" stroke="#222637" stroke-width="5" stroke-dasharray="2 10" stroke-linecap="round"/></svg>
+        <div class="node lily" style="position:absolute;left:14px;top:92px;width:36px;height:36px;background:#1d3a2c;border:2px solid var(--done);color:var(--done);box-shadow:0 4px 0 #0c1f17;font-size:15px;">✓</div>
+        <div class="node lily" style="position:absolute;left:120px;top:30px;width:44px;height:44px;background:var(--now);color:#fff;box-shadow:0 5px 0 #3a55c9,0 0 0 5px rgba(108,140,255,.22);font-size:17px;">▶</div>
+        <div class="node lily" style="position:absolute;left:236px;top:52px;width:36px;height:36px;background:var(--surf);color:#3a3f55;box-shadow:0 4px 0 #0a0b0f;font-size:15px;">🔒</div>
+        <div style="position:absolute;left:104px;top:80px;font-size:10px;color:#aeb9ff;">오늘</div>
+      </div>
+      <!-- block chips -->
+      <div style="display:flex;gap:6px;margin-top:14px;">
+        <span style="flex:1;text-align:center;font-size:10px;padding:6px 0;border-radius:8px;background:#13231b;color:var(--done);">토대 ✓</span>
+        <span style="flex:1;text-align:center;font-size:10px;padding:6px 0;border-radius:8px;background:#11203a;color:var(--now);border:1px solid #2b3a60;">SOVT</span>
+        <span style="flex:1;text-align:center;font-size:10px;padding:6px 0;border-radius:8px;background:#15171f;color:#566179;">발성</span>
+        <span style="flex:1;text-align:center;font-size:10px;padding:6px 0;border-radius:8px;background:#15171f;color:#566179;">감각</span>
+        <span style="flex:1;text-align:center;font-size:10px;padding:6px 0;border-radius:8px;background:#15171f;color:#566179;">졸업</span>
+      </div>
+    </div>
+    <div class="navbar">
+      <div class="tab on"><span class="ic">🏠</span>홈</div>
+      <div class="tab"><span class="ic">🗺</span>여정</div>
+      <div class="tab"><span class="ic">📊</span>통계</div>
+      <div class="tab"><span class="ic">👤</span>프로필</div>
+    </div>
+  </div>
+  <div style="margin-top:14px;"><span class="ref" style="background:var(--done);">추천 · 합성</span></div>
+  <div class="ctitle">오늘-히어로 + 미니 경로 (이 앱에 최적)</div>
+  <div class="cdesc">Headspace의 "오늘 하나"와 Duolingo의 "경로 진행감"을 합침. 상단은 오늘 한 레슨에 집중, 하단은 여정·블록을 한눈에. 1일1레슨에 정확히 맞고 확장도 쉬움.</div>
+  <div class="borrow"><b>차용:</b> 오늘 히어로 카드(Headspace) + 컴팩트 경로·3D 노드·블록 칩(Duolingo) + 통계/여정 탭. <b>왜 추천:</b> 고를 게 없는 1일1레슨엔 '오늘 집중'이 맞고, 경로는 동기·맥락만 보조.</div>
+</div>
+
+</div>
+
+<p class="lede" style="margin-top:34px;color:#777f90;">완료 ● <span style="color:var(--done);">초록</span> · 오늘 ● <span style="color:var(--now);">파랑</span> · 미래 ● 회색. &nbsp;출처: Duolingo 홈 리디자인, Yousician, Headspace/Calm 데일리 홈 패턴 참고.</p>
+</body></html>

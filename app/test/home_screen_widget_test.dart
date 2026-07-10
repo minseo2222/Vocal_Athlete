@@ -3,8 +3,13 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:vocal_athlete/assessment/learning_evidence.dart';
+import 'package:vocal_athlete/assessment/review_evidence.dart';
+import 'package:vocal_athlete/assessment/review_queue.dart';
 import 'package:vocal_athlete/lesson/lesson_screen.dart';
 import 'package:vocal_athlete/main.dart';
+
+import 'support/flow_app.dart';
 
 void _phoneViewport(WidgetTester tester) {
   tester.view.physicalSize = const Size(1260, 2700);
@@ -22,8 +27,8 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byKey(const Key('home-screen')), findsOneWidget);
     expect(find.byType(LessonScreen), findsNothing);
-    // 오늘 카드 프리뷰 — CARD-01 anatomyMain "6점 정렬 관찰"
-    expect(find.textContaining('6점 정렬 관찰'), findsOneWidget);
+    // 오늘 카드 프리뷰 — R2 Day 1 CARD-13 anatomyMain "고정 과제 녹음"
+    expect(find.textContaining('고정 과제 녹음'), findsOneWidget);
     expect(find.byKey(const Key('start-today')), findsOneWidget);
   });
 
@@ -53,7 +58,7 @@ void main() {
   testWidgets('H4 completing today returns home with 오늘 완료 state',
       (tester) async {
     _phoneViewport(tester);
-    await tester.pumpWidget(const DebugApp());
+    await tester.pumpWidget(flowApp());
     await tester.tap(find.widgetWithText(FilledButton, '확인'));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('start-today')));
@@ -72,4 +77,38 @@ void main() {
         find.byKey(const Key('start-today')));
     expect(start.onPressed, isNull);
   });
+
+  testWidgets('v13 due review appears as optional Today card', (tester) async {
+    _phoneViewport(tester);
+    final queue = InMemoryReviewQueueRepository();
+    await queue.saveItem(const ReviewQueueItem(
+      id: 'today_review_1',
+      sourceEvidenceId: 'source_1',
+      track: 'universalCore',
+      cycle: 1,
+      day: 1,
+      cardId: 'UC-01',
+      kind: ReviewTaskKind.retention,
+      targetEvidence: LearningEvidenceLevel.e2,
+      dueEpochDay: 10,
+      createdEpochMs: 1000,
+      contentRevision:
+          'universalCore:1:v10:day_1:UC-01:sha256_b00bafa4a975',
+    ));
+    await tester.pumpWidget(DebugApp(
+      evidenceRepository: InMemoryLearningEvidenceRepository(),
+      reviewQueueRepository: queue,
+      reviewEvidenceRepository: InMemoryReviewEvidenceRepository(),
+      todayEpochDay: 10,
+    ));
+    await tester.tap(find.widgetWithText(FilledButton, '확인'));
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(const Key('today-review-card')), findsOneWidget);
+    expect(find.textContaining('진도와 streak에 영향 없음'), findsOneWidget);
+    await tester.tap(find.byKey(const Key('today-review-open')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('review-queue-screen')), findsOneWidget);
+  });
+
 }

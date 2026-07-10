@@ -1,7 +1,0 @@
-{
-  "enabledPlugins": {
-    "watch@claude-video": true,
-    "superpowers@claude-plugins-official": true,
-    "understand-anything@understand-anything": true
-  }
-}

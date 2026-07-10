@@ -1,16 +1,24 @@
 /// U4 — PitchSource interface (ADR-0014 swappable seam).
 ///
-/// Real F0 detection (pYIN) drops in behind the same interface in A1 (issue 25).
+/// Real F0 detection drops in behind the same interface; V1 uses on-device Dart F0.
 /// Pure: no Flutter imports.
 library;
 
 class PitchReading {
-  const PitchReading({required this.f0Hz, required this.timestampSec});
+  const PitchReading({
+    required this.f0Hz,
+    required this.timestampSec,
+    this.ringRaw,
+  });
 
   /// Estimated fundamental in Hz; null = unvoiced / low-confidence.
   /// Honest reporting (ADR-0014): nulls are surfaced, not hidden behind a guess.
   final double? f0Hz;
   final double timestampSec;
+
+  /// 2~4kHz 상대 밴드 에너지(raw). 절대값 아님 — 세션 내 상대 추세 입력으로만.
+  /// 실 마이크 소스만 채우고, stub/합성 소스는 null로 둔다.
+  final double? ringRaw;
 }
 
 abstract class PitchSource {
@@ -24,7 +32,7 @@ abstract class PitchSource {
   Future<void> stop();
 
   /// 리소스 해제. 이후 호출 금지.
-  Future<void> dispose();
+  void dispose();
 }
 
 /// Synthetic source: deterministic wobble around `targetHz`. For UI iteration
@@ -50,7 +58,7 @@ class StubPitchSource implements PitchSource {
   Future<void> stop() async {}
 
   @override
-  Future<void> dispose() async {}
+  void dispose() {}
 
   PitchReading _generate(int i) => PitchReading(
         f0Hz: targetHz + ((i % 10) - 5) * 5.0,

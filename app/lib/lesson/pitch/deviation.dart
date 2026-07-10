@@ -7,6 +7,7 @@ library;
 import 'dart:math' as math;
 
 import 'pitch_source.dart';
+import 'pitch_tolerance.dart';
 
 enum DeviationDirection { flat, sharp, none }
 
@@ -20,7 +21,13 @@ double centsFromTarget(double f0Hz, double targetHz) =>
   double severeCents = 100,
   int windowN = 5,
   int severeMin = 3,
+  ({int intervalSemitones, ToleranceLevel level})? tolerance,
 }) {
+  // 음정/레벨 컨텍스트가 있으면 그에 맞는 허용오차를 severe 임계값으로 쓰고,
+  // 없으면 기존 severeCents(기본 100)를 그대로 유지한다.
+  final threshold = tolerance == null
+      ? severeCents
+      : toleranceCents(tolerance.intervalSemitones, tolerance.level);
   final voiced = recent
       .where((r) => r.f0Hz != null && r.f0Hz! > 0)
       .map((r) => centsFromTarget(r.f0Hz!, targetHz))
@@ -30,7 +37,7 @@ double centsFromTarget(double f0Hz, double targetHz) =>
   }
   final window =
       voiced.length <= windowN ? voiced : voiced.sublist(voiced.length - windowN);
-  final severe = window.where((c) => c.abs() > severeCents).toList();
+  final severe = window.where((c) => c.abs() > threshold).toList();
   if (severe.length < severeMin) {
     return (nudge: false, direction: DeviationDirection.none);
   }

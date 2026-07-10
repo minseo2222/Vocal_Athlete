@@ -1,0 +1,78 @@
+{
+  "assetId": "universal_core_cycle_01",
+  "status": "prototype_original_synthetic",
+  "owner": "Vocal Athlete project",
+  "thirdPartyAudio": false,
+  "humanVocalRecording": false,
+  "usage": "short reference tones, contours, phrase and pulse cues",
+  "note": "Synthetic low/mid prompts only; not a diagnostic or final pedagogic master. Peak is deliberately limited for prototype playback.",
+  "prototypePeakFullScale": 0.5,
+  "files": [
+    {
+      "path": "reference_pitch_low.wav",
+      "sha256": "22a9b7816e4f4d0c2b6e32a963550e95d27222437de8b612277e7c0660f333d8",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "reference_pitch_mid.wav",
+      "sha256": "adf8dcb5261168ef2801bbe9dea1c825af2994fb4103e3d71f3619256527136f",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "three_note_arch_low.wav",
+      "sha256": "d18a37a217fdd9f95588ed6bc1f3d2e849783dcfc0a411be63848ff6d517927e",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "three_note_arch_mid.wav",
+      "sha256": "a8e3040e6663bf1bb71725dd700335bdacaadf08fb13ab5de576f1e534fc1864",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "sovt_contour_low.wav",
+      "sha256": "6ea3c181acbd608622c1eb5f3a6cdc0746f915237ba95fa1f419db99c824957b",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "sovt_contour_mid.wav",
+      "sha256": "2dd9fec4d246801e4bafe42f287bee262363755034bd11d26dee1b04dd982ae1",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "pulse_72bpm.wav",
+      "sha256": "f2a97d6a09ac41309630b2ff13b86468c1e729e5597a76be202e09f75b27c098",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "phrase_4beat_u_low.wav",
+      "sha256": "486e737e2bf2d4b82c726be0ece6580557367c85be82ac2592e15fd1a9394d8c",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "phrase_4beat_u_mid.wav",
+      "sha256": "473bb3e9bc3c6ba225335b606769545c55513e7fe6fb528cb9cd9ac8999d0ad3",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "one_note_phrase_low.wav",
+      "sha256": "8f4bc410dc779b7fad4bfda8546aff66c40915e26533e5c8444a56fd16edf746",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "one_note_phrase_mid.wav",
+      "sha256": "36a8197edac854cfa17ffac6dc65f123bb099d990b104eaac270194feaacf8da",
+      "sampleRate": 24000,
+      "channels": 1
+    }
+  ]
+}

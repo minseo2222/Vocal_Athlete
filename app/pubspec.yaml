@@ -1,5 +1,5 @@
 name: vocal_athlete
-description: "A new Flutter project."
+description: "A local-first vocal training app with guided practice, review, and voice-safety checks."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.18.0+18
 
 environment:
   sdk: ^3.12.0
@@ -36,13 +36,27 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   # 진행 상태 영속화(Task 2).
-  shared_preferences: ^2.3.0
+  shared_preferences: ^2.5.5
 
-  # 실 마이크 PCM 스트림(A1 — frames 어댑터).
-  record: ^6.2.1
+  # 실 마이크 PCM 스트림 및 녹음 파일 캡처.
+  record: ^7.1.0
+
+  # 녹음 take 로컬 파일 재생.
+  audioplayers: ^6.7.1
+
+  # local-first 녹음 파일/메타데이터 저장 위치.
+  path_provider: ^2.1.6
+
+  # 마이크 권한 거부 시 OS 앱 설정 화면으로 보내기(openAppSettings).
+  permission_handler: ^11.3.1
+
+  # Reads the version generated from pubspec.yaml on each platform.
+  package_info_plus: ^8.3.1
 
 dev_dependencies:
   flutter_test:
+    sdk: flutter
+  integration_test:
     sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -62,6 +76,14 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/curriculum/
+    - assets/training/universal_core_cycle_01/
+    - assets/training/timbre_v16/
+    - assets/repertoire/neutral_001/
+    - assets/repertoire/neutral_002/
+    - assets/repertoire/korean_001/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

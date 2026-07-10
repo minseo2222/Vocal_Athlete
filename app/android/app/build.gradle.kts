@@ -1,3 +1,4 @@
+import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
@@ -6,13 +7,36 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-val releaseKeystorePropertiesFile = rootProject.file("key.properties")
-val releaseKeystoreProperties =
-    Properties().apply {
-        if (releaseKeystorePropertiesFile.exists()) {
-            releaseKeystorePropertiesFile.inputStream().use { load(it) }
+val keystorePropertiesFile = rootProject.file("key.properties")
+val keystoreProperties = Properties()
+if (keystorePropertiesFile.exists()) {
+    FileInputStream(keystorePropertiesFile).use(keystoreProperties::load)
+}
+
+val requiredSigningProperties = listOf("storeFile", "storePassword", "keyAlias", "keyPassword")
+val missingSigningProperties =
+    requiredSigningProperties.filter { keystoreProperties.getProperty(it).isNullOrBlank() }
+val configuredStoreFile = keystoreProperties.getProperty("storeFile")?.let(::file)
+val releaseSigningReady =
+    keystorePropertiesFile.exists() &&
+        missingSigningProperties.isEmpty() &&
+        configuredStoreFile?.isFile == true
+val releaseTaskRequested =
+    gradle.startParameter.taskNames.any { it.contains("release", ignoreCase = true) }
+
+if (releaseTaskRequested && !releaseSigningReady) {
+    val reason =
+        when {
+            !keystorePropertiesFile.exists() -> "android/key.properties does not exist"
+            missingSigningProperties.isNotEmpty() ->
+                "android/key.properties is missing: ${missingSigningProperties.joinToString()}"
+            else -> "the storeFile configured in android/key.properties does not exist"
         }
-    }
+    throw GradleException(
+        "Release signing is not configured: $reason. " +
+            "Follow docs/release/ANDROID-RELEASE-FOUNDATION.md; debug signing is never used for release builds.",
+    )
+}
 
 android {
     namespace = "com.vocalathlete.vocal_athlete"
@@ -35,48 +59,24 @@ android {
     }
 
     signingConfigs {
-        create("release") {
-            keyAlias = releaseKeystoreProperties.getProperty("keyAlias")
-            keyPassword = releaseKeystoreProperties.getProperty("keyPassword")
-            storePassword = releaseKeystoreProperties.getProperty("storePassword")
-            val storeFilePath = releaseKeystoreProperties.getProperty("storeFile")
-            if (!storeFilePath.isNullOrBlank()) {
-                storeFile = rootProject.file(storeFilePath)
+        if (releaseSigningReady) {
+            create("release") {
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+                storeFile = configuredStoreFile
+                storePassword = keystoreProperties.getProperty("storePassword")
             }
         }
     }
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
-        }
-    }
-}
-
-tasks.register("validateReleaseSigning") {
-    doLast {
-        val requiredKeys = listOf("storeFile", "storePassword", "keyAlias", "keyPassword")
-        val missingKeys =
-            requiredKeys.filter {
-                releaseKeystoreProperties.getProperty(it).isNullOrBlank()
+            if (releaseSigningReady) {
+                signingConfig = signingConfigs.getByName("release")
             }
-        if (!releaseKeystorePropertiesFile.exists() || missingKeys.isNotEmpty()) {
-            throw GradleException(
-                "Release signing is not configured. Copy app/android/key.properties.example " +
-                    "to app/android/key.properties and provide local keystore values. " +
-                    "Missing keys: ${missingKeys.joinToString(", ")}"
-            )
-        }
-        val storeFilePath = releaseKeystoreProperties.getProperty("storeFile")
-        val resolvedStoreFile = rootProject.file(storeFilePath)
-        if (!resolvedStoreFile.exists()) {
-            throw GradleException("Release keystore not found: ${resolvedStoreFile.path}")
         }
     }
 }
-
-tasks.matching { it.name in listOf("assembleRelease", "bundleRelease") }
-    .configureEach { dependsOn("validateReleaseSigning") }
 
 kotlin {
     compilerOptions {

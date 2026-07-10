@@ -1,0 +1,178 @@
+#!/usr/bin/env python3
+"""Generate deterministic synthetic prototype cues for the v16 timbre slice.
+
+Standard-library only. These low-peak original synthetic references exercise
+asset loading and low/mid choice UX. They are not human demonstrations,
+diagnostic samples, correct/incorrect production examples, or release masters.
+"""
+from __future__ import annotations
+
+import array
+import hashlib
+import json
+import math
+import wave
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "app/assets/training/timbre_v16"
+SR = 24_000
+PEAK = 0.38
+
+
+def midi_hz(note: int) -> float:
+    return 440.0 * 2.0 ** ((note - 69) / 12.0)
+
+
+def envelope(index: int, total: int, attack: float = 0.04, release: float = 0.08) -> float:
+    attack_n = min(total // 2, int(SR * attack))
+    release_n = min(total // 2, int(SR * release))
+    if attack_n and index < attack_n:
+        return index / attack_n
+    if release_n and index >= total - release_n:
+        return max(0.0, (total - 1 - index) / max(1, release_n - 1))
+    return 1.0
+
+
+def harmonic_tone(
+    freq: float,
+    duration: float,
+    *,
+    formants: tuple[float, float, float],
+    bandwidths: tuple[float, float, float] = (120.0, 180.0, 260.0),
+    hum: bool = False,
+) -> list[float]:
+    total = max(1, int(SR * duration))
+    harmonics: list[tuple[float, float]] = []
+    max_h = max(6, int(5000 / freq))
+    for harmonic in range(1, max_h + 1):
+        harmonic_freq = harmonic * freq
+        weight = 1.0 / harmonic
+        resonant = sum(
+            math.exp(-0.5 * ((harmonic_freq - formant) / bandwidth) ** 2)
+            for formant, bandwidth in zip(formants, bandwidths)
+        )
+        weight *= 0.16 + resonant
+        if hum:
+            weight *= math.exp(-harmonic_freq / 2200.0)
+            weight *= 1.0 + 0.9 * math.exp(
+                -0.5 * ((harmonic_freq - 260.0) / 150.0) ** 2
+            )
+        harmonics.append((harmonic_freq, weight))
+
+    result: list[float] = []
+    for index in range(total):
+        time_s = index / SR
+        value = sum(
+            weight * math.sin(2.0 * math.pi * harmonic_freq * time_s)
+            for harmonic_freq, weight in harmonics
+        )
+        result.append(value * envelope(index, total))
+    return result
+
+
+def silence(duration: float) -> list[float]:
+    return [0.0] * max(1, int(SR * duration))
+
+
+def hum_to_vowel(freq: float) -> list[float]:
+    return (
+        harmonic_tone(freq, 1.5, formants=(260.0, 900.0, 2100.0), hum=True)
+        + silence(0.35)
+        + harmonic_tone(freq, 1.5, formants=(700.0, 1200.0, 2500.0))
+    )
+
+
+VOWELS: tuple[tuple[str, tuple[float, float, float]], ...] = (
+    ("i", (300.0, 2300.0, 3000.0)),
+    ("e", (500.0, 1900.0, 2700.0)),
+    ("a", (750.0, 1200.0, 2500.0)),
+    ("o", (500.0, 900.0, 2400.0)),
+    ("u", (350.0, 700.0, 2200.0)),
+)
+
+
+def vowel_sequence(freq: float) -> list[float]:
+    result: list[float] = []
+    for _, formants in VOWELS:
+        result.extend(harmonic_tone(freq, 0.85, formants=formants))
+        result.extend(silence(0.12))
+    return result
+
+
+def write_wav(path: Path, samples: list[float]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    maximum = max((abs(value) for value in samples), default=0.0)
+    scale = PEAK / maximum if maximum > 0 else 1.0
+    pcm = array.array(
+        "h",
+        (
+            int(max(-1.0, min(1.0, value * scale)) * 32767.0)
+            for value in samples
+        ),
+    )
+    if pcm.itemsize != 2:
+        raise RuntimeError("Expected 16-bit signed short PCM")
+    if __import__("sys").byteorder != "little":
+        pcm.byteswap()
+    with wave.open(str(path), "wb") as handle:
+        handle.setnchannels(1)
+        handle.setsampwidth(2)
+        handle.setframerate(SR)
+        handle.writeframes(pcm.tobytes())
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def main() -> None:
+    OUT.mkdir(parents=True, exist_ok=True)
+    outputs = {
+        "hum_to_vowel_low.wav": hum_to_vowel(midi_hz(55)),
+        "hum_to_vowel_mid.wav": hum_to_vowel(midi_hz(60)),
+        "vowel_color_low.wav": vowel_sequence(midi_hz(55)),
+        "vowel_color_mid.wav": vowel_sequence(midi_hz(60)),
+    }
+    for old in OUT.glob("*.wav"):
+        old.unlink()
+    for name, samples in outputs.items():
+        write_wav(OUT / name, samples)
+
+    rights = {
+        "assetId": "timbre_v16",
+        "status": "prototype_original_synthetic",
+        "owner": "Vocal Athlete project",
+        "thirdPartyAudio": False,
+        "humanVocalRecording": False,
+        "usage": "first timbre vertical-slice prototype references",
+        "note": (
+            "Deterministic standard-library synthetic low/mid cues generated by "
+            "tools/generate_v16_timbre_audio.py. They are abstract listening "
+            "references, not release-ready teacher demonstrations, clinical "
+            "samples, or examples of a correct/incorrect vocal tract setting."
+        ),
+        "prototypePeakFullScale": PEAK,
+        "files": [
+            {
+                "path": name,
+                "sha256": sha256(OUT / name),
+                "sampleRate": SR,
+                "channels": 1,
+            }
+            for name in outputs
+        ],
+    }
+    (OUT / "rights.json").write_text(
+        json.dumps(rights, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    print(json.dumps({"files": list(outputs), "peak": PEAK}, ensure_ascii=False, indent=2))
+
+
+if __name__ == "__main__":
+    main()

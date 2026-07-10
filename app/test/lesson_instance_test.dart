@@ -9,11 +9,11 @@ import 'package:vocal_athlete/progression/path.dart';
 void main() {
   test('resolveLessonInstance exposes card + variation for slot/day', () {
     final manifest = buildPlaceholderManifest();
-    final slot = manifest.first; // CARD-01, block 1, blocked
+    final slot = manifest.first; // R2 Day 1 CARD-13 baseline sample
     final i = resolveLessonInstance(slot, 1);
-    expect(i.card.id, 'CARD-01');
-    expect(i.variation, {'sessionPos': '워밍업'});
-    expect(i.variationLabel, 'sessionPos=워밍업');
+    expect(i.card.id, 'CARD-13');
+    expect(i.variation, isEmpty);
+    expect(i.variationLabel, '');
     expect(i.hasVoicedMicroWin, isTrue);
   });
 

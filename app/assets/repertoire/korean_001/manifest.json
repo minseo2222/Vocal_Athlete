@@ -1,0 +1,35 @@
+{
+  "id": "korean_001",
+  "title": "Korean Diction 4-Bar Phrase 1",
+  "language": "ko",
+  "purpose": "repertoireApplication",
+  "bars": 4,
+  "tempoBpm": 68,
+  "recommendedKeys": ["low", "mid"],
+  "difficulty": "diction_tone_transfer",
+  "trainingSteps": [
+    "lyric_speech",
+    "consonant_timing",
+    "hum_melody",
+    "vowel_melody",
+    "lyric_melody",
+    "tone_tag_review"
+  ],
+  "audioPlaceholders": {
+    "guideVocalLow": "guide_vocal_low.wav",
+    "guideVocalMid": "guide_vocal_mid.wav",
+    "guideMelodyPiano": "guide_melody_piano.wav",
+    "backingTrack": "backing_track.wav",
+    "click": "click_68bpm.wav"
+  },
+  "lyricTiming": [
+    {"bar": 1, "text": "마음은", "beat": 1},
+    {"bar": 2, "text": "천천히", "beat": 1},
+    {"bar": 3, "text": "말하듯", "beat": 1},
+    {"bar": 4, "text": "노래해", "beat": 1}
+  ],
+  "breathMarks": [
+    {"beforeBar": 1, "cue": "턱 풀기"},
+    {"beforeBar": 3, "cue": "받침 짧게"}
+  ]
+}

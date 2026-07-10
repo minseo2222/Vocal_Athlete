@@ -16,7 +16,7 @@
 | Flutter | `C:/src/flutter/bin/flutter.bat --version` (3.44+) |
 | 기기 | Android 에뮬레이터(`emulator-5554`) 또는 실 기기 USB 디버깅 |
 | 기기 목록 | `C:/src/flutter/bin/flutter.bat devices` 에 대상이 보일 것 |
-| 작업 폴더 | repository `app/` directory |
+| 작업 폴더 | `C:\Users\user\Desktop\pro v new\app` |
 | 마이크 | 에뮬레이터: 확장 컨트롤(…) → Microphone → "Virtual microphone uses host audio input" ON. 실 기기: 권한 허용. |
 
 > ⚠️ 에뮬레이터 가상 마이크가 호스트 입력을 쓰도록 켜져 있어야 곡선이 움직인다.
@@ -27,11 +27,11 @@
 ## 1. 빌드 & 실행
 
 ```
-cd app
-flutter run -d emulator-5554
+cd "C:\Users\user\Desktop\pro v new\app"
+C:/src/flutter/bin/flutter.bat run -d emulator-5554
 ```
 
-- 빌드 해시 기록용: repository root에서 `git rev-parse --short HEAD` 를 실행 직전에 찍어 둔다.
+- 빌드 해시 기록용: `git rev-parse --short HEAD` 를 실행 직전에 찍어 둔다.
 - `flutter run` 콘솔에 "Syncing files to device…" 후 앱 화면이 떠야 한다.
 
 ---
@@ -46,7 +46,7 @@ flutter run -d emulator-5554
 | S2 | 확인 버튼 탭 | (최초 실행) **OS 마이크 권한 다이얼로그** 표시. |
 | S3 | 권한 **허용** | 홈 화면 표시(오늘 카드/스트릭/시작 버튼). |
 | S4 | "오늘 시작" 탭 | **레슨 화면**(`lesson-screen`) 진입. |
-| S5 | 본 운동(main) 단계까지 진행 | **피치 디스플레이**(`pitch-display`) + 가로 **파란 타깃선**(`pitch-target`) 표시. |
+| S5 | 본 운동(main) 단계까지 진행 | **피치 디스플레이**(`pitch-display`) 표시. `targetHz`가 있는 카드에서는 가로 **파란 타깃선**(`pitch-target`)도 표시되고, 없으면 타깃선 없이 절대 피치 점/곡선만 표시. |
 | S6 | 220Hz 부근(약 A3) 지속음 허밍 | **초록 점**(`pitch-current`)이 나타나 음높이에 따라 **상하로 이동**. (높으면 위, 낮으면 아래) |
 | S7 | 타깃보다 일관되게 높/낮게 지속 | (편차 충분 시) **"⤴ 좀 더 높게 — 다시?" / "⤵ 좀 더 낮게 — 다시?"** 넛지(`retry-nudge`) 노출 가능. |
 | S8 | 발성 멈춤(무음) | 초록 점 **사라짐**(무성/저신뢰 → 표시 없음). |
@@ -70,6 +70,23 @@ flutter run -d emulator-5554
 
 ---
 
+
+## 3b. V1 최소 기기 매트릭스 (피드백 반영, 2026-06-16)
+
+V1 출시 전에는 단일 에뮬레이터 PASS만으로 충분하지 않다. 최소 아래 조합을 기록한다.
+
+| 그룹 | 최소 수 | 예시 | 목적 |
+|---|---:|---|---|
+| Android 저가/중가 | 2 | 보급형 Samsung/Xiaomi 등 | 마이크 품질·노이즈 확인 |
+| Android 플래그십 | 2 | Galaxy S/Pixel 등 | 기준 성능 확인 |
+| OS 버전 차이 | 2 | Android 12 이하 / 13 이상 | 권한·오디오 API 확인 |
+| 입력 환경 | 3 | 조용한 방 / 생활 소음 / 이어폰 마이크 | 저신뢰 null UX 확인 |
+| 거리 | 3 | 한 뼘 / 멀리 / 너무 가까움 | pitch visible rate 확인 |
+
+PASS 기준은 “항상 점이 뜬다”가 아니라 **신뢰 낮을 때 틀린 점을 표시하지 않는 것**이다.
+
+> 근거 메모: 모바일 음성 분석 연구는 F0는 비교적 활용 가능하지만, HNR·shimmer 등 일부 음향질 지표는 기기·환경 bias가 커질 수 있음을 보여준다. 따라서 본 제품은 F0 중심 + 저신뢰 미표시 원칙을 유지한다.
+
 ## 4. 결과 기록 템플릿 (복사 → `device-results.md`에 append)
 
 ```
@@ -83,7 +100,7 @@ flutter run -d emulator-5554
   - S2 권한요청: <pass/fail/->
   - S3 허용→홈: <pass/fail/->
   - S4 레슨진입: <pass/fail/->
-  - S5 피치UI/타깃선: <pass/fail/->
+  - S5 피치UI/타깃선(목표음 카드만): <pass/fail/n-a>
   - S6 소리→점 상하이동(핵심): <pass/fail/->
   - S7 넛지: <pass/fail/n-a>
   - S8 무음→점 사라짐: <pass/fail/->

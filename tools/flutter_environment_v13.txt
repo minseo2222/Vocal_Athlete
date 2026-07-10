@@ -1,0 +1,19 @@
+v13 build environment check — 2026-06-20
+
+Project Dart constraint: ^3.12.0
+Recommended validation target: Flutter stable compatible with Dart 3.12 (Flutter 3.44 line)
+
+Attempted command:
+  ./tools/run_flutter_validation.sh
+
+Observed result:
+  exit code: 127
+  BLOCKED: flutter is not installed or not on PATH.
+
+Not executed:
+  flutter pub get
+  dart analyze
+  flutter test
+  flutter test integration_test
+
+This file records an environment block; it is not a compile or test certificate.

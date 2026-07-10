@@ -1,0 +1,292 @@
+{
+  "schema": "vocal-athlete/lesson-blueprint@1",
+  "version": "v10",
+  "track": "repertoireApplication",
+  "cycle": 1,
+  "title": "Repertoire Application Project 1 — Neutral 4-Bar Phrase",
+  "lessons": [
+    {
+      "day": 1,
+      "cardId": "RA-09",
+      "title": "전체 프레이즈 기준 take",
+      "primarySkill": "전체 맥락",
+      "secondarySkill": "낮은 부하 baseline",
+      "objective": "가이드 허밍을 듣고 네 마디를 중간에 멈추지 않고 한 번 남긴다.",
+      "attempts": 1,
+      "steps": [
+        "가사와 호흡 표시 확인",
+        "가이드 허밍 듣기",
+        "반주에 맞춰 한 번만 녹음"
+      ],
+      "feedbackPrompt": "교정하지 말고 가장 어려웠던 한 지점만 표시한다.",
+      "selfCheck": [
+        "중간에 다시 시작하지 않았다",
+        "오늘의 주 목표를 하나만 골랐다"
+      ],
+      "recoveryAlternative": "가이드와 반주를 듣고 어려운 마디만 표시한다.",
+      "evidence": "E1",
+      "assetId": "neutral_001",
+      "guideState": "full"
+    },
+    {
+      "day": 2,
+      "cardId": "RA-01",
+      "title": "가사와 박자 지도",
+      "primarySkill": "가사 리듬",
+      "secondarySkill": "핵심 단어",
+      "objective": "네 마디 가사를 말하고 박 위에 놓는다.",
+      "attempts": 3,
+      "steps": [
+        "가사 자연스럽게 말하기",
+        "클릭에 맞춰 말하기",
+        "핵심 단어 하나 표시"
+      ],
+      "feedbackPrompt": "자음이 박을 밀거나 늦춘 지점 하나만 고른다.",
+      "selfCheck": [
+        "아직 멜로디를 넣지 않았다",
+        "핵심 단어가 들렸다"
+      ],
+      "recoveryAlternative": "클릭에 맞춰 가사 말하기만 한다.",
+      "evidence": "E1",
+      "assetId": "neutral_001",
+      "guideState": "click"
+    },
+    {
+      "day": 3,
+      "cardId": "RA-02",
+      "title": "한 음으로 말하듯 연결",
+      "primarySkill": "speech-to-song",
+      "secondarySkill": "프레이즈 끝",
+      "objective": "가사 리듬을 편한 한 음으로 이어 부른다.",
+      "attempts": 3,
+      "steps": [
+        "말하기 한 번",
+        "편한 한 음으로 두 번",
+        "끝을 작게 정리"
+      ],
+      "feedbackPrompt": "말하기보다 소리가 커지지 않았는지 확인한다.",
+      "selfCheck": [
+        "자음이 박 앞에서 튀지 않았다",
+        "끝을 밀지 않았다"
+      ],
+      "recoveryAlternative": "한 음 대신 가사 리듬 말하기만 한다.",
+      "evidence": "E1",
+      "assetId": "neutral_001",
+      "guideState": "click"
+    },
+    {
+      "day": 4,
+      "cardId": "RA-03",
+      "title": "허밍에서 멜로디로",
+      "primarySkill": "멜로디 contour",
+      "secondarySkill": "모음 전이",
+      "objective": "가이드 허밍을 따라 네 마디 모양을 /m/과 /u/로 옮긴다.",
+      "attempts": 3,
+      "steps": [
+        "허밍 가이드 듣기",
+        "/m/으로 한 번",
+        "/u/로 한 번",
+        "가사 첫 마디만"
+      ],
+      "feedbackPrompt": "정확한 음보다 상승·하강 방향을 먼저 본다.",
+      "selfCheck": [
+        "가사 전 단계에서 모양이 유지됐다",
+        "첫 시도 중 화면을 보지 않았다"
+      ],
+      "recoveryAlternative": "가이드 멜로디를 듣고 손으로 모양만 그린다.",
+      "evidence": "E1",
+      "assetId": "neutral_001",
+      "guideState": "hum"
+    },
+    {
+      "day": 5,
+      "cardId": "RA-04",
+      "title": "호흡 위치와 마무리",
+      "primarySkill": "프레이즈 호흡",
+      "secondarySkill": "끝의 여유",
+      "objective": "1마디와 3마디 앞 호흡 표시를 사용해 네 마디를 잇는다.",
+      "attempts": 3,
+      "steps": [
+        "호흡 표시 확인",
+        "두 마디씩 나눠 부르기",
+        "네 마디 한 번"
+      ],
+      "feedbackPrompt": "숨을 많이 마셨는지보다 끝에 여유가 남았는지 본다.",
+      "selfCheck": [
+        "호흡 위치를 미리 정했다",
+        "마지막 단어를 밀지 않았다"
+      ],
+      "recoveryAlternative": "반주를 들으며 호흡 표시만 손으로 짚는다.",
+      "evidence": "E1",
+      "assetId": "neutral_001",
+      "guideState": "backing"
+    },
+    {
+      "day": 6,
+      "cardId": "CARD-15",
+      "title": "클릭과 쉼표 유지",
+      "primarySkill": "pulse",
+      "secondarySkill": "음절 entry",
+      "objective": "클릭을 들으며 가사 음절을 네 박 안에 놓는다.",
+      "attempts": 4,
+      "steps": [
+        "클릭에 손가락 탭",
+        "가사 리듬 말하기",
+        "첫 두 마디 허밍"
+      ],
+      "feedbackPrompt": "가장 빨라진 마디 하나만 다시 한다.",
+      "selfCheck": [
+        "쉼에서 소리를 쉬었다",
+        "클릭보다 앞서 달리지 않았다"
+      ],
+      "recoveryAlternative": "탭과 가사 말하기만 한다.",
+      "evidence": "E1",
+      "assetId": "neutral_001",
+      "guideState": "click"
+    },
+    {
+      "day": 7,
+      "cardId": "RA-07",
+      "title": "어려운 두 마디만 느리게",
+      "primarySkill": "부분 교정",
+      "secondarySkill": "반복 제한",
+      "objective": "어려운 두 마디를 느린 피아노 가이드로 최대 세 번 연습한다.",
+      "attempts": 3,
+      "steps": [
+        "어려운 마디 선택",
+        "느린 가이드 듣기",
+        "최대 세 번",
+        "전체 네 마디 한 번"
+      ],
+      "feedbackPrompt": "세 번 안에 해결되지 않아도 오늘은 멈춘다.",
+      "selfCheck": [
+        "반복 횟수를 지켰다",
+        "끝에 전체 프레이즈로 돌아왔다"
+      ],
+      "recoveryAlternative": "느린 가이드를 듣고 음정 방향과 가사만 표시한다.",
+      "evidence": "E1",
+      "assetId": "neutral_001",
+      "guideState": "slow"
+    },
+    {
+      "day": 8,
+      "cardId": "RA-05",
+      "title": "가이드 후 혼자 부르기",
+      "primarySkill": "모델 축소",
+      "secondarySkill": "A/B 청취",
+      "objective": "가이드 허밍을 한 번 듣고 혼자 부른 뒤 두 take를 비교한다.",
+      "attempts": 2,
+      "steps": [
+        "가이드 한 번",
+        "혼자 한 번 녹음",
+        "끝난 뒤 비교",
+        "cue 하나만 수정"
+      ],
+      "feedbackPrompt": "가이드와 똑같은 음색보다 contour와 박을 비교한다.",
+      "selfCheck": [
+        "가이드와 동시에 부르지 않았다",
+        "비교 후 cue 하나만 골랐다"
+      ],
+      "recoveryAlternative": "가이드와 이전 take를 듣고 차이 하나를 기록한다.",
+      "evidence": "E2",
+      "assetId": "neutral_001",
+      "guideState": "hum"
+    },
+    {
+      "day": 9,
+      "cardId": "RA-06",
+      "title": "반주 위 첫 음 잡기",
+      "primarySkill": "entry timing",
+      "secondarySkill": "시작음 기억",
+      "objective": "네 박 count-in 뒤 반주 위에서 첫 음을 작게 시작한다.",
+      "attempts": 4,
+      "steps": [
+        "첫 음 듣기",
+        "count-in 탭",
+        "첫 마디만 부르기",
+        "전체 네 마디 한 번"
+      ],
+      "feedbackPrompt": "첫 음이 맞았는지와 박에 들어왔는지를 따로 본다.",
+      "selfCheck": [
+        "count-in을 끝까지 들었다",
+        "틀려도 크게 밀지 않았다"
+      ],
+      "recoveryAlternative": "count-in과 첫 음을 듣고 시작 순간만 탭한다.",
+      "evidence": "E2",
+      "assetId": "neutral_001",
+      "guideState": "backing"
+    },
+    {
+      "day": 10,
+      "cardId": "CARD-17",
+      "title": "한국어 모음과 자음 연결",
+      "primarySkill": "한국어 딕션",
+      "secondarySkill": "모음 유지",
+      "objective": "가사 자음을 짧게 두고 모음을 박 안에서 이어 부른다.",
+      "attempts": 3,
+      "steps": [
+        "가사 말하기",
+        "받침 짧게 표시",
+        "반주에 두 마디",
+        "전체 네 마디"
+      ],
+      "feedbackPrompt": "가사가 들리는지와 모음이 끊기지 않는지 한 항목씩 듣는다.",
+      "selfCheck": [
+        "자음에서 목을 잠그지 않았다",
+        "모음이 박 안에 남았다"
+      ],
+      "recoveryAlternative": "가사를 말하고 자음 위치만 탭한다.",
+      "evidence": "E2",
+      "assetId": "neutral_001",
+      "guideState": "backing"
+    },
+    {
+      "day": 11,
+      "cardId": "RA-08",
+      "title": "오늘의 best take 남기기",
+      "primarySkill": "통합 take",
+      "secondarySkill": "자기평가",
+      "objective": "반주만 듣고 네 마디를 두 번 이내로 녹음하고 best take를 고른다.",
+      "attempts": 2,
+      "steps": [
+        "주 목표 확인",
+        "반주만으로 take",
+        "필요하면 한 번 더",
+        "best take와 태그 저장"
+      ],
+      "feedbackPrompt": "완벽한 take보다 편안하고 전달되는 take를 고른다.",
+      "selfCheck": [
+        "두 번 이내로 끝냈다",
+        "다음 cue를 하나만 기록했다"
+      ],
+      "recoveryAlternative": "이전 take 중 가장 편한 것을 골라 태그한다.",
+      "evidence": "E3",
+      "assetId": "neutral_001",
+      "guideState": "backing"
+    },
+    {
+      "day": 12,
+      "cardId": "RA-10",
+      "title": "가이드 없이 지연 재현",
+      "primarySkill": "지연 재현",
+      "secondarySkill": "한 조건 전이",
+      "objective": "보컬 가이드 없이 선호 키 반주로 한 번 부르고, 낮은/중간 키를 바꿔 한 번 더 전이한다.",
+      "attempts": 2,
+      "steps": [
+        "보컬 가이드 없이 선호 키 반주로 첫 take",
+        "Day 1과 주 목표 하나로 비교",
+        "낮은/중간 키를 바꿔 두 번째 take",
+        "다음 프로젝트 cue 저장"
+      ],
+      "feedbackPrompt": "Day 1보다 좋아졌는지 총점 대신 주 목표 하나와 키 변화 적응으로 비교한다.",
+      "selfCheck": [
+        "보컬 가이드 없이 시작했다",
+        "두 번째 take에서 키 조건만 바꿨다"
+      ],
+      "recoveryAlternative": "Day 1과 Day 11 take를 듣고, 낮은/중간 반주를 번갈아 들으며 다음 cue를 기록한다.",
+      "evidence": "E3",
+      "assetId": "neutral_001",
+      "guideState": "transfer"
+    }
+  ]
+}

@@ -1,98 +1,171 @@
-# 커리큘럼 전체 검토 (자료 수집·검증 반영, 2026-06)
+# 커리큘럼 전체 재점검 — v16
 
-> 5단위(초급·중급코어·중급뮤지컬·성악·가요)를 RESEARCH-INDEX·VERIFICATION-MASTER·
-> CITATION-AUDIT 결과와 대조한 *비판적 전체 검토*. 요약 아닌 정합성·갭·문제점 진단.
+> v9~v15 변경 이력을 함께 보존하며, 현재 판정은 마지막 v16 섹션을 우선한다.
+>
+> canonical 경로: **Beginner Foundation 48 → Universal Vocal Core 144 → Repertoire Application 72 → Advanced Genre Labs 40-slot 반복 cycle → Portfolio**
 
-## 1. 전체 구조 — 정합 양호
+## 1. 재점검 결론
 
-경로: **초급(48레슨, 5블록)** → **중급 코어(블록1 브리지·블록2 공명·모음조정, genre-neutral)** →
-**장르 분기(뮤지컬/성악/가요, 블록3 레지스터·블록4 텍스트·딕션·곡)** → 고급(미생성) → 통합 전이.
+v8은 장기 경로와 연구 체계를 만들었지만 실제 path에는 세 가지 문제가 남아 있었다.
 
-- ADR-0004(적응 완성 연속)·0011(공유 코어+블록3 분기)·0010(졸업/전이/유지)이 일관 적용. ✅
-- 패사지오 핸드오프(코어=*인지* → 분기=*처리*: 뮤지컬 믹스/belt, 성악 cover)가 깔끔. ✅
-- 전이목표 정반대(cover↔belt)를 코어에 장르색 금지로 분리 — 설계적으로 옳음. ✅
+1. `CARD-18` 회복 카드가 정상 학습 일정에 섞여 있었다.
+2. Universal Core가 36일 패스마다 같은 12카드를 세 번 반복해, 역량 간 간격과 난이도 상승이 거칠었다.
+3. Repertoire Application이 Global/Local/Recall/Transfer를 18일 덩어리로 분리해, 하나의 프레이즈를 전체로 재통합하는 주기가 너무 길었다.
 
-## 2. 단위별 검토
+추가로 R&B, Rock, Worship이 다른 트랙 카드를 조합하는 수준이라 장르별 학습 내용이 약했다.
 
-| 단위 | 카드 | 근거 품질(post-audit) | 평가 |
-|---|---|---|---|
-| 초급 | 13 IN(CARD-01~13) | SOVT RCT(ANDRADE/Adriaansen)·호흡 HIXON·3분류 KIM2025·운동학습 Schmidt&Lee | **견고**. 사인오프 완료, 변경 0 |
-| 코어 | 11(IC-01~11) | VFE RCT(STEMPLE)·Appoggio MILLER·패사지오 ROUBEAU·트웽 Jelinger | **견고**. genre-neutral 잘 지켜짐 |
-| 뮤지컬 | 12(IM-01~12) | belt MCGLASHAN2017(탐색적)·믹스 합의없음 | **양호+안전 HITL**. belt 보수 |
-| 성악 | 9(CL-01~09) | cover MILLER·aggiustamento CHAN_DO·ring SUNDBERG | **양호+HITL**. ADR-0012 정합 |
-| 가요 | 9(GY-01~09) | K-pop 매핑(산업)·트웽 Jelinger·딕션 LEE2020CGU | **양호+안전 S**. k-keok 제외 |
+## 2. v9 수정
 
-무납득(ADR-0002)·시각전용(ADR-0014)·1일1레슨(ADR-0003)은 전 단위 일관. ✅
+| 문제 | v9 해결 |
+|---|---|
+| 정상 path의 recovery card | `CARD-18`을 모든 manifest에서 제거하고 런타임 fallback으로만 유지 |
+| Beginner 청음 빈도 부족 | `CARD-14`를 최소 세 번 재등장 |
+| Core 반복의 단조로움 | 12일 microcycle 12개로 재작성 |
+| checkpoint 과다 | `UC-17`을 Day 36/72/108/144 네 번으로 제한 |
+| Core 기능 공백 | UC-18~25 신규 카드 추가 |
+| pressed 발성 모방 위험 | `UC-04`의 pressed 예시를 listening-only로 변경 |
+| Repertoire 재통합 지연 | 12일 phrase project 6개로 변경 |
+| 프로젝트 baseline/review 부재 | `RA-09`와 `RA-10` 추가 |
+| 장르별 전용 내용 부족 | RB-01~06, RK-01~06, WC-01~06 추가 |
+| 최대 발성처럼 보이는 baseline | 표준 모음을 3초, 1 take로 제한 |
 
-## 3b. 갭 해소 현황 (구현 goal D1~I6, 2026-06)
+## 3. 현재 단계별 준비도
 
-- **G1 중급 레슨 수 ✅ 해소**: 코어·3분기 블록별 레슨 수 + 카드→레슨 변주 확장 명세(D1).
-- **G2 표준샘플 SOP ✅ 해소**: IC-12 표준샘플 자기평가 카드 + 블록 경계 삽입(D2).
-- **G3 커리큘럼↔앱 구현 ✅ 해소**: 중급 ~50카드 card_library 이식(I1) + 코스 manifest
-  빌더(I2) + 졸업→분기 진입 실 로드(I3) + 분기 완주→유지(I4) + 안전 게이트(I5) +
-  정합 가드(I6). 168 tests green(2026-06 기준). *롤아웃 스위치*(release·safetyApproved)는
-  `INTERMEDIATE-IMPL-VERIFY.md` 참조(기존 ADR-0010 P10 + 안전 게이트).
-- **G4 고급 트랙 ⬜ 범위 밖(의도적)**: 풀 벨트 등 신규 고위험 = 안전 설계 + HITL 필요.
-- **G5 periodization/디로드 ⬜ 범위 밖**: 코어 갭 후보로 잔존.
+| 단계 | 설계 준비도 | 구현 준비도 | 남은 핵심 문제 |
+|---|---:|---:|---|
+| Beginner | 높음 | 중간 | 초보자 파일럿, 실제 기기 피치·녹음 QA |
+| Universal Core | 중상 | 중상 | Cycle 1은 상세 콘텐츠·짧은 cue 구현. Cycle 2~12 자산과 사용자 검증 필요 |
+| Repertoire Application | 중상 | 중간 | Project 1 원본 phrase·guide·backing·권리 기록 구현. Project 2~6 미구현 |
+| Advanced Gayo/Musical/Classical | 중간 | 낮음 | 전문가 검수와 고위험 gate |
+| Advanced R&B/Rock/Worship | 중간 | 낮음 | v9 전용 카드의 전문가·사용자 검증 |
+| Portfolio | 중간 | 낮음 | 루브릭 신뢰도와 review UI |
 
-## 3. 🔴 발견된 실질 갭 (우선순위) — 원본(이력 보존)
+## 4. 학습 흐름 품질 게이트
 
-### G1. 중급 레슨 수 ↔ 카드 수 매핑 부재 (설계 갭)
-- 초급은 *5블록 × 레슨범위 + 13카드 → 48레슨(변주로 확장)* 명세가 명확.
-- 중급은 "코어+분기 ≈ 70–98레슨"만 있고 **블록별 레슨 수·카드→레슨 확장 규칙 없음**.
-  코어 11카드·뮤지컬 12카드가 어떻게 70–98레슨으로 펼쳐지는지 미정.
-- → 중급 매크로에 *블록별 레슨 수 + 변주 확장 배수*를 초급 수준으로 명시 필요.
+### Beginner
 
-### G2. 표준 샘플 SOP(자기평가) 중급 부재 (연속성 갭)
-- 초급 졸업 4스킬 중 ③ "표준 샘플 전후 A/B"가 자기평가 축인데, **중급 4단위에 표준샘플 SOP 없음**.
-- 중급은 진척·적응 *완성*을 다루면서 정작 *측정 카드*가 없음 → 졸업/전이 판정 근거 약화.
-- → 각 중급 단위(또는 코어)에 표준샘플 SOP 카드 추가 검토(시각 전용·비차단 유지).
+- 표준샘플 Day 1/24/48
+- 청음·리듬·contour·한국어 bridge 재등장
+- 회복은 상태 기반, 일정 기반 아님
 
-### G3. 커리큘럼 ↔ 앱 구현 갭 (가장 큼)
-- 앱 `card_library.dart`는 **초급 13카드(CARD-01~13)만** 구현. 중급 IC/IM/CL/GY 카드는 *문서만*.
-- 변주 엔진·LessonScreen·진행 상태머신은 초급 manifest 전제 → 중급 경로 미구현.
-- → 중급을 실제 출시하려면 카드 데이터·manifest·분기 라우팅·장르별 경로 구현 필요(별도 대형 슬라이스).
+### Universal Core
 
-### G4. 고급 트랙 전무
-- 풀 벨트·완전 cover·풀 messa·고난도 런·디스토션·요들 등이 전부 "고급(미생성)"으로 이관됐으나 고급 단위 0개.
-- 중급 완주 → "고급 미생성 → 유지 모드"로만 처리(ADR-0010). 기능은 있으나 *콘텐츠 천장*이 중급.
+- 모든 12일 microcycle에 pitch, rhythm, phrase, review 포함
+- 세 microcycle마다 formal checkpoint
+- SOVT는 열린 모음과 가사로 전이
+- usable range/key를 maximum range보다 우선
 
-### G5. periodization/디로드 부재 (코어 갭 후보, 기존 기록)
-- 부하 관리(주간 디로드·periodization)가 *어느 단위에도 없음*(VERIFICATION에 기록). belt/고음 도입하는 중급에서 특히 필요할 수 있음 → HITL 검토 항목과 연동.
+### Repertoire Application
 
-## 4. 근거 품질 종합 (CITATION-AUDIT 반영)
+- 각 프로젝트 첫날 whole-phrase baseline
+- local practice 뒤 같은 프로젝트 안에서 global return
+- 마지막 날 delayed retrieval + 한 조건 transfer
+- primary skill 1개, secondary 최대 1개
 
-- **강(RCT/정전/검증)**: VFE(STEMPLE)·SOVT(ANDRADE/Adriaansen)·패사지오(ROUBEAU)·트웽 MRI(Jelinger)·aggiustamento(CHAN_DO)·한국 3분류(KIM2025)·belt 음향(MCGLASHAN2017).
-- **약(탐색적/합의없음)**: belt 효능(가창자 RCT 부재, `[탐색적]`)·믹스(과학 합의 없음)·K-pop 안전(코호트 부재, 서구 외삽).
-- **정정 10건**: 메타데이터(저자/연도/저널/수치) 오류 — 안전 *방향* 무영향(VERIFICATION-MASTER). 환각 0.
-- **ADR-0014 근거**: R3에서 실제 출처로 교체(F0 robust·perturbation device bias).
+### Advanced
 
-## 5. 안전 자세 — 적절·보수
+- 무작위 기술 소비가 아니라 곡/구간 프로젝트
+- 고위험 기술은 사인오프·cap·fallback·rollout 승인 전 미출시
+- 정상 cycle에 recovery 카드 미배치
 
-- belt/트웽/패사지오/cover/messa/런 = HITL 사인오프 패킷(자가승인 0), k-keok 영구 제외.
-- 손상 역학(MT 최고·가창자 46%·belt 고부하) V6 확정. belt 진입한정·call-based·중단 cue.
-- 증거강도 낮음(K-pop 코호트 부재) 정직 표기. → **출시 전 발성 전문가 사인오프가 유일한 미결 안전 게이트**.
+## 5. 아직 놓친 것
 
-### 5b. 교차검증 업데이트 (독립 리서치 2종, 2026-06)
-- 입력 패킷: [SAFETY-EVIDENCE-DOSSIER.md](../verification/SAFETY-EVIDENCE-DOSSIER.md)
-  (Claude 심층·GPT 웹Pro 교차, 하드 모순 0).
-- **합의:** 트웽·패사지오·cover 진입·messa 기초·런 = 조건부 가능 / belt 진입·레퍼토리 =
-  조건부·일반공개 보류 / k-keok = 영구 제외 *유지 정당*(✅Andrade 2000 재확인).
-- **§5 수정:** 사인오프가 *유일한* 게이트가 아님 — 둘 다 **강제 캡(음역·횟수·지속·주간) +
-  swelling check + 다중 stop**의 *앱 구현*을 사인오프 선결조건으로 요구. 즉 미결 게이트는
-  ①전문가 사인오프 + ②강제 캡 구현 **둘**.
-- **dose 한계 확정:** ✅Zuim·Stewart·Titze 2023 — 안전 baseline vocal dose 문헌 부재 →
-  모든 임계 수치는 보수적 추정(임상 검증 아님). belt 상한 여 C5/남 A4(✅Bourne&Garnier 2012;
-  남 A4 단일근거 약함).
+1. Universal Core Cycle 2~12의 날짜별 blueprint·오디오 exemplar·난이도 variant
+2. Repertoire Project 2~6의 자체 제작 프레이즈와 권리 기록
+3. pitch/rhythm/timbre 피드백의 Android 실기기 정확도
+4. 유저별 tessitura/key 추천의 안전한 초기 calibration
+5. 평가자간 루브릭 신뢰도
+6. 고급 가요·뮤지컬·성악의 전문가 signoff
+7. R&B/Rock/Worship 전용 카드의 장르 전문가 검토
+8. 첫 01–05 리서치 문서의 임시 인용 복구
+9. 실제 active attempt time과 설명 시간의 사용자 시험
+10. 12일 microcycle·project 길이의 유지/전이 효과 검증
 
-## 6. 종합 판정
+## 6. 출시 판단
 
-- **설계·정합·안전 자세: 우수**. 5단위가 ADR·연구로 일관 정렬, 무납득·시각전용·보수 안전 일관.
-- **콘텐츠 완성도: 초급=출시급, 중급=초안(레슨수·표준샘플 갭), 고급=없음**.
-- **구현 격차: 큼** — 중급 이상은 문서만, 앱 미구현(G3).
-- **다음 우선순위**:
-  1. (안전) HITL 사인오프 — belt/cover/messa/런 (출시 전 필수).
-  2. (설계) G1 중급 레슨수 매핑 + G2 표준샘플 SOP — 중급 초안→완성.
-  3. (구현) 초급 앱 마이크 검증(기기) → 중급 카드/분기 구현(G3).
-  4. (콘텐츠) 고급 트랙(G4)·periodization(G5)은 후순위.
-- **인용 인프라**: 영어권 키 1저자 잔여 재확인(배경 ~60키) 권장 — 후속 인용 전.
+- Beginner는 콘텐츠·기기·초보자 이해도 QA 후 MVP 후보다.
+- Universal Core와 Repertoire Application은 구조는 개선됐지만 자산과 파일럿 전에는 미출시다.
+- Advanced Genre Labs는 기본 미출시이며 고위험 기술뿐 아니라 전체 장르 cycle에 전문가 검수가 필요하다.
+
+## 7. 다음 우선순위
+
+1. v10 첫 24일 vertical slice의 Flutter compile·실기기 재생 QA
+2. 사용자 5–10명 formative test와 Day 12 지연 재현 확인
+3. Universal Core Cycle 2와 Repertoire Project 2 작성
+4. 전문가 2인 curriculum/audio/safety review
+5. Android 실기기 녹음·F0·timing QA
+
+## 8. v10 추가 판정
+
+- 첫 Universal 12일은 카드 ID만 있는 경로에서 날짜별 목표·단계·시도 상한·피드백·회복 대체가 있는 실행 단위로 승격됐다.
+- 첫 Repertoire 12일은 원본 네 마디 프레이즈와 합성 허밍/피아노/반주/클릭으로 end-to-end 흐름을 확인할 수 있다.
+- 합성 cue는 출시용 강사 데모가 아니다. 실제 발성 모범을 전달하는 자산은 전문가 제작 master가 필요하다.
+- 첫 24일을 구현했다고 전체 144+72일의 콘텐츠 준비도가 완료된 것은 아니다.
+- 다음 확장은 새 기능보다 첫 vertical slice의 compile·기기·초보자 사용성 검증이 먼저다.
+
+## 9. v11 학습 증거 재점검
+
+v10까지는 날짜별 `evidence`가 커리큘럼 목표로 존재했지만 앱은 completion 외 수행 흔적을 남기지 않았다. v11은 시도·자기점검·예시 청취·키 선택·녹음·회복 모드를 별도 기록한다.
+
+중요한 경계:
+
+- `목표 E2` 레슨 완료는 E2 달성이 아니다.
+- 시도 수와 자기점검 수는 실력 점수가 아니다.
+- 회복 모드는 voiced attempt가 없어도 정상 practice trace다.
+- 실제 E2/E3는 일정 시간이 지난 재현과 조건 전이 과제로 확인해야 한다.
+
+따라서 v12의 커리큘럼 우선순위는 카드 추가가 아니라 **delayed review queue와 콘텐츠 revision을 포함한 실제 retention/transfer checkpoint**다.
+
+## 10. v15 음색 리서치 재점검과 통합 판정
+
+업로드된 음색 리서치를 기존 경로와 대조한 결과, 독립 12주 코스로 추가하면 호흡·발성·공명·레지스터·딕션·곡 적용과 중복되고 음색을 별도 점수처럼 오해할 위험이 있었다. 따라서 다음처럼 병합했다.
+
+| 단계 | v15 역할 | 구현 |
+|---|---|---|
+| Beginner | 차이 관찰·자기태그 | Day 1/24/48 snapshot, Day 37 TONE-02, Day 38 TONE-03 |
+| Universal Core | 대비·편한 선택·재현·조건 전이 | TONE-02~12 나선형 재등장 |
+| Repertoire Application | 동일 프레이즈 tone 전이 | Project 2/4/5/6에 TONE-06/07/11/12 |
+| Advanced | 장르 미학 | TONE-13, 단 고위험 효과는 별도 gate |
+
+### 해결한 공백
+
+- 카드별 음색 층, 사용자 tag 선택지, A/B/C 순서가 실제 녹음 UI와 연결됐다.
+- `내 음색 팔레트`가 사용자 자기태그·편안함·Best take를 로컬 요약한다.
+- take 수, 반복 수, duration, weekly cap/fallback을 TONE 카드에 명시했다.
+- 39개 출처를 등록하고 8개 앵커를 v15에서 다시 확인했다.
+
+### 남은 공백
+
+1. 초급 TONE-02/03 및 Core tone day의 최종 강사 음원과 시각 데모
+2. tone tag의 사용자 이해도·일관성·재현성 파일럿
+3. 마이크 기종·거리·방 조건이 A/B 자기판단에 미치는 영향
+4. 31개 imported source의 개별 원문 재검증
+5. 고급 장르 tone의 전문가 사인오프
+6. 실제 Flutter compile/test와 Android/iOS 녹음 QA
+
+Tone Profile은 학습 보조 기록이며, 사용자의 음색 유형이나 가창 수준을 인증하지 않는다.
+
+
+## 11. v16 첫 음색 vertical slice 재점검
+
+### 해결한 공백
+
+- Beginner Day 37 `TONE-02`와 Day 38 `TONE-03`에 날짜별 blueprint, 최대 2회 시도, 자기점검, no-voice recovery를 연결했다.
+- Universal Core Cycle 1 Day 6의 Hum-to-Vowel도 같은 원칙으로 상세화했다.
+- low/mid synthetic prototype 4개와 권리·SHA-256 inventory를 추가했다.
+- 같은 날 반복 take가 음색 팔레트를 지배하지 않도록 안정 빈도를 `학습일 × tag`로 계산한다.
+- 원본 take 수, 서로 다른 학습일, same-condition 학습일, 날짜 미상 legacy take를 분리해 보여준다.
+- 음색 출처 확인 범위를 8개에서 13개로 늘렸고 26개는 pending으로 남겼다.
+
+### 남은 핵심 위험
+
+1. 합성 cue는 최종 강사 master가 아니며 모방 적합성이 검증되지 않았다.
+2. Flutter compile·asset bundle·Android/iOS 재생을 실행하지 못했다.
+3. 사용자가 `bright/warm/clean/speech-like`를 일관되게 이해하는지 모른다.
+4. local day 집계는 timezone 변경과 자정 경계에서 추가 정책이 필요하다.
+5. 최대 2회, 최소 3학습일은 제품 가설이다.
+6. 음색 과제가 실제 프레이즈와 장기 재현으로 전이되는지 사용자 시험이 필요하다.
+
+### 현재 출시 판정
+
+첫 음색 vertical slice는 **정적 프로토타입 준비 완료 / 런타임·전문가·사용자 검증 미완료**다. 신규 음색 카드 확장보다 실제 Flutter/Android 실행, 강사 master, 소규모 파일럿을 먼저 수행한다.

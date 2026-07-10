@@ -6,8 +6,8 @@
 ## 30초 요약
 
 ```
-cd app
-flutter test test/verification_harness_test.dart
+cd "C:\Users\user\Desktop\new_pro_v\pro v new\app"
+C:/src/flutter/bin/flutter.bat test test/verification_harness_test.dart
 ```
 
 - **PASS** = 단일 소스([`verification-status.json`](verification-status.json))가 라이브
@@ -22,16 +22,16 @@ flutter test test/verification_harness_test.dart
 | 항목 | 진실의 단일 소스(git) | 기본값 | 누가 바꾸나 |
 |---|---|---|---|
 | 안전 사인오프 | `app/lib/safety/safety_signoff.dart` `kSafetySignoff` | 빈=전 카드 잠금 | 발성 전문가(HITL) |
-| 장르 롤아웃 | `app/lib/progression/progression_state.dart` `kReleasedGenres` | 빈=전 장르 유지 | 롤아웃/안전 결정자 |
+| 장르 롤아웃 | `app/lib/progression/progression_state.dart` `kReleasedAdvancedGenres`/`kReleasedGenres` | 빈=전 장르 유지 | 롤아웃/안전 결정자 |
 | 기기 마이크 | `docs/verification/device-results.md` | UNVERIFIED | 검증자(육안) |
 | 고급/periodization | `docs/curriculum/CURRICULUM-REVIEW.md` G4·G5 | OUT_OF_SCOPE | 설계+HITL |
 
 ## 전체 재검증(권장)
 
 ```
-cd app
-flutter test     # 전 테스트 green = 게이트/라우팅/정합 전부 일치
-flutter analyze  # No issues found!
+cd "C:\Users\user\Desktop\new_pro_v\pro v new\app"
+C:/src/flutter/bin/flutter.bat test     # 전 테스트 green = 게이트/라우팅/정합 전부 일치
+C:/src/flutter/bin/flutter.bat analyze  # No issues found!
 ```
 
 해당 테스트가 강제하는 불변식:
@@ -39,6 +39,12 @@ flutter analyze  # No issues found!
 - `release_config_test.dart` — beginner/fromJson이 config를 권위로 읽음(persisted 무시).
 - `verification_harness_test.dart` (W5) — JSON 단일 소스 ↔ 라이브 상수 정합(드리프트 차단).
 - `card_library_test.dart` I1.2 — pending 안전 카드 플래그 고정.
+- `manifest_safety_invariant_test.dart` — 사용자 대면 트랙(초급·코어·곡적용)에 pending/gated 고위험 카드 유입 차단(방어 심층).
+- `card_copy_lint_test.dart` — 카드 사용자 문구에 의료기기 전환 트리거(진단·치료·위험도·의료급 등) 금지(무점수·비진단 포지셔닝).
+- `global_lock_invariant_test.dart` — belt/통성/hard-glottal는 어떤 게이트·플래그 상태에서도 unlock 안 됨.
+
+> **남은 작업**(미연결·미검증·확장)의 단일 최신 인덱스: [`../REMAINING-WORK.md`](../REMAINING-WORK.md).
+> enforced Stage 0 임상 사인오프 절차·후보값: [`CLINICAL-SIGNOFF-PACKET-2026.md`](CLINICAL-SIGNOFF-PACKET-2026.md).
 
 ## 각 항목을 "수행됨"으로 올리는 법 (사람)
 
@@ -46,7 +52,7 @@ flutter analyze  # No issues found!
 JSON을 함께** 갱신해야 한다. 한쪽만 바꾸면 W5가 실패시켜 거짓 통과를 막는다.
 
 - 안전: `kSafetySignoff`에 사람 검토자+일자+근거 추가 → JSON 동기화. (AI 자가 승인 ❌)
-- 롤아웃: `kReleasedGenres`에 장르 추가 → JSON 동기화. (AI 자가 롤아웃 ❌)
+- 롤아웃: `kReleasedAdvancedGenres`에 장르 추가 → JSON 동기화. (AI 자가 롤아웃 ❌)
 - 기기: [DEVICE-MIC-VERIFICATION.md](DEVICE-MIC-VERIFICATION.md) 수행 → `device-results.md`
   기록 → JSON `deviceMic.status` 갱신.
 

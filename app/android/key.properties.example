@@ -1,8 +1,0 @@
-# Copy this file to app/android/key.properties for local release builds.
-# Do not commit key.properties or keystore files.
-#
-# storeFile may be absolute or relative to app/android/.
-storeFile=release-upload-key.jks
-storePassword=REPLACE_WITH_LOCAL_SECRET
-keyAlias=upload
-keyPassword=REPLACE_WITH_LOCAL_SECRET

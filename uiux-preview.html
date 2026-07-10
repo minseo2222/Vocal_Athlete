@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vocal Athlete — UI/UX 시안</title>
+<style>
+  body { background:#07080c; color:#e8eaf0; font-family:-apple-system,'Segoe UI',sans-serif;
+         margin:0; padding:28px; }
+  h1 { font-size:20px; } h2 { font-size:16px; color:#cfd3df; margin-top:34px; }
+  .subtitle { color:#8a8f9c; font-size:13px; max-width:760px; line-height:1.6; }
+  .wrap { display:flex; gap:30px; justify-content:flex-start; flex-wrap:wrap; align-items:flex-start; margin-top:16px; }
+  .phone { width:280px; background:#0E0F13; border-radius:28px; padding:0 0 14px;
+           border:8px solid #23262f; overflow:hidden; }
+  .pad { padding:14px 16px; } .row { display:flex; justify-content:space-between; align-items:center; }
+  .muted{color:#8a8f9c;} .green{color:#39D98A;} .blue{color:#6C8CFF;}
+  .card{background:#171922;border-radius:12px;padding:14px;margin:14px 16px;}
+  .blocks{display:flex;gap:6px;margin:10px 16px;} .blk{flex:1;height:6px;border-radius:3px;}
+  .btn{background:#6C8CFF;color:#fff;text-align:center;padding:13px;border-radius:12px;font-weight:700;margin:10px 16px 0;}
+  .cap{text-align:center;color:#9aa;font-size:12px;margin-top:8px;}
+  .hdr{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 8px;}
+  .seg{padding:14px 16px;} .seg.t2{background:linear-gradient(180deg,#121a18,#0E0F13);}
+  .seglabel{font-size:11px;letter-spacing:1px;color:#7c8597;text-transform:uppercase;margin-bottom:6px;}
+  .path{position:relative;height:230px;}
+  .node{position:absolute;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;}
+  .done{background:#1d3a2c;border:2px solid #39D98A;color:#39D98A;}
+  .today{background:#6C8CFF;box-shadow:0 0 0 6px rgba(108,140,255,.25);color:#fff;font-weight:700;}
+  .lock{background:#171922;border:2px solid #2c3142;color:#3A3F55;}
+  .lbl{position:absolute;font-size:10px;color:#8a8f9c;} .illus{font-size:30px;opacity:.55;}
+  .legend{display:flex;gap:16px;margin-top:16px;font-size:12px;color:#aab;flex-wrap:wrap;}
+  .dot{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:middle;margin-right:4px;}
+  .note{background:#15171f;border-left:3px solid #6C8CFF;padding:12px 14px;border-radius:6px;max-width:760px;margin-top:16px;font-size:13px;line-height:1.6;color:#c2c6d2;}
+</style></head><body>
+
+<h1>Vocal Athlete — UI/UX 시안</h1>
+<p class="subtitle">방향: <b>다크 레슨맵</b>(다크 톤 유지 + 레슨맵·일러스트 악센트·애니메이션). 이 파일을 새로고침하면 갱신돼.</p>
+
+<h2>① 현재 상태 (baseline)</h2>
+<p class="subtitle">기능은 되지만 밋밋함. 세로 스택 + 5블록 막대 + 시작 버튼.</p>
+<div class="wrap">
+  <div><div class="phone">
+    <div class="hdr"><b>🔥 3일</b><span class="muted">⚙️</span></div>
+    <div class="card"><div class="muted" style="font-size:11px">오늘의 레슨</div>
+      <div style="font-size:18px;font-weight:700;margin:4px 0">6점 정렬 관찰</div>
+      <div class="muted" style="font-size:12px">바닥/의자에 편하게.</div></div>
+    <div class="blocks">
+      <div class="blk" style="background:#39D98A"></div><div class="blk" style="background:#6C8CFF"></div>
+      <div class="blk" style="background:#3A3F55"></div><div class="blk" style="background:#3A3F55"></div>
+      <div class="blk" style="background:#3A3F55"></div></div>
+    <div class="muted" style="font-size:9px;display:flex;justify-content:space-between;padding:0 16px">
+      <span>토대</span><span>SOVT</span><span>발성</span><span>감각</span><span>졸업</span></div>
+    <div style="height:50px"></div><div class="btn">오늘 시작</div>
+  </div><div class="cap">현재 홈</div></div>
+</div>
+
+<h2>② 다크 레슨맵 — 컨셉</h2>
+<p class="subtitle">세로로 오르는 여정. 48레슨이 5블록으로 묶임. 완료=초록, 오늘=파랑(맥동), 미래=잠금. 블록별 일러스트 악센트.</p>
+<div class="wrap">
+  <div><div class="phone">
+    <div class="hdr"><b>🔥 3일</b><span class="illus">🏔️</span></div>
+    <div class="seg t2">
+      <div class="seglabel">블록 2 · SOVT</div>
+      <div class="path">
+        <div class="node lock" style="left:30px;top:0;">🔒</div>
+        <div class="lbl" style="left:84px;top:14px;">CARD-06</div>
+        <div class="node today" style="left:150px;top:60px;">▶</div>
+        <div class="lbl" style="left:118px;top:110px;color:#6C8CFF;">오늘 · 빨대 발성</div>
+        <div class="node done" style="left:60px;top:120px;">✓</div>
+        <div class="node done" style="left:170px;top:170px;">✓</div>
+      </div>
+    </div>
+    <div class="seg" style="background:linear-gradient(180deg,#10131c,#0E0F13)">
+      <div class="seglabel">블록 1 · 토대 ✓ 완료</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="node done" style="position:static;width:32px;height:32px;font-size:13px">✓</div>
+        <div class="node done" style="position:static;width:32px;height:32px;font-size:13px">✓</div>
+        <div class="node done" style="position:static;width:32px;height:32px;font-size:13px">✓</div>
+        <span class="illus" style="margin-left:auto;font-size:22px">🌱</span></div>
+    </div>
+    <div class="btn">오늘 시작 →</div>
+  </div><div class="cap">홈 = 레슨맵 (오늘 노드에 시작)</div></div>
+</div>
+<div class="legend">
+  <span><span class="dot" style="background:#39D98A"></span>완료</span>
+  <span><span class="dot" style="background:#6C8CFF"></span>오늘(맥동)</span>
+  <span><span class="dot" style="background:#2c3142"></span>잠금</span>
+  <span>🏔️🌱 블록별 일러스트</span>
+</div>
+
+<div class="note"><b>⚠️ ADR-0002 무납득:</b> "잘했어요!" 동기부여·설명 카피 금지. 재미는 색·일러스트·맵·애니메이션·진행 시각화로만.<br>
+<b>다음 결정:</b> 1일1레슨·완료기반이라 "오늘 노드"만 진행 가능. 맵 노드를 탭할 수 있게 할지(과거 복습/미래 잠금)를 정해야 함.</div>
+
+</body></html>

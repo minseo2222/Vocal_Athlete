@@ -1,42 +1,517 @@
 {
   "schema": "vocal-athlete/verification-status@1",
-  "updated": "2026-06-05",
-  "note": "인간 게이트 항목의 검증 상태 단일 소스(머신리더블). W5 하네스(flutter test)가 이 파일과 라이브 코드 상수의 정합을 강제한다. 임의로 status/목록을 올려도 코드가 뒷받침 못 하면 테스트 실패.",
-  "statusEnum": ["VERIFIED", "UNVERIFIED", "BLOCKED", "OUT_OF_SCOPE"],
+  "updated": "2026-07-01",
+  "remainingWorkIndex": "docs/REMAINING-WORK.md",
+  "note": "v18 이후 후속 작업이 추가됐다: 안전 시스템 3기능(음정 허용오차·vocal dose 피드백·상대 공명), 고위험 게이트 enforced Stage 0 기계적 스캐폴드(잠금·placeholder), 임상 사인오프 패킷(CLINICAL-SIGNOFF-PACKET-2026.md), A2 적신호 스크리닝, 가요 차별화 안전 카드, UI 토큰 단일화·접근성. 남은 작업 단일 인덱스는 docs/REMAINING-WORK.md. W5가 검사하는 safetySignoff/rollout/deviceMic/advancedTrack은 코드와 정합 유지(신규 안전 카드는 전부 safetyReview=none이라 pending 세트·롤아웃 불변). 호스트 테스트 382 green·analyze 0·debug APK 빌드 확인; 실기기·임상 사인오프·법무는 여전히 UNVERIFIED/BLOCKED.",
+  "statusEnum": [
+    "VERIFIED",
+    "UNVERIFIED",
+    "BLOCKED",
+    "OUT_OF_SCOPE"
+  ],
   "items": {
     "safetySignoff": {
       "decision": "human:HITL",
       "source": "app/lib/safety/safety_signoff.dart (kSafetySignoff)",
       "signedOffCardIds": [],
       "stillGatedCardIds": [
-        "IM-02", "IM-03", "IM-05", "IM-12",
-        "CL-01", "CL-08",
-        "GY-04", "GY-05", "GY-06", "GY-09"
+        "IM-02",
+        "IM-03",
+        "IM-05",
+        "IM-12",
+        "CL-01",
+        "CL-08",
+        "GY-04",
+        "GY-05",
+        "GY-06",
+        "GY-09"
       ],
       "status": "UNVERIFIED",
-      "note": "빈 사인오프 레코드 = 전 안전 카드(belt/트웽/cover/messa/런) 잠금. 발성 전문가 사인오프 전까지 UNVERIFIED. AI 자가 승인 ❌.",
+      "note": "빈 사인오프 레코드 = 전 안전 카드(belt/트웽/cover/messa/런) 잠금. 발성 전문가 사인오프와 강제 캡 구현 전까지 UNVERIFIED. AI 자가 승인 ❌.",
       "evidenceInput": "docs/verification/SAFETY-EVIDENCE-DOSSIER.md (독립 리서치 2종 교차검증, 2026-06)",
-      "prerequisite": "전문가 ✅ + 강제 캡 구현(docs/verification/backlog-safety-enforcement.md, 이슈 #1) — 둘 다 충족 후에만 사인오프 기입"
+      "prerequisite": "전문가 ✅ + 강제 cap 구현(docs/verification/SAFETY-RUNTIME-CAPS.md) + 사람 rollout 승인 — 모두 충족 후에만 사인오프 기입/출시"
+    },
+    "pitchTolerance": {
+      "decision": "human:curriculum",
+      "source": "app/lib/lesson/pitch/pitch_tolerance.dart + deviation.dart + pitch_display.dart + app/lib/lesson/card.dart (toleranceIntervalSemitones); CARD-12/26 연결",
+      "status": "UNVERIFIED",
+      "note": "기능① 음정 간격·숙련도별 cents 허용오차. 무점수 넛지 임계로만. Flutter 실행·실기기 F0·학습효과 미검증."
+    },
+    "vocalDoseFeedback": {
+      "decision": "human:clinical-signoff+device",
+      "source": "app/lib/safety/vocal_load_budget.dart + vocal_recovery.dart + vocal_load_store.dart + vocal_fatigue_store.dart + range_boundary_store.dart + app/lib/lesson/vocal_fatigue_check_screen.dart + range_boundary_check_screen.dart",
+      "status": "UNVERIFIED",
+      "note": "기능② 세션 발성시간·회복 윈도우·VFI 경량 자가체크·음역 승격. 레슨 경감 배너로 연결. 임상 컷오프는 placeholder(CLINICAL-SIGNOFF-PACKET-2026.md). 실기기·사인오프 미검증."
+    },
+    "resonanceProxy": {
+      "decision": "human:device+research",
+      "source": "app/lib/timbre/resonance_proxy.dart + app/lib/lesson/pitch/resonance_band.dart + pitch_source.dart + mic_pitch_source.dart + lesson_screen.dart (쿨다운 추세)",
+      "status": "UNVERIFIED",
+      "note": "기능③ 세션 내·동일기기 상대 공명(2-4kHz 밴드에너지) 추세. 절대값·점수 없음, CPPS 제외. 실오디오 노이즈 내성 미검증."
+    },
+    "stage0Enforcement": {
+      "decision": "human:clinical-signoff",
+      "source": "app/lib/safety/safety_params.dart + gate_state.dart + safety_feature_flag.dart + vocal_load_budget.dart(LockAction) + vocal_recovery.dart(SymptomLock) + intensity_guard.dart + vocal_screening.dart",
+      "status": "BLOCKED",
+      "note": "고위험 게이트 enforced 기계적 안전장치(스크리닝·도즈/증상 하드락·강도 가드·피처플래그·킬스위치). 도메인+테스트만, 런타임 미연결(dormant). 임상 수치 전부 placeholder(SIGN-OFF REQUIRED). 후보 카드 released + 사인오프 후 활성. 방어심층=test/manifest_safety_invariant_test.dart."
+    },
+    "vocalScreening": {
+      "decision": "human:clinical-signoff",
+      "source": "app/lib/safety/vocal_screening.dart + vocal_screening_store.dart + app/lib/lesson/vocal_screening_screen.dart",
+      "status": "UNVERIFIED",
+      "note": "A2 적신호 자가 스크리닝(AAO-HNS 기반). hardBlock→레슨 비차단 의뢰 배너. 항목·문구는 후두과 승인 대기(CLINICAL-SIGNOFF-PACKET-2026.md)."
+    },
+    "gayoDifferentiation": {
+      "decision": "human:research-review",
+      "source": "app/lib/lesson/card_library.dart (GY-10~16) + app/lib/progression/path.dart advanced gayo blocks",
+      "status": "UNVERIFIED",
+      "note": "가요 차별화 안전 카드 GY-11~14(근거 B)+GY-15/16(C 수용). 전부 safetyReview=none, 게이트 잠금 하 편성. GY-13 판소리 계보 주장 금지. 게이트 사운드(belt/트웽/통성)는 영구 잠금."
+    },
+    "uiConsistencyA11y": {
+      "status": "implemented_static_unverified",
+      "source": "app/lib/theme/app_theme.dart(Sun 단일 토큰) + 안전 화면 Entrance/Sun.card/SunsetCta 정합 + a11y + test/card_copy_lint_test.dart",
+      "note": "레거시 AppColors 제거·Sun 토큰 단일화, 안전 화면 디자인 정합, a11y(button semantics·tooltip·탭타깃), 규제 카피 lint(카드 문구). 화면 인라인 카피 lint·소형칩 탭타깃·시각 골든은 미완(REMAINING-WORK.md)."
     },
     "rollout": {
       "decision": "human:rollout",
-      "source": "app/lib/progression/progression_state.dart (kReleasedGenres)",
+      "source": "app/lib/progression/progression_state.dart::kReleasedAdvancedGenres (advanced genre Lab rollout)",
       "releasedGenres": [],
-      "allGenres": ["musical", "classical", "gayo"],
+      "allGenres": [
+        "musical",
+        "classical",
+        "gayo",
+        "rbSoul",
+        "rockBand",
+        "ccm",
+        "userSong"
+      ],
       "status": "UNVERIFIED",
-      "note": "빈 config = 전 장르 유지 모드(미출시). 출시는 롤아웃·안전 결정이라 사람만. AI 자가 롤아웃 ❌."
+      "note": "빈 config = 전 고급 장르 Lab 미출시. 초급 Foundation·Universal Core·Repertoire Application은 장르 rollout과 분리된다. 미출시 장르 선택은 maintenance 대기로 보낸다. 출시는 사람만. AI 자가 롤아웃 ❌."
     },
     "deviceMic": {
       "decision": "human:device",
       "source": "docs/verification/device-results.md",
       "status": "UNVERIFIED",
-      "note": "기기 육안 검증(소리→피치 곡선) 미수행. RecordingPitchSource는 코드·analyze만 검증됨(device-bound glue)."
+      "note": "기기 육안 검증(소리→피치 곡선) 미수행. RecordingPitchSource는 코드·analyze만 검증됨(device-bound glue). V1 최소 기기 매트릭스는 docs/verification/DEVICE-MIC-VERIFICATION.md §3b 참조."
     },
     "advancedTrack": {
       "decision": "human:design+HITL",
-      "source": "docs/curriculum/CURRICULUM-REVIEW.md (G4·G5)",
-      "status": "OUT_OF_SCOPE",
-      "note": "고급 트랙(G4)·periodization/디로드(G5)는 의도적 범위 밖. 신규 고위험 = 별도 안전 설계 + HITL 필요."
+      "source": "docs/curriculum/ADVANCED-LOOP-SPEC.md + app/lib/progression/path.dart advanced Lab manifests",
+      "status": "UNVERIFIED",
+      "note": "v9에서 40-slot 장르 프로젝트와 R&B/Rock/Worship 전용 저위험 카드를 보강했지만, 자산 QA·장르 전문가 검수·고위험 카드 cap/fallback/HITL 전까지 UNVERIFIED."
+    },
+    "recordingAB": {
+      "decision": "human:privacy+device",
+      "source": "app/lib/recording/audio_io.dart + app/lib/recording/recording_store.dart + app/lib/recording/recording_library.dart + app/lib/lesson/recording_ab_panel.dart + app/lib/lesson/standard_sample_review_screen.dart + app/lib/lesson/repertoire_application_review_screen.dart + app/lib/lesson/recording_library_screen.dart + docs/app/RECORDING-AB-MVP-SPEC.md",
+      "status": "UNVERIFIED",
+      "note": "v7 adds recording library management, metadata-only export preview, whole-library delete, and Repertoire Application phrase take review. Native capture/playback adapters remain UNVERIFIED until real Android/iOS device QA passes."
+    },
+    "recordingDataManagement": {
+      "decision": "human:privacy+device",
+      "source": "app/lib/recording/recording_library.dart + app/lib/lesson/recording_library_screen.dart + docs/app/RECORDING-LIBRARY-MANAGEMENT-SPEC.md + docs/app/PLAY-DATA-SAFETY-DRAFT.md",
+      "status": "UNVERIFIED",
+      "note": "Metadata-only export preview and local clear-all are implemented. Audio file export/sharing/cloud sync/model training upload remain out of scope. Google Play Data safety and privacy policy must be checked against actual release behavior."
+    },
+    "deviceAudioQA": {
+      "decision": "human:device",
+      "source": "docs/app/ANDROID-IOS-AUDIO-QA-CHECKLIST.md",
+      "status": "UNVERIFIED",
+      "note": "v11은 앱 lifecycle과 레슨 역할 간 stop/cancel 정책 및 integration_test scaffold를 추가했다. 그러나 실제 권한, audio focus/interruption, record, stop, playback, delete, app-restart persistence, no-background-recording은 실기기 결과가 없어 UNVERIFIED."
+    },
+    "researchIntegration": {
+      "decision": "human:research-review",
+      "source": "docs/research/v8/README.md + docs/research/v9/ + docs/research/v15/ + docs/research/v16/ + docs/research/v17/ + docs/research/v18/",
+      "status": "UNVERIFIED",
+      "bundleDocuments": 21,
+      "sourceRecoveryRequiredDocuments": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "standaloneGaps": [
+        "rhythm_time",
+        "sovt_to_singing_dose",
+        "mobile_acoustic_validation",
+        "portfolio_inter_rater_reliability"
+      ],
+      "note": "기존 연구 묶음과 음색 R1–R39를 유지한다. v15 8개, v16 5개, v17 6개, v18 4개로 총 23개를 spot-check했으며 나머지 16개와 초기 01~05 문서의 임시 turn 인용 복구 전에는 전체를 VERIFIED로 승급하지 않는다.",
+      "unresolvedTurnReferenceOccurrences": 725,
+      "unresolvedTurnReferenceDistinctByDocument": 195,
+      "unresolvedTurnReferenceGloballyUnique": 176,
+      "timbreSourceRegister": 39,
+      "timbreSpotChecked": 23,
+      "timbrePendingFullRecheck": 16
+    },
+    "curriculumMethodology": {
+      "decision": "human:curriculum+user-study",
+      "source": "docs/curriculum/LEARNING-METHODOLOGY-SPEC.md + docs/curriculum/beginner/TIMBRE-VERTICAL-SLICE-v16.md + docs/curriculum/universal-core/CYCLE-01-DETAILED.md + app/assets/curriculum/ + app/lib/progression/path.dart",
+      "status": "UNVERIFIED",
+      "implementedDesign": [
+        "beginner_state_driven_recovery_only",
+        "universal_core_twelve_microcycles",
+        "formal_core_checkpoints_four",
+        "repertoire_six_phrase_projects",
+        "global_local_global_per_project",
+        "dedicated_rb_rock_worship_cards",
+        "delayed_retention_and_transfer_checkpoints",
+        "universal_cycle_01_detailed_blueprint",
+        "repertoire_project_01_detailed_blueprint",
+        "first_vertical_slice_guide_fade",
+        "day_level_recovery_alternatives",
+        "comfortable_low_mid_reference_choices",
+        "prototype_audio_peak_limited",
+        "completion_separated_from_practice_trace",
+        "target_evidence_not_auto_achievement",
+        "local_learning_evidence_review",
+        "timbre_observation_to_reproduction_spiral",
+        "beginner_tone_observation_late_block_four",
+        "repertoire_bright_warm_mic_and_three_tone_projects",
+        "user_selected_tone_palette_without_auto_scoring",
+        "beginner_timbre_days_37_38_detailed_blueprint",
+        "universal_core_cycle_01_day_06_timbre_blueprint",
+        "single_variable_timbre_comparison",
+        "day_weighted_tone_profile",
+        "multi_tag_tone_profile_curation",
+        "recording_time_local_date_key",
+        "teacher_guide_preparation_pack_v18"
+      ],
+      "note": "v18은 기존 커리큘럼 길이를 늘리지 않고 음색 자기기록 정합성과 첫 세 레슨의 강사 guide 제작 준비를 보강했다. Flutter·기기·전문가·사용자 시험 전까지 학습효과는 UNVERIFIED."
+    },
+    "trainingAudioAssets": {
+      "decision": "human:audio+device+curriculum-review",
+      "source": "app/assets/training/universal_core_cycle_01 + app/assets/training/timbre_v16 + app/assets/repertoire/neutral_001 + docs/app/TRAINING-AUDIO-ASSET-SPEC.md",
+      "status": "UNVERIFIED",
+      "implemented": [
+        "core_low_mid_reference_cues_eleven",
+        "neutral_001_low_mid_prototype_tracks_nine",
+        "prototype_peak_full_scale_0_50",
+        "rights_records_with_sha256",
+        "bundle_asset_playback_adapter",
+        "comfortable_key_selector",
+        "repertoire_practice_panel",
+        "timbre_v16_low_mid_prototype_cues_four",
+        "timbre_v16_peak_full_scale_0_38"
+      ],
+      "note": "공통 코어·곡 적용·음색 cue는 프로젝트 내부 생성 원본 합성 프로토타입이며 사람 보컬 master가 아니다. timbre_v16 peak는 full scale 0.38로 제한했지만 실제 음량 안전·모방 적합성·지연은 실기기와 발성 전문가 검수 전까지 미확인이다."
+    },
+    "curriculumVerticalSlice": {
+      "decision": "human:curriculum+user-study",
+      "source": "app/assets/curriculum/beginner_timbre_slice_v16.json + app/assets/curriculum/universal_core_cycle_01.json + app/assets/curriculum/repertoire_project_01.json + app/lib/curriculum/lesson_blueprint.dart",
+      "status": "UNVERIFIED",
+      "implemented": [
+        "24_day_level_blueprints",
+        "primary_and_secondary_skill_limits",
+        "attempt_caps",
+        "post_attempt_feedback_prompts",
+        "self_check_items",
+        "no_voice_recovery_alternatives",
+        "low_mid_guide_selection",
+        "first_project_guide_fade",
+        "practice_trace_persistence",
+        "best_take_persistence",
+        "audio_capture_playback_interlock",
+        "beginner_days_37_38_timbre_blueprints",
+        "beginner_timbre_no_voice_alternatives",
+        "universal_day_06_two_attempt_timbre_slice"
+      ],
+      "note": "기존 24일 first slice에 Beginner Day 37·38 음색 slice를 추가했다. path·asset·rights 정합성은 정적으로 검사하지만 실제 Flutter UI, cue 이해도, tag 재현성과 학습효과는 미검증이다."
+    },
+    "learningEvidence": {
+      "decision": "human:curriculum+user-study",
+      "source": "app/lib/assessment/learning_evidence.dart + app/lib/lesson/learning_evidence_review_screen.dart + app/lib/lesson/lesson_screen.dart",
+      "status": "UNVERIFIED",
+      "implemented": [
+        "local_practice_snapshot",
+        "attempt_and_self_check_trace",
+        "played_audio_trace",
+        "comfortable_key_trace",
+        "recording_and_best_take_trace",
+        "voice_state_and_adaptation_trace",
+        "settings_review_and_clear_all"
+      ],
+      "note": "v12는 contentRevision, recordedTakeIds, bestTakeId를 학습 기록에 추가했다. E0~E5는 목표 증거 수준이며 자동 성취 판정이나 품질 점수가 아니다. compile/실기기/사용자 retention 효과는 UNVERIFIED."
+    },
+    "audioSessionIntegrity": {
+      "decision": "human:device+privacy",
+      "source": "app/lib/main.dart + app/lib/lesson/lesson_screen.dart + app/lib/lesson/recording_ab_panel.dart + docs/app/AUDIO-SESSION-INTEGRITY-SPEC.md",
+      "status": "UNVERIFIED",
+      "implemented": [
+        "stop_saved_take_before_training_audio",
+        "cancel_capture_before_training_audio",
+        "stop_training_audio_before_capture",
+        "stop_all_on_step_exit_and_completion",
+        "stop_and_cancel_on_non_resumed_lifecycle",
+        "panel_dispose_stop",
+        "persistent_best_take_flag"
+      ],
+      "note": "Dart seam과 widget/integration test scaffold는 추가됐지만 Android audio focus, iOS interruption, 전화·Bluetooth route change·실제 캡처 파일 동작은 실기기 미검증."
+    },
+    "delayedReviewQueue": {
+      "decision": "human:learning-validation",
+      "source": "app/lib/assessment/review_queue.dart + app/lib/lesson/review_queue_screen.dart + app/lib/lesson/review_practice_screen.dart + docs/app/REVIEW-QUEUE-SPEC.md",
+      "status": "UNVERIFIED",
+      "implementedDesign": [
+        "dueEpochDay pending/completed/dismissed queue",
+        "Today optional due-review card",
+        "postpone-to-next-day without streak or progression loss",
+        "actual retention/transfer practice screen before completion",
+        "normal two-attempt and tired one-attempt caps",
+        "hoarse no-voice action and next-day reschedule",
+        "source take playback after first recall attempt",
+        "contentRevision attached to source/task/review evidence"
+      ],
+      "note": "v14 keeps Today optional review and adds source-card-specific cues. E2/E3 achievement, notification delivery, adherence, and learning effect remain UNVERIFIED."
+    },
+    "runtimeValidationPipeline": {
+      "decision": "human:qa",
+      "source": ".flutter-version + .github/workflows/flutter-validation.yml + tools/run_flutter_validation.sh + tools/validate_v18.py",
+      "status": "VERIFIED",
+      "implementedDesign": [
+        "Flutter 3.44.2 stable pin",
+        "content manifest and repository validation gates",
+        "flutter pub get",
+        "flutter analyze --fatal-infos",
+        "unit/widget tests",
+        "Android debug APK build",
+        "manual Android emulator integration-test job"
+      ],
+      "note": "2026-06-23 실제 실행: Flutter 3.44.0 환경에서 `flutter pub get` 성공, `flutter analyze --fatal-infos` 0건, host 단위/위젯 테스트 251개 전부 PASS, `flutter build apk --debug` 성공 후 emulator-5554(Android 16)에 설치·실행·Flutter 엔진 로드까지 확인(크래시 없음). 첫 실행 시 드러난 실제 버그 4건(AppMetadataStore legacy null sentinel, ListTile-in-DecoratedBox Material wrap, setState-returns-Future, blueprint 에셋 정적 캐시)과 Android 네이티브 셸 누락(v1 embedding)을 수정했다. 다만 `flutter test integration_test -d emulator-5554`는 호스트↔에뮬레이터 VM service WebSocket 연결 제약으로 로드 실패(앱 결함 아님) → 자동 on-device E2E는 이 환경에서 BLOCKED.",
+      "execution": "ran locally 2026-06-23: pub get OK, analyze 0, 251 host tests pass, debug APK built+installed+launched on emulator-5554; on-device integration_test blocked by VM-service websocket"
+    },
+    "reviewEvidence": {
+      "decision": "human:learning-validation+privacy",
+      "source": "app/lib/assessment/review_evidence.dart + app/lib/lesson/review_evidence_screen.dart + docs/app/REVIEW-EVIDENCE-SPEC.md",
+      "status": "UNVERIFIED",
+      "implementedDesign": [
+        "reviewTaskId and sourceEvidenceId linkage",
+        "voice state and adaptation metadata",
+        "attempt and self-check trace",
+        "new take IDs and played source take IDs",
+        "source/current content revision comparison",
+        "local clear-all",
+        "no quality score or health diagnosis"
+      ],
+      "note": "v14 adds card-specific source cue and a single safe transfer condition. Persistence now routes through AppMetadataStore, but Flutter execution, device audio, user comprehension, and retention/transfer validity remain UNVERIFIED."
+    },
+    "todayOptionalReview": {
+      "decision": "human:ux+learning-validation",
+      "source": "app/lib/lesson/home_screen.dart + app/lib/main.dart + docs/app/TODAY-OPTIONAL-REVIEW-SPEC.md",
+      "status": "UNVERIFIED",
+      "implementedDesign": [
+        "due review count on Home",
+        "optional 3-5 minute review copy",
+        "separate from regular lesson CTA",
+        "no streak/progression penalty for skipping"
+      ],
+      "note": "Widget/integration test scaffolds are included but not executed in this environment. Discoverability and burden require user testing."
+    },
+    "contentRevisionManifest": {
+      "decision": "human:content-governance",
+      "source": "tools/generate_content_manifest.py + app/assets/curriculum/content_manifest_v18.json + app/lib/curriculum/lesson_blueprint.dart + docs/app/CONTENT-REVISION-MANIFEST-SPEC.md",
+      "status": "UNVERIFIED",
+      "implementedDesign": [
+        "generated SHA-256 manifest schema v2",
+        "three blueprints, one asset manifest, three rights records, twenty-four WAV files",
+        "rights inventory and stale hash checks",
+        "untracked WAV and undeclared curriculum audio rejection",
+        "runtime 12-character revision suffix",
+        "CI freshness check"
+      ],
+      "note": "v18 manifest는 31개 blueprint/rights/audio 자산의 SHA-256 freshness를 검사한다. hash 일치는 파일 동일성만 나타내며 교육 품질·안전·권리 승인을 증명하지 않는다."
+    },
+    "metadataStorageMigration": {
+      "decision": "human:data-governance+qa",
+      "source": "app/lib/storage/app_metadata_store.dart + app/lib/progression/progression_store.dart + app/lib/lesson/learning_data_management_screen.dart + docs/app/METADATA-STORAGE-MIGRATION-SPEC.md",
+      "status": "UNVERIFIED",
+      "implementedDesign": [
+        "SharedPreferencesAsync primary behind AppMetadataStore",
+        "legacy SharedPreferences fallback and idempotent copy/remove migration",
+        "schema version 2 and migration marker",
+        "corrupt JSON quarantine backup",
+        "learning metadata inventory and clear-all UI",
+        "recording files remain in a separate repository"
+      ],
+      "note": "In-memory regression tests and static markers are present. Real v13→v14 Android/iOS upgrade, DataStore behavior, crash recovery, and no-data-loss behavior remain UNVERIFIED."
+    },
+    "timbreIntegration": {
+      "decision": "human:research+curriculum+ux",
+      "source": "docs/research/v15/ + docs/curriculum/TIMBRE-TRAINING-SPEC.md + app/lib/lesson/card_library.dart + app/lib/timbre/tone_profile.dart",
+      "status": "UNVERIFIED",
+      "implementedDesign": [
+        "R1-R39 source register and S/C/M/P/D evidence boundary",
+        "source/filter/style/learning-safety card metadata",
+        "Beginner observation, Universal Core spiral, Repertoire Application transfer",
+        "self-selected tone tags, comfort ratings, same-condition confirmation and Best takes",
+        "no automatic timbre score, vocal-fold diagnosis or singer similarity"
+      ],
+      "note": "공식 Estill/CVT 자료는 일반적인 음색 선택지·sound colour 원리 확인에만 사용하며 고유 recipe/인증 체계를 복제하지 않는다. SOVT와 임상 음성치료 근거를 건강한 가수의 장기 향상 보장으로 확장하지 않는다. Flutter 실행, 실기기 녹음, 사용자 이해도, 유지·전이 효과, 전문가 안전 검수는 미완료다."
+    },
+    "standardSampleMilestones": {
+      "decision": "human:data-integrity+device-qa",
+      "source": "app/lib/recording/recording_ab.dart + app/lib/lesson/recording_ab_panel.dart + app/lib/lesson/lesson_screen.dart",
+      "status": "UNVERIFIED",
+      "implementedDesign": [
+        "Day 1 baseline slot",
+        "Day 24 midpoint slot",
+        "Day 48 graduation slot",
+        "slot-qualified take IDs",
+        "per-milestone one-take cap",
+        "legacy slot readability"
+      ],
+      "note": "정적 wiring과 테스트 scaffold는 추가됐지만 실제 저장·재시작·삭제·기기 녹음 migration은 미검증이다."
+    },
+    "timbreResearchV15": {
+      "decision": "human:research+curriculum-review",
+      "source": "docs/research/v15/ + docs/research/v16/timbre-source-register.json",
+      "status": "UNVERIFIED",
+      "implementedDesign": [
+        "verbatim uploaded research archive",
+        "R1-R39 source registry",
+        "S/C/M/P/D evidence classes",
+        "application matrix",
+        "verified anchor subset"
+      ],
+      "note": "39개 출처 중 v15 8개, v16 5개를 spot-check했다. 26개는 원문·DOI·표본·적용 범위 재검증이 남아 있으며 상업 교수법 고유 recipe와 상표 체계는 복제하지 않는다."
+    },
+    "toneProfile": {
+      "decision": "human:self-report+privacy+user-study",
+      "source": "app/lib/timbre/tone_profile.dart + app/lib/lesson/tone_profile_screen.dart + docs/app/TONE-PROFILE-SPEC.md",
+      "status": "UNVERIFIED",
+      "implementedDesign": [
+        "user-selected tags only",
+        "raw tagged take count separated from stable frequency",
+        "local practice day by tag aggregation",
+        "same-day duplicate tag capped to one contribution",
+        "same-day low-comfort signal retained",
+        "three distinct practice-day threshold",
+        "undated legacy takes excluded from stable frequency",
+        "best/standard reference take IDs",
+        "no acoustic or health score"
+      ],
+      "note": "v16 Tone Profile은 반복 take 수와 다른 날 재등장을 구분한다. 사용자 tag 이해도, timezone 변화, 3일 기준, Flutter 실행과 실제 동기 효과는 미검증이다."
+    },
+    "timbreTraining": {
+      "decision": "human:curriculum+research+user-study",
+      "source": "docs/curriculum/TIMBRE-TRAINING-SPEC.md + docs/curriculum/beginner/TIMBRE-VERTICAL-SLICE-v16.md + docs/research/v16/ + app/lib/lesson/card_library.dart + app/lib/timbre/tone_profile.dart",
+      "status": "UNVERIFIED",
+      "implementedDesign": [
+        "beginner_days_37_38_detailed_timbre_slice",
+        "universal_day_06_hum_to_vowel_slice",
+        "low_mid_synthetic_prototype_cues",
+        "single_variable_instruction",
+        "two_attempt_cap",
+        "explicit_no_voice_recovery",
+        "day_weighted_user_derived_tone_profile",
+        "no_timbre_score_or_laryngeal_diagnosis"
+      ],
+      "researchSources": 39,
+      "spotCheckedSources": 13,
+      "pendingFullRecheckSources": 26,
+      "note": "카드·blueprint·prototype 자산·사용자 자기태그 모델은 정적으로 연결됐다. 최종 강사 가이드, tag 이해도, 재현성, 전문가 안전성, Flutter compile, 실제 기기 녹음 조건과 학습효과는 미검증이다."
+    },
+    "timbreVerticalSliceV16": {
+      "decision": "human:curriculum+audio+device+user-study",
+      "source": "app/assets/curriculum/beginner_timbre_slice_v16.json + app/assets/curriculum/universal_core_cycle_01.json + app/assets/training/timbre_v16/rights.json + docs/curriculum/beginner/TIMBRE-VERTICAL-SLICE-v16.md",
+      "status": "UNVERIFIED",
+      "implementedDesign": [
+        "beginner_day_37_hum_to_vowel",
+        "beginner_day_38_vowel_colour",
+        "universal_cycle_01_day_06_hum_to_vowel",
+        "four_low_mid_synthetic_prototype_cues",
+        "two_attempt_cap",
+        "no_voice_recovery",
+        "content_manifest_sha256_tracking"
+      ],
+      "note": "기능·asset·권리 inventory 검증용 vertical slice다. 합성 cue는 최종 강사 master, 정상/비정상 발성 예시, 임상 승인 또는 학습효과 근거가 아니다."
+    },
+    "toneProfileCurationV17": {
+      "status": "implemented_static_unverified",
+      "notes": "User can edit one self tone tag and exclude/restore takes from day-weighted Tone Profile aggregation. Flutter runtime not executed in container."
+    },
+    "teacherGuideMasterPipelineV17": {
+      "status": "specified_not_recorded",
+      "notes": "Human guide master requirements documented; prototype synthetic cues remain development assets."
+    },
+    "firstTimbrePilotV17": {
+      "status": "protocol_ready_not_run",
+      "notes": "5-10 user timbre usability/safety pilot protocol added; no participant data collected."
+    },
+    "timbreSourceRecheckV17": {
+      "status": "partial",
+      "notes": "19/39 timbre sources now spot-checked; 20 remain pending full recheck."
+    },
+    "toneProfileCurationV18": {
+      "status": "implemented_static_unverified",
+      "source": "app/lib/recording/recording_ab.dart + app/lib/timbre/tone_profile.dart + app/lib/lesson/tone_profile_screen.dart",
+      "implementedDesign": [
+        "multi_tag_toggle_without_replacing_other_tags",
+        "explicit_clear_all_tags",
+        "guarded_edit_and_exclusion_actions",
+        "created_local_date_key_for_new_takes",
+        "legacy_epoch_fallback_without_silent_rewrite",
+        "edited_excluded_undated_counts"
+      ],
+      "notes": "정적 코드와 테스트 구조를 추가했다. 실제 Flutter UI 동작, migration, 자정/시간대 edge case와 사용자 이해도는 미검증이다."
+    },
+    "teacherGuidePreparationV18": {
+      "status": "preparation_pack_ready_not_recorded",
+      "source": "docs/content/teacher-guides/v18/",
+      "implementedDesign": [
+        "day37_script",
+        "day38_script",
+        "universal_core_day6_script",
+        "performer_consent_template",
+        "pedagogy_review_checklist",
+        "audio_mastering_device_qa",
+        "rights_record_template"
+      ],
+      "notes": "사람 강사 master는 아직 녹음·검수·권리 승인되지 않았다. 합성 prototype은 release 승인 자산이 아니다."
+    },
+    "firstTimbrePilotReadinessV18": {
+      "status": "runbook_ready_not_run",
+      "source": "docs/app/FIRST-TIMBRE-PILOT-RUNBOOK-v18.md + docs/app/FIRST-TIMBRE-PILOT-OBSERVATION-FORM-v18.csv",
+      "notes": "실행 순서와 관찰 양식만 준비했다. 참가자 모집, 동의, 세션, 결과는 수행하지 않았다."
+    },
+    "timbreSourceRecheckV18": {
+      "status": "partial",
+      "source": "docs/research/v18/",
+      "notes": "R3, R12, R25, R26을 추가 spot-check했다. 총 23/39 checked, 16/39 pending. spot-check는 전체 연구 묶음의 검증 완료를 의미하지 않는다."
     }
+  },
+  "notes": [
+    "R4: Song Builder user-facing naming retired; Repertoire Application / 곡 적용 훈련 is canonical. Runtime safety fallback/cap metadata and voice-state adaptation policy added.",
+    "v5: numeric versioning started. Recording A/B metadata/panel, Vocal Load Budget policy, Repertoire Application phrase asset manifests, and assessment rubric model added. Native audio capture/playback remains UNVERIFIED.",
+    "v6: native recording/playback adapter seam, file-backed recording repository, Standard Sample Review, Android RECORD_AUDIO and iOS microphone usage declaration added. Real-device QA remains blocked.",
+    "v7: recording library/data management, metadata-only export preview, whole-library delete, Repertoire Application phrase review, and audio QA/Data safety drafts added. Real-device capture/playback remains blocked.",
+    "v8: 21개 연구 문서를 정규화하고 S/C/M/P/D 근거 분류, Universal Core 4 spiral pass, Repertoire Application 4-stage transfer, 상세 장르 Lab/assessment/asset specs를 반영했다. 초기 5개 문서에는 임시 인용이 725회 출현하며 전체 고유 176개가 복구 대기다.",
+    "v9: 정상 path에서 CARD-18을 제거하고 Universal Core를 12 microcycles, Repertoire Application을 6 phrase projects로 재작성했다. UC-18~25, RA-09~10, RB/RK/WC 전용 저위험 카드를 추가했다. 레슨 길이와 시도 수는 여전히 제품 가설이다.",
+    "v10: Universal Core Cycle 1과 Repertoire Project 1을 24개 날짜별 blueprint, 낮은/중간 선택형 원본 합성 cue, training audio adapter, lesson/repertoire panel로 연결했다. prototype peak는 full scale 0.50으로 제한했다. compile·실기기·전문가·사용자 검증은 미완료다.",
+    "v11: completion과 학습 증거 목표를 분리해 시도·자기점검·예시 청취·선택 키·녹음·회복 모드를 local-first로 기록한다. 가이드/녹음/마이크 interlock, lifecycle stop/cancel, best take 영속화, integration_test scaffold를 추가했다. 실제 evidence 달성·compile·device audio는 미검증이다.",
+    "v13: due review is exposed as an optional Today card, actual review practice creates linked local ReviewEvidence, hoarse reviews require an explicit no-voice action and are postponed, and first vertical-slice content revisions include SHA-256 manifest suffixes. Flutter compilation/device validation remains blocked.",
+    "v15: 음색 리서치 R1–R39를 source/filter/style/safety 경계로 통합하고, TONE 카드 메타데이터·Universal Core 나선형·Repertoire tone 전이·사용자 자기태그 Tone Profile을 추가했다. CARD-13 Day 1/24/48 녹음은 독립 milestone slot으로 분리했다. 자동 음색점수·성대진단·가수매칭은 금지한다.",
+    "v15: 음색 리서치 R1–R39를 등록하고, 독립 12주 코스 대신 Beginner 관찰→Universal Core 조절·재현→Repertoire 동일 프레이즈 A/B/C→Advanced 장르 미학으로 통합했다. 카드-defined tone tag/sequence와 사용자 파생 Tone Profile을 추가했으며 자동 음색 점수·성대 판정·가수 매칭은 금지한다.",
+    "v16: first timbre vertical slice and day-weighted Tone Profile added; runtime/device/user validation remains blocked or unverified."
+  ],
+  "version": "v18",
+  "appVersion": "1.18.0+18",
+  "recordingAB": {
+    "metadataModel": "implemented",
+    "panel": "implemented",
+    "nativeCaptureAdapter": "implemented_unverified",
+    "localPlaybackAdapter": "implemented_unverified",
+    "fileMetadataStore": "implemented_unverified",
+    "standardSampleReview": "implemented",
+    "androidDeviceQA": "blocked_until_real_device_v13",
+    "recordingLibraryManagement": "implemented_unverified",
+    "metadataExportPreview": "implemented_unverified",
+    "wholeLibraryDelete": "implemented_unverified",
+    "repertoirePhraseReview": "implemented_unverified",
+    "dataSafetyDraft": "drafted_needs_legal_review",
+    "bestTakePersistence": "implemented_unverified",
+    "audioSessionInterlock": "implemented_unverified",
+    "standardSampleMilestoneSlots": "implemented_unverified_v15",
+    "toneProfile": "implemented_unverified_v15"
   }
 }

@@ -1,0 +1,40 @@
+id,title,url,evidenceClass,status
+R1,NATS Science-Informed Pedagogy Institute. National Association of Teachers of Singing. 공식,https://www.nats.org/Science-Informed_Pedagogy_Institute.html,P,spot_checked_v16
+R2,Bachelor of Music in Performance: Voice. Berklee College of Music. 공식,https://college.berklee.edu/voice/bachelor-of-music-in-performance-voice,P,spot_checked_v17
+R3,Voice Technique 101. Berklee Online. 공식,https://online.berklee.edu/courses/voice-technique-101,P,spot_checked_v18
+R4,The Contemporary Singer: Elements of Vocal Technique. Berklee Online. 공식,https://online.berklee.edu/store/product?product_id=17638105&usca_p=t,P,imported_pending_full_recheck
+R5,Vocal Arts. Juilliard. 공식,https://www.juilliard.edu/music/vocal-arts,P,spot_checked_v17
+R6,Vocal Arts & Opera. USC Thornton School of Music. 공식,https://music.usc.edu/departments/vocal-arts-opera/,P,spot_checked_v17
+R7,Vocal Arts. Manhattan School of Music. 공식,https://www.msmnyc.edu/programs/vocal-arts/,P,spot_checked_v17
+R8,Vocal & Opera. Royal College of Music. 공식,https://www.rcm.ac.uk/vocal/,P,spot_checked_v17
+R9,Vocal Studies. Guildhall School of Music & Drama. 공식,https://www.gsmd.ac.uk/study-with-guildhall/music/principal-study-and-departments/vocal-studies,P,spot_checked_v17
+R10,Vocal Studies. Trinity Laban Conservatoire of Music and Dance. 공식,https://www.trinitylaban.ac.uk/music/vocal-studies/,P,imported_pending_full_recheck
+R11,"Voice Series, 2025 Edition. Royal Conservatory of Music Canada. 공식",https://www.rcmusic.com/about-us/rcm-publishing/voice-series-2025-edition,P,imported_pending_full_recheck
+R12,Vocal Pedagogy Handbook. University of North Texas. 공식,https://music.unt.edu/voice/handbook/vocal-pedagogy.html,P,spot_checked_v18
+R13,CCM Vocal Pedagogy Institute. Shenandoah Conservatory. 공식,https://www.ccminstitute.com/,P,imported_pending_full_recheck
+R14,Estill Voice Training Level 2: Voice Qualities. Estill Voice International. 공식,https://estillvoice.com/level2/,P,spot_checked_v15
+R15,Complete Vocal Technique. Complete Vocal Institute. 공식,https://completevocalinstitute.com/complete-vocal-technique/,P,spot_checked_v15
+R16,Somatic Voicework Vocal Pedagogy Course. Jeanie LoVetri. 공식,https://jeanielovetri.com/somatic-voicework-vocal-pedagogy-course/,P,imported_pending_full_recheck
+R17,Speech Level Singing. Riggs Vocal Studio. 공식,https://www.riggsvocalstudio.com/speech-level-singing,P,imported_pending_full_recheck
+R18,Pan American Vocology Association. PAVA. 공식,https://pavavocology.org/,P,imported_pending_full_recheck
+R19,The Voice Foundation. The Voice Foundation. 공식,https://voicefoundation.org/,P,imported_pending_full_recheck
+R20,Voice Disorders Practice Portal. ASHA. 전문기관,https://www.asha.org/practice-portal/clinical-topics/voice-disorders/,C,spot_checked_v16
+R21,Taking Care of Your Voice. NIDCD/NIH. 전문기관,https://www.nidcd.nih.gov/health/taking-care-your-voice,P,spot_checked_v15
+R22,"Voice Training and Therapy With a Semi-Occluded Vocal Tract. Titze, PubMed. 학술",https://pubmed.ncbi.nlm.nih.gov/16671856/,M,spot_checked_v15
+R23,"A Randomized Controlled Trial of Two Semi-Occluded Vocal Tract Voice Therapy Protocols. Kapsner-Smith et al., PMC. 학술",https://pmc.ncbi.nlm.nih.gov/articles/PMC4610291/,C,spot_checked_v15
+R24,"Assessing Voice Health Using Smartphones. Jannetts et al., PubMed. 학술",https://pubmed.ncbi.nlm.nih.gov/30779425/,M,spot_checked_v15
+R25,"Cepstral Peak Prominence: A More Reliable Measure of Dysphonia. Heman-Ackah et al., PubMed. 학술",https://pubmed.ncbi.nlm.nih.gov/12731627/,M,spot_checked_v18
+R26,How the Vocal Tract Filters Sound. National Center for Voice and Speech. 교육/학술,https://ncvs.org/tutorials/how-the-vocal-tract-filters-sound/,M,spot_checked_v18
+R27,"Modeling source-filter interaction in belting and high-pitched operatic male singing. Titze & Worley, JASA/PMC. 학술",https://pmc.ncbi.nlm.nih.gov/articles/PMC2757425/,M,spot_checked_v16
+R28,"The Vocal Tract in Loud Twang-Like Singing While Producing High and Low Pitches. Saldías et al., Journal of Voice/PubMed. 학술",https://pubmed.ncbi.nlm.nih.gov/32305174/,S,spot_checked_v16
+R29,Motor Learning Principles and Singing Pedagogy. NATS Journal of Singing. 학술/전문,https://www.nats.org/_Library/JOS_On_Point/JOS_077_5_2021_693.pdf,M,spot_checked_v15
+R30,Vocal learning and auditory feedback. Scientific Reports/Nature. 학술,https://www.nature.com/articles/s41598-022-24262-x,M,spot_checked_v16
+R31,"K-POP시대의 새로운 실용음악 보컬 교육 개념에 대한 제안. 오한승, KAIS, 2023. 학술",https://www.kais99.org/jkais/journal/Vol24No09/vol24no09p31.pdf,M,imported_pending_full_recheck
+R32,실용보컬 기초발성과 호흡 훈련의 실기교육 사례 연구. 한국 연구자료. 학술,https://scholar.kyobobook.co.kr/article/detail/4010068580099,M,imported_pending_full_recheck
+R33,K-Pop Vocal Training Syllabus. Hanyang ERICA Summer School. 공식/교육,https://ericasummer.hanyang.ac.kr/documents/10984638/168811307/HESS2025%2BSyllabus_K-Pop%2BVocal%2BTraining_2%2BCredit.pdf/ecbd8011-fcea-aae5-fa2e-0cc24a306326?download=true&t=1749027995586,P,imported_pending_full_recheck
+R34,"Prevalence of Voice Disorders in Singers: Systematic Review and Meta-Analysis. Pestana et al., PubMed. 학술",https://pubmed.ncbi.nlm.nih.gov/28342677/,S,spot_checked_v15
+R35,"Articulatory interpretation of the singing formant. Sundberg, JASA/PubMed. 학술",https://pubmed.ncbi.nlm.nih.gov/4833080/,S,imported_pending_full_recheck
+R36,"Formant tuning in a professional baritone. Miller & Schutte, Journal of Voice. 학술",https://www.jvoice.org/article/S0892-1997%2805%2980018-9/pdf,S,imported_pending_full_recheck
+R37,MM Vocal Pedagogy. Boston Conservatory at Berklee. 공식,https://bostonconservatory.berklee.edu/vocal-pedagogy/mm-vocal-pedagogy,P,imported_pending_full_recheck
+R38,Voice Department. New England Conservatory. 공식,https://necmusic.edu/the-college/departments/voice/,P,imported_pending_full_recheck
+R39,Voice & Opera. Mannes School of Music / The New School. 공식,https://www.newschool.edu/mannes/voice-opera/,P,imported_pending_full_recheck

@@ -1,61 +1,63 @@
-/// Task 2 — ProgressionStore save→load (shared_preferences).
 library;
 
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vocal_athlete/progression/progression_state.dart';
 import 'package:vocal_athlete/progression/progression_store.dart';
+import 'package:vocal_athlete/storage/app_metadata_store.dart';
 
 void main() {
-  test('S2 save then load restores progression', () async {
-    SharedPreferences.setMockInitialValues({});
-    final store = ProgressionStore();
+  test('v14 save then load restores progression through async metadata store',
+      () async {
+    final primary = InMemoryMetadataBackend();
+    final metadata = AppMetadataStore(primary: primary, legacy: null);
+    final store = ProgressionStore(metadataStore: metadata);
 
-    expect(await store.load(), isNull); // 최초 = 없음
+    expect(await store.load(), isNull);
 
-    final p = Progression.beginner();
-    p.completeLesson();
-    p.advanceDay();
-    await store.save(p);
+    final progression = Progression.beginner();
+    progression.completeLesson();
+    progression.advanceDay();
+    await store.save(progression);
 
     final loaded = await store.load();
     expect(loaded, isNotNull);
-    expect(loaded!.currentIndex, p.currentIndex);
-    expect(loaded.streak, p.streak);
-    expect(loaded.day, p.day);
+    expect(loaded!.currentIndex, progression.currentIndex);
+    expect(loaded.streak, progression.streak);
+    expect(loaded.day, progression.day);
   });
 
-  test('S2b 손상된 저장본 → load는 null(예외 전파 ❌)', () async {
-    SharedPreferences.setMockInitialValues({'progression_v1': '{깨진 json'});
-    final store = ProgressionStore();
-    expect(await store.load(), isNull); // 신규로 안전 폴백
+  test('v14 corrupt progression is quarantined and returns null', () async {
+    final primary = InMemoryMetadataBackend(
+      <String, Object>{ProgressionStore.storageKey: '{깨진 json'},
+    );
+    final metadata = AppMetadataStore(primary: primary, legacy: null);
+    final store = ProgressionStore(metadataStore: metadata);
+
+    expect(await store.load(), isNull);
+    expect(primary.snapshot[ProgressionStore.storageKey], isNull);
+    expect(
+      primary.snapshot[metadata.corruptBackupKey(ProgressionStore.storageKey)],
+      '{깨진 json',
+    );
   });
 
-  test(
-    'S2c store restores released genre course manifest after restart',
-    () async {
-      SharedPreferences.setMockInitialValues({});
-      final store = ProgressionStore(releasedGenres: {Genre.musical});
+  test('v14 legacy progression migrates once without data loss', () async {
+    final progression = Progression.beginner()..advanceDay();
+    final legacy = InMemoryMetadataBackend(<String, Object>{
+      ProgressionStore.storageKey: jsonEncode(progression.toJson()),
+    });
+    final primary = InMemoryMetadataBackend();
+    final metadata = AppMetadataStore(primary: primary, legacy: legacy);
+    final store = ProgressionStore(metadataStore: metadata);
 
-      final p = Progression.fromJson(
-        Progression.beginner().toJson()
-          ..['graduated'] = true
-          ..['currentIndex'] = 47,
-        releasedGenres: {Genre.musical},
-      );
-      p.chooseGenre(Genre.musical);
-      p.completeLesson();
-      p.advanceDay();
-      await store.save(p);
+    final loaded = await store.load();
+    expect(loaded?.day, progression.day);
+    expect(primary.snapshot.containsKey(ProgressionStore.storageKey), isTrue);
+    expect(legacy.snapshot.containsKey(ProgressionStore.storageKey), isFalse);
 
-      final loaded = await store.load();
-      expect(loaded, isNotNull);
-      expect(loaded!.genre, Genre.musical);
-      expect(loaded.maintenance, isFalse);
-      expect(loaded.graduated, isFalse);
-      expect(loaded.currentIndex, p.currentIndex);
-      expect(loaded.total, p.total);
-      expect(loaded.todaysLesson.cardId, p.todaysLesson.cardId);
-    },
-  );
+    final second = await store.load();
+    expect(second?.day, progression.day);
+  });
 }

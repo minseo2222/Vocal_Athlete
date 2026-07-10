@@ -4,6 +4,7 @@ library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vocal_athlete/lesson/pitch/deviation.dart';
 import 'package:vocal_athlete/lesson/pitch/pitch_source.dart';
+import 'package:vocal_athlete/lesson/pitch/pitch_tolerance.dart';
 
 PitchReading _r(double? hz) =>
     PitchReading(f0Hz: hz, timestampSec: 0);
@@ -43,6 +44,24 @@ void main() {
     expect(
       classifyDeviation([_r(null), _r(null), _r(null)], targetHz: 220).nudge,
       isFalse,
+    );
+  });
+
+  test('F1.8 tolerance 컨텍스트가 severe 임계값을 좁힌다', () {
+    final mild = _r(227.77); // 220 기준 ≈ +60 cents
+    // 컨텍스트 없음 → 기본 100: +60은 severe 아님 → 넛지 없음(하위호환).
+    expect(
+      classifyDeviation(List.filled(3, mild), targetHz: 220).nudge,
+      isFalse,
+    );
+    // mastery 5도(7반음) 허용오차 ±25: +60은 severe → 넛지.
+    expect(
+      classifyDeviation(
+        List.filled(3, mild),
+        targetHz: 220,
+        tolerance: (intervalSemitones: 7, level: ToleranceLevel.mastery),
+      ).nudge,
+      isTrue,
     );
   });
 

@@ -1,0 +1,44 @@
+{
+  "patch": "R4",
+  "date": "2026-06-16",
+  "summary": "Rename Song Builder to Repertoire Application / 곡 적용 훈련, add first safety fallback/cap schema, connect voice-state micro-check to light/recovery lesson adaptation, and add assessment/recording/repertoire asset specs.",
+  "canonicalRoute": [
+    "Beginner Foundation",
+    "Universal Vocal Core",
+    "Repertoire Application",
+    "Advanced Genre Labs",
+    "Portfolio / Performance Mode"
+  ],
+  "codeChanges": [
+    "LearningStage.repertoireApplication is canonical; R3 songBuilder persisted alias is supported.",
+    "buildRepertoireApplicationManifest() and repertoireApplicationLength are canonical; R3 aliases remain internal-only.",
+    "RA-01~RA-08 replace SB-01~SB-08 as Repertoire Application card IDs.",
+    "Unreleased advanced genres route to maintenance instead of advanced lessons.",
+    "SafetyReview.pending cards now carry fallbackCardId and runtime cap metadata.",
+    "Safety filtering remaps locked pending cards to fallback cards when available.",
+    "VoiceState ok/tired/hoarse now changes LessonScreen cues, micro-win copy, skip behavior, and pitch display."
+  ],
+  "newOrCanonicalDocs": [
+    "docs/curriculum/REPERTOIRE-APPLICATION-SPEC.md",
+    "docs/curriculum/REPERTOIRE-ASSET-SPEC.md",
+    "docs/curriculum/ASSESSMENT-RUBRIC.md",
+    "docs/verification/SAFETY-RUNTIME-CAPS.md",
+    "docs/app/RECORDING-AB-MVP-SPEC.md",
+    "docs/adr/0021-repertoire-application-rename.md",
+    "docs/FEEDBACK-UPDATE-2026-06-16-R4.md",
+    "docs/UPDATE-VALIDATION-2026-06-16-R4.md"
+  ],
+  "validation": [
+    "Dart brace/bracket/paren balance check passed for app/lib.",
+    "verification-status.json parsed successfully.",
+    "All path.dart card references exist in card_library.dart.",
+    "RA-01~RA-08 exist in card_library.dart.",
+    "All fallbackCardId targets exist in card_library.dart.",
+    "Core R4 markers exist: LearningStage.repertoireApplication, buildRepertoireApplicationManifest, startRepertoireApplication, VoiceState.hoarse, light-mode-notice, recovery-mode-notice."
+  ],
+  "notRun": [
+    "dart analyze",
+    "flutter test",
+    "Android device microphone/F0 verification"
+  ]
+}

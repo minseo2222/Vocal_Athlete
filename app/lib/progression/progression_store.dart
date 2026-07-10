@@ -1,37 +1,39 @@
-/// Task 2 — Progression 영속화 어댑터 (shared_preferences).
+/// v14 — Progression 영속화 어댑터.
 ///
-/// Progression(순수) ↔ 디스크 사이의 seam. 저장은 JSON 문자열 1개.
+/// 작은 진행 메타데이터만 SharedPreferencesAsync 계층에 저장한다. legacy
+/// `progression_v1` 값은 최초 읽기 때 무손실 이전되며, 손상 JSON은 백업 키로
+/// 격리한 뒤 신규 진행 상태로 안전하게 폴백한다.
 library;
 
 import 'dart:convert';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
+import '../storage/app_metadata_store.dart';
 import 'progression_state.dart';
 
 class ProgressionStore {
-  ProgressionStore({this._releasedGenres = kReleasedGenres});
+  ProgressionStore({AppMetadataStore? metadataStore})
+      : _metadataStore = metadataStore ?? AppMetadataStore.shared;
 
-  static const _key = 'progression_v1';
-  final Set<Genre> _releasedGenres;
+  static const String storageKey = 'progression_v1';
+  final AppMetadataStore _metadataStore;
 
-  /// 저장된 진행 상태 복원. 없으면 null.
   Future<Progression?> load() async {
-    final prefs = await SharedPreferences.getInstance();
-    final s = prefs.getString(_key);
-    if (s == null) return null;
+    final raw = await _metadataStore.readString(storageKey);
+    if (raw == null || raw.isEmpty) return null;
     try {
-      return Progression.fromJson(
-        jsonDecode(s) as Map<String, dynamic>,
-        releasedGenres: _releasedGenres,
-      );
+      final decoded = jsonDecode(raw);
+      if (decoded is! Map) throw const FormatException('progression is not a map');
+      return Progression.fromJson(Map<String, dynamic>.from(decoded));
     } catch (_) {
-      return null; // 손상된 저장본 → 신규로 안전 폴백(예외 전파 ❌)
+      await _metadataStore.quarantineCorruptValue(storageKey, raw);
+      return null;
     }
   }
 
-  Future<void> save(Progression p) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_key, jsonEncode(p.toJson()));
-  }
+  Future<void> save(Progression progression) => _metadataStore.writeString(
+        storageKey,
+        jsonEncode(progression.toJson()),
+      );
+
+  Future<void> clear() => _metadataStore.remove(storageKey);
 }

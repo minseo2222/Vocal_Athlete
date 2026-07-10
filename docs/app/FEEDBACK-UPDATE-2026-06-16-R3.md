@@ -1,0 +1,3 @@
+# FEEDBACK-UPDATE-2026-06-16-R3
+
+Canonical summary: `../FEEDBACK-UPDATE-2026-06-16-R3.md`.

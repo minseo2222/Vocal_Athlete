@@ -41,6 +41,7 @@ void main() {
         'lastActiveDay': 0,
         'streak': 0,
         'pendingReview': 0,
+        'stage': 'repertoireApplication',
         'genre': null,
         'maintenance': false,
         'released': <String>[],
@@ -65,7 +66,7 @@ void main() {
         livePendingInLibrary().difference(liveSignedOff()));
   });
 
-  test('W5.2 라우팅 == 롤아웃 config (졸업 후 픽)', () {
+  test('W5.2 라우팅 == 롤아웃 config (Repertoire Application 후 고급 장르 픽)', () {
     for (final g in Genre.values) {
       final p = Progression.fromJson(graduatedJson());
       p.chooseGenre(g);

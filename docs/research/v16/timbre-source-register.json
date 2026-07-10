@@ -1,0 +1,279 @@
+{
+  "schema": "vocal-athlete/source-register@1",
+  "version": "v16",
+  "sources": [
+    {
+      "id": "R1",
+      "title": "NATS Science-Informed Pedagogy Institute. National Association of Teachers of Singing. 공식",
+      "url": "https://www.nats.org/Science-Informed_Pedagogy_Institute.html",
+      "evidenceClass": "P",
+      "status": "spot_checked_v16"
+    },
+    {
+      "id": "R2",
+      "title": "Bachelor of Music in Performance: Voice. Berklee College of Music. 공식",
+      "url": "https://college.berklee.edu/voice/bachelor-of-music-in-performance-voice",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R3",
+      "title": "Voice Technique 101. Berklee Online. 공식",
+      "url": "https://online.berklee.edu/courses/voice-technique-101",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R4",
+      "title": "The Contemporary Singer: Elements of Vocal Technique. Berklee Online. 공식",
+      "url": "https://online.berklee.edu/store/product?product_id=17638105&usca_p=t",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R5",
+      "title": "Vocal Arts. Juilliard. 공식",
+      "url": "https://www.juilliard.edu/music/vocal-arts",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R6",
+      "title": "Vocal Arts & Opera. USC Thornton School of Music. 공식",
+      "url": "https://music.usc.edu/departments/vocal-arts-opera/",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R7",
+      "title": "Vocal Arts. Manhattan School of Music. 공식",
+      "url": "https://www.msmnyc.edu/programs/vocal-arts/",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R8",
+      "title": "Vocal & Opera. Royal College of Music. 공식",
+      "url": "https://www.rcm.ac.uk/vocal/",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R9",
+      "title": "Vocal Studies. Guildhall School of Music & Drama. 공식",
+      "url": "https://www.gsmd.ac.uk/study-with-guildhall/music/principal-study-and-departments/vocal-studies",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R10",
+      "title": "Vocal Studies. Trinity Laban Conservatoire of Music and Dance. 공식",
+      "url": "https://www.trinitylaban.ac.uk/music/vocal-studies/",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R11",
+      "title": "Voice Series, 2025 Edition. Royal Conservatory of Music Canada. 공식",
+      "url": "https://www.rcmusic.com/about-us/rcm-publishing/voice-series-2025-edition",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R12",
+      "title": "Vocal Pedagogy Handbook. University of North Texas. 공식",
+      "url": "https://music.unt.edu/voice/handbook/vocal-pedagogy.html",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R13",
+      "title": "CCM Vocal Pedagogy Institute. Shenandoah Conservatory. 공식",
+      "url": "https://www.ccminstitute.com/",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R14",
+      "title": "Estill Voice Training Level 2: Voice Qualities. Estill Voice International. 공식",
+      "url": "https://estillvoice.com/level2/",
+      "evidenceClass": "P",
+      "status": "spot_checked_v15"
+    },
+    {
+      "id": "R15",
+      "title": "Complete Vocal Technique. Complete Vocal Institute. 공식",
+      "url": "https://completevocalinstitute.com/complete-vocal-technique/",
+      "evidenceClass": "P",
+      "status": "spot_checked_v15"
+    },
+    {
+      "id": "R16",
+      "title": "Somatic Voicework Vocal Pedagogy Course. Jeanie LoVetri. 공식",
+      "url": "https://jeanielovetri.com/somatic-voicework-vocal-pedagogy-course/",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R17",
+      "title": "Speech Level Singing. Riggs Vocal Studio. 공식",
+      "url": "https://www.riggsvocalstudio.com/speech-level-singing",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R18",
+      "title": "Pan American Vocology Association. PAVA. 공식",
+      "url": "https://pavavocology.org/",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R19",
+      "title": "The Voice Foundation. The Voice Foundation. 공식",
+      "url": "https://voicefoundation.org/",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R20",
+      "title": "Voice Disorders Practice Portal. ASHA. 전문기관",
+      "url": "https://www.asha.org/practice-portal/clinical-topics/voice-disorders/",
+      "evidenceClass": "C",
+      "status": "spot_checked_v16"
+    },
+    {
+      "id": "R21",
+      "title": "Taking Care of Your Voice. NIDCD/NIH. 전문기관",
+      "url": "https://www.nidcd.nih.gov/health/taking-care-your-voice",
+      "evidenceClass": "P",
+      "status": "spot_checked_v15"
+    },
+    {
+      "id": "R22",
+      "title": "Voice Training and Therapy With a Semi-Occluded Vocal Tract. Titze, PubMed. 학술",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16671856/",
+      "evidenceClass": "M",
+      "status": "spot_checked_v15"
+    },
+    {
+      "id": "R23",
+      "title": "A Randomized Controlled Trial of Two Semi-Occluded Vocal Tract Voice Therapy Protocols. Kapsner-Smith et al., PMC. 학술",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4610291/",
+      "evidenceClass": "C",
+      "status": "spot_checked_v15"
+    },
+    {
+      "id": "R24",
+      "title": "Assessing Voice Health Using Smartphones. Jannetts et al., PubMed. 학술",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30779425/",
+      "evidenceClass": "M",
+      "status": "spot_checked_v15"
+    },
+    {
+      "id": "R25",
+      "title": "Cepstral Peak Prominence: A More Reliable Measure of Dysphonia. Heman-Ackah et al., PubMed. 학술",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12731627/",
+      "evidenceClass": "M",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R26",
+      "title": "How the Vocal Tract Filters Sound. National Center for Voice and Speech. 교육/학술",
+      "url": "https://ncvs.org/tutorials/how-the-vocal-tract-filters-sound/",
+      "evidenceClass": "M",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R27",
+      "title": "Modeling source-filter interaction in belting and high-pitched operatic male singing. Titze & Worley, JASA/PMC. 학술",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2757425/",
+      "evidenceClass": "M",
+      "status": "spot_checked_v16"
+    },
+    {
+      "id": "R28",
+      "title": "The Vocal Tract in Loud Twang-Like Singing While Producing High and Low Pitches. Saldías et al., Journal of Voice/PubMed. 학술",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32305174/",
+      "evidenceClass": "S",
+      "status": "spot_checked_v16"
+    },
+    {
+      "id": "R29",
+      "title": "Motor Learning Principles and Singing Pedagogy. NATS Journal of Singing. 학술/전문",
+      "url": "https://www.nats.org/_Library/JOS_On_Point/JOS_077_5_2021_693.pdf",
+      "evidenceClass": "M",
+      "status": "spot_checked_v15"
+    },
+    {
+      "id": "R30",
+      "title": "Vocal learning and auditory feedback. Scientific Reports/Nature. 학술",
+      "url": "https://www.nature.com/articles/s41598-022-24262-x",
+      "evidenceClass": "M",
+      "status": "spot_checked_v16"
+    },
+    {
+      "id": "R31",
+      "title": "K-POP시대의 새로운 실용음악 보컬 교육 개념에 대한 제안. 오한승, KAIS, 2023. 학술",
+      "url": "https://www.kais99.org/jkais/journal/Vol24No09/vol24no09p31.pdf",
+      "evidenceClass": "M",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R32",
+      "title": "실용보컬 기초발성과 호흡 훈련의 실기교육 사례 연구. 한국 연구자료. 학술",
+      "url": "https://scholar.kyobobook.co.kr/article/detail/4010068580099",
+      "evidenceClass": "M",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R33",
+      "title": "K-Pop Vocal Training Syllabus. Hanyang ERICA Summer School. 공식/교육",
+      "url": "https://ericasummer.hanyang.ac.kr/documents/10984638/168811307/HESS2025%2BSyllabus_K-Pop%2BVocal%2BTraining_2%2BCredit.pdf/ecbd8011-fcea-aae5-fa2e-0cc24a306326?download=true&t=1749027995586",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R34",
+      "title": "Prevalence of Voice Disorders in Singers: Systematic Review and Meta-Analysis. Pestana et al., PubMed. 학술",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28342677/",
+      "evidenceClass": "S",
+      "status": "spot_checked_v15"
+    },
+    {
+      "id": "R35",
+      "title": "Articulatory interpretation of the singing formant. Sundberg, JASA/PubMed. 학술",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/4833080/",
+      "evidenceClass": "S",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R36",
+      "title": "Formant tuning in a professional baritone. Miller & Schutte, Journal of Voice. 학술",
+      "url": "https://www.jvoice.org/article/S0892-1997%2805%2980018-9/pdf",
+      "evidenceClass": "S",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R37",
+      "title": "MM Vocal Pedagogy. Boston Conservatory at Berklee. 공식",
+      "url": "https://bostonconservatory.berklee.edu/vocal-pedagogy/mm-vocal-pedagogy",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R38",
+      "title": "Voice Department. New England Conservatory. 공식",
+      "url": "https://necmusic.edu/the-college/departments/voice/",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    },
+    {
+      "id": "R39",
+      "title": "Voice & Opera. Mannes School of Music / The New School. 공식",
+      "url": "https://www.newschool.edu/mannes/voice-opera/",
+      "evidenceClass": "P",
+      "status": "imported_pending_full_recheck"
+    }
+  ]
+}

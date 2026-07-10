@@ -1,0 +1,22 @@
+{
+  "schema": "vocal-athlete/teacher-guide-rights@1",
+  "assetGroup": "replace-me",
+  "releaseStatus": "draft_not_approved",
+  "thirdPartyAudio": false,
+  "performerConsent": false,
+  "license": "replace-with-reviewed-agreement",
+  "teacherReviewer": "",
+  "reviewDate": "",
+  "deviceQa": {
+    "android": false,
+    "ios": false
+  },
+  "files": [
+    {
+      "path": "replace-me.wav",
+      "approvedUse": "guide-only",
+      "highRiskTechnique": false,
+      "sha256": ""
+    }
+  ]
+}

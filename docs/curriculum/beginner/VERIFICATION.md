@@ -1,5 +1,7 @@
 # 초급 커리큘럼 — 검증 로그 (VERIFICATION)
 
+> **R2 업데이트 메모(2026-06-16)**: 본 문서의 초기 검증 로그는 13카드 기준 이력이다. 현재 canonical 초급은 `CARD-01~17` 정상 경로 + `CARD-18` 동적 recovery fallback, 표준샘플 Day 1/24/48, relative target, deferred feedback, 목 상태 micro-check를 반영한다. 상세 근거는 `docs/research/LEARNING-EFFECT-ADDENDUM-2026-06-16.md`와 `docs/adr/0018-beginner-learning-transfer-update.md`를 따른다.
+
 > 6단계 루프의 검증·자기비평 산출물. 교차검증(적대적) + 보강 제안 판정 + 안전 플래그 + 잔존 갭.
 > 원칙: 사인오프 카드 본문은 *안전 플래그 없이 변경 금지*. 본 작업은 cards.md/CURRICULUM.md **무변경**.
 
@@ -41,7 +43,7 @@
 - ADR-0004/0005(6–8주 바·범위분할): 곡·passaggio·belt·appoggio정교화 등 초급 제외 유지. ✅
 - ADR-0006(blocked→variable): 매크로 §4 + 변주 엔진(issue 26). ✅
 - ADR-0014(시각전용·정직한계): C5/C11/C12 시각 곡선, 저신뢰 비표시. ✅
-- ADR-0015(Card 스키마): cards.md 13 IN 준수(변경 없음). ✅
+- ADR-0015(Card 스키마): R1은 13 IN, 현재 R2는 ADR-0018에 따라 18 IN. ✅
 - ADR-0016(시간게이트 없음): 본운동 7–11분=가이드, 쿨다운 스킵가능. ✅
 - CONTEXT 글로서리: 신규 용어 도입 없음(기존 어휘만). ✅
 
@@ -52,6 +54,15 @@
 - **잔존 갭(범위 밖, 추적용)**: 한국어 가창 formant DB 부재(A, part 16) — 초급은 곡 없어 영향 작음. 변성기/청소년은 ADR-0001로 범위 밖.
 - **상위 단위 이관 확인**(보강 제안서 §5): appoggio 정교화→코어 §4.3, 모음조정·passaggio→코어 P4-09/10·P5-03/06, 트왱→코어 P4-12+뮤지컬, singer's formant→성악, placement→컷(ADR-0012). 모두 RESEARCH-INDEX.md 매핑과 일치.
 
-## 6. 결론
+## 6. R2 결론
 
-초급은 **출처 역검증 통과**(13카드·매크로·졸업 4스킬 전부 CITATIONS 키로 추적됨), **보강 변경 0건**(P1 유지·P2 검증·P3 보류), **안전 갭 없음**(P2), **ADR 정합 완전**. canonical 문서 무변경, 본 SOURCES/VERIFICATION 신설로 단위 확정.
+초급은 R1 기준 출처 역검증을 통과했고, R2에서 학습 전이 보강을 반영했다. 현재 canonical 상태는 다음과 같다.
+
+- 48레슨 유지.
+- 카드 범위: 정상 경로 `CARD-01~17`; recovery fallback `CARD-18`.
+- 신규 bridge: 청음-허밍, 4박 리듬, 2–3음 contour, 한국어 음절, 목 상태 light-mode.
+- 표준샘플: Day 1/24/48 고정.
+- CARD-12: 고정 targetHz가 아니라 relative target.
+- 피치 피드백: CARD-12/14/16은 수행 후 확인형.
+
+잔여 검증은 Flutter 테스트, Android 실기기 F0/null UX, 초보자 이해도 테스트다.

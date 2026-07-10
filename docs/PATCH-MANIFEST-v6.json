@@ -1,0 +1,42 @@
+{
+  "version": "v6",
+  "date": "2026-06-16",
+  "summary": "v6: 실제 녹음/재생 adapter seam, local-first file recording repository, Standard Sample Review, Android/iOS microphone declarations, recording tests/docs.",
+  "changedFiles": [
+    "app/android/app/src/main/AndroidManifest.xml",
+    "app/ios/Runner/Info.plist",
+    "app/lib/lesson/lesson_screen.dart",
+    "app/lib/lesson/recording_ab_panel.dart",
+    "app/lib/lesson/settings_screen.dart",
+    "app/lib/lesson/standard_sample_review_screen.dart",
+    "app/lib/main.dart",
+    "app/lib/recording/audio_io.dart",
+    "app/lib/recording/recording_ab.dart",
+    "app/lib/recording/recording_controller.dart",
+    "app/lib/recording/recording_store.dart",
+    "app/pubspec.yaml",
+    "app/test/audio_capture_fake_test.dart",
+    "app/test/audio_io_test.dart",
+    "app/test/recording_ab_panel_widget_test.dart",
+    "app/test/recording_ab_test.dart",
+    "app/test/recording_controller_test.dart",
+    "app/test/recording_store_test.dart",
+    "app/test/standard_sample_review_screen_test.dart",
+    "docs/FEEDBACK-UPDATE-2026-06-16-v6.md",
+    "docs/PATCH-MANIFEST-v6.json",
+    "docs/UPDATE-VALIDATION-2026-06-16-v6.md",
+    "docs/VERSIONING.md",
+    "docs/adr/0024-recording-capture-local-store-v6.md",
+    "docs/app/DATA-PRIVACY-SPEC.md",
+    "docs/app/RECORDING-AB-MVP-SPEC.md",
+    "docs/app/STANDARD-SAMPLE-REVIEW-SPEC.md",
+    "docs/verification/verification-status.json"
+  ],
+  "removedFiles": [],
+  "notes": [
+    "Flutter/Dart CLI and Android real-device capture/playback validation were not run in this environment.",
+    "Recording A/B supports vocal training take review and is not a song production feature.",
+    "Native recording/playback uses record + audioplayers + path_provider behind adapter interfaces; widget tests can use fake adapters.",
+    "iOS NSMicrophoneUsageDescription was added as a permission declaration; iOS device QA was not run."
+  ]
+}

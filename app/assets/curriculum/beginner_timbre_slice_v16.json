@@ -1,0 +1,75 @@
+{
+  "schema": "vocal-athlete/lesson-blueprint@1",
+  "version": "v16",
+  "track": "beginnerFoundation",
+  "cycle": 1,
+  "title": "Beginner Foundation — First Timbre Vertical Slice",
+  "lessons": [
+    {
+      "day": 37,
+      "cardId": "TONE-02",
+      "title": "허밍의 편안함을 모음으로",
+      "primarySkill": "Hum-to-Vowel 전이",
+      "secondarySkill": "편안함 자기관찰",
+      "objective": "예시의 절대 음높이를 복제하지 않고 내 편한 한 음을 고른 뒤, 허밍의 크기를 키우지 않은 채 /ma/로 한 번 연다.",
+      "attempts": 2,
+      "steps": [
+        "낮은/중간 예시 중 편한 흐름 하나만 듣기 — 예시 음높이는 따라 하지 않기",
+        "내 편한 한 음에서 /m/을 작고 편하게 2초",
+        "같은 높이·크기로 /ma/ 1회",
+        "두 take 이내에서 더 편한 쪽과 tone tag 선택"
+      ],
+      "feedbackPrompt": "더 밝거나 더 큰 소리보다, 입을 열 때 목·턱 힘과 음량이 늘지 않았는지 한 가지만 확인한다.",
+      "selfCheck": [
+        "허밍에서 모음으로 갈 때 음량을 키우지 않았다",
+        "턱을 크게 벌리거나 목을 누르지 않았다",
+        "편안함을 먼저 골랐다"
+      ],
+      "recoveryAlternative": "낮은 볼륨으로 예시를 듣고, 허밍 구간과 모음 구간을 손가락으로 표시한다. 오늘은 발성하지 않는다.",
+      "evidence": "E1",
+      "audioCues": [
+        {
+          "label": "허밍→모음 · 낮은 예시",
+          "path": "assets/training/timbre_v16/hum_to_vowel_low.wav"
+        },
+        {
+          "label": "허밍→모음 · 중간 예시",
+          "path": "assets/training/timbre_v16/hum_to_vowel_mid.wav"
+        }
+      ]
+    },
+    {
+      "day": 38,
+      "cardId": "TONE-03",
+      "title": "같은 음에서 모음 색채 듣기",
+      "primarySkill": "모음 색채 관찰",
+      "secondarySkill": "한 변수 유지",
+      "objective": "예시의 절대 음높이를 복제하지 않고 내 편한 한 음과 작은 음량을 유지하며 /i-e-a-o-u/에서 모음만 바꿔 차이를 기록한다.",
+      "attempts": 2,
+      "steps": [
+        "낮은/중간 예시 중 편한 흐름 하나만 듣기 — 예시 음높이는 따라 하지 않기",
+        "내 편한 한 음에서 /i-e-a-o-u/ 한 번",
+        "높이·음량은 그대로 두고 같은 순서를 한 번 더",
+        "편한 모음 하나와 달라진 느낌의 tag 하나 선택"
+      ],
+      "feedbackPrompt": "좋은 모음을 고르지 말고, 같은 높이·음량에서 모음만 달라졌는지 확인한다.",
+      "selfCheck": [
+        "모음마다 음높이를 바꾸지 않았다",
+        "밝게 만들려고 소리를 크게 하지 않았다",
+        "편한 모음과 불편한 느낌을 구분했다"
+      ],
+      "recoveryAlternative": "예시를 듣고 화면의 /i-e-a-o-u/ 순서를 손가락으로 따라간다. 발성·속삭임은 하지 않는다.",
+      "evidence": "E1",
+      "audioCues": [
+        {
+          "label": "모음 색채 · 낮은 예시",
+          "path": "assets/training/timbre_v16/vowel_color_low.wav"
+        },
+        {
+          "label": "모음 색채 · 중간 예시",
+          "path": "assets/training/timbre_v16/vowel_color_mid.wav"
+        }
+      ]
+    }
+  ]
+}

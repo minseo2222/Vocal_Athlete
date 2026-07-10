@@ -1,0 +1,110 @@
+{
+  "id": "neutral_001",
+  "title": "Neutral 4-Bar Phrase 1",
+  "language": "ko",
+  "purpose": "repertoireApplication",
+  "bars": 4,
+  "tempoBpm": 72,
+  "recommendedKeys": [
+    "low",
+    "mid"
+  ],
+  "difficulty": "foundation_transfer",
+  "trainingSteps": [
+    "lyric_speech",
+    "rhythm_speech",
+    "one_note_chant",
+    "hum_melody",
+    "vowel_melody",
+    "lyric_melody",
+    "take_ab_review"
+  ],
+  "lyricTiming": [
+    {
+      "bar": 1,
+      "text": "오늘은",
+      "beat": 1
+    },
+    {
+      "bar": 2,
+      "text": "편하게",
+      "beat": 1
+    },
+    {
+      "bar": 3,
+      "text": "소리를",
+      "beat": 1
+    },
+    {
+      "bar": 4,
+      "text": "이어가",
+      "beat": 1
+    }
+  ],
+  "breathMarks": [
+    {
+      "beforeBar": 1,
+      "cue": "작게 준비"
+    },
+    {
+      "beforeBar": 3,
+      "cue": "필요하면 짧게"
+    }
+  ],
+  "schemaVersion": 2,
+  "assetStatus": "prototype_audio_ready",
+  "countInBeats": 4,
+  "beatsPerBar": 4,
+  "audioAssets": {
+    "guideHumLow": "assets/repertoire/neutral_001/guide_hum_low.wav",
+    "guideHumMid": "assets/repertoire/neutral_001/guide_hum_mid.wav",
+    "guideMelodyPianoLow": "assets/repertoire/neutral_001/guide_melody_piano_low.wav",
+    "guideMelodyPianoMid": "assets/repertoire/neutral_001/guide_melody_piano_mid.wav",
+    "guideMelodySlowLow": "assets/repertoire/neutral_001/guide_melody_slow_low.wav",
+    "guideMelodySlowMid": "assets/repertoire/neutral_001/guide_melody_slow_mid.wav",
+    "backingTrackLow": "assets/repertoire/neutral_001/backing_track_low.wav",
+    "backingTrackMid": "assets/repertoire/neutral_001/backing_track_mid.wav",
+    "click": "assets/repertoire/neutral_001/click_72bpm.wav"
+  },
+  "rightsRecord": "assets/repertoire/neutral_001/rights.json",
+  "melody": {
+    "unit": "quarter_note",
+    "midiMid": [
+      60,
+      60,
+      62,
+      64,
+      64,
+      62,
+      60,
+      59,
+      60,
+      62,
+      64,
+      65,
+      64,
+      62,
+      60,
+      60
+    ],
+    "midiLow": [
+      55,
+      55,
+      57,
+      59,
+      59,
+      57,
+      55,
+      54,
+      55,
+      57,
+      59,
+      60,
+      59,
+      57,
+      55,
+      55
+    ]
+  },
+  "releaseNote": "v10 low/mid prototype synthetic assets with deliberately reduced peak. Expert masters and real-device QA remain release blockers."
+}

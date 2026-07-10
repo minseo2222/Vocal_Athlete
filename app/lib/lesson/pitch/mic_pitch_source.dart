@@ -1,4 +1,4 @@
-/// Task 5(A1) — 실 마이크 PitchSource 골격 (ADR-0014 pYIN 자리).
+/// Task 5(A1) — 실 마이크 PitchSource 골격(ADR-0014 V1 F0 seam).
 ///
 /// PCM 프레임 stream을 주입받아 각 프레임을 F0 검출 → PitchReading으로 변환.
 /// 실 마이크 캡처(권한·오디오 패키지)는 이 `frames` stream을 채우는 *어댑터*가
@@ -8,6 +8,7 @@ library;
 
 import 'f0.dart';
 import 'pitch_source.dart';
+import 'resonance_band.dart';
 
 class MicPitchSource implements PitchSource {
   MicPitchSource({required this.frames, this.sampleRate = 16000});
@@ -23,6 +24,7 @@ class MicPitchSource implements PitchSource {
       yield PitchReading(
         f0Hz: estimateF0(frame, sampleRate),
         timestampSec: t,
+        ringRaw: relativeBandEnergy(frame, sampleRate),
       );
       t += frame.length / sampleRate;
     }
@@ -37,5 +39,5 @@ class MicPitchSource implements PitchSource {
   Future<void> stop() async {}
 
   @override
-  Future<void> dispose() async {}
+  void dispose() {}
 }

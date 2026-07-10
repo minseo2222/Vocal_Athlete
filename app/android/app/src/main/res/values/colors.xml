@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 브랜드 컬러(차콜 + 샴페인 골드) — Sun.bg / Sun.coral 와 동일 -->
+    <color name="brand_charcoal">#FF0F1012</color>
+    <color name="brand_gold">#FFD9BE86</color>
+    <color name="ic_launcher_background">#FF0F1012</color>
+</resources>

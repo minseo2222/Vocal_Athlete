@@ -1,3 +1,7 @@
+# intermediate-classical — SUPERSEDED BY 고급 성악 Lab
+
+> R3 supersession: 이 문서는 이력 보존용이다. 초급 직후 또는 중급에서 이 장르로 분기하지 않는다. 현재 장르 자산은 `docs/curriculum/advanced-*` 고급 Lab 초안으로 승격되었다.
+
 # 중급 — 성악 (Intermediate · Classical) — *공유 코어 이후 장르 분기*
 
 [중급 공유 코어](../intermediate-core/CONTEXT.md)(블록1 브리지 + 블록2 공명·모음조정) 통과 후 진입하는 **성악(클래식) 분기**(블록3 레지스터 + 블록4 텍스트·딕션·곡, ADR-0011). 비증폭(어쿠스틱) 전제의 *맑고 울리는*(chiaroscuro) 음색을 향해 cover·aggiustamento·singer's formant를 쌓는다. 제품 메커니즘은 [[CONTEXT-MAP]] 전역 상속(글로서리 전용).
@@ -41,7 +45,7 @@ _Avoid_: 중급에서 풀 messa di voce 강요, 지속 고음에서 무리
 _Avoid_: 초급에 곡, 중급에 풀 covered 고음 아리아
 
 **성악 분기 경로 (Classical Branch Path)**:
-*공유 코어 이후* 성악 분기(블록3·4) 선형 레슨열. 코어+분기 합산 ≈ 10–14주. 완주 = **고급 성악 해금**(미생성 — ADR-0010 통합 전이: 의향 + 유지 모드).
+*공유 코어 이후* 성악 분기(블록3·4) 선형 레슨열. 현재 구현 기준 코어+분기 합산 **약 68레슨**(1일 1레슨 ≈ 9–10주). 완주 = **고급 성악 해금**(미생성 — ADR-0010 통합 전이: 의향 + 유지 모드).
 _Avoid_: "완주 = 숙련 완성"(고급 연속), 분기에 코어 포함
 
 ## Relationships

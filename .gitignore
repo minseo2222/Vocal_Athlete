@@ -1,33 +1,72 @@
-__pycache__/
+# Dart and Flutter generated state
+**/__pycache__/
 *.pyc
-
-# IDE
-.idea/
-
-# Flutter/Dart build artifacts
 **/.dart_tool/
-**/build/
-**/.gradle/
 **/.flutter-plugins
 **/.flutter-plugins-dependencies
-
-# Local Flutter/Android environment and signing files
-app/android/local.properties
-app/android/key.properties
-*.jks
-*.keystore
-
-# Mobile build outputs and Dart kernel artifacts
+**/.packages
+**/.pub/
+**/.pub-cache/
+**/build/
+**/coverage/
+**/doc/api/
 *.apk
 *.aab
 *.dill
 kernel_blob.bin
 
-.superpowers/
-uiux-preview.html
-uiux-mockups.html
-uiux-mockups/
-uiux-mockups-2.html
-uiux-mockups-3.html
-uiux-mockups-r4.html
-REVIEW-BUNDLE.md
+# Android generated and machine-local state
+**/.gradle/
+**/.cxx/
+**/captures/
+**/local.properties
+**/GeneratedPluginRegistrant.java
+
+# Release signing and credentials
+**/key.properties
+**/*.jks
+**/*.keystore
+**/*.p12
+**/*.pem
+**/*.mobileprovision
+**/*service-account*.json
+**/*service_account*.json
+**/serviceAccount*.json
+**/credentials.json
+.env
+.env.*
+!.env.example
+
+# iOS generated state and machine-local signing configuration
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/Runner.xcworkspace/xcuserdata/
+**/ios/Runner.xcodeproj/xcuserdata/
+**/DerivedData/
+**/.swiftpm/
+**/*.xcuserstate
+
+# IDE and editor-local state
+**/.idea/
+**/.vscode/
+*.iml
+*.ipr
+*.iws
+*.swp
+*~
+
+# Logs, temporary output, and local QA captures
+*.log
+*.tmp
+*.temp
+app/qa_*.png
+
+# OS metadata
+.DS_Store
+Thumbs.db
+Desktop.ini

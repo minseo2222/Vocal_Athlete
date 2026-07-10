@@ -23,54 +23,97 @@ class LaunchWarning extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bg,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 24),
-              // 마이크가 위에서 내려오는 진입 애니메이션(장식 — 추가 탭/게이트 아님).
-              Center(
-                child: TweenAnimationBuilder<double>(
-                  tween: Tween(begin: -80, end: 0),
-                  duration: const Duration(milliseconds: 700),
-                  curve: Curves.easeOutCubic,
-                  builder: (context, dy, child) =>
-                      Transform.translate(offset: Offset(0, dy), child: child),
-                  child: const Icon(Icons.mic_none,
-                      key: Key('launch-mic'), color: Colors.white, size: 64),
+      backgroundColor: Sun.bg,
+      body: DecoratedBox(
+        decoration: const BoxDecoration(gradient: Sun.bgWash),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Spacer(flex: 2),
+                // 마이크가 위에서 내려오는 진입 애니메이션(장식 — 추가 탭/게이트 아님).
+                Center(
+                  child: TweenAnimationBuilder<double>(
+                    tween: Tween(begin: -80, end: 0),
+                    duration: const Duration(milliseconds: 700),
+                    curve: Curves.easeOutCubic,
+                    builder: (context, dy, child) =>
+                        Transform.translate(offset: Offset(0, dy), child: child),
+                    child: Container(
+                      width: 104,
+                      height: 104,
+                      decoration: BoxDecoration(
+                        gradient: Sun.gradient,
+                        shape: BoxShape.circle,
+                        boxShadow: Sun.softShadow(
+                            color: Sun.coral, opacity: 0.34, blur: 30, dy: 14),
+                      ),
+                      alignment: Alignment.center,
+                      child: const Icon(Icons.mic_none_rounded,
+                          key: Key('launch-mic'), color: Colors.white, size: 52),
+                    ),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              const Center(
-                child: Text('Vocal Athlete',
-                    key: Key('launch-logo'),
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 0.5)),
-              ),
-              const SizedBox(height: 28),
-              const Text('시작 전 안내',
-                  style: TextStyle(color: Colors.white, fontSize: 20)),
-              const SizedBox(height: 16),
-              const Text(
-                kWarningSentence,
-                style: TextStyle(
-                    color: Colors.white, fontSize: 16, height: 1.6),
-              ),
-              const Spacer(),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed: onConfirm,
-                  child: const Text('확인'),
+                const SizedBox(height: 22),
+                const Center(
+                  child: Text('Vocal Athlete',
+                      key: Key('launch-logo'),
+                      style: TextStyle(
+                          color: Sun.ink,
+                          fontSize: 28,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 0.2)),
                 ),
-              ),
-            ],
+                const SizedBox(height: 6),
+                const Center(
+                  child: Text('매일 10–15분, 건강한 목소리 루틴',
+                      style: TextStyle(color: Sun.inkMid, fontSize: 13)),
+                ),
+                const Spacer(flex: 2),
+                // 안내 카드
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Sun.surface,
+                    borderRadius: BorderRadius.circular(AppRadii.card),
+                    boxShadow: Sun.softShadow(),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(7),
+                            decoration: const BoxDecoration(
+                                color: Sun.amberSoft, shape: BoxShape.circle),
+                            child: const Icon(Icons.favorite_rounded,
+                                color: Sun.amber, size: 18),
+                          ),
+                          const SizedBox(width: 10),
+                          const Text('시작 전 안내',
+                              style: TextStyle(
+                                  color: Sun.ink,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w800)),
+                        ],
+                      ),
+                      const SizedBox(height: 14),
+                      const Text(
+                        kWarningSentence,
+                        style: TextStyle(
+                            color: Sun.inkMid, fontSize: 14.5, height: 1.7),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SunsetCta(label: '확인', onPressed: onConfirm, height: 56),
+                const SizedBox(height: 6),
+              ],
+            ),
           ),
         ),
       ),

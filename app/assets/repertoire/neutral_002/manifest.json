@@ -1,0 +1,25 @@
+{
+  "id": "neutral_002",
+  "title": "Neutral 4-Bar Phrase 2",
+  "language": "ko",
+  "purpose": "repertoireApplication",
+  "bars": 4,
+  "tempoBpm": 80,
+  "recommendedKeys": ["low", "mid"],
+  "difficulty": "rhythm_transfer",
+  "trainingSteps": ["tap", "hum", "syllable", "lyric", "take_ab_review"],
+  "audioPlaceholders": {
+    "guideVocalLow": "guide_vocal_low.wav",
+    "guideVocalMid": "guide_vocal_mid.wav",
+    "guideMelodyPiano": "guide_melody_piano.wav",
+    "backingTrack": "backing_track.wav",
+    "click": "click_80bpm.wav"
+  },
+  "lyricTiming": [
+    {"bar": 1, "text": "가볍게", "beat": 1},
+    {"bar": 2, "text": "들어와", "beat": 1},
+    {"bar": 3, "text": "박자에", "beat": 1},
+    {"bar": 4, "text": "기대어", "beat": 1}
+  ],
+  "breathMarks": [{"beforeBar": 1, "cue": "들이마시기보다 준비"}]
+}

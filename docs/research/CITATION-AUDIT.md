@@ -216,3 +216,33 @@
 **영향 전파 적용**:
 - D 중급뮤지컬·F 가요 VERIFICATION에 BRETL "39%→67%/32–40%", SIELSKA "2024→2018" 정정 반영(아래).
 - CITATIONS.md 해당 5키에 `⚠️정정` 인라인 주석.
+
+---
+
+# v8 Research Bundle Audit — 2026-06-19
+
+## 범위
+
+- 사용자 제공 심층 리서치 20개
+- 기존 음색 통합 리서치 1개
+- 정규화 위치: `docs/research/v8/source-bundle/`
+
+## 판정
+
+- 21개 원문을 내용 보존본으로 편입했다.
+- 01–05에는 세션 종속 `turn...` 인용이 725회 출현하며, 문서별 고유 합계 195개·전체 고유 176개다.
+- 06–20은 URL 정의가 포함돼 있으나 일괄 정확성 검증 전 `SOURCE_LINKED_UNVERIFIED_IN_BULK`로 둔다.
+- 21 음색 문서는 기존 프로젝트 자료로 편입했으나 출처 정규화가 추가로 필요하다.
+- 공식 NATS, NIDCD, ASHA, PubMed/PMC 페이지에서 구조·안전·운동학습·리듬·SOVT의 최소 앵커를 재검증해 `v8/VERIFIED-ANCHOR-SOURCES.md`에 기록했다.
+
+## 중복 처리
+
+- 09 = 가요/K-pop 배경, 11 = Advanced Gayo Lab canonical.
+- 10 = 부하 운영 가설, 18 = 안전·회복 canonical.
+
+## 적용 제한
+
+- 임시 인용은 복구 전 개별 claim의 검증 근거로 재사용하지 않는다.
+- 임상 근거는 건강한 가수 성과로 직접 일반화하지 않는다.
+- 정확한 레슨 수·반복 수·부하 cap은 제품 가설로 유지한다.
+- 고위험 기술은 출처가 있어도 HITL·runtime cap·fallback·rollout 승인이 없으면 미출시다.

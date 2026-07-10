@@ -1,0 +1,66 @@
+{
+  "assetId": "neutral_001",
+  "status": "prototype_original_synthetic",
+  "owner": "Vocal Athlete project",
+  "thirdPartyAudio": false,
+  "humanVocalRecording": false,
+  "usage": "in-app vocal training prototype",
+  "note": "Synthetic low/mid guide and accompaniment generated deterministically by tools/generate_v10_training_audio.py. Peak is deliberately limited for prototype playback. Replace with expert-produced masters before release.",
+  "prototypePeakFullScale": 0.5,
+  "files": [
+    {
+      "path": "guide_hum_low.wav",
+      "sha256": "b6334a53c00f9d711020659d20fa8ae66ddf229196ebf5a24e0d1130d64fa63c",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "guide_hum_mid.wav",
+      "sha256": "6927e0b1ef2eaa042074cea070ea73279a2e9513243261780156b05eec212fe9",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "guide_melody_piano_low.wav",
+      "sha256": "390d68411868499739fbabd3b791a49072e9e526fd6afa4ee4c9264fb0fa1943",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "guide_melody_piano_mid.wav",
+      "sha256": "8c404cafc6a8625bad7a3d03dbfadbadce79dd701e12dde88273d3eaf6d5a55d",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "guide_melody_slow_low.wav",
+      "sha256": "eb79a1c44908753f7b3112d2ff738f818fb4e7a68e63cfc8080ba0b35bd1f0ee",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "guide_melody_slow_mid.wav",
+      "sha256": "a3e334476fa4d81a8cd7830eede5f9df3af666e7225bab41caed80ccd6e7a9bc",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "backing_track_low.wav",
+      "sha256": "5fb5a4ec48694e193e121f233fb0589374e29cc33c740f4d7c24d688b5a960ba",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "backing_track_mid.wav",
+      "sha256": "9ea5c43eba4e6aac01cb9b6896f2316592e0b9c072729d9564b3c9015caadf2d",
+      "sampleRate": 24000,
+      "channels": 1
+    },
+    {
+      "path": "click_72bpm.wav",
+      "sha256": "bf3e3371c53b439d9dfc6a8dbc3b8aa5dcbd64f0317bc8299df55bbc8764456d",
+      "sampleRate": 24000,
+      "channels": 1
+    }
+  ]
+}

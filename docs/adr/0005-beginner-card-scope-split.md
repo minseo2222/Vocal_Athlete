@@ -1,4 +1,10 @@
+> v9 note: `CARD-18` remains in the library as a state-driven recovery fallback but is not scheduled in the normal 48-lesson path.
+> R4 supersession note: 이 ADR의 13카드/중급 장르 backlog 표현은 ADR-0018/0019/0020에 의해 대체된다. 현재 초급은 18카드이며, 장르 분기는 Repertoire Application 이후 고급 Lab에서 열린다.
+
 # 초급 경로 카드 범위 — 13개 IN, 나머지 중급/컷
+
+> Superseded note: 이 ADR은 R1 기준 이력이다. 현재 초급 canonical 범위와 경로는 `ADR-0018-beginner-learning-transfer-update.md`를 따른다.
+
 
 6–8주(≈40–56레슨, ADR-0004) 초급 경로의 척추를 졸업 4스킬 + 전제조건(호흡·신체) + 유성 마이크로-윈 기준으로 확정한다. **IN(13)**: §4.1 자세·Body Mapping, §4.2 흉곽-복부 호흡, §4.4 턱·혀·목 긴장해소, §4.5 가벼운 첫 소리, §4.6 골/공기 전도 자기청취, §5.1 빨대, §5.2 립 트릴, §5.3 허밍/NG-hum, §5.4 물저항 빨대, §5.5 균형 발성, §5.6 self-imitation, §5.7 시각 피드백, 표준 샘플 녹음 SOP. **OUT(중급/장르 또는 컷)**: §4.3 Appoggio 정교화, §5.8 VFE 심화, §5.9 자기 곡, §6.1·6.2 모음 정밀·전환, §6.3 placement(⚫ 측정변수 없음), §6.4·6.5 적용곡·레퍼토리, §6.6 무대공포(ADR-0002로 기 컷).
 

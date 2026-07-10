@@ -1,0 +1,66 @@
+{
+  "created": "2026-06-16",
+  "base": "pro_v_new_feedback_r2_updated_project_2026-06-16.zip",
+  "summary": "R3 curriculum routing + timbre integration patch. Full zip is authoritative; patch zip contains modified/new files only.",
+  "changed_core_code": [
+    "app/lib/lesson/card.dart",
+    "app/lib/lesson/card_library.dart",
+    "app/lib/lesson/course_transition_screen.dart",
+    "app/lib/lesson/graduation_screen.dart",
+    "app/lib/lesson/settings_screen.dart",
+    "app/lib/main.dart",
+    "app/lib/progression/path.dart",
+    "app/lib/progression/progression_state.dart"
+  ],
+  "changed_tests": [
+    "app/test/card_library_test.dart",
+    "app/test/graduation_screen_widget_test.dart",
+    "app/test/lesson_screen_widget_test.dart",
+    "app/test/path_test.dart",
+    "app/test/progression_test.dart",
+    "app/test/release_config_test.dart",
+    "app/test/settings_screen_widget_test.dart",
+    "app/test/verification_harness_test.dart"
+  ],
+  "changed_or_added_docs": [
+    "CONTEXT.md",
+    "CONTEXT-MAP.md",
+    "docs/FEEDBACK-UPDATE-2026-06-16-R3.md",
+    "docs/UPDATE-VALIDATION-2026-06-16-R3.md",
+    "docs/adr/0019-universal-core-advanced-genre-route.md",
+    "docs/adr/0020-timbre-training-integration.md",
+    "docs/app/APP-SPEC.md",
+    "docs/app/MVP-SCOPE.md",
+    "docs/app/PRODUCT-LOOP-SPEC.md",
+    "docs/app/TONE-FEEDBACK-SPEC.md",
+    "docs/curriculum/LONG-TERM-SINGER-PATH.md",
+    "docs/curriculum/SINGER-LEVEL-OUTCOMES.md",
+    "docs/curriculum/SONG-BUILDER-SPEC.md",
+    "docs/curriculum/ADVANCED-LOOP-SPEC.md",
+    "docs/curriculum/TIMBRE-TRAINING-SPEC.md",
+    "docs/curriculum/universal-core/CURRICULUM.md",
+    "docs/curriculum/universal-core/cards.md",
+    "docs/curriculum/advanced-gayo/CURRICULUM.md",
+    "docs/curriculum/advanced-musical/CURRICULUM.md",
+    "docs/curriculum/advanced-classical/CURRICULUM.md",
+    "docs/curriculum/advanced-rb-soul/CURRICULUM.md",
+    "docs/curriculum/advanced-rock/CURRICULUM.md",
+    "docs/curriculum/advanced-ccm/CURRICULUM.md",
+    "docs/research/TIMBRE-RESEARCH-ADDENDUM-2026-06-16.md",
+    "docs/research/UNIVERSAL-CORE-RESEARCH-ADDENDUM-2026-06-16.md",
+    "docs/verification/verification-status.json"
+  ],
+  "consolidated_removed_if_present": [
+    "docs/adr/0019-universal-core-before-genre.md",
+    "docs/curriculum/advanced-rnb-soul/",
+    "docs/curriculum/advanced-rock-band/"
+  ],
+  "validation_notes": [
+    "All card IDs referenced by path.dart exist in card_library.dart.",
+    "Beginner manifest remains 48 slots and CARD-13 is fixed at Day 1/24/48.",
+    "TONE-01~13, UC-01~17, and SB-01~08 are present in card_library.dart.",
+    "Universal Core manifest is 144 slots; Song Builder manifest is 72 slots; advanced genre manifests are 40-slot repeatable cycles.",
+    "Genre enum matches docs/verification/verification-status.json rollout.allGenres.",
+    "Flutter/Dart CLI was unavailable in this environment; run dart analyze and flutter test locally."
+  ]
+}

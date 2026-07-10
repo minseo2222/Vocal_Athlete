@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vocal Athlete — UI 시안 갤러리 2</title>
+<style>
+  :root{ --done:#39D98A; --now:#6C8CFF; }
+  *{box-sizing:border-box;}
+  body{ margin:0; padding:32px 28px 60px; background:#07080c; color:#e8eaf0;
+        font-family:-apple-system,'Segoe UI',Roboto,sans-serif; }
+  h1{ font-size:22px; margin:0 0 4px; }
+  .lede{ color:#8a8f9c; font-size:13px; max-width:840px; line-height:1.6; }
+  .grid{ display:flex; flex-wrap:wrap; gap:30px; margin-top:26px; align-items:flex-start; }
+  .concept{ width:300px; }
+  .tag{ display:inline-block; font-size:11px; letter-spacing:.5px; color:#aab2c5;
+        background:#161922; border:1px solid #232838; padding:3px 9px; border-radius:999px; }
+  .ctitle{ font-size:15px; font-weight:700; margin:10px 0 2px; }
+  .cdesc{ font-size:12px; color:#9aa1b2; line-height:1.55; min-height:48px; }
+  .pc{ display:flex; gap:10px; margin-top:8px; font-size:11px; }
+  .pc div{ flex:1; }
+  .pc .p{ color:#7fd9a8; } .pc .c{ color:#e2a06b; }
+  .pc b{ display:block; color:#777f90; font-weight:600; margin-bottom:2px; font-size:10px; letter-spacing:.5px; }
+  .phone{ width:300px; height:560px; border-radius:34px; border:9px solid #20232c;
+          overflow:hidden; position:relative; box-shadow:0 18px 40px rgba(0,0,0,.5);
+          display:flex; flex-direction:column; }
+  .ph-head{ display:flex; justify-content:space-between; align-items:center; padding:16px 18px 6px; font-size:14px; }
+  .streak{ font-weight:800; }
+  .cta{ margin:auto 16px 18px; text-align:center; padding:14px; border-radius:14px; font-weight:800; font-size:15px; }
+  .body{ flex:1; overflow:hidden; position:relative; }
+  .node{ width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700; }
+  .seclabel{ font-size:10px; letter-spacing:1.5px; text-transform:uppercase; }
+</style></head><body>
+
+<h1>Vocal Athlete — UI 시안 갤러리 <span style="color:#6C8CFF;">2</span></h1>
+<p class="lede">갤러리 1이 "맵 비주얼 변형" 위주였다면, 여기는 <b>주제(호흡·발성)와 정보 구조까지 다시 생각한</b> 6개. 같은 데이터(🔥3일·블록 토대/SOVT/발성/감각/졸업·오늘 "빨대 발성"·3/48), 응원 카피 없음(ADR-0002). 갤러리 1(uiux-mockups.html)과 합쳐 비교해 골라줘.</p>
+
+<div class="grid">
+
+<!-- 7. BREATH / RIBCAGE -->
+<div class="concept">
+  <div class="phone" style="background:radial-gradient(120% 80% at 50% 30%,#0e2622 0%,#0a1614 50%,#070d0c 100%);">
+    <div class="ph-head"><span class="streak" style="color:#7fe6c4;">🔥 3일</span><span style="color:#2c4a42;">⚙</span></div>
+    <div class="body">
+      <div style="position:absolute;left:18px;top:14px;color:#5fae9a;" class="seclabel">호흡 · SOVT</div>
+      <!-- ribcage: pairs of ribs, filled = done, glowing = today -->
+      <svg width="100%" height="92%" viewBox="0 0 280 430" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;">
+        <line x1="140" y1="40" x2="140" y2="380" stroke="#1c3a34" stroke-width="3"/>
+        <!-- done ribs -->
+        <path d="M140 80 C 80 80 60 110 64 140" fill="none" stroke="#39D98A" stroke-width="5" stroke-linecap="round"/>
+        <path d="M140 80 C 200 80 220 110 216 140" fill="none" stroke="#39D98A" stroke-width="5" stroke-linecap="round"/>
+        <path d="M140 130 C 74 130 52 162 58 196" fill="none" stroke="#39D98A" stroke-width="5" stroke-linecap="round"/>
+        <path d="M140 130 C 206 130 228 162 222 196" fill="none" stroke="#39D98A" stroke-width="5" stroke-linecap="round"/>
+        <!-- today ribs (glow) -->
+        <path d="M140 186 C 66 186 44 224 52 262" fill="none" stroke="#6C8CFF" stroke-width="7" stroke-linecap="round" style="filter:drop-shadow(0 0 6px #6C8CFF);"/>
+        <path d="M140 186 C 214 186 236 224 228 262" fill="none" stroke="#6C8CFF" stroke-width="7" stroke-linecap="round" style="filter:drop-shadow(0 0 6px #6C8CFF);"/>
+        <!-- future ribs -->
+        <path d="M140 248 C 64 248 42 290 52 330" fill="none" stroke="#23423b" stroke-width="5" stroke-linecap="round"/>
+        <path d="M140 248 C 216 248 238 290 228 330" fill="none" stroke="#23423b" stroke-width="5" stroke-linecap="round"/>
+        <path d="M140 312 C 74 312 56 348 66 380" fill="none" stroke="#23423b" stroke-width="5" stroke-linecap="round"/>
+        <path d="M140 312 C 206 312 224 348 214 380" fill="none" stroke="#23423b" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+      <div style="position:absolute;left:0;right:0;bottom:18px;text-align:center;font-size:12px;color:#9fe6d2;">오늘 · 빨대 발성 — 늑골 확장</div>
+    </div>
+    <div class="cta" style="background:#39D98A;color:#06140f;">들이쉬고 시작</div>
+  </div>
+  <div style="margin-top:12px;"><span class="tag">⑦ 호흡·늑골</span></div>
+  <div class="ctitle">Breath / Ribcage · 해부 테마</div>
+  <div class="cdesc">진행을 갈비뼈 한 쌍씩 채워지는 흉곽으로. 오늘 늑골이 발광하며 확장. 발성 앱의 정체성(호흡)을 시각화 — 도메인 의미가 가장 강함.</div>
+  <div class="pc"><div class="p"><b>장점</b>주제 직결·독창적·기억에 남음</div><div class="c"><b>단점</b>긴 경로 표현 한계·은유 학습 필요</div></div>
+</div>
+
+<!-- 8. VINYL GROOVE -->
+<div class="concept">
+  <div class="phone" style="background:#15110c;">
+    <div class="ph-head"><span class="streak" style="color:#e8b878;">🔥 3일</span><span style="color:#4a3c28;">⚙</span></div>
+    <div class="body">
+      <div style="position:absolute;left:18px;top:14px;color:#bb955f;" class="seclabel">SOVT 트랙 · A면</div>
+      <svg width="100%" height="100%" viewBox="0 0 280 430" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;">
+        <g transform="translate(140 215)">
+          <circle r="150" fill="#0d0b07"/>
+          <!-- grooves -->
+          <g fill="none" stroke="#2a2118" stroke-width="2">
+            <circle r="142"/><circle r="128"/><circle r="100"/><circle r="86"/></g>
+          <circle r="142" fill="none" stroke="#39D98A" stroke-width="3"/>
+          <circle r="114" fill="none" stroke="#39D98A" stroke-width="3"/>
+          <circle r="72" fill="none" stroke="#2a2118" stroke-width="3"/>
+          <circle r="58" fill="none" stroke="#2a2118" stroke-width="3"/>
+          <!-- label -->
+          <circle r="44" fill="#e8b878"/><circle r="6" fill="#15110c"/>
+          <text y="-16" text-anchor="middle" font-size="9" fill="#5a3f1c" font-weight="700">VOCAL</text>
+          <text y="22" text-anchor="middle" font-size="8" fill="#5a3f1c">SVOT · 03</text>
+        </g>
+        <!-- tonearm + needle on today groove -->
+        <line x1="248" y1="60" x2="178" y2="150" stroke="#7a6a52" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="178" cy="150" r="7" fill="#6C8CFF" style="filter:drop-shadow(0 0 6px #6C8CFF);"/>
+      </svg>
+      <div style="position:absolute;left:0;right:0;bottom:18px;text-align:center;font-size:12px;color:#e8b878;">오늘 · 빨대 발성 (바늘 위치)</div>
+    </div>
+    <div class="cta" style="background:#e8b878;color:#231a0e;">▶ 재생 · 오늘 시작</div>
+  </div>
+  <div style="margin-top:12px;"><span class="tag">⑧ 바이닐</span></div>
+  <div class="ctitle">Vinyl Groove · 레트로 오디오</div>
+  <div class="cdesc">여정을 LP 레코드의 홈(groove)으로, 오늘=턴테이블 바늘 위치. 완료한 홈은 금빛. 음악/소리 정체성 + 따뜻한 레트로.</div>
+  <div class="pc"><div class="p"><b>장점</b>분위기·차별성·음악 연상</div><div class="c"><b>단점</b>원형이라 '진행도' 직관성↓</div></div>
+</div>
+
+<!-- 9. GARDEN GROWTH -->
+<div class="concept">
+  <div class="phone" style="background:linear-gradient(180deg,#0a140f 0%,#0c1a12 100%);">
+    <div class="ph-head"><span class="streak" style="color:#9be08a;">🔥 3일</span><span style="color:#2e4636;">⚙</span></div>
+    <div class="body">
+      <div style="position:absolute;left:18px;top:14px;color:#6fa55c;" class="seclabel">자라는 중 · SOVT</div>
+      <svg width="100%" height="100%" viewBox="0 0 280 430" preserveAspectRatio="xMidYMax meet" style="position:absolute;inset:0;">
+        <!-- vine stem -->
+        <path d="M140 420 C 120 360 170 320 150 270 C 132 226 180 196 156 150" fill="none" stroke="#3a6b3f" stroke-width="6" stroke-linecap="round"/>
+        <!-- done leaves -->
+        <path d="M138 360 C 100 350 92 320 120 318 C 130 336 138 348 138 360Z" fill="#39D98A"/>
+        <path d="M150 300 C 188 292 196 262 168 260 C 158 278 150 290 150 300Z" fill="#39D98A"/>
+        <path d="M138 252 C 104 246 98 220 122 220 C 130 234 138 244 138 252Z" fill="#39D98A"/>
+        <!-- today bud (glow) -->
+        <circle cx="156" cy="150" r="13" fill="#6C8CFF" style="filter:drop-shadow(0 0 8px #6C8CFF);"/>
+        <path d="M156 163 C 150 178 156 188 156 196" stroke="#6C8CFF" stroke-width="3" fill="none"/>
+        <!-- soil -->
+        <rect x="40" y="402" width="200" height="14" rx="7" fill="#241a12"/>
+      </svg>
+      <div style="position:absolute;left:0;right:0;top:118px;text-align:center;font-size:11px;color:#aef0a0;">오늘 · 빨대 발성 (새 봉오리)</div>
+    </div>
+    <div class="cta" style="background:#39D98A;color:#06140f;">오늘 물 주기</div>
+  </div>
+  <div style="margin-top:12px;"><span class="tag">⑨ 정원</span></div>
+  <div class="ctitle">Garden Growth · 유기적 성장</div>
+  <div class="cdesc">매일 한 잎씩 자라는 덩굴. 완료=잎, 오늘=새 봉오리(발광). 꾸준함이 '키운다'는 은유 — 차분하고 습관 형성에 강함.</div>
+  <div class="pc"><div class="p"><b>장점</b>습관·정서적 보상·차분함</div><div class="c"><b>단점</b>'레슨 맵' 명료성↓·게임성↓</div></div>
+</div>
+
+<!-- 10. SEASON PASS (HORIZONTAL) -->
+<div class="concept">
+  <div class="phone" style="background:#0c0f17;">
+    <div class="ph-head"><span class="streak" style="color:#fff;">🔥 3일</span><span style="color:#39425e;">⚙</span></div>
+    <div class="body" style="display:flex;flex-direction:column;justify-content:center;">
+      <div style="padding:0 16px 10px;font-size:10px;letter-spacing:1.5px;color:#6b7790;">시즌 · 초급 패스</div>
+      <!-- horizontal track -->
+      <div style="position:relative;height:120px;">
+        <div style="position:absolute;left:0;right:0;top:54px;height:6px;background:linear-gradient(90deg,var(--done) 0 46%,var(--now) 46% 54%,#222637 54% 100%);"></div>
+        <div style="position:absolute;display:flex;gap:0;left:0;right:0;top:0;justify-content:space-around;align-items:center;height:100%;">
+          <div class="node" style="background:#1d3a2c;border:2px solid var(--done);color:var(--done);width:38px;height:38px;font-size:14px;">✓</div>
+          <div class="node" style="background:#1d3a2c;border:2px solid var(--done);color:var(--done);width:38px;height:38px;font-size:14px;">✓</div>
+          <div class="node" style="background:var(--now);color:#fff;box-shadow:0 0 0 6px rgba(108,140,255,.22);">▶</div>
+          <div class="node" style="background:#171922;border:2px solid #2c3142;color:#3a3f55;width:38px;height:38px;font-size:14px;">🔒</div>
+          <div class="node" style="background:#171922;border:2px solid #2c3142;color:#3a3f55;width:38px;height:38px;font-size:14px;">🔒</div>
+        </div>
+      </div>
+      <div style="margin:14px 16px 0;background:#161a26;border:1px solid #242a3c;border-radius:16px;padding:18px;">
+        <div style="font-size:10px;color:#6b7790;letter-spacing:1px;">오늘 · 블록 2 SOVT</div>
+        <div style="font-size:22px;font-weight:800;color:#fff;margin-top:6px;">빨대 발성</div>
+        <div style="font-size:12px;color:#9aa1b2;margin-top:6px;">가는 거품 일정하게 · 5초 × 5</div>
+      </div>
+    </div>
+    <div class="cta" style="background:var(--now);color:#fff;">오늘 단계 열기</div>
+  </div>
+  <div style="margin-top:12px;"><span class="tag">⑩ 시즌 패스</span></div>
+  <div class="ctitle">Season Pass · 가로 트랙</div>
+  <div class="cdesc">스크롤 축을 가로로. 게임 배틀패스처럼 한 줄 트랙 + 오늘 단계 카드. 블록=시즌 챕터. 진행이 직선적이고 게임 친화.</div>
+  <div class="pc"><div class="p"><b>장점</b>익숙한 게임 메타포·오늘 강조</div><div class="c"><b>단점</b>긴 경로(48) 가로 표현 빡빡</div></div>
+</div>
+
+<!-- 11. DEPTH TUNNEL -->
+<div class="concept">
+  <div class="phone" style="background:radial-gradient(60% 60% at 50% 42%,#1a2030 0%,#0c0f18 60%,#06080e 100%);">
+    <div class="ph-head"><span class="streak" style="color:#cdd6ff;">🔥 3일</span><span style="color:#39425e;">⚙</span></div>
+    <div class="body">
+      <div style="position:absolute;left:18px;top:14px;color:#7c86c0;" class="seclabel">남은 거리 · 졸업까지 45</div>
+      <!-- receding rings toward vanishing point -->
+      <svg width="100%" height="100%" viewBox="0 0 280 430" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;">
+        <g transform="translate(140 200)">
+          <ellipse rx="135" ry="120" fill="none" stroke="#39D98A" stroke-width="4" opacity=".9"/>
+          <ellipse rx="98" ry="86" fill="none" stroke="#39D98A" stroke-width="3.5" opacity=".7"/>
+          <ellipse rx="70" ry="60" fill="none" stroke="#6C8CFF" stroke-width="5" opacity="1" style="filter:drop-shadow(0 0 7px #6C8CFF);"/>
+          <ellipse rx="48" ry="40" fill="none" stroke="#3a3f55" stroke-width="3"/>
+          <ellipse rx="30" ry="25" fill="none" stroke="#2c3142" stroke-width="2.5"/>
+          <ellipse rx="15" ry="12" fill="none" stroke="#222637" stroke-width="2"/>
+        </g>
+      </svg>
+      <div style="position:absolute;left:0;right:0;bottom:30px;text-align:center;">
+        <div style="font-size:11px;color:#aeb9ff;">오늘 · 빨대 발성</div>
+        <div style="font-size:10px;color:#566179;margin-top:2px;">파란 링을 통과하면 다음 깊이로</div>
+      </div>
+    </div>
+    <div class="cta" style="background:var(--now);color:#fff;">앞으로 한 칸</div>
+  </div>
+  <div style="margin-top:12px;"><span class="tag">⑪ 깊이 터널</span></div>
+  <div class="ctitle">Depth Tunnel · 1인칭 원근</div>
+  <div class="cdesc">소실점으로 빨려드는 동심 링을 통과해 전진하는 1인칭 시점. 오늘=가장 또렷한 파란 링. 몰입·전진감이 강함.</div>
+  <div class="pc"><div class="p"><b>장점</b>몰입·전진감·신선함</div><div class="c"><b>단점</b>전체 조망↓·길 잃기 쉬움</div></div>
+</div>
+
+<!-- 12. CHAPTER COVERS -->
+<div class="concept">
+  <div class="phone" style="background:#101117;">
+    <div class="ph-head"><span class="streak" style="color:#fff;">🔥 3일</span><span style="color:#3a3f55;">⚙</span></div>
+    <div class="body" style="padding:10px 14px;display:flex;flex-direction:column;gap:9px;">
+      <!-- chapter 1 done -->
+      <div style="height:46px;border-radius:12px;background:#13231b;border:1px solid #1f4030;display:flex;align-items:center;padding:0 14px;gap:10px;">
+        <span style="color:var(--done);">✓</span><span style="font-size:13px;color:#7fd9a8;">1 · 토대</span>
+        <span style="margin-left:auto;font-size:11px;color:#4f7a63;">6/6</span>
+      </div>
+      <!-- chapter 2 current, expanded -->
+      <div style="border-radius:16px;background:linear-gradient(160deg,#1b2740,#141a2a);border:1px solid #2b3a60;padding:16px;box-shadow:0 8px 22px rgba(40,60,120,.3);">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--now);">▶</span><span style="font-size:13px;color:#aeb9ff;font-weight:700;">2 · SOVT</span>
+          <span style="margin-left:auto;font-size:11px;color:#6b7790;">3/9</span>
+        </div>
+        <div style="font-size:22px;font-weight:800;color:#fff;margin-top:12px;">빨대 발성</div>
+        <div style="font-size:12px;color:#9aa1b2;margin-top:6px;">가는 거품 일정하게 · 5초 × 5</div>
+        <div style="height:5px;background:#2b3350;border-radius:3px;margin-top:14px;overflow:hidden;"><div style="width:33%;height:100%;background:var(--now);"></div></div>
+      </div>
+      <!-- locked chapters -->
+      <div style="height:42px;border-radius:12px;background:#15171f;border:1px solid #232838;display:flex;align-items:center;padding:0 14px;gap:10px;color:#566179;">
+        <span>🔒</span><span style="font-size:13px;">3 · 발성</span></div>
+      <div style="height:42px;border-radius:12px;background:#15171f;border:1px solid #232838;display:flex;align-items:center;padding:0 14px;gap:10px;color:#566179;">
+        <span>🔒</span><span style="font-size:13px;">4 · 감각</span></div>
+      <div style="height:42px;border-radius:12px;background:#15171f;border:1px solid #232838;display:flex;align-items:center;padding:0 14px;gap:10px;color:#566179;">
+        <span>🔒</span><span style="font-size:13px;">5 · 졸업</span></div>
+    </div>
+    <div class="cta" style="background:var(--now);color:#fff;">오늘 시작</div>
+  </div>
+  <div style="margin-top:12px;"><span class="tag">⑫ 챕터 커버</span></div>
+  <div class="ctitle">Chapters · 매거진/앨범 구조</div>
+  <div class="cdesc">노드 대신 5블록을 '챕터 카드'로. 현재 챕터만 펼쳐져 오늘+진척바, 나머지는 접힘. 정보 구조가 가장 또렷하고 스케일에 강함.</div>
+  <div class="pc"><div class="p"><b>장점</b>가독성·확장성(중급 코스)·정돈</div><div class="c"><b>단점</b>'지도' 탐험감↓·정적</div></div>
+</div>
+
+</div>
+
+<p class="lede" style="margin-top:30px;color:#777f90;">완료 ● <span style="color:var(--done);">초록</span> · 오늘 ● <span style="color:var(--now);">파랑(강조)</span> · 미래 ● 회색 잠금. &nbsp;갤러리 1(uiux-mockups.html) ①~⑥과 함께 비교.</p>
+</body></html>

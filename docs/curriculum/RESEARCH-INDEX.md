@@ -1,90 +1,134 @@
-# 커리큘럼 ↔ 리서치 인덱스 + 갭맵 (Task A 산출물)
+# 커리큘럼 ↔ 리서치 인덱스 — v16
 
-> 목적: `docs/research/` 26개 파일 + 인용/태그 인프라를 각 커리큘럼 단위에 매핑하고,
-> 단위별 핵심 claim·1차 출처·잔존 갭·안전 플래그를 한 곳에 고정한다. 이후 단위 작업
-> (B 초급 / C 중급코어 / D 중급뮤지컬 / E 성악 / F 가요)의 *기준표*.
-> 준거: ADR-0001~0016, CONTEXT.md, part 16 갭 매트릭스, `docs/TAGS.md`, `docs/CITATIONS.md`.
+> 목적: 업로드된 20개 심층 리서치와 기존 음색 리서치 1개를 커리큘럼·제품 결정에 추적 가능하게 연결한다.  
+> canonical source bundle: `docs/research/v8/source-bundle/`  
+> 근거 분류: `docs/research/v8/EVIDENCE-TAXONOMY.md`  
+> 적용 결정표: `docs/research/v8/EVIDENCE-MATRIX.md`
 
----
 
-## 0. 리서치 인프라
+## 0. v16 음색 canonical research
 
-- **인용 키 표준**: `docs/CITATIONS.md` (~88 키, 예 `[CITE: TITZE2006]`, `[CITE: BRETL2023]`).
-- **증거/관행 태그**: `docs/TAGS.md` — `[근거 부족]` · `[탐색적 근거]` · `[Phase III RCT 부재]` · `[성악·CCM 병기]` · `[K-pop 산업관행]`.
-- **증거 2축 평가**: 연구 설계(OCEBM) + 확실성(GRADE) — *학술 근거 강도*와 *현장 채택*은 분리 축(part 0).
-- **잔존 갭 시급성**: S(안전/핵심주장) / A(챕터 부분작성) / B(2판) — part 16 §"잔존 갭".
+음색 관련 현재 권위 자료는 다음이다.
 
-## 1. 리서치 파일 → 단위 매핑
+- 원문 보존: `docs/research/v15/TIMBRE-INTEGRATED-RESEARCH.md`
+- R1–R39 출처 레지스트리: `docs/research/v15/timbre-source-register.json` 및 `TIMBRE-SOURCE-REGISTER.csv`
+- 주장→제품 적용 결정: `TIMBRE-EVIDENCE-APPLICATION-MATRIX.md`
+- 검증된 외부 앵커: `VERIFIED-ANCHOR-SOURCES.md`
 
-| 파일 | 주제 | 주 공급 단위 |
+- v16 재검증 레지스트리: `docs/research/v16/timbre-source-register.json` 및 CSV
+- v16 확인 요약: `TIMBRE-SOURCE-RECHECK.md`
+- 현재 확인: v15 8개 + v16 5개 = 13개, pending 26개
+
+기존 `docs/research/v8/source-bundle/21-timbre-resonance-integrated-research.md`는 역사 보존본이다. v15 원문·적용 결정은 계속 보존하며, v16부터 개별 재검증 상태는 `docs/research/v16/`을 우선한다. R1–R39가 모두 동일한 강도로 검증된 것은 아니며, 상업 페다고지의 고유 명칭·recipe·도표는 복제하지 않는다.
+
+## 1. v8 리서치 묶음
+
+| 번호 | 정규화 파일 | 주제 | 주 적용 영역 | 현재 상태 |
+|---:|---|---|---|---|
+| 01 | `01-beginner-foundation.md` | 초급 48일 기초 | Beginner Foundation | 임시 인용 복구 필요 |
+| 02 | `02-universal-vocal-core.md` | 공통 중급 전체 | Universal Vocal Core | 임시 인용 복구 필요 |
+| 03 | `03-breath-support.md` | 호흡·프레이즈 관리 | Core: Breath/Support | 임시 인용 복구 필요 |
+| 04 | `04-phonation-onset.md` | 발성 시작·균형 발성 | Core: Phonation/Onset | 임시 인용 복구 필요 |
+| 05 | `05-pitch-ear.md` | 청음·음정·내적 청취 | Core: Pitch/Ear | 임시 인용 복구 필요 |
+| 06 | `06-registration-range.md` | 레지스터·usable range | Core: Registration/Range | 링크 일괄 검증 필요 |
+| 07 | `07-korean-diction.md` | 한국어 가사 명료도 | Core·곡 적용·가요 | 링크 일괄 검증 필요 |
+| 08 | `08-repertoire-application.md` | 프레이즈·곡 적용 | Repertoire Application | 링크 일괄 검증 필요 |
+| 09 | `09-advanced-gayo-background.md` | 가요/K-pop 배경 분석 | Advanced Gayo 참고 | 링크 일괄 검증 필요 |
+| 10 | `10-vocal-load-operating-model.md` | 부하 운영 모델 | Safety 운영 가설 | 링크 일괄 검증 필요 |
+| 11 | `11-advanced-gayo-kpop-lab.md` | 가요 고급 Lab | Advanced Gayo canonical | 링크 일괄 검증 필요 |
+| 12 | `12-advanced-musical-theatre-lab.md` | 뮤지컬 고급 Lab | Advanced Musical canonical | 링크 일괄 검증 필요 |
+| 13 | `13-advanced-classical-lab.md` | 성악 고급 Lab | Advanced Classical canonical | 링크 일괄 검증 필요 |
+| 14 | `14-advanced-rnb-soul-lab.md` | R&B/Soul 고급 Lab | Advanced R&B/Soul canonical | 링크 일괄 검증 필요 |
+| 15 | `15-advanced-rock-band-lab.md` | Rock/Band 고급 Lab | Advanced Rock canonical | 링크 일괄 검증 필요 |
+| 16 | `16-advanced-ccm-worship-lab.md` | CCM/Worship 고급 Lab | Advanced CCM canonical | 링크 일괄 검증 필요 |
+| 17 | `17-portfolio-performance-mode.md` | 수행평가·포트폴리오 | Assessment·Portfolio | 링크 일괄 검증 필요 |
+| 18 | `18-vocal-load-safety-recovery.md` | 안전·피로·회복 | Safety canonical | 링크 일괄 검증 필요 |
+| 19 | `19-app-learning-methodology.md` | 운동학습·피드백·복습 | 전 단계 방법론 canonical | 링크 일괄 검증 필요 |
+| 20 | `20-repertoire-asset-authoring.md` | 훈련 프레이즈 제작 | Asset authoring canonical | 링크 일괄 검증 필요 |
+| 21 | `21-timbre-resonance-integrated-research.md` | 음색·공명 통합 역사본 | Timbre 전 단계 | v15 canonical 자료로 승계 |
+
+세부 파일 상태는 `SOURCE-STATUS-MATRIX.md`, 원 링크 목록은 `SOURCE-REGISTER.csv`, 미복구 항목은 `SOURCE-RECOVERY-BACKLOG.md`를 따른다.
+
+## 2. 근거 분류 규칙
+
+v9은 주장과 제품 결정을 다음처럼 구분한다.
+
+| 코드 | 의미 | 제품 적용 원칙 |
 |---|---|---|
-| part 0 / 1 / 2 | 프레임·심층 리서치 토대 | 전 단위(설계 원리) |
-| part HP | 인체해부·생리 토대(Hirano 성대5층·Hixon 호흡·Fitts&Posner·Cooksey/Gackle 변성기·Lã&Howard 호르몬) | 전 단위(내부 근거) |
-| part HX | 인체-가창 응용 문헌(Body Mapping·운동학습 응용·MPA·Accent Method) | 전 단위(내부 근거) |
-| part QI | 정량 인덱스(formant·PTP·성대접지·belt/twang 음향) | 코어·뮤지컬·성악·가요 |
-| part MX | 학파 매트릭스·계보·Evidence Ladder | 방법론 근거(횡단) |
-| part 3 | 온셋·포네이션·내전·SOVT 전수 | **초급**·코어(VFE·온셋) |
-| part 4 | 공명·성도형상·모음조정·포먼트튜닝·플레이스먼트 | **코어**·성악(singer's formant) |
-| part 5 | 레지스터·패사지오·믹스·벨트·트웽·스피치라이크 | **뮤지컬**·가요·성악(passaggio) |
-| part 6 / 6-KR | 딕션·조음 / 한국어 가창 딕션 | 뮤지컬·**가요(6-KR)**·성악 |
-| part 7 | 자기모니터링·평가·청지각(웨어러블·AI 도구·컨슈머앱 한계) | 전 단위(피드백 설계, ADR-0014) |
-| part 8 | 워밍업·쿨다운·회복·부하관리·음성위생 | 전 단위(**안전**) |
-| part 9 / 9-KR | 정규기관 커리큘럼 / 한국 기관·K-pop 산업 | 코어·성악·**가요** |
-| part 10 | 국가별 커리큘럼 구조 비교 | 매크로 시퀀스 근거 |
-| part 11 | 온라인 강의·AI 보컬 도구 사례 | 피드백·도구(ADR-0014) |
-| part 12 / 13 | 대표 교수법 비교 / 교육자·연구자 방법론 | 방법론 근거(벨트=EVT/CVT 등) |
-| part 14 | 논쟁 지점·정의 충돌(support/appoggio/placement/register/mix/belt/twang/open throat) | **용어 정합**(전 단위) |
-| part 15 | 훈련법 DB·동의어 통합(P3-xx·P4-xx·P5-xx·P6-xx ID 원천) | 카드 ID 원천(전 단위) |
-| RESEARCH_COMPILATION 1–3 | 외부 리서치 컴파일(Wave 통합) | 갱신 근거(전 단위) |
+| `S` | 건강한 가수 대상 직접 연구 | 대상·과제·용량이 맞을 때 우선 적용 |
+| `C` | 임상 음성치료 연구 | 원리를 참고하되 건강한 가창 효과로 직접 일반화 금지 |
+| `M` | 운동학습·음악인지 간접 근거 | 피드백·복습·전이 설계에 적용 |
+| `P` | 공식 교육과정·전문가 합의 | 모듈 구성과 교육 순서의 근거 |
+| `D` | 제품 설계 가설 | 실험값으로 표시하고 안전선처럼 표현 금지 |
 
-> **카드 ID 규약**: `P{part}-{nn}`(예 P3-07)은 part 15/해당 part의 훈련법 DB 행 ID. 커리큘럼 문서가
-> 이 ID로 카드를 참조 → SOURCES.md에서 ID→1차 출처로 추적한다.
+근거 강도와 제품 위험도는 별도 축이다. 연구가 많아도 고강도 belt·rasp·scream처럼 앱 단독 위험이 크면 HITL과 런타임 제한이 우선한다.
 
-## 2. 단위별 현황 + 갭 + 안전 플래그
+## 3. 단계별 연구 반영
 
-### B. 초급 (beginner) — 산출물 보강
-- **현황**: `cards.md`(13 IN, 사인오프) + `CURRICULUM.md`(5블록) 존재. 보강 제안서 `.scratch/beginner-v1/research-augmentation-proposal.md`(미적용, P1 빨대지름·P2 안전cue·P3 변주 — HITL 대기).
-- **핵심 claim**: SOVT(Titze 합리화), appoggio(Miller), 균형 onset, 자기청취(녹음 비교), 5블록 blocked→variable(ADR-0006), 졸업 4스킬.
-- **주 출처**: part 3(SOVT/온셋), part 7(자기모니터링), part 8(워밍업·위생), part HP(해부).
-- **갭**: 보강 제안 3건 판정 미완. 사인오프 카드의 출처 역추적(SOURCES) 부재.
-- **안전 플래그(HITL)**: SOVT 강도·빨대 지름·호흡(과호흡/어지럼) 중단 cue 완전성 — *기존 카드 본문 변경은 사인오프 전 금지*.
+### Beginner Foundation — 48레슨
 
-### C. 중급 코어 (intermediate-core) — cards.md + SOURCES + VERIFICATION 필요
-- **현황**: `CONTEXT.md`+`CURRICULUM.md`(블록1 브리지·블록2 공명/모음조정, 카드 ID 참조) 작성됨. `cards.md`(ADR-0015 스키마) 미생성.
-- **핵심 claim**: P3-07 균형발성·3분류(김형미 2025 균형/저접지/과접지), VFE 4과제(Stemple, RCT 최강), §4.3 Appoggio 정교화, P4-09/10 모음조정·포먼트튜닝 기초, P4-07 후두높이 인지, P4-12 비음 분리, 패사지오 *인지*(P5-03/06).
-- **주 출처**: part 3(VFE·온셋), part 4(공명·포먼트), part 5(패사지오 인지), part QI(formant·접지).
-- **갭**: cards.md 스키마화. 모음조정 R1:f0 정량 앵커(part QI).
-- **안전 플래그(HITL)**: 균형발성 압착·SOVT 부하. (벨트/고음은 코어 밖 → 분기.)
+- 낮은 노력의 coordination, SOVT, easy onset, 자기청취, 간단한 pulse·contour·한국어 bridge를 유지한다.
+- SOVT 자체를 목표로 삼지 않고 허밍·모음·짧은 음절로 전이한다.
+- Day 1/24/48 표준샘플은 시험이 아니라 동일 조건의 변화 기록이다.
+- 근거 상태: 구조는 적용 가능하나 01번 문서의 임시 인용 복구가 남아 있다.
 
-### D. 중급 뮤지컬 (intermediate-musical) — cards.md + SOURCES + VERIFICATION 필요
-- **현황**: `CONTEXT.md`+`CURRICULUM.md`(블록3 레지스터·블록4 텍스트/딕션/캐릭터/곡) 작성됨. `cards.md` 미생성.
-- **핵심 claim**: P5-04 믹스(단일정의 ❌, 경험으로), 구강 트웽(P15-20 oral), 패사지오 처리, P15-18 Bozeman 모음전환, **call-based 벨트 진입(ADR-0007 천장)**, P6-08/09/10 텍스트·딕션, 한국어 딕션 교차스트림.
-- **주 출처**: part 5(레지스터·벨트·트웽), part 6(딕션), part 12/13(EVT/CVT 벨트 근거), part 14(belt/twang 용어), part 9-KR(K-pop neutral 병기).
-- **갭**: 벨트 Phase III RCT 부재(`[Phase III RCT 부재]`), 벨트 entry 근거 `[탐색적 근거]`(McGlashan 2017).
-- **안전 플래그(HITL) — S 등급**: **벨트·고음·트웽·패사지오 처리** = ADR-0008 명시 위험수용. *자가 확정 금지*, 사인오프 필요. 완화책(진입까지·call-based·"밝게 크게아님")은 유지하되 안전 결정은 HITL.
+### Universal Vocal Core — 144레슨
 
-### E. 성악 (classical) — 신규 (범위 확인 대상)
-- **현황**: 폴더·문서 없음. ADR-0011 장르 분기 중 하나로 예정(미생성).
-- **예상 핵심 claim**: aggiustamento(고소프라노 모음조정), singer's formant(2.8–3.2kHz), 패사지오 *클래식 처리*(커버링), messa di voce(고급), 이태리어/독일어 딕션, chiaroscuro.
-- **주 출처**: part 4(singer's formant·포먼트), part 5(passaggio/covering), part 12/13(Bel Canto/Miller/Bozeman), part 9/10(콘서바토리), part 6(IT/DE 딕션).
-- **안전 플래그(HITL)**: 고음·messa di voce·지속 — 고급 영역. 신규 트랙 생성 = 범위 결정 → 착수 시 확인.
+- 12일 microcycle을 12회 순환한다.
+- 각 microcycle에 pitch/ear, rhythm/time, phrase transfer, retrieval/checkpoint가 다시 등장한다.
+- 세 microcycle이 `Map → Stabilize → Retain → Transfer` macro phase를 이룬다.
+- SOVT·모음·onset·range는 개별 기술로 끝내지 않고 매 패스에서 프레이즈로 전이한다.
+- 정확한 레슨 수와 카드 빈도는 `D` 등급 제품 가설이며 사용자 시험으로 조정한다.
 
-### F. 가요 (gayo) — 신규 (범위 확인 대상)
-- **현황**: 폴더·문서 없음. ADR-0011 분기 예정(미생성).
-- **예상 핵심 claim**: CCM 스피치라이크·믹스·벨트, 한국어 가창 딕션(part 6-KR), K-pop 명명연습↔음성과학 매핑(k-keok/꺽기/siren/lip bubble ↔ SOVT/Estill, `[K-pop 산업관행]`), 마이크 전제(증폭) 명료도 policy.
-- **주 출처**: part 6-KR(한국어 딕션·판소리), part 9-KR(K-pop 산업·매핑), part 5(CCM 벨트/트웽), part 11(도구).
-- **갭(S 등급)**: K-pop 트레이니 손상 코호트 부재, 한국어 가창 formant DB 부재(A), 판소리 안전성 정량연구 부재(A).
-- **안전 플래그(HITL) — S 등급**: 벨트·고음·꺽기·판소리식 부하. 신규 트랙 = 범위 결정 → 착수 시 확인.
+### Repertoire Application — 72레슨
 
-## 3. 전 단위 공통 — 범위 밖(ADR/제품 결정상 *포함 금지*)
-- **변성기·청소년·아동 가창**(part 16 S갭): ADR-0001 만 18세 이상·변성기 종료 대상 → **범위 밖**. 연구상 S갭이나 본 제품 비대상.
-- **트랜스/젠더 확정 음성 훈련**(part 16 S갭, 연구 완전누락): 본 제품 일반 소비자 V1 비대상. 향후 별도 검토.
-- **임상·치료 전용 프로토콜**(LSVT 등 의학감독 필요): 교육용 차용 드릴만 허용, 치료 프로토콜 자체는 제외(ADR-0001 의료도구 아님).
-- **무대공포 모듈·학술 정당화 온보딩·강사/임상 동반 트랙**: ADR-0001/0002로 제거됨 — 되살리지 않음.
+- 작곡·노래 제작이 아니라 배운 보컬 기술의 실제 프레이즈 전이 단계다.
+- 12일 phrase project를 6회 운영하며 각 project 안에서 Global→Local→Global을 완결한다.
+- 한 과제의 주목표는 1개, 보조목표는 최대 1개로 제한한다.
+- guide vocal·피치 곡선·가사 표시 등 도움은 단계적으로 줄여 독립 수행을 확인한다.
+- 4마디라는 길이는 저작권 면책 기준이 아니며, 출시 자산은 자체 제작 또는 명시적 라이선스를 사용한다.
 
-## 4. 작업 순서 (의존) — 진행 현황
-A ✅ → B 초급 ✅ → C 중급코어 ✅ → D 중급뮤지컬 ✅(belt HITL) → E 성악 ✅(cover/messa HITL) → F 가요 ✅(belt/트웽/런 HITL, k-keok 제외).
-산출물: 각 단위 `docs/curriculum/<unit>/{CURRICULUM, cards, SOURCES, VERIFICATION}`
-(성악·가요는 CONTEXT 포함 신규). 모든 안전 S등급 항목은 VERIFICATION에 `HITL 사인오프 필요` 플래그.
-각 단위 = 수집→웹보강→교차검증(적대적)→정합→집필(CURRICULUM/cards/SOURCES/VERIFICATION)→자기비평→확정.
-안전 플래그 항목은 VERIFICATION.md에 `HITL 사인오프 필요`로 표시하고 자가 확정하지 않는다.
+### Advanced Genre Labs — 반복 40슬롯 cycle
+
+- 가요, 뮤지컬, 성악, R&B/Soul, Rock/Band, CCM/Worship, 사용자 곡 프로젝트를 고급에서만 분기한다.
+- 각 cycle은 진단/목표 → 기술 적용 → 구간 반복 → 녹음·회복의 네 단계다.
+- 고급은 무한 콘텐츠 피드가 아니라 반복 가능한 곡 프로젝트다.
+- belt, cover, messa, 고속 run, 강한 twang, distortion 계열은 근거 유무와 별개로 HITL·cap·fallback이 없으면 미출시다.
+
+### Portfolio / Performance
+
+- 일일 진행은 completion 기반을 유지한다.
+- 레벨 인증은 retention, transfer, 자기수정이 확인되는 녹음 산출물 기반이다.
+- 공통 루브릭과 장르별 모듈을 분리하고 단일 “가수 점수”는 만들지 않는다.
+
+## 4. 중복 처리 결정
+
+- 09번은 가요/K-pop 장르 배경 자료, 11번은 Advanced Gayo Lab의 canonical 설계다.
+- 18번은 안전·회복의 canonical 근거, 10번은 VLU·일/주간 cap 같은 운영 가설 자료다.
+- 기존 음색 리서치는 21번으로 편입하며, 음색은 점수보다 A/B·tone tag·재현성으로 평가한다.
+
+## 5. 잔존 리서치 갭
+
+1. **01–05 출처 복구**: `turn...` 임시 인용 725회 출현(문서별 고유 합계 195개·전체 고유 176개)을 실제 서지·URL로 연결해야 한다.
+2. **Rhythm & Time 독립 심층문서**: 현재 Core·방법론 문서에 흩어져 있으므로 독립 모듈 수준으로 보강해야 한다.
+3. **SOVT→가창 전이 용량**: 도구별·사용자별 최적 반복량은 확정 근거가 부족하다.
+4. **한국어 가창 데이터**: 딕션·모음·받침의 자동 피드백 데이터셋이 부족하다.
+5. **모바일 음향 검증**: F0, timing, clipping/noise, 녹음 조건을 Android 실기기에서 확인해야 한다.
+6. **고강도 부하량**: 고음·belt·run·full take의 정확한 일/주간 cap은 제품 가설이며 전문가 검수와 관찰 데이터가 필요하다.
+7. **평가 신뢰도**: 포트폴리오 루브릭의 평가자간 일치도와 사용자 자기평가 일치도를 시험해야 한다.
+
+## 6. 커리큘럼 반영 원칙
+
+- 출처가 미복구된 주장은 교육 아이디어로 참고할 수 있지만 “검증 완료”로 승급하지 않는다.
+- 임상 근거는 치료 효과가 아니라 낮은 부하 과제의 원리와 단계화 참고로만 쓴다.
+- 숫자 용량·임계점·주차는 제품 실험값으로 표시한다.
+- 안전 관련 결정은 논문 수보다 증상 기반 중단, HITL, runtime cap, fallback을 우선한다.
+- 새 카드에는 학습목표, 선행조건, cue, 반복 상한, 피드백, 대체과제, 산출물, 근거 태그가 모두 있어야 한다.
+
+## 7. v9 재점검 추가 자료
+
+- `docs/research/v9/CURRICULUM-RECHECK.md`
+- `docs/research/v9/VERIFIED-SOURCES.md`
+- `docs/curriculum/CURRICULUM-QUALITY-GATES.md`
+
+v8 source bundle은 계속 보존하며, v9 자료는 코드 배치 재점검과 외부 앵커 검증을 추가한다.

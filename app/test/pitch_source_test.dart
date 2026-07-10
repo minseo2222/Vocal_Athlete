@@ -22,7 +22,7 @@ void main() {
     final r = await s.readings.first;
     expect(r.f0Hz, isNotNull);
     await s.stop();
-    await s.dispose();
+    s.dispose();
   });
 
   test('P1 StubPitchSource emits at least one non-null reading', () async {

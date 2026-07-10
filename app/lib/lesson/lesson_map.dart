@@ -48,13 +48,9 @@ class JourneyPreview extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Container(
-          height: 96,
-          decoration: BoxDecoration(
-            color: const Color(0xFF101117),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: const Color(0xFF1C2030)),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          height: 100,
+          decoration: Sun.card(),
+          padding: const EdgeInsets.symmetric(horizontal: 18),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -102,36 +98,39 @@ class _Node extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ({Color bg, Color border, String glyph, Color glyphColor, Key key, double size})
+    final today = state == _NodeState.today;
+    final ({Color bg, Color border, Color glyphColor, Key key, double size})
         v = switch (state) {
       _NodeState.done => (
-          bg: AppColors.doneSurface, border: AppColors.done, glyph: '✓',
-          glyphColor: AppColors.done, key: const Key('node-done'), size: 34),
+          bg: Sun.mintSoft, border: Sun.mint,
+          glyphColor: Sun.mint, key: const Key('node-done'), size: 36),
       _NodeState.today => (
-          bg: AppColors.now, border: AppColors.now, glyph: '▶',
-          glyphColor: Colors.white, key: const Key('node-today'), size: 46),
+          bg: Sun.coral, border: Colors.white,
+          glyphColor: Colors.white, key: const Key('node-today'), size: 50),
       _NodeState.future => (
-          bg: AppColors.surface, border: AppColors.lockedSurface, glyph: '🔒',
-          glyphColor: AppColors.textLow, key: const Key('node-future'), size: 34),
+          bg: Sun.lockBg, border: Sun.lockBg,
+          glyphColor: Sun.lockInk, key: const Key('node-future'), size: 36),
+    };
+    final icon = switch (state) {
+      _NodeState.done => Icons.check_rounded,
+      _NodeState.today => Icons.play_arrow_rounded,
+      _NodeState.future => Icons.lock_rounded,
     };
     return Container(
       key: v.key,
       width: v.size,
       height: v.size,
       decoration: BoxDecoration(
-        color: v.bg,
+        color: today ? null : v.bg,
+        gradient: today ? Sun.gradient : null,
         shape: BoxShape.circle,
-        border: Border.all(color: v.border, width: 2),
-        boxShadow: state == _NodeState.today
-            ? [
-                BoxShadow(
-                    color: AppColors.now.withValues(alpha: 0.30),
-                    blurRadius: 9, spreadRadius: 2)
-              ]
+        border: Border.all(color: v.border, width: today ? 3 : 2),
+        boxShadow: today
+            ? Sun.softShadow(color: Sun.coral, opacity: 0.45, blur: 14, dy: 4)
             : null,
       ),
       alignment: Alignment.center,
-      child: Text(v.glyph, style: TextStyle(color: v.glyphColor, fontSize: 16)),
+      child: Icon(icon, color: v.glyphColor, size: today ? 26 : 18),
     );
   }
 }
@@ -144,22 +143,22 @@ class _BlockChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (bg, fg, suffix) = switch (state) {
-      _NodeState.done => (AppColors.doneSurface, AppColors.done, ' ✓'),
-      _NodeState.today => (const Color(0xFF11203A), AppColors.now, ''),
-      _NodeState.future => (const Color(0xFF15171F), const Color(0xFF566179), ''),
+      _NodeState.done => (Sun.mintSoft, Sun.mint, ' ✓'),
+      _NodeState.today => (Sun.surfaceSoft, Sun.coral, ''),
+      _NodeState.future => (Sun.lockBg, Sun.lockInk, ''),
     };
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 7),
+      padding: const EdgeInsets.symmetric(vertical: 9),
       decoration: BoxDecoration(
         color: bg,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
         border: state == _NodeState.today
-            ? Border.all(color: const Color(0xFF2B3A60))
+            ? Border.all(color: Sun.coral.withValues(alpha: 0.4))
             : null,
       ),
       alignment: Alignment.center,
       child: Text('$label$suffix',
-          style: TextStyle(color: fg, fontSize: 10, fontWeight: FontWeight.w600)),
+          style: TextStyle(color: fg, fontSize: 10.5, fontWeight: FontWeight.w700)),
     );
   }
 }

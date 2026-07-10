@@ -22,6 +22,16 @@ void main() {
     expect((r.f0Hz! - 220).abs() / 220, lessThan(0.05));
   });
 
+  test('F3 voiced frame → reading carries ringRaw (2-4kHz 상대 에너지)', () async {
+    final src = MicPitchSource(
+      frames: Stream.value(_sine(3000, 16000, 2048)), // 대역 내
+      sampleRate: 16000,
+    );
+    final r = await src.readings.first;
+    expect(r.ringRaw, isNotNull);
+    expect(r.ringRaw!, greaterThan(0.5));
+  });
+
   test('A1.2 silent frame → reading with null f0 (honest)', () async {
     final src = MicPitchSource(
       frames: Stream.value(List<double>.filled(2048, 0)),
@@ -48,6 +58,6 @@ void main() {
     );
     expect(await src.start(), isTrue);
     await src.stop();
-    await src.dispose();
+    src.dispose();
   });
 }

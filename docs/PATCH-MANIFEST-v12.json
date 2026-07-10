@@ -1,0 +1,42 @@
+{
+  "version": "v12",
+  "target": "v12 / app 1.12.0+12",
+  "base": "v11 / app 1.11.0+11",
+  "date": "2026-06-20",
+  "changedFiles": [
+    "app/lib/assessment/learning_evidence.dart",
+    "app/lib/assessment/review_queue.dart",
+    "app/lib/curriculum/lesson_blueprint.dart",
+    "app/lib/lesson/learning_evidence_review_screen.dart",
+    "app/lib/lesson/lesson_screen.dart",
+    "app/lib/lesson/review_queue_screen.dart",
+    "app/lib/lesson/settings_screen.dart",
+    "app/lib/main.dart",
+    "app/pubspec.yaml",
+    "app/test/learning_evidence_test.dart",
+    "app/test/lesson_evidence_integration_test.dart",
+    "app/test/review_queue_screen_test.dart",
+    "app/test/review_queue_test.dart",
+    "app/test/settings_screen_widget_test.dart",
+    "docs/FEEDBACK-UPDATE-2026-06-20-v12.md",
+    "docs/NEXT-VERSION-DIRECTION-v13.md",
+    "docs/PATCH-MANIFEST-v12.json",
+    "docs/UPDATE-VALIDATION-2026-06-20-v12.md",
+    "docs/VERSIONING.md",
+    "docs/adr/0030-delayed-review-queue-v12.md",
+    "docs/app/LEARNING-EVIDENCE-SPEC.md",
+    "docs/app/REVIEW-QUEUE-SPEC.md",
+    "docs/changed-files-v12.txt",
+    "docs/verification/verification-status.json",
+    "tools/run_flutter_validation.sh",
+    "tools/validate_v12.py"
+  ],
+  "summary": [
+    "delayed review queue domain/repository/scheduler",
+    "review queue settings entry and screen",
+    "learning evidence contentRevision and take ID linkage",
+    "review queue scheduling on lesson completion",
+    "Flutter validation command script scaffold",
+    "v13 next-version direction document"
+  ]
+}

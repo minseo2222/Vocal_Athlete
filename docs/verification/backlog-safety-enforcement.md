@@ -5,6 +5,7 @@
 > **왜:** 독립 리서치 2종([도시에](SAFETY-EVIDENCE-DOSSIER.md))이 *둘 다* "텍스트 cue만으로는
 > 사인오프 불가, 캡을 앱이 강제해야 한다"를 결론. 현재 앱은 cue 텍스트만 있고 강제 캡이 없으므로,
 > `kSafetySignoff`를 비워 카드를 잠근 현 상태가 옳은 기본값. 본 항목 구현 전엔 belt/cover/messa/런 출시 불가.
+> 제품 기준은 [`SAFETY-RELEASE-GATE.md`](SAFETY-RELEASE-GATE.md)를 canonical로 따른다.
 >
 > ⚠️ **수치 미확정:** 아래 수치는 리서치의 *보수적 추정*이며 임상 검증값이 아니다(안전 dose 문헌
 > 부재, ✅Zuim 2023). **전문가가 사인오프에서 확정한 값으로 대체**해야 한다 — AI 자가 수치확정 ❌.
@@ -35,8 +36,12 @@
 - 카드/장르/연령군별 completion·stop·pain·다음날 쉰목·cap-hit 수집 + 즉시 끌 kill switch
   (GPT 산출물 PART 2 거버넌스). canary 단계 출시.
 
+### 7. fallback manifest
+- pending/high-risk 카드가 제외될 때 코스가 짧아지거나 핵심 학습 맥락이 비지 않도록 안전 대체 카드 슬롯을 지정한다.
+- 예: belt → SOVT transfer / low-range speech-like call, cover → neutral vowel shaping, run → low-range slow 3-note pattern.
+
 ## 수용 기준 (구현 완료 정의)
-- 위 1–5가 코드로 강제되고 테스트로 검증(예: 상한 초과 차단, swelling-check 잠금, 다중 stop 잠금).
+- 위 1–5와 fallback manifest가 코드로 강제되고 테스트로 검증(예: 상한 초과 차단, swelling-check 잠금, 다중 stop 잠금, pending 카드 대체).
 - 전문가가 확정한 수치가 반영됨(본 문서의 추정치가 아니라).
 - 이후에만 `kSafetySignoff` 기입 → `verification-status.json` 동기화 → W5 정합 → 출시 검토.
 

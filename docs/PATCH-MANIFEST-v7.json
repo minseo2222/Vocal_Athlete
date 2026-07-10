@@ -1,0 +1,28 @@
+{
+  "version": "v7",
+  "appVersion": "1.7.0+7",
+  "date": "2026-06-16",
+  "summary": "v7: recording library/data management, metadata-only export preview, Repertoire Application phrase review, audio QA checklist, Play Data safety draft.",
+  "changedFiles": [
+    "app/pubspec.yaml",
+    "app/lib/main.dart",
+    "app/lib/lesson/settings_screen.dart",
+    "app/lib/lesson/recording_library_screen.dart",
+    "app/lib/lesson/repertoire_application_review_screen.dart",
+    "app/lib/recording/recording_library.dart",
+    "app/test/recording_library_test.dart",
+    "app/test/recording_library_screen_test.dart",
+    "app/test/repertoire_application_review_screen_test.dart",
+    "app/test/settings_screen_widget_test.dart",
+    "docs/FEEDBACK-UPDATE-2026-06-16-v7.md",
+    "docs/UPDATE-VALIDATION-2026-06-16-v7.md",
+    "docs/PATCH-MANIFEST-v7.json",
+    "docs/adr/0025-recording-library-data-management-v7.md",
+    "docs/app/ANDROID-IOS-AUDIO-QA-CHECKLIST.md",
+    "docs/app/PLAY-DATA-SAFETY-DRAFT.md",
+    "docs/app/RECORDING-LIBRARY-MANAGEMENT-SPEC.md",
+    "docs/app/REPERTOIRE-APPLICATION-TAKE-REVIEW-SPEC.md",
+    "docs/verification/verification-status.json",
+    "docs/VERSIONING.md"
+  ]
+}

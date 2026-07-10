@@ -1,0 +1,97 @@
+name: Flutter validation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze-test-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.44.2'
+          channel: stable
+          cache: true
+      - name: Verify generated curriculum manifest
+        run: python tools/generate_content_manifest.py --version v18 --check
+      - name: Run repository validator
+        run: python tools/validate_v18.py
+      - name: Resolve Flutter dependencies
+        working-directory: app
+        run: flutter pub get
+      - name: Verify Android release foundation
+        run: python tools/verify_android_release_foundation.py
+      - name: Analyze Dart
+        working-directory: app
+        run: flutter analyze --fatal-infos
+      - name: Run unit and widget tests
+        working-directory: app
+        run: flutter test --reporter expanded
+      - name: Build Android debug APK
+        working-directory: app
+        run: flutter build apk --debug
+      - name: Create disposable release-signing key
+        shell: bash
+        run: |
+          keytool -genkeypair -noprompt \
+            -keystore "$RUNNER_TEMP/ci-release.jks" \
+            -storepass ci-validation-only \
+            -keypass ci-validation-only \
+            -alias ci-validation \
+            -keyalg RSA -keysize 2048 -validity 1 \
+            -dname "CN=CI Validation, OU=CI, O=Vocal Athlete, L=Seoul, C=KR"
+          printf '%s\n' \
+            'storePassword=ci-validation-only' \
+            'keyPassword=ci-validation-only' \
+            'keyAlias=ci-validation' \
+            "storeFile=$RUNNER_TEMP/ci-release.jks" \
+            > app/android/key.properties
+      - name: Inspect Android signing configuration
+        working-directory: app/android
+        run: ./gradlew signingReport
+      - name: Build Android release App Bundle
+        working-directory: app
+        run: flutter build appbundle --release
+      - name: Remove disposable signing properties
+        if: always()
+        run: rm -f app/android/key.properties
+
+  android-integration:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.44.2'
+          channel: stable
+          cache: true
+      - name: Resolve Flutter dependencies
+        working-directory: app
+        run: flutter pub get
+      - name: Run integration tests on Android emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_6
+          script: cd app && flutter test integration_test -d emulator-5554

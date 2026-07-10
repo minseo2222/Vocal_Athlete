@@ -1,0 +1,211 @@
+{
+  "schema": "vocal-athlete/curriculum-content-manifest@2",
+  "version": "v14",
+  "generatedAt": "2026-06-21",
+  "algorithm": "sha256",
+  "generator": "tools/generate_content_manifest.py",
+  "files": {
+    "assets/curriculum/repertoire_project_01.json": {
+      "sha256": "d527d8a1c3d35a96c1e71021cdf26a3c37b6424c3620ad9c3f70c10c560d8d32",
+      "kind": "blueprint",
+      "bundleVersion": "v10",
+      "track": "repertoireApplication",
+      "cycle": 1
+    },
+    "assets/curriculum/universal_core_cycle_01.json": {
+      "sha256": "b00bafa4a97554c1fcfac988ce83c2e1c6f9addb95dd9d2fad29524ede6cb29a",
+      "kind": "blueprint",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1
+    },
+    "assets/repertoire/neutral_001/backing_track_low.wav": {
+      "sha256": "5fb5a4ec48694e193e121f233fb0589374e29cc33c740f4d7c24d688b5a960ba",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "repertoireApplication",
+      "cycle": 1,
+      "rightsRecord": "assets/repertoire/neutral_001/rights.json"
+    },
+    "assets/repertoire/neutral_001/backing_track_mid.wav": {
+      "sha256": "9ea5c43eba4e6aac01cb9b6896f2316592e0b9c072729d9564b3c9015caadf2d",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "repertoireApplication",
+      "cycle": 1,
+      "rightsRecord": "assets/repertoire/neutral_001/rights.json"
+    },
+    "assets/repertoire/neutral_001/click_72bpm.wav": {
+      "sha256": "bf3e3371c53b439d9dfc6a8dbc3b8aa5dcbd64f0317bc8299df55bbc8764456d",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "repertoireApplication",
+      "cycle": 1,
+      "rightsRecord": "assets/repertoire/neutral_001/rights.json"
+    },
+    "assets/repertoire/neutral_001/guide_hum_low.wav": {
+      "sha256": "b6334a53c00f9d711020659d20fa8ae66ddf229196ebf5a24e0d1130d64fa63c",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "repertoireApplication",
+      "cycle": 1,
+      "rightsRecord": "assets/repertoire/neutral_001/rights.json"
+    },
+    "assets/repertoire/neutral_001/guide_hum_mid.wav": {
+      "sha256": "6927e0b1ef2eaa042074cea070ea73279a2e9513243261780156b05eec212fe9",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "repertoireApplication",
+      "cycle": 1,
+      "rightsRecord": "assets/repertoire/neutral_001/rights.json"
+    },
+    "assets/repertoire/neutral_001/guide_melody_piano_low.wav": {
+      "sha256": "390d68411868499739fbabd3b791a49072e9e526fd6afa4ee4c9264fb0fa1943",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "repertoireApplication",
+      "cycle": 1,
+      "rightsRecord": "assets/repertoire/neutral_001/rights.json"
+    },
+    "assets/repertoire/neutral_001/guide_melody_piano_mid.wav": {
+      "sha256": "8c404cafc6a8625bad7a3d03dbfadbadce79dd701e12dde88273d3eaf6d5a55d",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "repertoireApplication",
+      "cycle": 1,
+      "rightsRecord": "assets/repertoire/neutral_001/rights.json"
+    },
+    "assets/repertoire/neutral_001/guide_melody_slow_low.wav": {
+      "sha256": "eb79a1c44908753f7b3112d2ff738f818fb4e7a68e63cfc8080ba0b35bd1f0ee",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "repertoireApplication",
+      "cycle": 1,
+      "rightsRecord": "assets/repertoire/neutral_001/rights.json"
+    },
+    "assets/repertoire/neutral_001/guide_melody_slow_mid.wav": {
+      "sha256": "a3e334476fa4d81a8cd7830eede5f9df3af666e7225bab41caed80ccd6e7a9bc",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "repertoireApplication",
+      "cycle": 1,
+      "rightsRecord": "assets/repertoire/neutral_001/rights.json"
+    },
+    "assets/repertoire/neutral_001/manifest.json": {
+      "sha256": "e5ab7dcc2e044cecb0f94e603fe2f05f693cf7097925d77fe946bae14f1e3198",
+      "kind": "asset_manifest",
+      "bundleVersion": "v10",
+      "track": "repertoireApplication",
+      "cycle": 1
+    },
+    "assets/repertoire/neutral_001/rights.json": {
+      "sha256": "495d37ffbba514cfa202c332272680b7193aee84a37b54d96ee454306c73440f",
+      "kind": "rights_record",
+      "bundleVersion": "v10",
+      "track": "repertoireApplication",
+      "cycle": 1
+    },
+    "assets/training/universal_core_cycle_01/one_note_phrase_low.wav": {
+      "sha256": "8f4bc410dc779b7fad4bfda8546aff66c40915e26533e5c8444a56fd16edf746",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1,
+      "rightsRecord": "assets/training/universal_core_cycle_01/rights.json"
+    },
+    "assets/training/universal_core_cycle_01/one_note_phrase_mid.wav": {
+      "sha256": "36a8197edac854cfa17ffac6dc65f123bb099d990b104eaac270194feaacf8da",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1,
+      "rightsRecord": "assets/training/universal_core_cycle_01/rights.json"
+    },
+    "assets/training/universal_core_cycle_01/phrase_4beat_u_low.wav": {
+      "sha256": "486e737e2bf2d4b82c726be0ece6580557367c85be82ac2592e15fd1a9394d8c",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1,
+      "rightsRecord": "assets/training/universal_core_cycle_01/rights.json"
+    },
+    "assets/training/universal_core_cycle_01/phrase_4beat_u_mid.wav": {
+      "sha256": "473bb3e9bc3c6ba225335b606769545c55513e7fe6fb528cb9cd9ac8999d0ad3",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1,
+      "rightsRecord": "assets/training/universal_core_cycle_01/rights.json"
+    },
+    "assets/training/universal_core_cycle_01/pulse_72bpm.wav": {
+      "sha256": "f2a97d6a09ac41309630b2ff13b86468c1e729e5597a76be202e09f75b27c098",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1,
+      "rightsRecord": "assets/training/universal_core_cycle_01/rights.json"
+    },
+    "assets/training/universal_core_cycle_01/reference_pitch_low.wav": {
+      "sha256": "22a9b7816e4f4d0c2b6e32a963550e95d27222437de8b612277e7c0660f333d8",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1,
+      "rightsRecord": "assets/training/universal_core_cycle_01/rights.json"
+    },
+    "assets/training/universal_core_cycle_01/reference_pitch_mid.wav": {
+      "sha256": "adf8dcb5261168ef2801bbe9dea1c825af2994fb4103e3d71f3619256527136f",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1,
+      "rightsRecord": "assets/training/universal_core_cycle_01/rights.json"
+    },
+    "assets/training/universal_core_cycle_01/rights.json": {
+      "sha256": "6bf6ab86feb2b9f92cae6d78d52d30030754dd60dcdb1c0bca7eb89c16f4bda5",
+      "kind": "rights_record",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1
+    },
+    "assets/training/universal_core_cycle_01/sovt_contour_low.wav": {
+      "sha256": "6ea3c181acbd608622c1eb5f3a6cdc0746f915237ba95fa1f419db99c824957b",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1,
+      "rightsRecord": "assets/training/universal_core_cycle_01/rights.json"
+    },
+    "assets/training/universal_core_cycle_01/sovt_contour_mid.wav": {
+      "sha256": "2dd9fec4d246801e4bafe42f287bee262363755034bd11d26dee1b04dd982ae1",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1,
+      "rightsRecord": "assets/training/universal_core_cycle_01/rights.json"
+    },
+    "assets/training/universal_core_cycle_01/three_note_arch_low.wav": {
+      "sha256": "d18a37a217fdd9f95588ed6bc1f3d2e849783dcfc0a411be63848ff6d517927e",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1,
+      "rightsRecord": "assets/training/universal_core_cycle_01/rights.json"
+    },
+    "assets/training/universal_core_cycle_01/three_note_arch_mid.wav": {
+      "sha256": "a8e3040e6663bf1bb71725dd700335bdacaadf08fb13ab5de576f1e534fc1864",
+      "kind": "audio",
+      "bundleVersion": "v10",
+      "track": "universalCore",
+      "cycle": 1,
+      "rightsRecord": "assets/training/universal_core_cycle_01/rights.json"
+    }
+  },
+  "summary": {
+    "blueprints": 2,
+    "assetManifests": 1,
+    "rightsRecords": 2,
+    "audioFiles": 20,
+    "referencedAudioFiles": 20
+  }
+}

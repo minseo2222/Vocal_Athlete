@@ -1,47 +1,54 @@
-# 인간 게이트 검증 상태 — 단일 소스 (W4)
+# 인간 게이트 검증 상태
 
-> "사람이 결정·조치할 항목"의 현재 검증 상태를 한 곳에 모은 **사람용 요약**.
-> 기계용 단일 소스는 [`verification-status.json`](verification-status.json).
-> 두 파일과 라이브 코드의 정합은 **W5 하네스(`flutter test`)가 강제**한다 — 어느
-> 세션·어느 사람이든 `flutter test`만 돌리면 이 표가 코드와 일치하는지 즉시 검증된다.
+> 기계용 단일 소스는 `verification-status.json`이다. 기능이 구현됐다는 이유만으로 안전성·학습효과·기기 동작을 VERIFIED로 올리지 않는다.
 
-## 현재 상태 (2026-06-04)
+## 최신 스냅샷 — 2026-07 (v18 이후 후속 작업 반영)
 
-| 항목 | 결정 주체 | 상태 | 단일 소스 | 해제 방법 |
-|---|---|---|---|---|
-| 안전 사인오프 | 발성 전문가(HITL) | 🔒 UNVERIFIED | `kSafetySignoff` (빈) | `safety_signoff.dart` 레코드에 검토자+일자+근거 추가 |
-| 장르 롤아웃 | 롤아웃/안전 | 🔒 UNVERIFIED | `kReleasedGenres` (빈) | `progression_state.dart` config에 장르 추가 |
-| 기기 마이크 검증 | 검증자(육안) | 🔒 UNVERIFIED | `device-results.md` | [체크리스트](DEVICE-MIC-VERIFICATION.md) 수행 후 결과 기록 |
-| 고급/periodization | 설계+HITL | ⬜ OUT_OF_SCOPE | CURRICULUM-REVIEW G4·G5 | 의도적 범위 밖(별도 안전 설계 필요) |
+> **남은 작업 단일 인덱스: [`../REMAINING-WORK.md`](../REMAINING-WORK.md).** 아래 v11 표는 과거 기준이며, 최신 항목·주체는 `verification-status.json`(2026-07-01 갱신)과 REMAINING-WORK.md를 본다.
 
-기본은 전부 잠금/미검증 = **안전 기본값**. AI는 어느 것도 자가 결정하지 않는다.
+- 호스트 검증: Flutter 테스트 **382 green** · `analyze --fatal-infos` 0 · `build apk --debug` 성공.
+- v18 이후 추가(모두 UNVERIFIED/BLOCKED — 실기기·임상 사인오프·법무 대기):
+  - 안전 시스템 3기능: 음정 허용오차(F1)·vocal dose 피드백(F2)·상대 공명 추세(F3) — 레슨에 배선·동작.
+  - **고위험 게이트 enforced Stage 0**: 기계적 안전장치(스크리닝·도즈/증상 하드락·강도 가드·피처플래그·킬스위치) — **도메인+테스트만, 런타임 미연결(dormant)**, 임상 수치 전부 placeholder(`SIGN-OFF REQUIRED`). 방어심층 = `test/manifest_safety_invariant_test.dart`.
+  - **임상 사인오프 패킷** [`CLINICAL-SIGNOFF-PACKET-2026.md`](CLINICAL-SIGNOFF-PACKET-2026.md): 파라미터 후보값·한국 경로·규제 카피. 확정은 후두과+SLP.
+  - A2 적신호 스크리닝(→비차단 의뢰 배너), 가요 차별화 안전 카드(GY-11~16, 게이트 잠금 하 편성), UI 토큰 단일화(Sun)·접근성·카피 lint.
+- 불변: `kSafetySignoff`={} (전 고위험 카드 잠금), `kReleasedAdvancedGenres`={} (전 고급 장르 미출시). W5 하네스가 JSON↔코드 정합 강제.
 
-> **안전 사인오프 입력 패킷:** [SAFETY-EVIDENCE-DOSSIER.md](SAFETY-EVIDENCE-DOSSIER.md)
-> (독립 리서치 2종 교차검증, 2026-06). 사인오프 = 전문가 ✅ **+** 강제 캡 구현
-> ([backlog-safety-enforcement.md](backlog-safety-enforcement.md), 이슈 #1) 둘 다 충족 후.
+## (과거) 현재 상태 — 2026-06-20
 
-## 세션-독립성이 보장되는 방식
+| 항목 | 상태 | 해제 조건 |
+|---|---|---|
+| 고위험 카드 HITL | UNVERIFIED | 전문가 검토 + runtime cap + fallback + rollout 승인 |
+| Advanced rollout | UNVERIFIED | 장르 자산·전문가 검수·device QA |
+| 마이크/F0/timing | UNVERIFIED | Android/iOS 실기기 매트릭스 |
+| 녹음·재생·삭제 | UNVERIFIED | 권한·파일·재시작 persistence QA |
+| 오디오 세션 무결성 | UNVERIFIED | Android audio focus·iOS interruption·전화/route change 실기기 QA |
+| 학습 기록 | UNVERIFIED | content revision + delayed review + 사용자 이해도/retention 검증 |
+| v8 research bundle | UNVERIFIED | 01–05 임시 인용 복구 + 링크 일괄 검증 |
+| v11 curriculum vertical slice | UNVERIFIED | Flutter tests + 실기기 음원 QA + 전문가 검수 + retention/transfer 결과 |
+| 평가 루브릭 | UNVERIFIED | 평가자간 신뢰도와 사용자 이해도 |
+| 개인정보 | UNVERIFIED | 실제 출시 동작과 Play Data safety/정책 정합 |
 
-1. **진실의 위치 = git에 박힌 산출물**: 사인오프=`kSafetySignoff`, 롤아웃=`kReleasedGenres`,
-   기기=`device-results.md` + `verification-status.json`. 대화·메모리가 아니다.
-2. **드리프트 차단**: W5가 이 JSON의 `signedOffCardIds`/`releasedGenres`를 라이브
-   코드 상수와 대조 → JSON만 올리고 코드가 안 따르면(또는 반대) **테스트 실패**.
-3. **재도출 1커맨드**: 신규 세션은 맥락 없이 `flutter test`로 현재 진실을 재확인.
+## v11에서 정적으로 확인할 수 있는 설계
 
-## 갱신 규칙 (사람)
+- v10 경로·blueprint·WAV·권리 inventory 정합성 유지
+- 시도·자기점검·예시 청취·키·녹음 수·best 선택·목 상태의 local practice trace
+- target evidence와 achieved evidence를 자동으로 동일시하지 않는 모델
+- 학습 기록 설정 화면과 전체 삭제 seam
+- 가이드 재생 전 녹음 take/capture 중단
+- 녹음 시작 전 가이드와 저장 take 재생 중단
+- 본운동 이탈·완료·non-resumed lifecycle에서 stop/cancel
+- best take `isBest` 메타데이터 영속화
+- Flutter `integration_test` 실행 파일 존재
 
-상태를 바꾸려면 **코드 산출물과 JSON을 함께** 갱신하고 커밋해야 한다(둘 중 하나만
-바꾸면 W5 실패):
+이는 코드·문서 구조의 확인이지 학습효과, 오디오 focus, 플랫폼 동작 또는 안전성 검증이 아니다.
 
-- **안전 카드 사인오프**: ① `kSafetySignoff`에 항목 추가(검토자/일자/근거)
-  → ② JSON `safetySignoff.signedOffCardIds`에 같은 cardId 추가 + `stillGatedCardIds`에서 제거
-  → ③ 전 카드 사인오프 시 `status: VERIFIED`.
-- **장르 출시**: ① `kReleasedGenres`에 장르 추가 → ② JSON `releasedGenres`에 같은 이름 추가
-  → ③ `status: VERIFIED`.
-- **기기 검증**: ① `device-results.md`에 런 결과 append → ② JSON `deviceMic.status`를
-  종합 결과(VERIFIED/FAIL→UNVERIFIED/BLOCKED)로 갱신.
-- **고급/periodization**: 범위 진입 시 별도 안전 설계 ADR + HITL 후 본 표 갱신.
+## 상태 갱신 규칙
 
-> ⚠️ AI는 위 ①(코드 상수)·기기 결과를 채우지 않는다. 사람만 채운다(자가 결정 금지).
-> AI가 도울 수 있는 건 *채워진 사실을 JSON에 반영*하는 동기화뿐이며, 그조차 사람이
-> 코드를 먼저 채운 뒤다.
+1. 코드, JSON, 사람용 문서를 함께 갱신한다.
+2. 고위험 카드는 전문가·날짜·근거·cap·fallback을 모두 기록한다.
+3. 기기 검증은 실제 결과 파일을 남긴다.
+4. 연구 출처는 제목·저자·연도·DOI/URL과 주장 연결을 남긴다.
+5. 학습효과는 delayed retention과 transfer를 포함한다.
+6. target evidence는 실제 achieved evidence로 자동 승격하지 않는다.
+7. `flutter test`, integration test, `dart analyze`, device QA 전 adapter와 interlock은 `implemented_unverified`다.

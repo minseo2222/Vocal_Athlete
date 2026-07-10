@@ -1,0 +1,355 @@
+{
+  "schema": "vocal-athlete/lesson-blueprint@1",
+  "version": "v16",
+  "track": "universalCore",
+  "cycle": 1,
+  "title": "Universal Core Cycle 1 — Map & Coordinate",
+  "lessons": [
+    {
+      "day": 1,
+      "cardId": "UC-01",
+      "title": "4박을 편하게 남기기",
+      "primarySkill": "호흡 배분",
+      "secondarySkill": "프레이즈 마무리",
+      "objective": "작은 소리로 4박을 내고 끝에 여유를 남긴다.",
+      "attempts": 3,
+      "steps": [
+        "말로 4박 세기",
+        "낮은 예시와 중간 예시 중 편한 쪽을 고른 뒤 /m/으로 4박 한 번",
+        "/u/로 4박 두 번"
+      ],
+      "feedbackPrompt": "끝에서 밀었는지보다 편하게 멈췄는지 확인한다.",
+      "selfCheck": [
+        "끝에 숨이 조금 남았다",
+        "어깨가 들리지 않았다"
+      ],
+      "recoveryAlternative": "4박 무성 날숨과 손가락 탭만 한다.",
+      "evidence": "E1",
+      "audioCues": [
+        {
+          "label": "4박 /u/ · 낮은 예시",
+          "path": "assets/training/universal_core_cycle_01/phrase_4beat_u_low.wav"
+        },
+        {
+          "label": "4박 /u/ · 중간 예시",
+          "path": "assets/training/universal_core_cycle_01/phrase_4beat_u_mid.wav"
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "cardId": "UC-03",
+      "title": "말하기에서 모음으로",
+      "primarySkill": "호흡-발성 연결",
+      "secondarySkill": "부드러운 시작",
+      "objective": "같은 짧은 문장을 말하기, 허밍, 모음으로 옮긴다.",
+      "attempts": 3,
+      "steps": [
+        "오늘은 편하게를 말한다",
+        "같은 길이로 /m/ 허밍",
+        "같은 길이로 /u/"
+      ],
+      "feedbackPrompt": "세 단계의 길이가 비슷했는지 듣는다.",
+      "selfCheck": [
+        "소리 시작을 치지 않았다",
+        "말하기보다 더 크게 하지 않았다"
+      ],
+      "recoveryAlternative": "문장 말하기 대신 입모양과 리듬 탭만 한다.",
+      "evidence": "E1",
+      "audioCues": []
+    },
+    {
+      "day": 3,
+      "cardId": "UC-05",
+      "title": "SOVT를 열린 소리로 옮기기",
+      "primarySkill": "SOVT 전이",
+      "secondarySkill": "선율 모양",
+      "objective": "낮은 부하 SOVT의 3음 모양을 /u/로 옮긴다.",
+      "attempts": 3,
+      "steps": [
+        "립트릴 또는 허밍 3음",
+        "같은 모양을 /u/",
+        "마지막 한 번만 짧은 음절"
+      ],
+      "feedbackPrompt": "SOVT 직후의 편안함을 억지로 유지하지 않고 모양만 옮긴다.",
+      "selfCheck": [
+        "모음으로 열 때 목이 조이지 않았다",
+        "세 음의 방향이 유지됐다"
+      ],
+      "recoveryAlternative": "가이드 3음을 듣고 손으로 방향만 그린다.",
+      "evidence": "E1",
+      "audioCues": [
+        {
+          "label": "3음 SOVT · 낮은 예시",
+          "path": "assets/training/universal_core_cycle_01/sovt_contour_low.wav"
+        },
+        {
+          "label": "3음 SOVT · 중간 예시",
+          "path": "assets/training/universal_core_cycle_01/sovt_contour_mid.wav"
+        }
+      ]
+    },
+    {
+      "day": 4,
+      "cardId": "CARD-14",
+      "title": "듣고, 떠올리고, 허밍하기",
+      "primarySkill": "청각 기억",
+      "secondarySkill": "시작음",
+      "objective": "한 음을 듣고 2초 떠올린 뒤 화면 없이 허밍한다.",
+      "attempts": 4,
+      "steps": [
+        "낮은 예시와 중간 예시 중 편한 기준음을 한 번 듣기",
+        "2초 조용히 떠올리기",
+        "/m/으로 한 번",
+        "끝난 뒤만 곡선 보기"
+      ],
+      "feedbackPrompt": "정확한 점수보다 시작이 위인지 아래인지 한 가지만 본다.",
+      "selfCheck": [
+        "소리 내기 전에 음을 떠올렸다",
+        "첫 시도 중 화면을 보지 않았다",
+        "편하지 않은 예시를 억지로 따라 하지 않았다"
+      ],
+      "recoveryAlternative": "기준음을 듣고 높낮이 방향만 손으로 표시한다.",
+      "evidence": "E1",
+      "audioCues": [
+        {
+          "label": "기준음 · 낮은 예시",
+          "path": "assets/training/universal_core_cycle_01/reference_pitch_low.wav"
+        },
+        {
+          "label": "기준음 · 중간 예시",
+          "path": "assets/training/universal_core_cycle_01/reference_pitch_mid.wav"
+        },
+        {
+          "label": "3음 아치 · 낮은 예시",
+          "path": "assets/training/universal_core_cycle_01/three_note_arch_low.wav"
+        },
+        {
+          "label": "3음 아치 · 중간 예시",
+          "path": "assets/training/universal_core_cycle_01/three_note_arch_mid.wav"
+        }
+      ]
+    },
+    {
+      "day": 5,
+      "cardId": "CARD-15",
+      "title": "4박 pulse에 허밍 놓기",
+      "primarySkill": "박 유지",
+      "secondarySkill": "쉼표",
+      "objective": "손가락 탭 뒤 /m/을 박 안에 놓는다.",
+      "attempts": 4,
+      "steps": [
+        "4박을 손가락으로 탭",
+        "음-음-쉼-음 말하기",
+        "같은 패턴을 /m/"
+      ],
+      "feedbackPrompt": "빠르거나 늦은 한 지점만 고른다.",
+      "selfCheck": [
+        "쉼표에서 소리를 쉬었다",
+        "박이 빨라지지 않았다"
+      ],
+      "recoveryAlternative": "소리 없이 탭과 쉼표만 수행한다.",
+      "evidence": "E1",
+      "audioCues": [
+        {
+          "label": "72 BPM pulse",
+          "path": "assets/training/universal_core_cycle_01/pulse_72bpm.wav"
+        }
+      ]
+    },
+    {
+      "day": 6,
+      "cardId": "TONE-02",
+      "title": "허밍에서 모음으로 같은 조건 전이",
+      "primarySkill": "Hum-to-Vowel 재현",
+      "secondarySkill": "A/B 자기청취",
+      "objective": "예시의 절대 음높이를 복제하지 않고 내 편한 한 음을 고른 뒤, /m/에서 /ma/로 열 때 높이와 음량을 유지하고 두 take 이내로 비교한다.",
+      "attempts": 2,
+      "steps": [
+        "낮은/중간 예시 중 편한 흐름 하나만 듣기 — 예시 음높이는 따라 하지 않기",
+        "Take A: 내 편한 한 음에서 /m/ 2초 뒤 같은 높이·크기로 /ma/",
+        "바꿀 cue를 하나만 고르기: 음량 유지 또는 턱 힘 줄이기",
+        "Take B: 같은 패턴을 한 번 더 하고 더 편한 take 선택"
+      ],
+      "feedbackPrompt": "두 take 사이에 바꾼 cue가 하나였는지, 모음으로 열 때 힘과 음량이 늘지 않았는지 확인한다.",
+      "selfCheck": [
+        "A와 B에서 같은 시작음과 음량을 사용했다",
+        "두 번째 take에서 cue 하나만 바꿨다",
+        "더 편한 take를 골랐다"
+      ],
+      "recoveryAlternative": "두 예시 중 편한 것을 낮은 볼륨으로 듣고, 허밍→모음 전환 지점을 표시한다. 발성하지 않는다.",
+      "evidence": "E1",
+      "audioCues": [
+        {
+          "label": "허밍→모음 · 낮은 예시",
+          "path": "assets/training/timbre_v16/hum_to_vowel_low.wav"
+        },
+        {
+          "label": "허밍→모음 · 중간 예시",
+          "path": "assets/training/timbre_v16/hum_to_vowel_mid.wav"
+        }
+      ]
+    },
+    {
+      "day": 7,
+      "cardId": "UC-13",
+      "title": "오늘의 사용 가능 음역 지도",
+      "primarySkill": "편한 음역 인식",
+      "secondarySkill": "자기조절",
+      "objective": "최고음이 아니라 편하게 반복 가능한 범위를 기록한다.",
+      "attempts": 3,
+      "steps": [
+        "편한 중음 허밍",
+        "작은 하행 1회",
+        "작은 상행 1회 후 편한 지점 표시"
+      ],
+      "feedbackPrompt": "더 높은 음보다 다시 낼 수 있는 음을 고른다.",
+      "selfCheck": [
+        "목소리를 크게 하지 않았다",
+        "불편해지기 전에 멈췄다"
+      ],
+      "recoveryAlternative": "이전 range map을 듣고 오늘 연습할 낮은 범위만 선택한다.",
+      "evidence": "E1",
+      "audioCues": []
+    },
+    {
+      "day": 8,
+      "cardId": "CARD-17",
+      "title": "한국어 음절을 끊지 않기",
+      "primarySkill": "한국어 딕션",
+      "secondarySkill": "모음 연속성",
+      "objective": "/마-미-무/를 낮고 편한 음에서 연결한다.",
+      "attempts": 4,
+      "steps": [
+        "말로 마-미-무",
+        "한 음으로 천천히",
+        "짧은 3음 모양에 적용"
+      ],
+      "feedbackPrompt": "자음보다 모음이 이어졌는지 먼저 듣는다.",
+      "selfCheck": [
+        "받침이나 자음에서 목을 잠그지 않았다",
+        "모음마다 음정이 크게 흔들리지 않았다"
+      ],
+      "recoveryAlternative": "음절을 소리 없이 입모양과 탭으로 연결한다.",
+      "evidence": "E1",
+      "audioCues": []
+    },
+    {
+      "day": 9,
+      "cardId": "UC-18",
+      "title": "짧게 다시 숨 쉬고 이어가기",
+      "primarySkill": "갱신 호흡",
+      "secondarySkill": "프레이즈 끝",
+      "objective": "4박 뒤 조용히 짧게 숨 쉬고 다음 4박을 잇는다.",
+      "attempts": 3,
+      "steps": [
+        "숨 위치 표시",
+        "4박 /m/",
+        "짧은 갱신 호흡 후 4박 /u/"
+      ],
+      "feedbackPrompt": "두 번째 프레이즈를 크게 밀지 않았는지 확인한다.",
+      "selfCheck": [
+        "갱신 호흡이 시끄럽지 않았다",
+        "두 번째 끝에도 여유가 남았다"
+      ],
+      "recoveryAlternative": "4박 탭 사이에 조용한 들숨만 연습한다.",
+      "evidence": "E1",
+      "audioCues": [
+        {
+          "label": "4박 phrase · 낮은 예시",
+          "path": "assets/training/universal_core_cycle_01/phrase_4beat_u_low.wav"
+        },
+        {
+          "label": "4박 phrase · 중간 예시",
+          "path": "assets/training/universal_core_cycle_01/phrase_4beat_u_mid.wav"
+        }
+      ]
+    },
+    {
+      "day": 10,
+      "cardId": "UC-16",
+      "title": "중립 프레이즈를 한 음으로",
+      "primarySkill": "프레이즈 적용",
+      "secondarySkill": "가사 리듬",
+      "objective": "네 마디 가사를 말하고 한 음으로 연결한다.",
+      "attempts": 3,
+      "steps": [
+        "가사를 자연스럽게 말하기",
+        "박에 맞춰 말하기",
+        "편한 한 음으로 이어 부르기"
+      ],
+      "feedbackPrompt": "음정보다 가사와 박이 이어졌는지 본다.",
+      "selfCheck": [
+        "문장 끝을 밀지 않았다",
+        "말하기의 자연스러운 강세가 남았다"
+      ],
+      "recoveryAlternative": "가사 말하기와 리듬 탭만 한다.",
+      "evidence": "E1",
+      "audioCues": [
+        {
+          "label": "한 음 phrase · 낮은 예시",
+          "path": "assets/training/universal_core_cycle_01/one_note_phrase_low.wav"
+        },
+        {
+          "label": "한 음 phrase · 중간 예시",
+          "path": "assets/training/universal_core_cycle_01/one_note_phrase_mid.wav"
+        }
+      ]
+    },
+    {
+      "day": 11,
+      "cardId": "UC-24",
+      "title": "SOVT에서 가사 한 줄로",
+      "primarySkill": "기술 전이",
+      "secondarySkill": "가이드 축소",
+      "objective": "허밍으로 한 짧은 모양을 만든 뒤 같은 가사를 한 번만 부른다.",
+      "attempts": 3,
+      "steps": [
+        "허밍 3음",
+        "/u/ 3음",
+        "가사 한 줄",
+        "가이드 없이 한 번"
+      ],
+      "feedbackPrompt": "가사에서 힘이 늘었는지 한 가지만 비교한다.",
+      "selfCheck": [
+        "가사로 바꿀 때 음량을 키우지 않았다",
+        "마지막 시도는 가이드 없이 했다"
+      ],
+      "recoveryAlternative": "허밍 가이드를 듣고 가사 리듬만 말한다.",
+      "evidence": "E2",
+      "audioCues": [
+        {
+          "label": "3음 SOVT · 낮은 예시",
+          "path": "assets/training/universal_core_cycle_01/sovt_contour_low.wav"
+        },
+        {
+          "label": "3음 SOVT · 중간 예시",
+          "path": "assets/training/universal_core_cycle_01/sovt_contour_mid.wav"
+        }
+      ]
+    },
+    {
+      "day": 12,
+      "cardId": "UC-25",
+      "title": "모델 없이 다시 꺼내기",
+      "primarySkill": "지연 재현",
+      "secondarySkill": "자기 코칭",
+      "objective": "첫날과 다른 날에 같은 짧은 과제를 모델 없이 수행하고 cue 하나만 바꾼다.",
+      "attempts": 2,
+      "steps": [
+        "모델 없이 첫 시도",
+        "바꿀 점 하나 고르기",
+        "두 번째 시도 한 번",
+        "더 편한 take 선택"
+      ],
+      "feedbackPrompt": "두 시도 사이에 바꾼 것이 하나였는지 확인한다.",
+      "selfCheck": [
+        "첫 시도를 먼저 남겼다",
+        "두 번째 시도에서 cue 하나만 바꿨다"
+      ],
+      "recoveryAlternative": "이전 take를 듣고 다음 cue 하나만 기록한다.",
+      "evidence": "E2",
+      "audioCues": []
+    }
+  ]
+}

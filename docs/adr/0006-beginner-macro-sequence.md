@@ -1,4 +1,10 @@
+> v9 note: `CARD-18` remains in the library as a state-driven recovery fallback but is not scheduled in the normal 48-lesson path.
+> R3 supersession note: 초급 48레슨의 5블록 원칙은 유지하되, 현재 초급은 CARD-01~18 및 Day 1/24/48 표준샘플 구조로 확장되었다. 장르 선택은 초급 직후 열리지 않는다.
+
 # 초급 매크로 시퀀스 — 13 IN 카드의 선형 배치
+
+> Superseded note: 이 ADR은 R1 기준 이력이다. 현재 초급 canonical 범위와 경로는 `ADR-0018-beginner-learning-transfer-update.md`를 따른다.
+
 
 초급 경로(≈48레슨, 40–56 범위, ADR-0004/0005)의 콘텐츠 척추를 5개 내부 설계 블록으로 확정한다. 블록은 *설계 전용*이며 사용자에게 노출하지 않는다(ADR-0002). 비중 곡선 = 신체·호흡:유성을 70:30 → 20:80으로 점진 역전, 무성 레슨 0개(유성 마이크로-윈).
 

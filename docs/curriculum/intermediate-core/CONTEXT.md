@@ -1,3 +1,7 @@
+# intermediate-core — SUPERSEDED BY Universal Vocal Core
+
+> R3 supersession: 이 문서는 이력 보존용이다. 현재 권위 문서는 `../universal-core/CURRICULUM.md`이며, 장르 분기는 Repertoire Application 이후 고급 Lab에서만 열린다.
+
 # 중급 공유 코어 (Intermediate · Shared Core)
 
 초급 졸업 + 장르 트랙 선택 후, *장르 분기 이전*에 모든 학습자(성악·뮤지컬·가요)가 거치는 genre-neutral 중급 코어. 블록1 브리지 + 블록2 공명·모음조정. 블록3 레지스터부터 장르 분기(ADR-0011). 제품 메커니즘은 [[CONTEXT-MAP]] 전역 상속(글로서리 전용 — 구현·레슨수·UI 금지).
@@ -20,7 +24,7 @@ _Avoid_: "뮤지컬 중급의 일부"(코어는 장르 무관·선행), 코어�
 
 - **브리지 → 공명·모음조정** (= 블록1·2) → *블록3에서 장르 분기* (ADR-0011)
 - 초급 **졸업**(4스킬)이 코어 진입을 해금 — 초급이 미룬 적응 완성은 **브리지**가 이어받음 (ADR-0004)
-- 코어 이후 분기: [중급 — 뮤지컬](../intermediate-musical/CONTEXT.md) / 성악·가요(미작성)
+- 코어 이후 분기: [중급 — 뮤지컬](../intermediate-musical/CONTEXT.md) / [중급 — 성악](../intermediate-classical/CONTEXT.md) / [중급 — 가요](../intermediate-gayo/CONTEXT.md)
 - 제품 메커니즘 전역 상속 [[CONTEXT-MAP]]
 
 ## Flagged ambiguities
