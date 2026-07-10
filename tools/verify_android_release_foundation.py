@@ -2,7 +2,9 @@
 
 from pathlib import Path
 import re
+import subprocess
 import sys
+import zipfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -12,6 +14,13 @@ EXPECTED_ACTIVITY = (
     APP
     / "android/app/src/main/kotlin/com/vocalathlete/vocal_athlete/MainActivity.kt"
 )
+WRAPPER_FILES = (
+    "app/android/gradlew",
+    "app/android/gradlew.bat",
+    "app/android/gradle/wrapper/gradle-wrapper.jar",
+    "app/android/gradle/wrapper/gradle-wrapper.properties",
+)
+WORKFLOW_PATH = ROOT / ".github/workflows/flutter-validation.yml"
 
 
 def require(condition: bool, message: str, failures: list[str]) -> None:
@@ -19,11 +28,90 @@ def require(condition: bool, message: str, failures: list[str]) -> None:
         failures.append(message)
 
 
+def git_index_entries(failures: list[str]) -> dict[str, str]:
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(ROOT), "ls-files", "--stage", "--", *WRAPPER_FILES],
+            check=False,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+    except FileNotFoundError:
+        failures.append(
+            "Git executable is unavailable; wrapper tracking and executable mode cannot be verified"
+        )
+        return {}
+
+    if result.returncode != 0:
+        detail = result.stderr.strip() or "git ls-files failed"
+        failures.append(
+            f"Git index is unavailable; wrapper tracking cannot be verified: {detail}"
+        )
+        return {}
+
+    entries: dict[str, str] = {}
+    for line in result.stdout.splitlines():
+        metadata, path = line.split("\t", maxsplit=1)
+        mode = metadata.split(maxsplit=1)[0]
+        entries[path.replace("\\", "/")] = mode
+    return entries
+
+
 def main() -> int:
     failures: list[str] = []
     gradle = (APP / "android/app/build.gradle.kts").read_text(encoding="utf-8")
     android_ignore = (APP / "android/.gitignore").read_text(encoding="utf-8")
+    android_ignore_rules = {
+        line.strip()
+        for line in android_ignore.splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    }
     pubspec = (APP / "pubspec.yaml").read_text(encoding="utf-8")
+    workflow = WORKFLOW_PATH.read_text(encoding="utf-8")
+
+    for wrapper_path in WRAPPER_FILES:
+        require(
+            (ROOT / wrapper_path).is_file(),
+            f"required Gradle Wrapper file is missing: {wrapper_path}",
+            failures,
+        )
+
+    index_entries = git_index_entries(failures)
+    for wrapper_path in WRAPPER_FILES:
+        require(
+            wrapper_path in index_entries,
+            f"required Gradle Wrapper file is not tracked by Git: {wrapper_path}",
+            failures,
+        )
+    if "app/android/gradlew" in index_entries:
+        require(
+            index_entries["app/android/gradlew"] == "100755",
+            "app/android/gradlew must be tracked with executable mode 100755",
+            failures,
+        )
+
+    wrapper_jar = APP / "android/gradle/wrapper/gradle-wrapper.jar"
+    if wrapper_jar.is_file():
+        require(
+            zipfile.is_zipfile(wrapper_jar),
+            "Gradle Wrapper JAR is not a valid ZIP/JAR file",
+            failures,
+        )
+        if zipfile.is_zipfile(wrapper_jar):
+            with zipfile.ZipFile(wrapper_jar) as jar:
+                require(
+                    "org/gradle/wrapper/GradleWrapperMain.class" in jar.namelist(),
+                    "Gradle Wrapper JAR does not contain GradleWrapperMain",
+                    failures,
+                )
+
+    require(
+        "working-directory: app/android" in workflow
+        and "run: ./gradlew signingReport" in workflow,
+        "CI signingReport must invoke the tracked app/android/gradlew path",
+        failures,
+    )
 
     namespace = re.search(r'namespace\s*=\s*"([^"]+)"', gradle)
     application_id = re.search(r'applicationId\s*=\s*"([^"]+)"', gradle)
@@ -54,9 +142,16 @@ def main() -> int:
         "missing release credentials are not rejected",
         failures,
     )
-    require("key.properties" in android_ignore, "key.properties is not ignored", failures)
-    require("**/*.jks" in android_ignore, "JKS files are not ignored", failures)
-    require("**/*.keystore" in android_ignore, "keystore files are not ignored", failures)
+    require("key.properties" in android_ignore_rules, "key.properties is not ignored", failures)
+    require("**/*.jks" in android_ignore_rules, "JKS files are not ignored", failures)
+    require("**/*.keystore" in android_ignore_rules, "keystore files are not ignored", failures)
+    require(
+        "app/android/key.properties" in workflow
+        and '"$RUNNER_TEMP/ci-release.jks"' in workflow,
+        "CI must create and clean up both disposable signing files",
+        failures,
+    )
+    require("if: always()" in workflow, "CI signing cleanup must run with if: always()", failures)
     require(
         'description: "A new Flutter project."' not in pubspec,
         "pubspec still has the Flutter template description",

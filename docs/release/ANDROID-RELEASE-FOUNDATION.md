@@ -15,6 +15,8 @@ On July 10, 2026, the project root contained an empty `.git` directory. A read-o
 
 The current tree is the verified Android release baseline layered on that history. The root `.gitignore` excludes local build/cache, IDE, signing, environment, and service-account material while retaining product source, tests, documentation, curriculum JSON, production audio assets, and app icons. The existing remote is preserved, but publishing or changing that remote remains a user action.
 
+Baseline commit `be480f7` changed 643 paths and includes removal of the prior iOS project scaffold, `.agents`, `.claude`, and the former root `AGENTS.md`. This release foundation is Android-first. Whether to restore or regenerate the iOS project is a separate product decision; this Android reproducibility fix neither restores nor ratifies those removals and does not rewrite the baseline commit.
+
 ## Release signing structure
 
 `app/android/app/build.gradle.kts` loads four values from the ignored file `app/android/key.properties`:

@@ -66,9 +66,9 @@ jobs:
       - name: Build Android release App Bundle
         working-directory: app
         run: flutter build appbundle --release
-      - name: Remove disposable signing properties
+      - name: Remove disposable signing material
         if: always()
-        run: rm -f app/android/key.properties
+        run: rm -f app/android/key.properties "$RUNNER_TEMP/ci-release.jks"
 
   android-integration:
     if: github.event_name == 'workflow_dispatch'
