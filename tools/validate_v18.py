@@ -258,7 +258,9 @@ def validate_timbre_path() -> dict[str, object]:
         fail("TONE-13 genre tone must remain advanced-only")
 
     repertoire = base.extract_cycle_cards(path_text, "_repertoireApplicationCycles")
-    expected = {1: "TONE-06", 3: "TONE-07", 4: "TONE-11", 5: "TONE-12"}
+    # R5g diversified Projects 2-4 with dedicated RA cards. Projects 5-6
+    # retain the explicit tone-transfer anchors documented beside the path.
+    expected = {4: "TONE-11", 5: "TONE-12"}
     for project_index, card in expected.items():
         if card not in repertoire[project_index]:
             fail(f"Repertoire Project {project_index + 1} must include {card}")
@@ -266,7 +268,7 @@ def validate_timbre_path() -> dict[str, object]:
     return {
         "beginnerTimbreDays": [37, 38],
         "universalToneCards": len({c for c in universal_flat if c.startswith('TONE-')}),
-        "repertoireToneProjects": [2, 4, 5, 6],
+        "repertoireToneProjects": [5, 6],
     }
 
 
